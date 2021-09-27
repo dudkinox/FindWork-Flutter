@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:login_ui/Screens/homehome.dart';
 import 'package:login_ui/Screens/register/register.dart';
 import 'package:login_ui/components/background.dart';
 
@@ -87,12 +88,17 @@ class LoginScreen extends StatelessWidget {
                     )
                   ),
                   padding: const EdgeInsets.all(0),
+                  child: GestureDetector(
+                    onTap: () => {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeHome()))
+                    },
                   child: Text(
                     "LOGIN",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontWeight: FontWeight.bold
                     ),
+                  ),
                   ),
                 ),
               ),
