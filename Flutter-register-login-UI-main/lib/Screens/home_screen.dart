@@ -23,32 +23,9 @@ class HomePage extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      IconButton(icon: Icon(Icons.menu), onPressed: () {}),
+                      IconButton(icon: Icon(null), onPressed: () {}),
                       Row(
                         children: [
-                          Container(
-                            height: 40.0,
-                            width: 40.0,
-                            //color: Colors.blue,
-                            child: Stack(
-                              children: [
-                                IconButton(
-                                    icon: Icon(Icons.add_alert_outlined),
-                                    onPressed: () {}),
-                                Padding(
-                                  padding:
-                                      EdgeInsets.only(left: 22.0, top: 11.0),
-                                  child: Container(
-                                    height: 5.0,
-                                    width: 5.0,
-                                    decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: Colors.red),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
                           Container(
                             height: 40.0,
                             width: 40.0,
@@ -56,7 +33,7 @@ class HomePage extends StatelessWidget {
                                 color: Colors.red,
                                 shape: BoxShape.circle,
                                 border: Border.all(
-                                    color: Colors.orange, width: 2.0),
+                                    color: Color(0xFF481E95), width: 2.0),
                                 image: DecorationImage(
                                     image: NetworkImage(
                                         "https://avatars.githubusercontent.com/u/56843071?v=4"),
@@ -79,7 +56,7 @@ class HomePage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Hello, Hakkı!",
+                        "สวัสดี, เบล!",
                         style: TextStyle(
                             fontWeight: FontWeight.w600,
                             color: Colors.black54,
@@ -89,10 +66,10 @@ class HomePage extends StatelessWidget {
                         height: 10.0,
                       ),
                       Text(
-                        "Where today you'll work?!",
+                        "คุณต้องการค้นหางานที่ไหน?!",
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: Colors.black,
+                            color: Color(0xFF481E95),
                             fontSize: 20.0),
                       ),
                     ],
@@ -107,25 +84,25 @@ class HomePage extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 15.0),
                   child: TextField(
-                      cursorColor: Colors.orange,
+                      cursorColor: Color(0xFF481E95),
                       decoration: InputDecoration(
-                        fillColor: Colors.orange,
+                        fillColor: Color(0xFF481E95),
                         suffixIcon: Icon(
                           Icons.filter_list,
-                          color: Colors.orange,
+                          color: Color(0xFF481E95),
                         ),
                         prefixIcon: Icon(
                           Icons.search,
-                          color: Colors.orange,
+                          color: Color(0xFF481E95),
                         ),
-                        hintText: "Or search coworking here",
+                        hintText: "ค้นหาที่นี่",
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(30.0),
-                          borderSide: BorderSide(color: Colors.orange),
+                          borderSide: BorderSide(color: Color(0xFF481E95)),
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(30.0),
-                          borderSide: BorderSide(color: Colors.orange),
+                          borderSide: BorderSide(color: Color(0xFF481E95)),
                         ),
                       )),
                 ),
@@ -138,27 +115,27 @@ class HomePage extends StatelessWidget {
                 Container(
                   height: 610.0,
                   width: double.infinity,
-                  color: Colors.white,
+                  color: Color(0xFF481E95),
                   child: DefaultTabController(
                     length: 3,
                     child: Scaffold(
                       backgroundColor: Colors.white,
                       appBar: TabBar(
-                          labelColor: Colors.orange,
-                          indicatorColor: Colors.orange,
-                          unselectedLabelColor: Colors.grey,
+                          labelColor: Color(0xFF481E95),
+                          indicatorColor: Color(0xFF481E95),
+                          unselectedLabelColor: Color(0xFF481E95),
                           tabs: [
                             Tab(
-                              icon: Icon(Icons.wine_bar),
-                              text: "Bar",
-                            ),
-                            Tab(
                               icon: Icon(Icons.home_work_outlined),
-                              text: "Office",
+                              text: "งานประจำ",
                             ),
                             Tab(
                               icon: Icon(Icons.home_work_rounded),
-                              text: "Space",
+                              text: "พาร์ทไทม์",
+                            ),
+                            Tab(
+                              icon: Icon(Icons.favorite_border),
+                              text: "ชื่นชอบ",
                             ),
                           ]),
                       body: TabBarView(children: [
@@ -183,14 +160,14 @@ class HomePage extends StatelessWidget {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            "Recommendation",
+                                            "คำแนะนำ",
                                             style: TextStyle(
-                                                color: Colors.black,
+                                                color: Color(0xFF481E95),
                                                 fontWeight: FontWeight.bold,
                                                 fontSize: 18.0),
                                           ),
                                           Text(
-                                            "These cafe are might you like it",
+                                            "งานที่คุณอาจชอบ",
                                             style: TextStyle(
                                                 color: Colors.grey,
                                                 fontSize: 14.0),
@@ -198,9 +175,9 @@ class HomePage extends StatelessWidget {
                                         ],
                                       ),
                                       Text(
-                                        "See All",
+                                        "ดูทั้งหมด",
                                         style: TextStyle(
-                                          color: Colors.orange,
+                                          color: Color(0xFF481E95),
                                         ),
                                       ),
                                     ],
@@ -242,14 +219,14 @@ class HomePage extends StatelessWidget {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            "Recommendation",
+                                            "คำแนะนำ",
                                             style: TextStyle(
-                                                color: Colors.black,
+                                                color: Color(0xFF481E95),
                                                 fontWeight: FontWeight.bold,
                                                 fontSize: 18.0),
                                           ),
                                           Text(
-                                            "These cafe are might you like it",
+                                            "งานที่คุณอาจชอบ",
                                             style: TextStyle(
                                                 color: Colors.grey,
                                                 fontSize: 14.0),
@@ -257,9 +234,9 @@ class HomePage extends StatelessWidget {
                                         ],
                                       ),
                                       Text(
-                                        "See All",
+                                        "ดูทั้งหมด",
                                         style: TextStyle(
-                                          color: Colors.orange,
+                                          color: Color(0xFF481E95),
                                         ),
                                       ),
                                     ],
@@ -301,14 +278,14 @@ class HomePage extends StatelessWidget {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            "Recommendation",
+                                            "คำแนะนำ",
                                             style: TextStyle(
-                                                color: Colors.black,
+                                                color: Color(0xFF481E95),
                                                 fontWeight: FontWeight.bold,
                                                 fontSize: 18.0),
                                           ),
                                           Text(
-                                            "These cafe are might you like it",
+                                            "งานที่คุณอาจชอบ",
                                             style: TextStyle(
                                                 color: Colors.grey,
                                                 fontSize: 14.0),
@@ -316,9 +293,9 @@ class HomePage extends StatelessWidget {
                                         ],
                                       ),
                                       Text(
-                                        "See All",
+                                        "ดูทั้งหมด",
                                         style: TextStyle(
-                                          color: Colors.orange,
+                                          color: Color(0xFF481E95),
                                         ),
                                       ),
                                     ],
@@ -370,7 +347,7 @@ Widget childCetegory() {
       children: [
         Icon(
           Icons.wine_bar,
-          color: Colors.white,
+          color: Color(0xFF481E95),
         ),
         Text("Bar", style: TextStyle(color: Colors.white)),
       ],

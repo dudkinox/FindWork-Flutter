@@ -72,11 +72,11 @@ class DetailsPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        " Happiness Cafe Roastery",
+                        " ค่าเฟ่",
                         style: TextStyle(
                             fontSize: 20.0,
                             fontWeight: FontWeight.bold,
-                            color: Colors.black),
+                            color: Color(0xFF481E95)),
                       ),
                       SizedBox(
                         height: 10.0,
@@ -85,13 +85,13 @@ class DetailsPage extends StatelessWidget {
                         children: [
                           Icon(
                             Icons.location_on_outlined,
-                            color: Colors.grey,
+                            color: Color(0xFF481E95),
                           ),
                           SizedBox(
                             width: 10.0,
                           ),
                           Text(
-                            "jalan ciujung raya....",
+                            "จันทรเกษม....",
                             style: TextStyle(
                               color: Colors.grey,
                             ),
@@ -108,19 +108,19 @@ class DetailsPage extends StatelessWidget {
                             children: [
                               Icon(
                                 Icons.star,
-                                color: Colors.orange,
+                                color: Color(0xFF481E95),
                               ),
                               Icon(
                                 Icons.star,
-                                color: Colors.orange,
+                                color: Color(0xFF481E95),
                               ),
                               Icon(
                                 Icons.star,
-                                color: Colors.orange,
+                                color: Color(0xFF481E95),
                               ),
                               Icon(
                                 Icons.star,
-                                color: Colors.orange,
+                                color: Color(0xFF481E95),
                               ),
                               Icon(
                                 Icons.star,
@@ -129,9 +129,9 @@ class DetailsPage extends StatelessWidget {
                             ],
                           ),
                           Text(
-                            "\$ 50/hour",
+                            "\฿ 50/ชั่วโมง",
                             style: TextStyle(
-                                color: Colors.black,
+                                color: Color(0xFF481E95),
                                 fontWeight: FontWeight.bold),
                           ),
                         ],
@@ -140,9 +140,9 @@ class DetailsPage extends StatelessWidget {
                         height: 10.0,
                       ),
                       Text(
-                        "Facilities",
+                        "สิ่งอำนวยความสะดวก",
                         style: TextStyle(
-                            color: Colors.black,
+                            color: Color(0xFF481E95),
                             fontWeight: FontWeight.bold,
                             fontSize: 20.0),
                       ),
@@ -158,27 +158,27 @@ class DetailsPage extends StatelessWidget {
                             FacilitiesChild(
                                 Icon(
                                   Icons.wifi,
-                                  color: Colors.orange,
+                                  color: Colors.white,
                                 ),
                                 "Wifi"),
                             FacilitiesChild(
                                 Icon(
                                   Icons.ac_unit,
-                                  color: Colors.orange,
+                                  color: Colors.white,
                                 ),
                                 "AC"),
                             FacilitiesChild(
                                 Icon(
                                   Icons.wash_outlined,
-                                  color: Colors.orange,
+                                  color: Colors.white,
                                 ),
-                                "Hygiene"),
+                                "สุขอนามัย"),
                             FacilitiesChild(
                                 Icon(
                                   Icons.audiotrack_outlined,
-                                  color: Colors.orange,
+                                  color: Colors.white,
                                 ),
-                                "Music"),
+                                "เพลง"),
                           ],
                         ),
                       ),
@@ -186,9 +186,9 @@ class DetailsPage extends StatelessWidget {
                         height: 10.0,
                       ),
                       Text(
-                        "All Menus",
+                        "เมนูทั้งหมด",
                         style: TextStyle(
-                            color: Colors.black,
+                            color: Color(0xFF481E95),
                             fontWeight: FontWeight.bold,
                             fontSize: 20.0),
                       ),
@@ -199,16 +199,16 @@ class DetailsPage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "Popular Menu",
+                            "เมนูยอดนิยม",
                             style: TextStyle(
-                                color: Colors.black,
+                                color: Color(0xFF481E95),
                                 fontWeight: FontWeight.bold,
                                 fontSize: 16.0),
                           ),
                           Text(
-                            "See All",
+                            "ดูทั้งหมด",
                             style: TextStyle(
-                              color: Colors.orange,
+                              color: Color(0xFF481E95),
                             ),
                           ),
                         ],
@@ -244,14 +244,14 @@ Widget PopularMenu(String imgUrl) {
     child: Container(
       height: 120.0,
       width: double.infinity,
-      // color: Colors.orange,
+      // color: Colors.bull,
       child: Row(
         children: [
           Container(
             height: 120.0,
             width: 80.0,
             decoration: BoxDecoration(
-              color: Colors.orange,
+              color: Color(0xFF481E95),
               borderRadius: BorderRadius.circular(20.0),
             ),
             child: Center(
@@ -295,21 +295,21 @@ Widget PopularMenu(String imgUrl) {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Berry Gelato",
+                      "ไอศครีม",
                       style: TextStyle(
-                          color: Colors.black,
+                          color: Color(0xFF481E95),
                           fontWeight: FontWeight.bold,
                           fontSize: 17.0),
                     ),
                     Text(
-                      "Double flavors of berry",
+                      "ไอศครีมสองรสชาติ",
                       style: TextStyle(color: Colors.grey, fontSize: 16.0),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "\$ 25",
+                          "\฿ 25",
                           style: TextStyle(
                               color: Colors.teal,
                               fontWeight: FontWeight.bold,
@@ -319,7 +319,7 @@ Widget PopularMenu(String imgUrl) {
                           height: 30.0,
                           width: 100.0,
                           decoration: BoxDecoration(
-                            color: Colors.orange,
+                            color: Color(0xFF481E95),
                             borderRadius: BorderRadius.only(
                               bottomLeft: Radius.circular(20.0),
                               topRight: Radius.circular(20.0),
@@ -327,7 +327,7 @@ Widget PopularMenu(String imgUrl) {
                           ),
                           child: Center(
                             child: Text(
-                              "Book Now",
+                              "สมัครตอนนี้",
                               style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold),
@@ -357,7 +357,7 @@ Widget FacilitiesChild(
       height: 40.0,
       width: 90.0,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Color(0xFF481E95),
         borderRadius: BorderRadius.circular(20.0),
       ),
       child: Row(

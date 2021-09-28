@@ -4,13 +4,13 @@ import 'package:login_ui/details_screen.dart';
 List RecommendationList = [
   Recommendation(
       "https://cdn.pixabay.com/photo/2018/07/14/15/27/cafe-3537801__480.jpg",
-      "Sleman, Yogyakarta"),
+      "จันเกษม"),
   Recommendation(
       "https://cdn.pixabay.com/photo/2016/11/19/16/46/architecture-1840263__480.jpg",
-      "Berlin, Germany"),
+      "จันเกษม"),
   Recommendation(
       "https://cdn.pixabay.com/photo/2018/07/14/15/27/cafe-3537801__480.jpg",
-      "Sleman, Yogyakarta"),
+      "จันเกษม"),
 ];
 
 class Recommendation extends StatelessWidget {
@@ -47,7 +47,7 @@ class Recommendation extends StatelessWidget {
                       height: 250.0,
                       width: double.infinity,
                       decoration: BoxDecoration(
-                        color: Colors.blueGrey,
+                        color: Color(0xFF481E95),
                         borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(20.0),
                           topRight: Radius.circular(20.0),
@@ -65,9 +65,9 @@ class Recommendation extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            " Happiness Cafe Roastery",
+                            " คาเฟ่",
                             style: TextStyle(
-                                color: Colors.black,
+                                color: Color(0xFF481E95),
                                 fontWeight: FontWeight.bold,
                                 fontSize: 20.0),
                           ),
@@ -79,7 +79,7 @@ class Recommendation extends StatelessWidget {
                             children: [
                               Icon(
                                 Icons.location_on_outlined,
-                                color: Colors.grey,
+                                color: Color(0xFF481E95),
                               ),
                               SizedBox(
                                 width: 4.0,
@@ -87,7 +87,7 @@ class Recommendation extends StatelessWidget {
                               Text(
                                 location,
                                 style: TextStyle(
-                                    color: Colors.grey,
+                                    color: Color(0xFF481E95),
                                     fontWeight: FontWeight.bold,
                                     fontSize: 15.0),
                               ),
@@ -105,24 +105,24 @@ class Recommendation extends StatelessWidget {
                                 children: [
                                   Icon(
                                     Icons.star,
-                                    color: Colors.orange,
+                                    color: Color(0xFF481E95),
                                   ),
                                   SizedBox(
                                     width: 4.0,
                                   ),
                                   Text(
-                                    "4(24 Review)",
+                                    "4(24 รีวิว)",
                                     style: TextStyle(
-                                        color: Colors.grey,
+                                        color: Color(0xFF481E95),
                                         fontWeight: FontWeight.bold,
                                         fontSize: 15.0),
                                   ),
                                 ],
                               ),
                               Text(
-                                "Detail >",
+                                "รายละเอียด >",
                                 style: TextStyle(
-                                  color: Colors.teal,
+                                  color: Color(0xFF481E95),
                                 ),
                               )
                             ],
