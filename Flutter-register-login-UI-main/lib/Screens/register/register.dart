@@ -19,7 +19,7 @@ class RegisterScreen extends StatelessWidget {
                 "สมัครสมาชิก",
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: Color(0xFF481E95),
+                    color: Color(0xFF31B4BC),
                     fontSize: 36),
                 textAlign: TextAlign.left,
               ),
@@ -74,8 +74,8 @@ class RegisterScreen extends StatelessWidget {
                   decoration: new BoxDecoration(
                       borderRadius: BorderRadius.circular(80.0),
                       gradient: new LinearGradient(colors: [
-                        Color.fromARGB(255, 72, 30, 149),
-                        Color.fromARGB(255, 72, 30, 149)
+                        Color(0xFF25888E),
+                        Color(0xFF31B4BC),
                       ])),
                   padding: const EdgeInsets.all(0),
                   child: Text(

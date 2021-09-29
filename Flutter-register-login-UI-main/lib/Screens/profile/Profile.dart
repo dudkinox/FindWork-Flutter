@@ -38,12 +38,12 @@ class MapScreenState extends State<ProfilePage>
                           children: <Widget>[
                             Padding(
                               padding: EdgeInsets.only(left: 25.0),
-                              child: new Text('PROFILE',
+                              child: new Text('ข้อมูลส่วนตัว',
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 20.0,
                                       fontFamily: 'sans-serif-light',
-                                      color: Colors.black)),
+                                      color: Color(0xFF481E95))),
                             )
                           ],
                         )),
@@ -73,7 +73,7 @@ class MapScreenState extends State<ProfilePage>
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
                                 new CircleAvatar(
-                                  backgroundColor: Colors.red,
+                                  backgroundColor: Color(0xFF481E95),
                                   radius: 25.0,
                                   child: new Icon(
                                     Icons.camera_alt,
@@ -107,9 +107,10 @@ class MapScreenState extends State<ProfilePage>
                                 mainAxisSize: MainAxisSize.min,
                                 children: <Widget>[
                                   new Text(
-                                    'Parsonal Information',
+                                    'แก้ไขข้อมูล',
                                     style: TextStyle(
                                         fontSize: 18.0,
+                                        color: Color(0xFF481E95),
                                         fontWeight: FontWeight.bold),
                                   ),
                                 ],
@@ -134,9 +135,10 @@ class MapScreenState extends State<ProfilePage>
                                 mainAxisSize: MainAxisSize.min,
                                 children: <Widget>[
                                   new Text(
-                                    'Name',
+                                    'ชื่อ',
                                     style: TextStyle(
                                         fontSize: 16.0,
+                                        color: Color(0xFF481E95),
                                         fontWeight: FontWeight.bold),
                                   ),
                                 ],
@@ -152,7 +154,7 @@ class MapScreenState extends State<ProfilePage>
                               new Flexible(
                                 child: new TextField(
                                   decoration: const InputDecoration(
-                                    hintText: "Enter Your Name",
+                                    hintText: "ใส่ชื่อของคุณ",
                                   ),
                                   enabled: !_status,
                                   autofocus: !_status,
@@ -171,9 +173,10 @@ class MapScreenState extends State<ProfilePage>
                                 mainAxisSize: MainAxisSize.min,
                                 children: <Widget>[
                                   new Text(
-                                    'Email ID',
+                                    'ชื่ออีเมล์',
                                     style: TextStyle(
                                         fontSize: 16.0,
+                                        color: Color(0xFF481E95),
                                         fontWeight: FontWeight.bold),
                                   ),
                                 ],
@@ -189,7 +192,7 @@ class MapScreenState extends State<ProfilePage>
                               new Flexible(
                                 child: new TextField(
                                   decoration: const InputDecoration(
-                                      hintText: "Enter Email ID"),
+                                      hintText: "ป้อน ID อีเมล"),
                                   enabled: !_status,
                                 ),
                               ),
@@ -206,9 +209,10 @@ class MapScreenState extends State<ProfilePage>
                                 mainAxisSize: MainAxisSize.min,
                                 children: <Widget>[
                                   new Text(
-                                    'Mobile',
+                                    'เบอร์โทรศัพท์',
                                     style: TextStyle(
                                         fontSize: 16.0,
+                                        color: Color(0xFF481E95),
                                         fontWeight: FontWeight.bold),
                                   ),
                                 ],
@@ -224,42 +228,57 @@ class MapScreenState extends State<ProfilePage>
                               new Flexible(
                                 child: new TextField(
                                   decoration: const InputDecoration(
-                                      hintText: "Enter Mobile Number"),
+                                      hintText: "ใส่เบอร์โทรศัพท์"),
                                   enabled: !_status,
                                 ),
                               ),
                             ],
                           )),
+                      Container(
+                        padding:
+                            EdgeInsets.only(left: 25.0, right: 25.0, top: 25.0),
+                        alignment: Alignment.centerRight,
+                        margin:
+                            EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                        child: RaisedButton(
+                          onPressed: () {},
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(80.0)),
+                          textColor: Colors.white,
+                          padding: const EdgeInsets.all(0),
+                          child: Container(
+                            alignment: Alignment.center,
+                            height: 50.0,
+                            decoration: new BoxDecoration(
+                                borderRadius: BorderRadius.circular(80.0),
+                                gradient: new LinearGradient(colors: [
+                                  Color(0xFF481E95),
+                                  Color(0xFF481E95),
+                                ])),
+                            padding: const EdgeInsets.all(0),
+                            child: GestureDetector(
+                              onTap: () => {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => ProfilePage()))
+                              },
+                              child: Text(
+                                "เพื่มเรซุเม่",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
                       Padding(
                           padding: EdgeInsets.only(
-                              left: 25.0, right: 25.0, top: 25.0),
+                              left: 25.0, right: 25.0, top: 15.0),
                           child: new Row(
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.start,
-                            children: <Widget>[
-                              Expanded(
-                                child: Container(
-                                  child: new Text(
-                                    'Pin Code',
-                                    style: TextStyle(
-                                        fontSize: 16.0,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                                flex: 2,
-                              ),
-                              Expanded(
-                                child: Container(
-                                  child: new Text(
-                                    'State',
-                                    style: TextStyle(
-                                        fontSize: 16.0,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                                flex: 2,
-                              ),
-                            ],
+                            children: <Widget>[],
                           )),
                       Padding(
                           padding: EdgeInsets.only(
@@ -267,27 +286,7 @@ class MapScreenState extends State<ProfilePage>
                           child: new Row(
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.start,
-                            children: <Widget>[
-                              Flexible(
-                                child: Padding(
-                                  padding: EdgeInsets.only(right: 10.0),
-                                  child: new TextField(
-                                    decoration: const InputDecoration(
-                                        hintText: "Enter Pin Code"),
-                                    enabled: !_status,
-                                  ),
-                                ),
-                                flex: 2,
-                              ),
-                              Flexible(
-                                child: new TextField(
-                                  decoration: const InputDecoration(
-                                      hintText: "Enter State"),
-                                  enabled: !_status,
-                                ),
-                                flex: 2,
-                              ),
-                            ],
+                            children: <Widget>[],
                           )),
                       !_status ? _getActionButtons() : new Container(),
                     ],
@@ -310,7 +309,7 @@ class MapScreenState extends State<ProfilePage>
 
   Widget _getActionButtons() {
     return Padding(
-      padding: EdgeInsets.only(left: 25.0, right: 25.0, top: 45.0),
+      padding: EdgeInsets.only(left: 25.0, right: 25.0, top: 0),
       child: new Row(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.start,
@@ -322,7 +321,7 @@ class MapScreenState extends State<ProfilePage>
                   child: new RaisedButton(
                 child: new Text("Save"),
                 textColor: Colors.white,
-                color: Colors.green,
+                color: Color(0xFF25888E),
                 onPressed: () {
                   setState(() {
                     _status = true;
@@ -342,7 +341,7 @@ class MapScreenState extends State<ProfilePage>
                   child: new RaisedButton(
                 child: new Text("Cancel"),
                 textColor: Colors.white,
-                color: Colors.red,
+                color: Colors.red[600],
                 onPressed: () {
                   setState(() {
                     _status = true;
@@ -363,7 +362,7 @@ class MapScreenState extends State<ProfilePage>
   Widget _getEditIcon() {
     return new GestureDetector(
       child: new CircleAvatar(
-        backgroundColor: Colors.red,
+        backgroundColor: Color(0xFF481E95),
         radius: 14.0,
         child: new Icon(
           Icons.edit,
