@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'Animation/Fade_Animation.dart';
+import 'Themes/Themes.dart';
 
 class DetailsPage extends StatelessWidget {
   final String imgUrl;
@@ -72,11 +73,11 @@ class DetailsPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        " ค่าเฟ่",
+                        " คาเฟ่",
                         style: TextStyle(
                             fontSize: 20.0,
                             fontWeight: FontWeight.bold,
-                            color: Color(0xFF481E95)),
+                            color: PrimaryColor),
                       ),
                       SizedBox(
                         height: 10.0,
@@ -85,7 +86,7 @@ class DetailsPage extends StatelessWidget {
                         children: [
                           Icon(
                             Icons.location_on_outlined,
-                            color: Color(0xFF481E95),
+                            color: PrimaryColor,
                           ),
                           SizedBox(
                             width: 10.0,
@@ -104,34 +105,11 @@ class DetailsPage extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.star,
-                                color: Color(0xFF481E95),
-                              ),
-                              Icon(
-                                Icons.star,
-                                color: Color(0xFF481E95),
-                              ),
-                              Icon(
-                                Icons.star,
-                                color: Color(0xFF481E95),
-                              ),
-                              Icon(
-                                Icons.star,
-                                color: Color(0xFF481E95),
-                              ),
-                              Icon(
-                                Icons.star,
-                                color: Colors.grey,
-                              ),
-                            ],
-                          ),
+                          Row(),
                           Text(
                             "\฿ 50/ชั่วโมง",
                             style: TextStyle(
-                                color: Color(0xFF481E95),
+                                color: PrimaryColor,
                                 fontWeight: FontWeight.bold),
                           ),
                         ],
@@ -142,7 +120,7 @@ class DetailsPage extends StatelessWidget {
                       Text(
                         "สิ่งอำนวยความสะดวก",
                         style: TextStyle(
-                            color: Color(0xFF481E95),
+                            color: PrimaryColor,
                             fontWeight: FontWeight.bold,
                             fontSize: 20.0),
                       ),
@@ -188,7 +166,7 @@ class DetailsPage extends StatelessWidget {
                       Text(
                         "เมนูทั้งหมด",
                         style: TextStyle(
-                            color: Color(0xFF481E95),
+                            color: PrimaryColor,
                             fontWeight: FontWeight.bold,
                             fontSize: 20.0),
                       ),
@@ -201,14 +179,14 @@ class DetailsPage extends StatelessWidget {
                           Text(
                             "เมนูยอดนิยม",
                             style: TextStyle(
-                                color: Color(0xFF481E95),
+                                color: PrimaryColor,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 16.0),
                           ),
                           Text(
                             "ดูทั้งหมด",
                             style: TextStyle(
-                              color: Color(0xFF481E95),
+                              color: PrimaryColor,
                             ),
                           ),
                         ],
@@ -251,7 +229,7 @@ Widget PopularMenu(String imgUrl) {
             height: 120.0,
             width: 80.0,
             decoration: BoxDecoration(
-              color: Color(0xFF481E95),
+              color: PrimaryColor,
               borderRadius: BorderRadius.circular(20.0),
             ),
             child: Center(
@@ -297,7 +275,7 @@ Widget PopularMenu(String imgUrl) {
                     Text(
                       "ไอศครีม",
                       style: TextStyle(
-                          color: Color(0xFF481E95),
+                          color: PrimaryColor,
                           fontWeight: FontWeight.bold,
                           fontSize: 17.0),
                     ),
@@ -319,7 +297,7 @@ Widget PopularMenu(String imgUrl) {
                           height: 30.0,
                           width: 100.0,
                           decoration: BoxDecoration(
-                            color: Color(0xFF481E95),
+                            color: PrimaryColor,
                             borderRadius: BorderRadius.only(
                               bottomLeft: Radius.circular(20.0),
                               topRight: Radius.circular(20.0),
@@ -357,7 +335,7 @@ Widget FacilitiesChild(
       height: 40.0,
       width: 90.0,
       decoration: BoxDecoration(
-        color: Color(0xFF481E95),
+        color: PrimaryColor,
         borderRadius: BorderRadius.circular(20.0),
       ),
       child: Row(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:login_ui/Screens/homehome.dart';
 import 'package:login_ui/Screens/register/register.dart';
+import 'package:login_ui/Themes/Themes.dart';
 import 'package:login_ui/components/background.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -47,7 +48,7 @@ class LoginScreen extends StatelessWidget {
               margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
               child: Text(
                 "ลืมรหัสผ่าน?",
-                style: TextStyle(fontSize: 12, color: Color(0xFF481E95)),
+                style: TextStyle(fontSize: 12, color: PrimaryColor),
               ),
             ),
             SizedBox(height: size.height * 0.05),
@@ -98,7 +99,7 @@ class LoginScreen extends StatelessWidget {
                   style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.bold,
-                      color: Color(0xFF481E95)),
+                      color: PrimaryColor),
                 ),
               ),
             )

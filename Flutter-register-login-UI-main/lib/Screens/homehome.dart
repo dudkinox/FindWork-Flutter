@@ -5,6 +5,7 @@ import 'package:login_ui/Screens/alertPage/alertPage.dart';
 import 'package:login_ui/Screens/favorite/favorite.dart';
 import 'package:login_ui/Screens/home_screen.dart';
 import 'package:login_ui/Screens/profile/Profile.dart';
+import 'package:login_ui/Themes/Themes.dart';
 
 class HomeHome extends StatefulWidget {
   @override
@@ -17,7 +18,7 @@ class _HomeHomeState extends State<HomeHome> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: CurvedNavigationBar(
-        color: Color(0xFF481E95),
+        color: PrimaryColor,
         index: 0,
         backgroundColor: Colors.white,
         items: <Widget>[

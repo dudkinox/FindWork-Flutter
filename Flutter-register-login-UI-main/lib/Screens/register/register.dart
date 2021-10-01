@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:login_ui/Screens/login/login.dart';
+import 'package:login_ui/Themes/Themes.dart';
 import 'package:login_ui/components/background.dart';
+import 'package:login_ui/components/selcetChackbox.dart';
 
 class RegisterScreen extends StatelessWidget {
   @override
@@ -24,7 +26,7 @@ class RegisterScreen extends StatelessWidget {
                 textAlign: TextAlign.left,
               ),
             ),
-            SizedBox(height: size.height * 0.03),
+            SizedBox(height: size.height * 0.01),
             Container(
               alignment: Alignment.center,
               margin: EdgeInsets.symmetric(horizontal: 40),
@@ -32,7 +34,7 @@ class RegisterScreen extends StatelessWidget {
                 decoration: InputDecoration(labelText: "ชื่อผู้ใช้"),
               ),
             ),
-            SizedBox(height: size.height * 0.03),
+            SizedBox(height: size.height * 0.01),
             Container(
               alignment: Alignment.center,
               margin: EdgeInsets.symmetric(horizontal: 40),
@@ -41,7 +43,7 @@ class RegisterScreen extends StatelessWidget {
                 obscureText: true,
               ),
             ),
-            SizedBox(height: size.height * 0.03),
+            SizedBox(height: size.height * 0.01),
             Container(
               alignment: Alignment.center,
               margin: EdgeInsets.symmetric(horizontal: 40),
@@ -50,7 +52,7 @@ class RegisterScreen extends StatelessWidget {
                 obscureText: true,
               ),
             ),
-            SizedBox(height: size.height * 0.03),
+            SizedBox(height: size.height * 0.01),
             Container(
               alignment: Alignment.center,
               margin: EdgeInsets.symmetric(horizontal: 40),
@@ -58,7 +60,7 @@ class RegisterScreen extends StatelessWidget {
                 decoration: InputDecoration(labelText: "อีเมล"),
               ),
             ),
-            SizedBox(height: size.height * 0.03),
+            SizedBox(height: size.height * 0.01),
             Container(
               alignment: Alignment.center,
               margin: EdgeInsets.symmetric(horizontal: 40),
@@ -66,7 +68,13 @@ class RegisterScreen extends StatelessWidget {
                 decoration: InputDecoration(labelText: "เบอร์โทรศัพท์"),
               ),
             ),
-            SizedBox(height: size.height * 0.05),
+            // matching
+            Container(
+              alignment: Alignment.center,
+              margin: EdgeInsets.symmetric(horizontal: 40),
+              child: FeaturesMultiChips(),
+            ),
+            SizedBox(height: size.height * 0.01),
             Container(
               alignment: Alignment.centerRight,
               margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
@@ -108,7 +116,7 @@ class RegisterScreen extends StatelessWidget {
                   style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.bold,
-                      color: Color(0xFF481E95)),
+                      color: PrimaryColor),
                 ),
               ),
             )

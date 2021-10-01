@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:login_ui/Animation/Fade_Animation.dart';
+import 'package:login_ui/Themes/Themes.dart';
 
 class Favorite extends StatefulWidget {
   @override
@@ -28,7 +29,7 @@ class _FavoriteState extends State<Favorite> {
                   "ชื่นชอบ",
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      color: Color(0xFF481E95),
+                      color: PrimaryColor,
                       fontSize: 36),
                   textAlign: TextAlign.left,
                 ),
@@ -62,7 +63,7 @@ class _FavoriteState extends State<Favorite> {
                                         height: 250.0,
                                         width: double.infinity,
                                         decoration: BoxDecoration(
-                                          color: Color(0xFF481E95),
+                                          color: PrimaryColor,
                                           borderRadius: BorderRadius.only(
                                             topLeft: Radius.circular(20.0),
                                             topRight: Radius.circular(20.0),
@@ -82,7 +83,7 @@ class _FavoriteState extends State<Favorite> {
                                                   borderRadius:
                                                       BorderRadius.circular(
                                                           20.0),
-                                                  color: Color(0xFF481E95)),
+                                                  color: PrimaryColor),
                                               child: Icon(
                                                 Icons.favorite_border,
                                                 color: Colors.white,
@@ -104,7 +105,7 @@ class _FavoriteState extends State<Favorite> {
                                             Text(
                                               " คาเฟ่",
                                               style: TextStyle(
-                                                  color: Color(0xFF481E95),
+                                                  color: PrimaryColor,
                                                   fontWeight: FontWeight.bold,
                                                   fontSize: 20.0),
                                             ),
@@ -117,7 +118,7 @@ class _FavoriteState extends State<Favorite> {
                                               children: [
                                                 Icon(
                                                   Icons.location_on_outlined,
-                                                  color: Color(0xFF481E95),
+                                                  color: PrimaryColor,
                                                 ),
                                                 SizedBox(
                                                   width: 4.0,
@@ -146,7 +147,7 @@ class _FavoriteState extends State<Favorite> {
                                                   children: [
                                                     Icon(
                                                       Icons.star,
-                                                      color: Color(0xFF481E95),
+                                                      color: PrimaryColor,
                                                     ),
                                                     SizedBox(
                                                       width: 4.0,
@@ -154,8 +155,7 @@ class _FavoriteState extends State<Favorite> {
                                                     Text(
                                                       "4(24 รีวิว)",
                                                       style: TextStyle(
-                                                          color:
-                                                              Color(0xFF481E95),
+                                                          color: PrimaryColor,
                                                           fontWeight:
                                                               FontWeight.bold,
                                                           fontSize: 15.0),
@@ -165,7 +165,7 @@ class _FavoriteState extends State<Favorite> {
                                                 Text(
                                                   "รายละเอียด >",
                                                   style: TextStyle(
-                                                    color: Color(0xFF481E95),
+                                                    color: PrimaryColor,
                                                   ),
                                                 )
                                               ],

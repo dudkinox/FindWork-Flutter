@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:login_ui/Animation/Fade_Animation.dart';
+import 'package:login_ui/Themes/Themes.dart';
 import 'package:login_ui/components/background.dart';
 
 import 'infinite.dart';
@@ -26,7 +28,7 @@ class _AlertPageState extends State<AlertPage> {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           title: const Text('แจ้งเตือน'),
-          backgroundColor: Color(0xFF481E95),
+          backgroundColor: PrimaryColor,
           actions: <Widget>[
             IconButton(
               icon: const Icon(Icons.arrow_downward),
@@ -54,11 +56,14 @@ class _AlertPageState extends State<AlertPage> {
             ],
           ),
         ),
-        body: TabBarView(
-          children: <Widget>[
-            _buildTab(0),
-            _buildTab(1),
-          ],
+        body: FadeAnimation(
+          1.0,
+          TabBarView(
+            children: <Widget>[
+              _buildTab(0),
+              _buildTab(1),
+            ],
+          ),
         ),
       ),
     );

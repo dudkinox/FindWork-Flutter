@@ -1,4 +1,0 @@
-#Mon Sep 27 19:53:25 ICT 2021
-base.0=E\:\\Flutter\\findwork\\find_a_job_flutter_app-main\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
-renamed.0=classes.dex
-path.0=classes.dex

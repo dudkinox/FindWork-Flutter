@@ -1,4 +1,0 @@
-io/flutter/plugins/GeneratedPluginRegistrant.java
- io.flutter.plugins.GeneratedPluginRegistrant
-com/cansngnl/find_a_job_flutter_app/BuildConfig.java
- com.cansngnl.find_a_job_flutter_app.BuildConfig

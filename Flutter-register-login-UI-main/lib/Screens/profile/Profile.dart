@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:login_ui/Animation/Fade_Animation.dart';
+import 'package:login_ui/Themes/Themes.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -46,7 +47,7 @@ class MapScreenState extends State<ProfilePage>
                                         fontWeight: FontWeight.bold,
                                         fontSize: 20.0,
                                         fontFamily: 'sans-serif-light',
-                                        color: Color(0xFF481E95))),
+                                        color: PrimaryColor)),
                               )
                             ],
                           )),
@@ -77,7 +78,7 @@ class MapScreenState extends State<ProfilePage>
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: <Widget>[
                                   new CircleAvatar(
-                                    backgroundColor: Color(0xFF481E95),
+                                    backgroundColor: PrimaryColor,
                                     radius: 25.0,
                                     child: new Icon(
                                       Icons.camera_alt,
@@ -114,7 +115,7 @@ class MapScreenState extends State<ProfilePage>
                                       'แก้ไขข้อมูล',
                                       style: TextStyle(
                                           fontSize: 18.0,
-                                          color: Color(0xFF481E95),
+                                          color: PrimaryColor,
                                           fontWeight: FontWeight.bold),
                                     ),
                                   ],
@@ -142,7 +143,7 @@ class MapScreenState extends State<ProfilePage>
                                       'ชื่อ',
                                       style: TextStyle(
                                           fontSize: 16.0,
-                                          color: Color(0xFF481E95),
+                                          color: PrimaryColor,
                                           fontWeight: FontWeight.bold),
                                     ),
                                   ],
@@ -180,7 +181,7 @@ class MapScreenState extends State<ProfilePage>
                                       'ชื่ออีเมล์',
                                       style: TextStyle(
                                           fontSize: 16.0,
-                                          color: Color(0xFF481E95),
+                                          color: PrimaryColor,
                                           fontWeight: FontWeight.bold),
                                     ),
                                   ],
@@ -216,7 +217,7 @@ class MapScreenState extends State<ProfilePage>
                                       'เบอร์โทรศัพท์',
                                       style: TextStyle(
                                           fontSize: 16.0,
-                                          color: Color(0xFF481E95),
+                                          color: PrimaryColor,
                                           fontWeight: FontWeight.bold),
                                     ),
                                   ],
@@ -256,8 +257,8 @@ class MapScreenState extends State<ProfilePage>
                               decoration: new BoxDecoration(
                                   borderRadius: BorderRadius.circular(80.0),
                                   gradient: new LinearGradient(colors: [
-                                    Color(0xFF481E95),
-                                    Color(0xFF481E95),
+                                    PrimaryColor,
+                                    PrimaryColor,
                                   ])),
                               padding: const EdgeInsets.all(0),
                               child: GestureDetector(
@@ -367,7 +368,7 @@ class MapScreenState extends State<ProfilePage>
   Widget _getEditIcon() {
     return new GestureDetector(
       child: new CircleAvatar(
-        backgroundColor: Color(0xFF481E95),
+        backgroundColor: PrimaryColor,
         radius: 14.0,
         child: new Icon(
           Icons.edit,

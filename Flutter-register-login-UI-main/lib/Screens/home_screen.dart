@@ -1,6 +1,7 @@
 import 'package:login_ui/Recommendation_List_Data/Recommendation_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:login_ui/Animation/Fade_Animation.dart';
+import 'package:login_ui/Themes/Themes.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -30,13 +31,13 @@ class HomePage extends StatelessWidget {
                             height: 40.0,
                             width: 40.0,
                             decoration: BoxDecoration(
-                                color: Colors.red,
+                                color: Colors.white,
                                 shape: BoxShape.circle,
-                                border: Border.all(
-                                    color: Color(0xFF481E95), width: 2.0),
+                                border:
+                                    Border.all(color: PrimaryColor, width: 2.0),
                                 image: DecorationImage(
                                     image: NetworkImage(
-                                        "https://avatars.githubusercontent.com/u/56843071?v=4"),
+                                        "https://img.icons8.com/ios-glyphs/64/000000/user.png"),
                                     fit: BoxFit.cover)),
                           ),
                         ],
@@ -69,7 +70,7 @@ class HomePage extends StatelessWidget {
                         "คุณต้องการค้นหางานที่ไหน?!",
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: Color(0xFF481E95),
+                            color: PrimaryColor,
                             fontSize: 20.0),
                       ),
                     ],
@@ -84,25 +85,25 @@ class HomePage extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 15.0),
                   child: TextField(
-                      cursorColor: Color(0xFF481E95),
+                      cursorColor: PrimaryColor,
                       decoration: InputDecoration(
-                        fillColor: Color(0xFF481E95),
+                        fillColor: PrimaryColor,
                         suffixIcon: Icon(
                           Icons.filter_list,
-                          color: Color(0xFF481E95),
+                          color: PrimaryColor,
                         ),
                         prefixIcon: Icon(
                           Icons.search,
-                          color: Color(0xFF481E95),
+                          color: PrimaryColor,
                         ),
                         hintText: "ค้นหาที่นี่",
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(30.0),
-                          borderSide: BorderSide(color: Color(0xFF481E95)),
+                          borderSide: BorderSide(color: PrimaryColor),
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(30.0),
-                          borderSide: BorderSide(color: Color(0xFF481E95)),
+                          borderSide: BorderSide(color: PrimaryColor),
                         ),
                       )),
                 ),
@@ -115,15 +116,15 @@ class HomePage extends StatelessWidget {
                 Container(
                   height: 610.0,
                   width: double.infinity,
-                  color: Color(0xFF481E95),
+                  color: PrimaryColor,
                   child: DefaultTabController(
                     length: 3,
                     child: Scaffold(
                       backgroundColor: Colors.white,
                       appBar: TabBar(
-                          labelColor: Color(0xFF481E95),
-                          indicatorColor: Color(0xFF481E95),
-                          unselectedLabelColor: Color(0xFF481E95),
+                          labelColor: PrimaryColor,
+                          indicatorColor: PrimaryColor,
+                          unselectedLabelColor: PrimaryColor,
                           tabs: [
                             Tab(
                               icon: Icon(Icons.home_work_outlined),
@@ -162,7 +163,7 @@ class HomePage extends StatelessWidget {
                                           Text(
                                             "คำแนะนำ",
                                             style: TextStyle(
-                                                color: Color(0xFF481E95),
+                                                color: PrimaryColor,
                                                 fontWeight: FontWeight.bold,
                                                 fontSize: 18.0),
                                           ),
@@ -177,7 +178,7 @@ class HomePage extends StatelessWidget {
                                       Text(
                                         "ดูทั้งหมด",
                                         style: TextStyle(
-                                          color: Color(0xFF481E95),
+                                          color: PrimaryColor,
                                         ),
                                       ),
                                     ],
@@ -221,7 +222,7 @@ class HomePage extends StatelessWidget {
                                           Text(
                                             "คำแนะนำ",
                                             style: TextStyle(
-                                                color: Color(0xFF481E95),
+                                                color: PrimaryColor,
                                                 fontWeight: FontWeight.bold,
                                                 fontSize: 18.0),
                                           ),
@@ -236,7 +237,7 @@ class HomePage extends StatelessWidget {
                                       Text(
                                         "ดูทั้งหมด",
                                         style: TextStyle(
-                                          color: Color(0xFF481E95),
+                                          color: PrimaryColor,
                                         ),
                                       ),
                                     ],
@@ -280,7 +281,7 @@ class HomePage extends StatelessWidget {
                                           Text(
                                             "คำแนะนำ",
                                             style: TextStyle(
-                                                color: Color(0xFF481E95),
+                                                color: PrimaryColor,
                                                 fontWeight: FontWeight.bold,
                                                 fontSize: 18.0),
                                           ),
@@ -295,7 +296,7 @@ class HomePage extends StatelessWidget {
                                       Text(
                                         "ดูทั้งหมด",
                                         style: TextStyle(
-                                          color: Color(0xFF481E95),
+                                          color: PrimaryColor,
                                         ),
                                       ),
                                     ],
@@ -347,7 +348,7 @@ Widget childCetegory() {
       children: [
         Icon(
           Icons.wine_bar,
-          color: Color(0xFF481E95),
+          color: PrimaryColor,
         ),
         Text("Bar", style: TextStyle(color: Colors.white)),
       ],
