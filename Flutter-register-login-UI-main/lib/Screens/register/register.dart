@@ -29,22 +29,6 @@ class RegisterScreen extends StatelessWidget {
               alignment: Alignment.center,
               margin: EdgeInsets.symmetric(horizontal: 40),
               child: TextField(
-                decoration: InputDecoration(labelText: "ชื่อ"),
-              ),
-            ),
-            SizedBox(height: size.height * 0.03),
-            Container(
-              alignment: Alignment.center,
-              margin: EdgeInsets.symmetric(horizontal: 40),
-              child: TextField(
-                decoration: InputDecoration(labelText: "เบอร์โทรศัพท์"),
-              ),
-            ),
-            SizedBox(height: size.height * 0.03),
-            Container(
-              alignment: Alignment.center,
-              margin: EdgeInsets.symmetric(horizontal: 40),
-              child: TextField(
                 decoration: InputDecoration(labelText: "ชื่อผู้ใช้"),
               ),
             ),
@@ -55,6 +39,31 @@ class RegisterScreen extends StatelessWidget {
               child: TextField(
                 decoration: InputDecoration(labelText: "รหัสผ่าน"),
                 obscureText: true,
+              ),
+            ),
+            SizedBox(height: size.height * 0.03),
+            Container(
+              alignment: Alignment.center,
+              margin: EdgeInsets.symmetric(horizontal: 40),
+              child: TextField(
+                decoration: InputDecoration(labelText: "ยืนยันรหัสผ่าน"),
+                obscureText: true,
+              ),
+            ),
+            SizedBox(height: size.height * 0.03),
+            Container(
+              alignment: Alignment.center,
+              margin: EdgeInsets.symmetric(horizontal: 40),
+              child: TextField(
+                decoration: InputDecoration(labelText: "อีเมล"),
+              ),
+            ),
+            SizedBox(height: size.height * 0.03),
+            Container(
+              alignment: Alignment.center,
+              margin: EdgeInsets.symmetric(horizontal: 40),
+              child: TextField(
+                decoration: InputDecoration(labelText: "เบอร์โทรศัพท์"),
               ),
             ),
             SizedBox(height: size.height * 0.05),

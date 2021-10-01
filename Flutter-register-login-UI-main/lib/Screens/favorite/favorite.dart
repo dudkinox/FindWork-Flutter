@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:login_ui/Animation/Fade_Animation.dart';
 
 class Favorite extends StatefulWidget {
   @override
@@ -53,121 +54,127 @@ class _FavoriteState extends State<Favorite> {
                             ),
                             child: Column(
                               children: [
-                                Column(
-                                  children: [
-                                    Container(
-                                      height: 250.0,
-                                      width: double.infinity,
-                                      decoration: BoxDecoration(
-                                        color: Color(0xFF481E95),
-                                        borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(20.0),
-                                          topRight: Radius.circular(20.0),
+                                FadeAnimation(
+                                  1.0,
+                                  Column(
+                                    children: [
+                                      Container(
+                                        height: 250.0,
+                                        width: double.infinity,
+                                        decoration: BoxDecoration(
+                                          color: Color(0xFF481E95),
+                                          borderRadius: BorderRadius.only(
+                                            topLeft: Radius.circular(20.0),
+                                            topRight: Radius.circular(20.0),
+                                          ),
+                                          image: DecorationImage(
+                                              image: AssetImage(item),
+                                              fit: BoxFit.cover),
                                         ),
-                                        image: DecorationImage(
-                                            image: AssetImage(item),
-                                            fit: BoxFit.cover),
-                                      ),
-                                      child: Container(
-                                        child: Transform.translate(
-                                          offset: Offset(145, -90),
-                                          child: Container(
-                                            margin: EdgeInsets.symmetric(
-                                                horizontal: 155, vertical: 100),
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(20.0),
-                                                color: Color(0xFF481E95)),
-                                            child: Icon(
-                                              Icons.favorite_border,
-                                              color: Colors.white,
+                                        child: Container(
+                                          child: Transform.translate(
+                                            offset: Offset(145, -90),
+                                            child: Container(
+                                              margin: EdgeInsets.symmetric(
+                                                  horizontal: 155,
+                                                  vertical: 100),
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          20.0),
+                                                  color: Color(0xFF481E95)),
+                                              child: Icon(
+                                                Icons.favorite_border,
+                                                color: Colors.white,
+                                              ),
                                             ),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                    SizedBox(
-                                      height: 10.0,
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 10.0),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            " คาเฟ่",
-                                            style: TextStyle(
-                                                color: Color(0xFF481E95),
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 20.0),
-                                          ),
-                                          SizedBox(
-                                            height: 10.0,
-                                          ),
-                                          Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.end,
-                                            children: [
-                                              Icon(
-                                                Icons.location_on_outlined,
-                                                color: Color(0xFF481E95),
-                                              ),
-                                              SizedBox(
-                                                width: 4.0,
-                                              ),
-                                              Text(
-                                                "จันทรเกษม....",
-                                                style: TextStyle(
-                                                  color: Colors.grey,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 10.0,
-                                          ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.end,
-                                            children: [
-                                              Row(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.end,
-                                                children: [
-                                                  Icon(
-                                                    Icons.star,
-                                                    color: Color(0xFF481E95),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 4.0,
-                                                  ),
-                                                  Text(
-                                                    "4(24 รีวิว)",
-                                                    style: TextStyle(
-                                                        color:
-                                                            Color(0xFF481E95),
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontSize: 15.0),
-                                                  ),
-                                                ],
-                                              ),
-                                              Text(
-                                                "รายละเอียด >",
-                                                style: TextStyle(
+                                      SizedBox(
+                                        height: 10.0,
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 10.0),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              " คาเฟ่",
+                                              style: TextStyle(
+                                                  color: Color(0xFF481E95),
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 20.0),
+                                            ),
+                                            SizedBox(
+                                              height: 10.0,
+                                            ),
+                                            Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.end,
+                                              children: [
+                                                Icon(
+                                                  Icons.location_on_outlined,
                                                   color: Color(0xFF481E95),
                                                 ),
-                                              )
-                                            ],
-                                          ),
-                                        ],
+                                                SizedBox(
+                                                  width: 4.0,
+                                                ),
+                                                Text(
+                                                  "จันทรเกษม....",
+                                                  style: TextStyle(
+                                                    color: Colors.grey,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: 10.0,
+                                            ),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.end,
+                                              children: [
+                                                Row(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.end,
+                                                  children: [
+                                                    Icon(
+                                                      Icons.star,
+                                                      color: Color(0xFF481E95),
+                                                    ),
+                                                    SizedBox(
+                                                      width: 4.0,
+                                                    ),
+                                                    Text(
+                                                      "4(24 รีวิว)",
+                                                      style: TextStyle(
+                                                          color:
+                                                              Color(0xFF481E95),
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 15.0),
+                                                    ),
+                                                  ],
+                                                ),
+                                                Text(
+                                                  "รายละเอียด >",
+                                                  style: TextStyle(
+                                                    color: Color(0xFF481E95),
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                               ],
                             ),
