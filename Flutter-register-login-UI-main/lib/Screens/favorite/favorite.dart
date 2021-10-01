@@ -1,68 +1,206 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class Favorites extends StatefulWidget {
+class Favorite extends StatefulWidget {
   @override
-  _FavoritesState createState() => _FavoritesState();
+  _FavoriteState createState() => _FavoriteState();
 }
 
-class _FavoritesState extends State<Favorites> {
-  Stream favStream;
-  Stream profileStream;
+final List<String> _listItem = [
+  'assets/images/two.jpg',
+  'assets/images/three.jpg',
+  'assets/images/four.jpg',
+];
 
+class _FavoriteState extends State<Favorite> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        actions: [
-          StreamBuilder(
-              stream: profileStream,
-              builder: (context, snapshot) {
-                return snapshot.hasData
-                    ? Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 15, vertical: 13),
-                        child: CircleAvatar(
-                          radius: 15,
-                          backgroundImage:
-                              NetworkImage(snapshot.data.data()["img"]),
-                          backgroundColor: Colors.white54,
-                        ),
-                      )
-                    : Center(
-                        child: Padding(
-                          padding: const EdgeInsets.only(right: 20),
-                          child: SizedBox(
-                            width: 15,
-                            height: 15,
-                          ),
-                        ),
-                      );
-              })
-        ],
-      ),
-      body: Container(
-          padding: EdgeInsets.only(
-            left: 15,
-            right: 15,
-            top: 15,
-          ),
+      body: SafeArea(
+        child: Container(
+          padding: EdgeInsets.all(20.0),
           child: Column(
-            children: [
-              Expanded(
-                child: Container(
-                  padding: EdgeInsets.only(
-                    bottom: 15,
-                  ),
-                  alignment: Alignment.topLeft,
-                  child: Text(
-                    'Favorites',
-                  ),
+            children: <Widget>[
+              Container(
+                alignment: Alignment.centerLeft,
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                child: Text(
+                  "ชื่นชอบ",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF481E95),
+                      fontSize: 36),
+                  textAlign: TextAlign.left,
                 ),
               ),
+              SizedBox(
+                height: 20,
+              ),
+              Expanded(
+                  child: GridView.count(
+                crossAxisCount: 1,
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 15,
+                children: _listItem
+                    .map((item) => Card(
+                          color: Colors.transparent,
+                          elevation: 0,
+                          child: Container(
+                            height: 370.0,
+                            width: 300.0,
+                            decoration: BoxDecoration(
+                              color: Colors.grey[300],
+                              borderRadius: BorderRadius.circular(20.0),
+                            ),
+                            child: Column(
+                              children: [
+                                Column(
+                                  children: [
+                                    Container(
+                                      height: 250.0,
+                                      width: double.infinity,
+                                      decoration: BoxDecoration(
+                                        color: Color(0xFF481E95),
+                                        borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(20.0),
+                                          topRight: Radius.circular(20.0),
+                                        ),
+                                        image: DecorationImage(
+                                            image: AssetImage(item),
+                                            fit: BoxFit.cover),
+                                      ),
+                                      child: Container(
+                                        child: Transform.translate(
+                                          offset: Offset(145, -90),
+                                          child: Container(
+                                            margin: EdgeInsets.symmetric(
+                                                horizontal: 155, vertical: 100),
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(20.0),
+                                                color: Color(0xFF481E95)),
+                                            child: Icon(
+                                              Icons.favorite_border,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 10.0,
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: 10.0),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            " คาเฟ่",
+                                            style: TextStyle(
+                                                color: Color(0xFF481E95),
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 20.0),
+                                          ),
+                                          SizedBox(
+                                            height: 10.0,
+                                          ),
+                                          Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.end,
+                                            children: [
+                                              Icon(
+                                                Icons.location_on_outlined,
+                                                color: Color(0xFF481E95),
+                                              ),
+                                              SizedBox(
+                                                width: 4.0,
+                                              ),
+                                              Text(
+                                                "จันทรเกษม....",
+                                                style: TextStyle(
+                                                  color: Colors.grey,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: 10.0,
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.end,
+                                            children: [
+                                              Row(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.end,
+                                                children: [
+                                                  Icon(
+                                                    Icons.star,
+                                                    color: Color(0xFF481E95),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 4.0,
+                                                  ),
+                                                  Text(
+                                                    "4(24 รีวิว)",
+                                                    style: TextStyle(
+                                                        color:
+                                                            Color(0xFF481E95),
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 15.0),
+                                                  ),
+                                                ],
+                                              ),
+                                              Text(
+                                                "รายละเอียด >",
+                                                style: TextStyle(
+                                                  color: Color(0xFF481E95),
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ))
+                    .toList(),
+              ))
             ],
-          )),
+          ),
+        ),
+      ),
     );
   }
 }
+
+//  child: Container(
+//                               child: Transform.translate(
+//                                 offset: Offset(0, -150),
+//                                 child: Container(
+//                                   margin: EdgeInsets.symmetric(
+//                                       horizontal: 150, vertical: 150),
+//                                   decoration: BoxDecoration(
+//                                       borderRadius: BorderRadius.circular(20.0),
+//                                       color: Colors.grey[300]),
+//                                 ),
+//                               ),
+//                             ),
+
+
+// child: Container(
+//                             decoration: BoxDecoration(
+//                                 borderRadius: BorderRadius.circular(20),
+//                                 image: DecorationImage(
+//                                     image: AssetImage(item),
+//                                     fit: BoxFit.cover)),
+//                           ),

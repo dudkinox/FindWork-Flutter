@@ -1,6 +1,8 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 
 import 'package:flutter/material.dart';
+import 'package:login_ui/Screens/alertPage/alertPage.dart';
+import 'package:login_ui/Screens/favorite/favorite.dart';
 import 'package:login_ui/Screens/home_screen.dart';
 import 'package:login_ui/Screens/profile/Profile.dart';
 
@@ -46,7 +48,15 @@ class _HomeHomeState extends State<HomeHome> {
           });
         },
       ),
-      body: newindex == 0 ? HomePage() : newindex == 1 ? ProfilePage(): null,
+      body: newindex == 0
+          ? HomePage()
+          : newindex == 1
+              ? ProfilePage()
+              : newindex == 2
+                  ? Favorite()
+                  : newindex == 3
+                      ? AlertPage()
+                      : null,
     );
   }
 }
