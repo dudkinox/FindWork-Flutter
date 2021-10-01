@@ -1,0 +1,14 @@
+	-- id pass --
+username: findjobmobileapp@gmail.com
+password: Qwertyui-12345678
+	-- 2FT --
+ต้องถาม suphanat chinnarach
+
+	-- deploy --
+heroku login
+cd my-project/
+git init
+heroku git:remote -a api-find-job-app
+git add .
+git commit -am "make it better"
+git push heroku master
