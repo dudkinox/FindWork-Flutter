@@ -1,12 +1,14 @@
 // ignore_for_file: deprecated_member_use, unused_local_variable
 
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:login_ui/Controller/LoginController.dart';
 import 'package:login_ui/Screens/homehome.dart';
 import 'package:login_ui/Screens/register/register.dart';
 import 'package:login_ui/Themes/Themes.dart';
+import 'package:login_ui/components/alert.dart';
 import 'package:login_ui/components/background.dart';
-import 'package:login_ui/model/loginModel.dart';
 
 class LoginScreen extends StatelessWidget {
   @override
@@ -14,6 +16,27 @@ class LoginScreen extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     var username = "";
     var password = "";
+
+    void login(String username, String password) async {
+      dynamic login = await Login(username, password);
+      print(login);
+      if (login != "false") {
+        switch (login) {
+          case "employee":
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => HomeHome()));
+            break;
+          case "employer":
+            break;
+        }
+      } else {
+        showDialog(
+          context: context,
+          builder: (_) =>
+              AlertMessage("แจ้งเตือน", "บัญชีผู้ใช้หรือรหัสผ่านไม่ถูกต้อง"),
+        );
+      }
+    }
 
     return Scaffold(
       body: Background(
@@ -74,7 +97,6 @@ class LoginScreen extends StatelessWidget {
                 textColor: Colors.white,
                 padding: const EdgeInsets.all(0),
                 child: Container(
-                  alignment: Alignment.center,
                   height: 50.0,
                   width: size.width * 0.5,
                   decoration: new BoxDecoration(
@@ -84,26 +106,21 @@ class LoginScreen extends StatelessWidget {
                         Color(0xFF31B4BC),
                       ])),
                   padding: const EdgeInsets.all(0),
-                  child: FutureBuilder(
-                      future: GetLogin(),
-                      builder: (BuildContext context, AsyncSnapshot snapshot) {
-                        return GestureDetector(
-                          onTap: () => {
-                            if (username == "admin" && password == "admin")
-                              {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => HomeHome()))
-                              }
-                          },
-                          child: Text(
-                            "เข้าสู่ระบบ",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                        );
-                      }),
+                  child: GestureDetector(
+                    onTap: () => {
+                      login(username, password),
+                      print("object"),
+                    },
+                    child: Text(
+                      "เข้าสู่ระบบ",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                        height: 2,
+                      ),
+                    ),
+                  ),
                 ),
               ),
             ),

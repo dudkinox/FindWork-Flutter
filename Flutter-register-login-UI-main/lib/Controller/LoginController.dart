@@ -4,14 +4,15 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:login_ui/Database/Host.dart';
-import 'package:login_ui/model/loginModel.dart';
 
-Future<loginModel> GetLogin() async {
-  final String url = Host + "/api/login";
-  final response = await http.get(Uri.parse(url));
-  if (response.statusCode == 200) {
-    return sorenerFromJson(response.body);
-  } else {
-    throw Exception();
-  }
+Future<dynamic> Login(String username, String password) async {
+  final String url = Host + "/api/login/" + username + "/" + password;
+  final response = await http.get(
+    Uri.parse(url),
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+  );
+  var data = json.decode(json.encode(response.body));
+  return data;
 }
