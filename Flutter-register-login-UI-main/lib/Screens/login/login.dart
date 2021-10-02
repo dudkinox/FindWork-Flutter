@@ -1,13 +1,19 @@
+// ignore_for_file: deprecated_member_use, unused_local_variable
+
 import 'package:flutter/material.dart';
+import 'package:login_ui/Controller/LoginController.dart';
 import 'package:login_ui/Screens/homehome.dart';
 import 'package:login_ui/Screens/register/register.dart';
 import 'package:login_ui/Themes/Themes.dart';
 import 'package:login_ui/components/background.dart';
+import 'package:login_ui/model/loginModel.dart';
 
 class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    var username = "";
+    var password = "";
 
     return Scaffold(
       body: Background(
@@ -31,6 +37,9 @@ class LoginScreen extends StatelessWidget {
               alignment: Alignment.center,
               margin: EdgeInsets.symmetric(horizontal: 40),
               child: TextField(
+                onChanged: (value) {
+                  username = value.trim();
+                },
                 decoration: InputDecoration(labelText: "ชื่อผู้ใช้"),
               ),
             ),
@@ -41,6 +50,9 @@ class LoginScreen extends StatelessWidget {
               child: TextField(
                 decoration: InputDecoration(labelText: "รหัสผ่าน"),
                 obscureText: true,
+                onChanged: (value) {
+                  password = value.trim();
+                },
               ),
             ),
             Container(
@@ -72,17 +84,26 @@ class LoginScreen extends StatelessWidget {
                         Color(0xFF31B4BC),
                       ])),
                   padding: const EdgeInsets.all(0),
-                  child: GestureDetector(
-                    onTap: () => {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => HomeHome()))
-                    },
-                    child: Text(
-                      "เข้าสู่ระบบ",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                  ),
+                  child: FutureBuilder(
+                      future: GetLogin(),
+                      builder: (BuildContext context, AsyncSnapshot snapshot) {
+                        return GestureDetector(
+                          onTap: () => {
+                            if (username == "admin" && password == "admin")
+                              {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => HomeHome()))
+                              }
+                          },
+                          child: Text(
+                            "เข้าสู่ระบบ",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                        );
+                      }),
                 ),
               ),
             ),
