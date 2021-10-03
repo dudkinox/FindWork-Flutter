@@ -14,8 +14,8 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    var username = "";
-    var password = "";
+    TextEditingController username = TextEditingController();
+    TextEditingController password = TextEditingController();
 
     void login(String username, String password) async {
       dynamic login = await Login(username, password);
@@ -24,7 +24,7 @@ class LoginScreen extends StatelessWidget {
         switch (login) {
           case "employee":
             Navigator.push(
-                context, MaterialPageRoute(builder: (context) => HomeHome()));
+                context, MaterialPageRoute(builder: (context) => HomeHome(0)));
             break;
           case "employer":
             break;
@@ -60,10 +60,10 @@ class LoginScreen extends StatelessWidget {
               alignment: Alignment.center,
               margin: EdgeInsets.symmetric(horizontal: 40),
               child: TextField(
-                onChanged: (value) {
-                  username = value.trim();
-                },
-                decoration: InputDecoration(labelText: "ชื่อผู้ใช้"),
+                controller: username,
+                decoration: InputDecoration(
+                    icon: Icon(Icons.account_circle_outlined),
+                    labelText: "ชื่อผู้ใช้"),
               ),
             ),
             SizedBox(height: size.height * 0.03),
@@ -71,11 +71,10 @@ class LoginScreen extends StatelessWidget {
               alignment: Alignment.center,
               margin: EdgeInsets.symmetric(horizontal: 40),
               child: TextField(
-                decoration: InputDecoration(labelText: "รหัสผ่าน"),
+                decoration: InputDecoration(
+                    icon: Icon(Icons.vpn_key_outlined), labelText: "รหัสผ่าน"),
                 obscureText: true,
-                onChanged: (value) {
-                  password = value.trim();
-                },
+                controller: password,
               ),
             ),
             Container(
@@ -108,7 +107,7 @@ class LoginScreen extends StatelessWidget {
                   padding: const EdgeInsets.all(0),
                   child: GestureDetector(
                     onTap: () => {
-                      login(username, password),
+                      login(username.text, password.text),
                       print("object"),
                     },
                     child: Text(

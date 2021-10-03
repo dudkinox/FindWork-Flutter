@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 
 import 'package:flutter/material.dart';
@@ -8,12 +10,15 @@ import 'package:login_ui/Screens/profile/Profile.dart';
 import 'package:login_ui/Themes/Themes.dart';
 
 class HomeHome extends StatefulWidget {
+  HomeHome(this.newindex);
+  int newindex;
   @override
-  _HomeHomeState createState() => _HomeHomeState();
+  _HomeHomeState createState() => _HomeHomeState(newindex);
 }
 
 class _HomeHomeState extends State<HomeHome> {
-  int newindex = 0;
+  _HomeHomeState(this.newindex);
+  int newindex;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,7 +55,7 @@ class _HomeHomeState extends State<HomeHome> {
         },
       ),
       body: newindex == 0
-          ? HomePage()
+          ? HomePage(newindex)
           : newindex == 1
               ? ProfilePage()
               : newindex == 2

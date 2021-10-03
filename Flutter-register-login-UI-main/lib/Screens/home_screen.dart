@@ -1,11 +1,18 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:login_ui/Recommendation_List_Data/Recommendation_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:login_ui/Animation/Fade_Animation.dart';
+import 'package:login_ui/Screens/homehome.dart';
+import 'package:login_ui/Screens/profile/Profile.dart';
 import 'package:login_ui/Themes/Themes.dart';
 
 class HomePage extends StatelessWidget {
+  HomePage(this.newindex);
+  int newindex;
   @override
   Widget build(BuildContext context) {
+    print("ปัจจุบัน " + newindex.toString());
     return Material(
       color: Colors.white,
       child: Container(
@@ -27,18 +34,40 @@ class HomePage extends StatelessWidget {
                       IconButton(icon: Icon(null), onPressed: () {}),
                       Row(
                         children: [
-                          Container(
-                            height: 40.0,
-                            width: 40.0,
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                shape: BoxShape.circle,
-                                border:
-                                    Border.all(color: PrimaryColor, width: 2.0),
+                          ClipOval(
+                            child: Container(
+                              height: 40.0,
+                              width: 40.0,
+                              decoration: BoxDecoration(
+                                border: Border.all(color: Colors.white),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.blue[900].withOpacity(0.2),
+                                    spreadRadius: 5,
+                                    blurRadius: 7,
+                                    offset: Offset(
+                                        0, 3), // changes position of shadow
+                                  ),
+                                ],
                                 image: DecorationImage(
-                                    image: NetworkImage(
-                                        "https://img.icons8.com/ios-glyphs/64/000000/user.png"),
-                                    fit: BoxFit.cover)),
+                                  image: NetworkImage(
+                                      "https://img.icons8.com/ios-glyphs/64/000000/user.png"),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                              child: FlatButton(
+                                padding: EdgeInsets.all(0.0),
+                                onPressed: () {
+                                  newindex = 1;
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              HomeHome(newindex)));
+                                },
+                                child: null,
+                              ),
+                            ),
                           ),
                         ],
                       ),
@@ -57,7 +86,7 @@ class HomePage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "สวัสดี, เบล!",
+                        "สวัสดี, ชื่อสกุลผู้ใช้!",
                         style: TextStyle(
                             fontWeight: FontWeight.w600,
                             color: Colors.black54,

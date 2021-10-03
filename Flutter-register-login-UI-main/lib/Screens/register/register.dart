@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:login_ui/Screens/login/login.dart';
 import 'package:login_ui/Themes/Themes.dart';
@@ -31,7 +33,9 @@ class RegisterScreen extends StatelessWidget {
               alignment: Alignment.center,
               margin: EdgeInsets.symmetric(horizontal: 40),
               child: TextField(
-                decoration: InputDecoration(labelText: "ชื่อผู้ใช้"),
+                decoration: InputDecoration(
+                    icon: Icon(Icons.account_circle_outlined),
+                    labelText: "ชื่อผู้ใช้"),
               ),
             ),
             SizedBox(height: size.height * 0.01),
@@ -39,7 +43,8 @@ class RegisterScreen extends StatelessWidget {
               alignment: Alignment.center,
               margin: EdgeInsets.symmetric(horizontal: 40),
               child: TextField(
-                decoration: InputDecoration(labelText: "รหัสผ่าน"),
+                decoration: InputDecoration(
+                    icon: Icon(Icons.vpn_key_outlined), labelText: "รหัสผ่าน"),
                 obscureText: true,
               ),
             ),
@@ -48,7 +53,9 @@ class RegisterScreen extends StatelessWidget {
               alignment: Alignment.center,
               margin: EdgeInsets.symmetric(horizontal: 40),
               child: TextField(
-                decoration: InputDecoration(labelText: "ยืนยันรหัสผ่าน"),
+                decoration: InputDecoration(
+                    icon: Icon(Icons.vpn_key_outlined),
+                    labelText: "ยืนยันรหัสผ่าน"),
                 obscureText: true,
               ),
             ),
@@ -57,7 +64,8 @@ class RegisterScreen extends StatelessWidget {
               alignment: Alignment.center,
               margin: EdgeInsets.symmetric(horizontal: 40),
               child: TextField(
-                decoration: InputDecoration(labelText: "อีเมล"),
+                decoration: InputDecoration(
+                    icon: Icon(Icons.email_outlined), labelText: "อีเมล"),
               ),
             ),
             SizedBox(height: size.height * 0.01),
@@ -65,7 +73,9 @@ class RegisterScreen extends StatelessWidget {
               alignment: Alignment.center,
               margin: EdgeInsets.symmetric(horizontal: 40),
               child: TextField(
-                decoration: InputDecoration(labelText: "เบอร์โทรศัพท์"),
+                decoration: InputDecoration(
+                    icon: Icon(Icons.call_outlined),
+                    labelText: "เบอร์โทรศัพท์"),
               ),
             ),
             // matching
