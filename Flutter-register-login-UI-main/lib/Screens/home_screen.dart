@@ -117,10 +117,6 @@ class HomePage extends StatelessWidget {
                       cursorColor: PrimaryColor,
                       decoration: InputDecoration(
                         fillColor: PrimaryColor,
-                        suffixIcon: Icon(
-                          Icons.filter_list,
-                          color: PrimaryColor,
-                        ),
                         prefixIcon: Icon(
                           Icons.search,
                           color: PrimaryColor,
