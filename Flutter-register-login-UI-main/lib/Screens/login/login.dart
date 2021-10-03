@@ -19,7 +19,6 @@ class LoginScreen extends StatelessWidget {
 
     void login(String username, String password) async {
       dynamic login = await Login(username, password);
-      print(login);
       if (login != "false") {
         switch (login) {
           case "employee":
