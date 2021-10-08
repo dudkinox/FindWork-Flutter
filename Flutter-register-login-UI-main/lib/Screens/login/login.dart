@@ -1,7 +1,3 @@
-// ignore_for_file: deprecated_member_use, unused_local_variable
-
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:login_ui/Controller/LoginController.dart';
 import 'package:login_ui/Screens/homehome.dart';
@@ -10,14 +6,30 @@ import 'package:login_ui/Themes/Themes.dart';
 import 'package:login_ui/components/alert.dart';
 import 'package:login_ui/components/background.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
+  LoginScreen({Key key}) : super(key: key);
+
+  final TextEditingController username = TextEditingController();
+  final TextEditingController password = TextEditingController();
+
+  @override
+  _LoginScreenState createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  TextEditingController username = TextEditingController();
+  TextEditingController password = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    TextEditingController username = TextEditingController();
-    TextEditingController password = TextEditingController();
 
     void login(String username, String password) async {
+      print(username);
       dynamic login = await Login(username, password);
       if (login != "false") {
         switch (login) {
@@ -56,6 +68,7 @@ class LoginScreen extends StatelessWidget {
             ),
             SizedBox(height: size.height * 0.03),
             Container(
+              
               alignment: Alignment.center,
               margin: EdgeInsets.symmetric(horizontal: 40),
               child: TextField(
