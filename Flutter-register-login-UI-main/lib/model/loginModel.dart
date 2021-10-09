@@ -4,32 +4,33 @@
 
 import 'dart:convert';
 
-RegisterModel registerModelFromJson(String str) => RegisterModel.fromJson(json.decode(str));
+RegisterModel registerModelFromJson(String str) =>
+    RegisterModel.fromJson(json.decode(str));
 
 String registerModelToJson(RegisterModel data) => json.encode(data.toJson());
 
 class RegisterModel {
-    RegisterModel({
-        this.email,
-        this.fullname,
-        this.jobId,
-        this.matching,
-        this.tel,
-        this.type,
-        this.username,
-        this.password,
-    });
+  String email;
+  String fullname;
+  String jobId;
+  String matching;
+  String tel;
+  String type;
+  String username;
+  String password;
 
-    String email;
-    String fullname;
-    String jobId;
-    String matching;
-    String tel;
-    String type;
-    String username;
-    String password;
+  RegisterModel({
+    this.email,
+    this.fullname,
+    this.jobId,
+    this.matching,
+    this.tel,
+    this.type,
+    this.username,
+    this.password,
+  });
 
-    factory RegisterModel.fromJson(Map<String, dynamic> json) => RegisterModel(
+  factory RegisterModel.fromJson(Map<String, dynamic> json) => RegisterModel(
         email: json["email"],
         fullname: json["fullname"],
         jobId: json["job_id"],
@@ -38,9 +39,9 @@ class RegisterModel {
         type: json["type"],
         username: json["username"],
         password: json["password"],
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "email": email,
         "fullname": fullname,
         "job_id": jobId,
@@ -49,5 +50,5 @@ class RegisterModel {
         "type": type,
         "username": username,
         "password": password,
-    };
+      };
 }

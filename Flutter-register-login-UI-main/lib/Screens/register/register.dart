@@ -3,32 +3,58 @@
 import 'package:flutter/material.dart';
 import 'package:login_ui/Controller/LoginController.dart';
 import 'package:login_ui/Screens/login/login.dart';
+
 import 'package:login_ui/Themes/Themes.dart';
 import 'package:login_ui/components/alert.dart';
 import 'package:login_ui/components/background.dart';
 import 'package:login_ui/components/selcetChackbox.dart';
 import 'package:login_ui/model/loginModel.dart';
+import 'package:login_ui/model/registerModel.dart';
+
+// class Register {
+//   String username;
+//   String password;
+//   String confirmpassword;
+//   String email;
+//   String tel;
+
+//   Register(
+//       {this.username,
+//       this.password,
+//       this.confirmpassword,
+//       this.email,
+//       this.tel});
+// }
 
 class RegisterScreen extends StatefulWidget {
-
   @override
   _RegisterScreenState createState() => _RegisterScreenState();
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+  final username = GlobalKey<FormState>();
+  final password = GlobalKey<FormState>();
+  final confirmpassword = GlobalKey<FormState>();
+  final email = GlobalKey<FormState>();
+  final tel = GlobalKey<FormState>();
+  Register register = Register(
+      // username: "บัญชีผู้ใช้",
+      // password: "รหัสผ่าน",
+      // confirmpassword: "ยืนยันรหัสผ่าน",
+      // email: "อีเมล",
+      // tel: "เบอร์โทรศัพท์",
+      );
 
-    final TextEditingController username = new TextEditingController();
-    final TextEditingController fullname = new TextEditingController();
-    final TextEditingController password = new TextEditingController();
-    final TextEditingController confirmpassword = new TextEditingController();
-    final TextEditingController email = new TextEditingController();
-    final TextEditingController tel = new TextEditingController();
-    final TextEditingController matching = new TextEditingController();
+  // final TextEditingController usernames = new TextEditingController();
+  // final TextEditingController fullnames = new TextEditingController();
+  // final TextEditingController passwords = new TextEditingController();
+  // final TextEditingController confirmpasswords = new TextEditingController();
+  // final TextEditingController emails = new TextEditingController();
+  // final TextEditingController tels = new TextEditingController();
+  // final TextEditingController matching = new TextEditingController();
   @override
   Widget build(BuildContext context) {
-
     Size size = MediaQuery.of(context).size;
-
 
     return Scaffold(
       body: Background(
@@ -48,62 +74,93 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
             ),
             SizedBox(height: size.height * 0.01),
+
             Container(
               alignment: Alignment.center,
               margin: EdgeInsets.symmetric(horizontal: 40),
-              child: TextField(
-                decoration: InputDecoration(
-                    icon: Icon(Icons.account_circle_outlined),
-                    labelText: "ชื่อผู้ใช้"),
-                controller: username,
-              ),
-            ),
-            SizedBox(height: size.height * 0.01),
-            Container(
-              alignment: Alignment.center,
-              margin: EdgeInsets.symmetric(horizontal: 40),
-              child: TextField(
-                decoration: InputDecoration(
-                  icon: Icon(Icons.vpn_key_outlined),
-                  labelText: "รหัสผ่าน",
+              child: Form(
+                key: username,
+                child: TextFormField(
+                  decoration: InputDecoration(
+                      icon: Icon(Icons.account_circle_outlined),
+                      labelText: "ชื่อผู้ใช้"),
+                  // controller: usernames,
+                  onSaved: (String username) {
+                    register.username = username;
+                  },
                 ),
-                controller: password,
-                obscureText: true,
               ),
             ),
             SizedBox(height: size.height * 0.01),
             Container(
               alignment: Alignment.center,
               margin: EdgeInsets.symmetric(horizontal: 40),
-              child: TextField(
-                decoration: InputDecoration(
+              child: Form(
+                key: password,
+                child: TextFormField(
+                  decoration: InputDecoration(
                     icon: Icon(Icons.vpn_key_outlined),
-                    labelText: "ยืนยันรหัสผ่าน"),
-                obscureText: true,
-                controller: confirmpassword,
-              ),
-            ),
-            SizedBox(height: size.height * 0.01),
-            Container(
-              alignment: Alignment.center,
-              margin: EdgeInsets.symmetric(horizontal: 40),
-              child: TextField(
-                decoration: InputDecoration(
-                  icon: Icon(Icons.email_outlined),
-                  labelText: "อีเมล",
+                    labelText: "รหัสผ่าน",
+                  ),
+                  // controller: passwords,
+                  obscureText: true,
+                  onSaved: (String password) {
+                    register.password = password;
+                  },
                 ),
-                controller: email,
               ),
             ),
             SizedBox(height: size.height * 0.01),
             Container(
               alignment: Alignment.center,
               margin: EdgeInsets.symmetric(horizontal: 40),
-              child: TextField(
-                decoration: InputDecoration(
-                    icon: Icon(Icons.call_outlined),
-                    labelText: "เบอร์โทรศัพท์"),
-                    controller: tel,
+              child: Form(
+                key: confirmpassword,
+                child: TextFormField(
+                  decoration: InputDecoration(
+                      icon: Icon(Icons.vpn_key_outlined),
+                      labelText: "ยืนยันรหัสผ่าน"),
+                  obscureText: true,
+                  // controller: confirmpasswords,
+                  onSaved: (String confirmpassword) {
+                    register.confirmpassword = confirmpassword;
+                  },
+                ),
+              ),
+            ),
+            SizedBox(height: size.height * 0.01),
+            Container(
+              alignment: Alignment.center,
+              margin: EdgeInsets.symmetric(horizontal: 40),
+              child: Form(
+                key: email,
+                child: TextFormField(
+                  decoration: InputDecoration(
+                    icon: Icon(Icons.email_outlined),
+                    labelText: "อีเมล",
+                  ),
+                  // controller: emails,
+                  onSaved: (String email) {
+                    register.email = email;
+                  },
+                ),
+              ),
+            ),
+            SizedBox(height: size.height * 0.01),
+            Container(
+              alignment: Alignment.center,
+              margin: EdgeInsets.symmetric(horizontal: 40),
+              child: Form(
+                key: tel,
+                child: TextFormField(
+                  decoration: InputDecoration(
+                      icon: Icon(Icons.call_outlined),
+                      labelText: "เบอร์โทรศัพท์"),
+                  // controller: tels,
+                  onSaved: (String tel) {
+                    register.tel = tel;
+                  },
+                ),
               ),
             ),
             // matching
@@ -117,15 +174,46 @@ class _RegisterScreenState extends State<RegisterScreen> {
               alignment: Alignment.centerRight,
               margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
               child: RaisedButton(
-                onPressed: () async{
-                print("กด1");
-                  // final loginModel status = await RegisterEmployee(email.text, username.text, tel.text, username.text, password.text);
-                  final RegisterModel status = await RegisterEmployee("2@gmail.com", "t1", "191", "t1", "123456");
-                                
-                print(status);
-                AlertMessage("แจ้งเตือน","สมัครสำเร็จ");
+                onPressed: () async {
+                  username.currentState.save();
+                  password.currentState.save();
+                  confirmpassword.currentState.save();
+                  email.currentState.save();
+                  tel.currentState.save();
+                  print(
+                      "บัญชีผู้ใช้ = ${register.username} รหัสผ่าน = ${register.password} ยืนยันรหัสผ่าน =${register.confirmpassword} อีเมล = ${register.email} เบอร์โทรศัพท์ = ${register.tel}");
+
+                  final RegisterModel status = await RegisterEmployee(
+                      "บัญชีผู้ใช้ = ${register.username}",
+                      "รหัสผ่าน = ${register.password}",
+                      "ยืนยันรหัสผ่าน = ${register.confirmpassword}",
+                      "อีเมล = ${register.email}",
+                      "เบอร์โทรศัพท์ = ${register.tel}");
+
+                  print(status);
+                  AlertMessage("แจ้งเตือน", "สมัครสำเร็จ");
                 },
-                
+
+                // onPressed: () async {
+                //   // print("กด1");
+                //   // final RegisterModel status = await RegisterEmployee(
+                //   //     email.text,
+                //   //     username.text,
+                //   //     tel.text,
+                //   //     username.text,
+                //   //     password.text);
+
+                //   print("บัญชีผู้ใช้" + username.text);
+                //   ("รหัสผ่าน" + password.text);
+                //   ("ยืนยันรหัสผ่าน" + confirmpassword.text);
+                //   ("อีเมล" + email.text);
+                //   ("เบอร์โทรศัพท์" + tel.text);
+
+                //   "2@gmail.com", "t1", "191", "t1", "123456");
+
+                // print(status);
+                // AlertMessage("แจ้งเตือน", "สมัครสำเร็จ");
+                //  },
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(80.0)),
                 textColor: Colors.white,
@@ -169,10 +257,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
           ],
         ),
       ),
-      
-      
     );
-    
   }
 }
-
