@@ -176,7 +176,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               alignment: Alignment.centerRight,
               margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
               child: RaisedButton(
-                onPressed: () {
+                onPressed: () async {
                   username.currentState.save();
                   password.currentState.save();
                   confirmpassword.currentState.save();
@@ -217,17 +217,28 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             confirmpassword.currentState.reset();
                             email.currentState.reset();
                             tel.currentState.reset();
-                            // final RegisterModel status = await RegisterEmployee(
-                            //     "บัญชีผู้ใช้ = ${register.username}",
-                            //     "รหัสผ่าน = ${register.password}",
-                            //     "ยืนยันรหัสผ่าน = ${register.confirmpassword}",
-                            //     "อีเมล = ${register.email}",
-                            //     "เบอร์โทรศัพท์ = ${register.tel}");
-                            showDialog(
-                              context: context,
-                              builder: (_) => AlertMessage(
-                                  "แจ้งเตือน", "สมัครสำเร็จ", MyApp()),
-                            );
+                            final String status = await RegisterEmployee(
+                                register.username,
+                                register.password,
+                                register.confirmpassword,
+                                register.email,
+                                register.tel);
+                            print(status);
+                            if (status == "เพิ่มบัญชีสำเร็จ") {
+                              showDialog(
+                                context: context,
+                                builder: (_) => AlertMessage("แจ้งเตือน",
+                                    "สมัครสามาชิกรเรียบร้อยแล้ว", MyApp()),
+                              );
+                            } else {
+                              showDialog(
+                                context: context,
+                                builder: (_) => AlertMessage(
+                                    "แจ้งเตือน",
+                                    "การสมัครสมาชิกปิดปรับปรุงเนื่องจาก server มีปัญหา โปรดลองใหม่ภายหลัง",
+                                    null),
+                              );
+                            }
                           }
                         }
                       }

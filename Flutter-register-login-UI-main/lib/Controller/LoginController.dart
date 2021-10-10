@@ -1,4 +1,4 @@
-// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: non_constant_identifier_names, missing_return
 
 import 'dart:convert';
 
@@ -18,27 +18,27 @@ Future<dynamic> Login(String username, String password) async {
   return data;
 }
 
-Future<RegisterModel> RegisterEmployee(String email, String fullname,
-    String tel, String username, String password) async {
+Future<String> RegisterEmployee(String email, String fullname, String tel,
+    String username, String password) async {
   try {
-    print("Hello");
     final String Url = Host + "/api/login";
-
-    final response = await http.post(Uri.parse(Url), body: {
-      "email": email,
-      "fullname": fullname,
-      "job_id": "",
-      "matching": "",
-      "tel": tel,
-      "type": "employee",
-      "username": username,
-      "password": password
-    });
-    print(response.statusCode);
+    final response = await http.post(
+      Uri.parse(Url),
+      body: jsonEncode(<String, String>{
+        "email": email,
+        "fullname": fullname,
+        "job_id": "",
+        "matching": "",
+        "tel": tel,
+        "type": "employee",
+        "username": username,
+        "password": password
+      }),
+    );
 
     if (response.statusCode == 200) {
-      final String responseString = response.body;
-      return registerModelFromJson(responseString);
+      var data = json.decode(json.encode(response.body));
+      return data;
     } else {
       return null;
     }
