@@ -6,9 +6,10 @@ import 'package:flutter/material.dart';
 import '../main.dart';
 
 class AlertMessage extends StatelessWidget {
-  AlertMessage(this.Title, this.DetailMessage);
+  AlertMessage(this.Title, this.DetailMessage, this.Path);
   String Title;
   String DetailMessage;
+  var Path;
 
   @override
   Widget build(BuildContext context) {
@@ -18,8 +19,11 @@ class AlertMessage extends StatelessWidget {
       actions: [
         CupertinoDialogAction(
           onPressed: () => {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => MyApp())),
+            if (Path != null)
+              {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => Path)),
+              }
           },
           child: Text("ยอมรับ"),
         ),

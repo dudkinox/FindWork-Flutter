@@ -1,6 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
+import 'package:form_field_validator/form_field_validator.dart';
 import 'package:login_ui/Controller/LoginController.dart';
 import 'package:login_ui/Screens/login/login.dart';
 
@@ -8,6 +9,7 @@ import 'package:login_ui/Themes/Themes.dart';
 import 'package:login_ui/components/alert.dart';
 import 'package:login_ui/components/background.dart';
 import 'package:login_ui/components/selcetChackbox.dart';
+import 'package:login_ui/main.dart';
 import 'package:login_ui/model/loginModel.dart';
 import 'package:login_ui/model/registerModel.dart';
 
@@ -174,7 +176,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               alignment: Alignment.centerRight,
               margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
               child: RaisedButton(
-                onPressed: () async {
+                onPressed: () {
                   username.currentState.save();
                   password.currentState.save();
                   confirmpassword.currentState.save();
@@ -182,20 +184,31 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   tel.currentState.save();
                   print(
                       "บัญชีผู้ใช้ = ${register.username} รหัสผ่าน = ${register.password} ยืนยันรหัสผ่าน =${register.confirmpassword} อีเมล = ${register.email} เบอร์โทรศัพท์ = ${register.tel}");
-                  username.currentState.reset();
-                  password.currentState.reset();
-                  confirmpassword.currentState.reset();
-                  email.currentState.reset();
-                  tel.currentState.reset();
-                  // final RegisterModel status = await RegisterEmployee(
-                  //     "บัญชีผู้ใช้ = ${register.username}",
-                  //     "รหัสผ่าน = ${register.password}",
-                  //     "ยืนยันรหัสผ่าน = ${register.confirmpassword}",
-                  //     "อีเมล = ${register.email}",
-                  //     "เบอร์โทรศัพท์ = ${register.tel}");
 
-                  // print(status);
-                  AlertMessage("แจ้งเตือน", "สมัครสำเร็จ");
+                  if (register.password != register.confirmpassword) {
+                    showDialog(
+                        context: context,
+                        builder: (_) => AlertMessage(
+                            "แจ้งเตือน", "กรอกรหัสผ่านไม่ตรงกัน", null));
+                  } else {
+                    username.currentState.reset();
+                    password.currentState.reset();
+                    confirmpassword.currentState.reset();
+                    email.currentState.reset();
+                    tel.currentState.reset();
+                    // final RegisterModel status = await RegisterEmployee(
+                    //     "บัญชีผู้ใช้ = ${register.username}",
+                    //     "รหัสผ่าน = ${register.password}",
+                    //     "ยืนยันรหัสผ่าน = ${register.confirmpassword}",
+                    //     "อีเมล = ${register.email}",
+                    //     "เบอร์โทรศัพท์ = ${register.tel}");
+
+                    showDialog(
+                      context: context,
+                      builder: (_) =>
+                          AlertMessage("แจ้งเตือน", "สมัครสำเร็จ", MyApp()),
+                    );
+                  }
                 },
 
                 // onPressed: () async {

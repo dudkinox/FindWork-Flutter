@@ -5,6 +5,7 @@ import 'package:login_ui/Screens/register/register.dart';
 import 'package:login_ui/Themes/Themes.dart';
 import 'package:login_ui/components/alert.dart';
 import 'package:login_ui/components/background.dart';
+import 'package:login_ui/main.dart';
 
 class LoginScreen extends StatefulWidget {
   LoginScreen({Key key}) : super(key: key);
@@ -44,8 +45,8 @@ class _LoginScreenState extends State<LoginScreen> {
       } else {
         showDialog(
           context: context,
-          builder: (_) =>
-              AlertMessage("แจ้งเตือน", "บัญชีผู้ใช้หรือรหัสผ่านไม่ถูกต้อง"),
+          builder: (_) => AlertMessage(
+              "แจ้งเตือน", "บัญชีผู้ใช้หรือรหัสผ่านไม่ถูกต้อง", MyApp()),
         );
       }
     }
