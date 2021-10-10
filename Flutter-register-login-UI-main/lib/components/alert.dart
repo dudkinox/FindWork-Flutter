@@ -1,9 +1,9 @@
 // ignore_for_file: must_be_immutable
 
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import '../main.dart';
 
 class AlertMessage extends StatelessWidget {
   AlertMessage(this.Title, this.DetailMessage, this.Path);
@@ -24,6 +24,10 @@ class AlertMessage extends StatelessWidget {
                 Navigator.push(
                     context, MaterialPageRoute(builder: (context) => Path)),
               }
+            else
+              {
+                Navigator.pop(context),
+              },
           },
           child: Text("ยอมรับ"),
         ),

@@ -185,7 +185,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   if (register.username == "") {
                     showDialog(
                         context: context,
-                        builder: (_) => AlertMessage(
+                        builder: (BuildContext context) => AlertMessage(
                             "แจ้งเตือน", "กรุณากรอกบัญชีผู้ใช้", null));
                   } else {
                     if (register.password == "") {
