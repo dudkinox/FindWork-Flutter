@@ -182,55 +182,58 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   confirmpassword.currentState.save();
                   email.currentState.save();
                   tel.currentState.save();
-                  print(
-                      "บัญชีผู้ใช้ = ${register.username} รหัสผ่าน = ${register.password} ยืนยันรหัสผ่าน =${register.confirmpassword} อีเมล = ${register.email} เบอร์โทรศัพท์ = ${register.tel}");
-
-                  if (register.password != register.confirmpassword) {
+                  if (register.username == "") {
                     showDialog(
                         context: context,
                         builder: (_) => AlertMessage(
-                            "แจ้งเตือน", "กรอกรหัสผ่านไม่ตรงกัน", null));
+                            "แจ้งเตือน", "กรุณากรอกบัญชีผู้ใช้", null));
                   } else {
-                    username.currentState.reset();
-                    password.currentState.reset();
-                    confirmpassword.currentState.reset();
-                    email.currentState.reset();
-                    tel.currentState.reset();
-                    // final RegisterModel status = await RegisterEmployee(
-                    //     "บัญชีผู้ใช้ = ${register.username}",
-                    //     "รหัสผ่าน = ${register.password}",
-                    //     "ยืนยันรหัสผ่าน = ${register.confirmpassword}",
-                    //     "อีเมล = ${register.email}",
-                    //     "เบอร์โทรศัพท์ = ${register.tel}");
-
-                    showDialog(
-                      context: context,
-                      builder: (_) =>
-                          AlertMessage("แจ้งเตือน", "สมัครสำเร็จ", MyApp()),
-                    );
+                    if (register.password == "") {
+                      showDialog(
+                          context: context,
+                          builder: (_) => AlertMessage(
+                              "แจ้งเตือน", "กรุณากรอกรหัสผ่าน", null));
+                    } else {
+                      if (register.email == "") {
+                        showDialog(
+                            context: context,
+                            builder: (_) => AlertMessage(
+                                "แจ้งเตือน", "กรุณากรอกอีเมล์", null));
+                      } else {
+                        if (register.tel == "") {
+                          showDialog(
+                              context: context,
+                              builder: (_) => AlertMessage(
+                                  "แจ้งเตือน", "กรุณากรอกเบอร์โทรศัพท์", null));
+                        } else {
+                          if (register.password != register.confirmpassword) {
+                            showDialog(
+                                context: context,
+                                builder: (_) => AlertMessage("แจ้งเตือน",
+                                    "กรอกรหัสผ่านไม่ตรงกัน", null));
+                          } else {
+                            username.currentState.reset();
+                            password.currentState.reset();
+                            confirmpassword.currentState.reset();
+                            email.currentState.reset();
+                            tel.currentState.reset();
+                            // final RegisterModel status = await RegisterEmployee(
+                            //     "บัญชีผู้ใช้ = ${register.username}",
+                            //     "รหัสผ่าน = ${register.password}",
+                            //     "ยืนยันรหัสผ่าน = ${register.confirmpassword}",
+                            //     "อีเมล = ${register.email}",
+                            //     "เบอร์โทรศัพท์ = ${register.tel}");
+                            showDialog(
+                              context: context,
+                              builder: (_) => AlertMessage(
+                                  "แจ้งเตือน", "สมัครสำเร็จ", MyApp()),
+                            );
+                          }
+                        }
+                      }
+                    }
                   }
                 },
-
-                // onPressed: () async {
-                //   // print("กด1");
-                //   // final RegisterModel status = await RegisterEmployee(
-                //   //     email.text,
-                //   //     username.text,
-                //   //     tel.text,
-                //   //     username.text,
-                //   //     password.text);
-
-                //   print("บัญชีผู้ใช้" + username.text);
-                //   ("รหัสผ่าน" + password.text);
-                //   ("ยืนยันรหัสผ่าน" + confirmpassword.text);
-                //   ("อีเมล" + email.text);
-                //   ("เบอร์โทรศัพท์" + tel.text);
-
-                //   "2@gmail.com", "t1", "191", "t1", "123456");
-
-                // print(status);
-                // AlertMessage("แจ้งเตือน", "สมัครสำเร็จ");
-                //  },
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(80.0)),
                 textColor: Colors.white,
