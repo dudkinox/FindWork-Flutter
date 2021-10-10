@@ -187,14 +187,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   confirmpassword.currentState.reset();
                   email.currentState.reset();
                   tel.currentState.reset();
-                  final RegisterModel status = await RegisterEmployee(
-                      "บัญชีผู้ใช้ = ${register.username}",
-                      "รหัสผ่าน = ${register.password}",
-                      "ยืนยันรหัสผ่าน = ${register.confirmpassword}",
-                      "อีเมล = ${register.email}",
-                      "เบอร์โทรศัพท์ = ${register.tel}");
+                  // final RegisterModel status = await RegisterEmployee(
+                  //     "บัญชีผู้ใช้ = ${register.username}",
+                  //     "รหัสผ่าน = ${register.password}",
+                  //     "ยืนยันรหัสผ่าน = ${register.confirmpassword}",
+                  //     "อีเมล = ${register.email}",
+                  //     "เบอร์โทรศัพท์ = ${register.tel}");
 
-                  print(status);
+                  // print(status);
                   AlertMessage("แจ้งเตือน", "สมัครสำเร็จ");
                 },
 

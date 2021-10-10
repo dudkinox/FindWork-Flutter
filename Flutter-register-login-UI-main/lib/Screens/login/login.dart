@@ -24,13 +24,14 @@ class _LoginScreenState extends State<LoginScreen> {
   void initState() {
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
     void login(String username, String password) async {
-      print(username);
       dynamic login = await Login(username, password);
+
       if (login != "false") {
         switch (login) {
           case "employee":
@@ -68,7 +69,6 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             SizedBox(height: size.height * 0.03),
             Container(
-              
               alignment: Alignment.center,
               margin: EdgeInsets.symmetric(horizontal: 40),
               child: TextField(
