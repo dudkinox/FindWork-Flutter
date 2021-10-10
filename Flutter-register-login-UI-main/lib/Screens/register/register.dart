@@ -1,7 +1,6 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
-import 'package:form_field_validator/form_field_validator.dart';
 import 'package:login_ui/Controller/LoginController.dart';
 import 'package:login_ui/Screens/login/login.dart';
 
@@ -10,23 +9,7 @@ import 'package:login_ui/components/alert.dart';
 import 'package:login_ui/components/background.dart';
 import 'package:login_ui/components/selcetChackbox.dart';
 import 'package:login_ui/main.dart';
-import 'package:login_ui/model/loginModel.dart';
 import 'package:login_ui/model/registerModel.dart';
-
-// class Register {
-//   String username;
-//   String password;
-//   String confirmpassword;
-//   String email;
-//   String tel;
-
-//   Register(
-//       {this.username,
-//       this.password,
-//       this.confirmpassword,
-//       this.email,
-//       this.tel});
-// }
 
 class RegisterScreen extends StatefulWidget {
   @override
@@ -39,21 +22,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final confirmpassword = GlobalKey<FormState>();
   final email = GlobalKey<FormState>();
   final tel = GlobalKey<FormState>();
-  Register register = Register(
-      // username: "บัญชีผู้ใช้",
-      // password: "รหัสผ่าน",
-      // confirmpassword: "ยืนยันรหัสผ่าน",
-      // email: "อีเมล",
-      // tel: "เบอร์โทรศัพท์",
-      );
-
-  // final TextEditingController usernames = new TextEditingController();
-  // final TextEditingController fullnames = new TextEditingController();
-  // final TextEditingController passwords = new TextEditingController();
-  // final TextEditingController confirmpasswords = new TextEditingController();
-  // final TextEditingController emails = new TextEditingController();
-  // final TextEditingController tels = new TextEditingController();
-  // final TextEditingController matching = new TextEditingController();
+  Register register = Register();
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -86,7 +55,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   decoration: InputDecoration(
                       icon: Icon(Icons.account_circle_outlined),
                       labelText: "ชื่อผู้ใช้"),
-                  // controller: usernames,
                   onSaved: (String username) {
                     register.username = username;
                   },
@@ -104,7 +72,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     icon: Icon(Icons.vpn_key_outlined),
                     labelText: "รหัสผ่าน",
                   ),
-                  // controller: passwords,
                   obscureText: true,
                   onSaved: (String password) {
                     register.password = password;
@@ -123,7 +90,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       icon: Icon(Icons.vpn_key_outlined),
                       labelText: "ยืนยันรหัสผ่าน"),
                   obscureText: true,
-                  // controller: confirmpasswords,
                   onSaved: (String confirmpassword) {
                     register.confirmpassword = confirmpassword;
                   },
@@ -141,7 +107,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     icon: Icon(Icons.email_outlined),
                     labelText: "อีเมล",
                   ),
-                  // controller: emails,
                   onSaved: (String email) {
                     register.email = email;
                   },
@@ -158,7 +123,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   decoration: InputDecoration(
                       icon: Icon(Icons.call_outlined),
                       labelText: "เบอร์โทรศัพท์"),
-                  // controller: tels,
                   onSaved: (String tel) {
                     register.tel = tel;
                   },

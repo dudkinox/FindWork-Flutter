@@ -4,7 +4,6 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:login_ui/Database/Host.dart';
-import 'package:login_ui/model/loginModel.dart';
 
 Future<dynamic> Login(String username, String password) async {
   final String url = Host + "/api/login/" + username + "/" + password;
@@ -24,6 +23,9 @@ Future<String> RegisterEmployee(String email, String fullname, String tel,
     final String Url = Host + "/api/login";
     final response = await http.post(
       Uri.parse(Url),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
       body: jsonEncode(<String, String>{
         "email": email,
         "fullname": fullname,
@@ -36,12 +38,12 @@ Future<String> RegisterEmployee(String email, String fullname, String tel,
       }),
     );
 
-    if (response.statusCode == 200) {
-      var data = json.decode(json.encode(response.body));
-      return data;
-    } else {
-      return null;
+    if (response.statusCode == 400) {
+      var err = json.decode(json.encode(response.body));
+      return err;
     }
+    var data = json.decode(json.encode(response.body));
+    return data;
   } catch (e) {
     print(e);
   }
