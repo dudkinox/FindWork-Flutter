@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_session/flutter_session.dart';
 import 'package:login_ui/Animation/Fade_Animation.dart';
 import 'package:login_ui/Controller/LoginController.dart';
+import 'package:login_ui/Screens/homehome.dart';
 import 'package:login_ui/Themes/Themes.dart';
 import 'package:login_ui/components/alert.dart';
 import 'package:login_ui/model/loginModel.dart';
@@ -64,6 +65,16 @@ class MapScreenState extends State<ProfilePage>
                                 child: new Row(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
+                                    IconButton(
+                                      icon: const Icon(Icons.arrow_back_ios),
+                                      onPressed: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    HomeHome(0)));
+                                      },
+                                    ),
                                     Padding(
                                       padding: EdgeInsets.only(left: 25.0),
                                       child: new Text('ข้อมูลส่วนตัว',
@@ -502,11 +513,9 @@ class MapScreenState extends State<ProfilePage>
                     });
                   } else {
                     showDialog(
-                          context: context,
-                          builder: (_) => AlertMessage(
-                              "แจ้งเตือน",
-                              "กรอกกรหัสให้ตรงกัน",
-                              null));
+                        context: context,
+                        builder: (_) => AlertMessage(
+                            "แจ้งเตือน", "กรอกกรหัสให้ตรงกัน", null));
                   }
                 },
                 shape: new RoundedRectangleBorder(

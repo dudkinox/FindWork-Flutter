@@ -1,12 +1,17 @@
 // ignore_for_file: deprecated_member_use
 
+import 'dart:math';
+
 import 'package:flutter_session/flutter_session.dart';
 import 'package:login_ui/Recommendation_List_Data/Recommendation_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:login_ui/Animation/Fade_Animation.dart';
 import 'package:login_ui/Screens/homehome.dart';
+import 'package:login_ui/Screens/profile/Profile.dart';
 import 'package:login_ui/Screens/profile/ProfileController.dart';
 import 'package:login_ui/Themes/Themes.dart';
+
+import 'login/login.dart';
 
 class HomePage extends StatelessWidget {
   TextEditingController fullname = TextEditingController();
@@ -34,6 +39,19 @@ class HomePage extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
+                      Transform.rotate(
+                          angle: 180 * pi / 180,
+                          child: IconButton(
+                            iconSize: 40,
+                            color: PrimaryColor,
+                            icon: const Icon(Icons.exit_to_app_rounded),
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => LoginScreen()));
+                            },
+                          )),
                       IconButton(icon: Icon(null), onPressed: () {}),
                       Row(
                         children: [
@@ -64,8 +82,7 @@ class HomePage extends StatelessWidget {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) =>
-                                              HomeHome(1)));
+                                          builder: (context) => ProfilePage()));
                                 },
                                 child: null,
                               ),
@@ -81,45 +98,45 @@ class HomePage extends StatelessWidget {
                 height: 20.0,
               ),
               FutureBuilder(
-              future: FlutterSession().get('token'),
-              builder: (context, snapshot) {
-                print("token => " + snapshot.data.toString());
-                // DataProfile(snapshot.data.toString());
-                token = snapshot.data;
-              return FadeAnimation(
-                1.1,
-                Padding(
-                  padding: EdgeInsets.only(left: 20.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [FutureBuilder<
-                                            TextEditingController>(
-                                          future: datafullname(
-                                              snapshot.data.toString()),
-                                          builder: (context, snapshot) {
-                                            fullname = snapshot.data;
-                      return Text(
-                        "สวัสดี, " + fullname.text,
-                        style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            color: Colors.black54,
-                            fontSize: 20.0),
-                                            );}),
-                      SizedBox(
-                        height: 10.0,
+                  future: FlutterSession().get('token'),
+                  builder: (context, snapshot) {
+                    print("token => " + snapshot.data.toString());
+                    // DataProfile(snapshot.data.toString());
+                    token = snapshot.data;
+                    return FadeAnimation(
+                      1.1,
+                      Padding(
+                        padding: EdgeInsets.only(left: 20.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            FutureBuilder<TextEditingController>(
+                                future: datafullname(snapshot.data.toString()),
+                                builder: (context, snapshot) {
+                                  fullname = snapshot.data;
+                                  return Text(
+                                    "สวัสดี, " + fullname.text,
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.black54,
+                                        fontSize: 20.0),
+                                  );
+                                }),
+                            SizedBox(
+                              height: 10.0,
+                            ),
+                            Text(
+                              "คุณต้องการค้นหางานที่ไหน?!",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: PrimaryColor,
+                                  fontSize: 20.0),
+                            ),
+                          ],
+                        ),
                       ),
-                      Text(
-                        "คุณต้องการค้นหางานที่ไหน?!",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: PrimaryColor,
-                            fontSize: 20.0),
-                      ),
-                    ],
-                  ),
-                ),
-              );}),
-              
+                    );
+                  }),
               SizedBox(
                 height: 20.0,
               ),
