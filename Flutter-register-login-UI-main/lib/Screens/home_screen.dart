@@ -1,13 +1,16 @@
 // ignore_for_file: deprecated_member_use
 
+import 'package:flutter_session/flutter_session.dart';
 import 'package:login_ui/Recommendation_List_Data/Recommendation_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:login_ui/Animation/Fade_Animation.dart';
 import 'package:login_ui/Screens/homehome.dart';
-import 'package:login_ui/Screens/profile/Profile.dart';
+import 'package:login_ui/Screens/profile/ProfileController.dart';
 import 'package:login_ui/Themes/Themes.dart';
 
 class HomePage extends StatelessWidget {
+  TextEditingController fullname = TextEditingController();
+  String token = "";
   HomePage(this.newindex);
   int newindex;
   @override
@@ -77,20 +80,31 @@ class HomePage extends StatelessWidget {
               SizedBox(
                 height: 20.0,
               ),
-              FadeAnimation(
+              FutureBuilder(
+              future: FlutterSession().get('token'),
+              builder: (context, snapshot) {
+                print("token => " + snapshot.data.toString());
+                // DataProfile(snapshot.data.toString());
+                token = snapshot.data;
+              return FadeAnimation(
                 1.1,
                 Padding(
                   padding: EdgeInsets.only(left: 20.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "สวัสดี, ชื่อสกุลผู้ใช้!",
+                    children: [FutureBuilder<
+                                            TextEditingController>(
+                                          future: datafullname(
+                                              snapshot.data.toString()),
+                                          builder: (context, snapshot) {
+                                            fullname = snapshot.data;
+                      return Text(
+                        "สวัสดี, " + fullname.text,
                         style: TextStyle(
                             fontWeight: FontWeight.w600,
                             color: Colors.black54,
                             fontSize: 20.0),
-                      ),
+                                            );}),
                       SizedBox(
                         height: 10.0,
                       ),
@@ -104,7 +118,8 @@ class HomePage extends StatelessWidget {
                     ],
                   ),
                 ),
-              ),
+              );}),
+              
               SizedBox(
                 height: 20.0,
               ),
