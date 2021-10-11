@@ -1,54 +1,85 @@
 // To parse this JSON data, do
 //
-//     final registerModel = registerModelFromJson(jsonString);
+//     final sorener = sorenerFromJson(jsonString);
 
 import 'dart:convert';
 
-RegisterModel registerModelFromJson(String str) =>
-    RegisterModel.fromJson(json.decode(str));
+AccountModel sorenerFromJson(String str) =>
+    AccountModel.fromJson(json.decode(str));
 
-String registerModelToJson(RegisterModel data) => json.encode(data.toJson());
+String sorenerToJson(AccountModel data) => json.encode(data.toJson());
 
-class RegisterModel {
-  String email;
-  String fullname;
-  String jobId;
-  String matching;
-  String tel;
-  String type;
-  String username;
-  String password;
-
-  RegisterModel({
+class AccountModel {
+  AccountModel({
     this.email,
-    this.fullname,
-    this.jobId,
     this.matching,
     this.tel,
-    this.type,
-    this.username,
     this.password,
+    this.jobId,
+    this.type,
+    this.fullname,
+    this.username,
   });
 
-  factory RegisterModel.fromJson(Map<String, dynamic> json) => RegisterModel(
-        email: json["email"],
-        fullname: json["fullname"],
-        jobId: json["job_id"],
-        matching: json["matching"],
-        tel: json["tel"],
-        type: json["type"],
-        username: json["username"],
-        password: json["password"],
+  String email;
+  String matching;
+  String tel;
+  String password;
+  String jobId;
+  String type;
+  String fullname;
+  String username;
+
+  factory AccountModel.fromJson(Map<String, dynamic> json) => AccountModel(
+        email: json["email"] == null ? null : json["email"],
+        matching: json["matching"] == null ? null : json["matching"],
+        tel: json["tel"] == null ? null : json["tel"],
+        password: json["password"] == null ? null : json["password"],
+        jobId: json["job_id"] == null ? null : json["job_id"],
+        type: json["type"] == null ? null : json["type"],
+        fullname: json["fullname"] == null ? null : json["fullname"],
+        username: json["username"] == null ? null : json["username"],
       );
 
   Map<String, dynamic> toJson() => {
-        "email": email,
-        "fullname": fullname,
-        "job_id": jobId,
-        "matching": matching,
-        "tel": tel,
-        "type": type,
-        "username": username,
-        "password": password,
+        "email": email == null ? null : email,
+        "matching": matching == null ? null : matching,
+        "tel": tel == null ? null : tel,
+        "password": password == null ? null : password,
+        "job_id": jobId == null ? null : jobId,
+        "type": type == null ? null : type,
+        "fullname": fullname == null ? null : fullname,
+        "username": username == null ? null : username,
+      };
+}
+
+class RegisterInputModel {
+  String username;
+  String password;
+  String confirmpassword;
+  String email;
+  String tel;
+
+  RegisterInputModel({
+    this.username,
+    this.password,
+    this.confirmpassword,
+    this.email,
+    this.tel,
+  });
+}
+
+class LoginModel {
+  String type;
+  String id;
+  LoginModel({this.type, this.id});
+  factory LoginModel.fromJson(Map<String, dynamic> json) => LoginModel(
+        type: json["type"] == null ? null : json["type"],
+        id: json["id"] == null ? null : json["id"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "type": type == null ? null : type,
+        "id": id == null ? null : id,
       };
 }

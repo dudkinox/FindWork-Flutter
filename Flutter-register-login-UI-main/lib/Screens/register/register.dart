@@ -9,7 +9,7 @@ import 'package:login_ui/components/alert.dart';
 import 'package:login_ui/components/background.dart';
 import 'package:login_ui/components/selcetChackbox.dart';
 import 'package:login_ui/main.dart';
-import 'package:login_ui/model/registerModel.dart';
+import 'package:login_ui/model/loginModel.dart';
 
 class RegisterScreen extends StatefulWidget {
   @override
@@ -22,7 +22,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final confirmpassword = GlobalKey<FormState>();
   final email = GlobalKey<FormState>();
   final tel = GlobalKey<FormState>();
-  Register register = Register();
+  RegisterInputModel register = RegisterInputModel();
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
