@@ -58,12 +58,11 @@ class HomePage extends StatelessWidget {
                               child: FlatButton(
                                 padding: EdgeInsets.all(0.0),
                                 onPressed: () {
-                                  newindex = 1;
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              HomeHome(newindex)));
+                                              HomeHome(1)));
                                 },
                                 child: null,
                               ),

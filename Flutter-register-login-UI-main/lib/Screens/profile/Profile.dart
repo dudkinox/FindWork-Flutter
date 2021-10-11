@@ -4,20 +4,31 @@ import 'package:flutter_session/flutter_session.dart';
 import 'package:login_ui/Animation/Fade_Animation.dart';
 import 'package:login_ui/Controller/LoginController.dart';
 import 'package:login_ui/Themes/Themes.dart';
+import 'package:login_ui/components/alert.dart';
 import 'package:login_ui/model/loginModel.dart';
 
 import 'ProfileController.dart';
 
 class ProfilePage extends StatefulWidget {
   ProfilePage({Key key}) : super(key: key);
-  final TextEditingController username = new TextEditingController();
+  final TextEditingController fullname = new TextEditingController();
+  final TextEditingController email = new TextEditingController();
+  final TextEditingController tel = new TextEditingController();
+  final TextEditingController password = new TextEditingController();
+  final TextEditingController confirmpassword = new TextEditingController();
   @override
   MapScreenState createState() => MapScreenState();
 }
 
 class MapScreenState extends State<ProfilePage>
     with SingleTickerProviderStateMixin {
-  var username = new TextEditingController();
+  var fullname = new TextEditingController();
+  var email = new TextEditingController();
+  var tel = new TextEditingController();
+  var password = new TextEditingController();
+  var confirmpassword = new TextEditingController();
+  String token = "";
+
   bool _status = true;
   final FocusNode myFocusNode = FocusNode();
 
@@ -38,7 +49,7 @@ class MapScreenState extends State<ProfilePage>
               builder: (context, snapshot) {
                 print("token => " + snapshot.data.toString());
                 // DataProfile(snapshot.data.toString());
-                username.text = "ทดสอบ";
+                token = snapshot.data;
                 return FadeAnimation(
                   1.0,
                   Column(
@@ -181,13 +192,21 @@ class MapScreenState extends State<ProfilePage>
                                     mainAxisSize: MainAxisSize.max,
                                     children: <Widget>[
                                       new Flexible(
-                                        child: new TextField(
-                                          controller: username,
-                                          decoration: const InputDecoration(
-                                            hintText: "ใส่ชื่อของคุณ",
-                                          ),
-                                          enabled: !_status,
-                                          autofocus: !_status,
+                                        child: FutureBuilder<
+                                            TextEditingController>(
+                                          future: datafullname(
+                                              snapshot.data.toString()),
+                                          builder: (context, snapshot) {
+                                            fullname = snapshot.data;
+                                            return new TextField(
+                                              controller: fullname,
+                                              decoration: const InputDecoration(
+                                                hintText: "ใส่ชื่อของคุณ",
+                                              ),
+                                              enabled: !_status,
+                                              autofocus: !_status,
+                                            );
+                                          },
                                         ),
                                       ),
                                     ],
@@ -221,12 +240,21 @@ class MapScreenState extends State<ProfilePage>
                                     mainAxisSize: MainAxisSize.max,
                                     children: <Widget>[
                                       new Flexible(
-                                        child: new TextField(
-                                          decoration: const InputDecoration(
-                                              hintText: "ป้อน ID อีเมล"),
-                                          enabled: !_status,
-                                        ),
-                                      ),
+                                          child: FutureBuilder<
+                                                  TextEditingController>(
+                                              future: dataemail(
+                                                  snapshot.data.toString()),
+                                              builder: (context, snapshot) {
+                                                email = snapshot.data;
+                                                return new TextField(
+                                                  controller: email,
+                                                  decoration:
+                                                      const InputDecoration(
+                                                          hintText:
+                                                              "ป้อน ID อีเมล"),
+                                                  enabled: !_status,
+                                                );
+                                              })),
                                     ],
                                   )),
                               Padding(
@@ -258,9 +286,97 @@ class MapScreenState extends State<ProfilePage>
                                     mainAxisSize: MainAxisSize.max,
                                     children: <Widget>[
                                       new Flexible(
+                                          child: FutureBuilder<
+                                                  TextEditingController>(
+                                              future: datatel(
+                                                  snapshot.data.toString()),
+                                              builder: (context, snapshot) {
+                                                tel = snapshot.data;
+                                                return new TextField(
+                                                  controller: tel,
+                                                  decoration:
+                                                      const InputDecoration(
+                                                          hintText:
+                                                              "ใส่เบอร์โทรศัพท์"),
+                                                  enabled: !_status,
+                                                );
+                                              })),
+                                    ],
+                                  )),
+                              Padding(
+                                  padding: EdgeInsets.only(
+                                      left: 25.0, right: 25.0, top: 25.0),
+                                  child: new Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: <Widget>[
+                                      new Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: <Widget>[
+                                          new Text(
+                                            'ตั้งรหัสผ่านใหม่',
+                                            style: TextStyle(
+                                                fontSize: 16.0,
+                                                color: PrimaryColor,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  )),
+                              Padding(
+                                  padding: EdgeInsets.only(
+                                      left: 25.0, right: 25.0, top: 2.0),
+                                  child: new Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: <Widget>[
+                                      new Flexible(
                                         child: new TextField(
+                                          obscureText: true,
+                                          controller: password,
                                           decoration: const InputDecoration(
-                                              hintText: "ใส่เบอร์โทรศัพท์"),
+                                              hintText: "ตั้งรหัสผ่านใหม่"),
+                                          enabled: !_status,
+                                        ),
+                                      ),
+                                    ],
+                                  )),
+                              Padding(
+                                  padding: EdgeInsets.only(
+                                      left: 25.0, right: 25.0, top: 25.0),
+                                  child: new Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: <Widget>[
+                                      new Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: <Widget>[
+                                          new Text(
+                                            'ยืนยัน ตั้งรหัสผ่านใหม่',
+                                            style: TextStyle(
+                                                fontSize: 16.0,
+                                                color: PrimaryColor,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  )),
+                              Padding(
+                                  padding: EdgeInsets.only(
+                                      left: 25.0, right: 25.0, top: 2.0),
+                                  child: new Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: <Widget>[
+                                      new Flexible(
+                                        child: new TextField(
+                                          obscureText: true,
+                                          controller: confirmpassword,
+                                          decoration: const InputDecoration(
+                                              hintText:
+                                                  "ยืนยันตั้งรหัสผ่านใหม่"),
                                           enabled: !_status,
                                         ),
                                       ),
@@ -360,11 +476,38 @@ class MapScreenState extends State<ProfilePage>
                 child: new Text("Save"),
                 textColor: Colors.white,
                 color: Color(0xFF25888E),
-                onPressed: () {
-                  setState(() {
-                    _status = true;
-                    FocusScope.of(context).requestFocus(new FocusNode());
-                  });
+                onPressed: () async {
+                  print(token);
+                  if (password.text == confirmpassword.text) {
+                    final String status = await UpdateProfile(email.text,
+                        fullname.text, tel.text, password.text, token);
+                    print(status);
+
+                    if (status == "แก้ไขข้อมูลแล้ว") {
+                      showDialog(
+                          context: context,
+                          builder: (_) => AlertMessage(
+                              "แจ้งเตือน", "แก้ไขข้อมูลสำเร็จ", null));
+                    } else {
+                      showDialog(
+                          context: context,
+                          builder: (_) => AlertMessage(
+                              "แจ้งเตือน",
+                              "Server มีปัญหา ปิดปรับปรุงชั่วคราว กรุณาลองใหม่ภายหลัง",
+                              null));
+                    }
+                    setState(() {
+                      _status = true;
+                      FocusScope.of(context).requestFocus(new FocusNode());
+                    });
+                  } else {
+                    showDialog(
+                          context: context,
+                          builder: (_) => AlertMessage(
+                              "แจ้งเตือน",
+                              "กรอกกรหัสให้ตรงกัน",
+                              null));
+                  }
                 },
                 shape: new RoundedRectangleBorder(
                     borderRadius: new BorderRadius.circular(20.0)),
