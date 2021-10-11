@@ -38,21 +38,20 @@ class _LoginScreenState extends State<LoginScreen> {
       LoginModel login = await Login(username, password);
       await FlutterSession().set('token', login.id);
       print("ID => " + login.id);
-      if (login != "false") {
-        switch (login.type) {
-          case "employee":
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => HomeHome(0)));
-            break;
-          case "employer":
-            break;
-        }
-      } else {
-        showDialog(
-          context: context,
-          builder: (_) => AlertMessage(
-              "แจ้งเตือน", "บัญชีผู้ใช้หรือรหัสผ่านไม่ถูกต้อง", MyApp()),
-        );
+      switch (login.type) {
+        case "employee":
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => HomeHome(0)));
+          break;
+        case "employer":
+          break;
+        default:
+          showDialog(
+            context: context,
+            builder: (_) => AlertMessage(
+                "แจ้งเตือน", "บัญชีผู้ใช้หรือรหัสผ่านไม่ถูกต้อง", MyApp()),
+          );
+          break;
       }
     }
 
@@ -125,8 +124,29 @@ class _LoginScreenState extends State<LoginScreen> {
                   padding: const EdgeInsets.all(0),
                   child: GestureDetector(
                     onTap: () => {
-                      login(username.text, password.text),
-                      print("object"),
+                      if (username.text != "")
+                        {
+                          if (password.text != "")
+                            {
+                              login(username.text, password.text),
+                            }
+                          else
+                            {
+                              showDialog(
+                                context: context,
+                                builder: (_) => AlertMessage(
+                                    "แจ้งเตือน", "กรุงณากรอกรหัสผ่าน", null),
+                              ),
+                            }
+                        }
+                      else
+                        {
+                          showDialog(
+                            context: context,
+                            builder: (_) => AlertMessage(
+                                "แจ้งเตือน", "กรุงณากรอกบัญชีผู้ใช้", null),
+                          ),
+                        }
                     },
                     child: Text(
                       "เข้าสู่ระบบ",

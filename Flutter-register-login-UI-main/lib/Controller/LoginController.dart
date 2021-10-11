@@ -54,26 +54,13 @@ Future<String> RegisterEmployee(
   }
 }
 
-Future<dynamic> Del(String username, String password) async {
-  final String url = Host + "/api/login/" + username + "/" + password;
-  final response = await http.delete(
+Future<AccountModel> FindID(String token) async {
+  final String url = Host + "/api/login/" + token;
+  final response = await http.get(
     Uri.parse(url),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },
   );
-  var data = json.decode(json.encode(response.body));
-  return data;
-}
-
-Future<dynamic> Find(String username, String password) async {
-  final String url = Host + "/api/login/" + username + "/" + password;
-  final response = await http.post(
-    Uri.parse(url),
-    headers: <String, String>{
-      'Content-Type': 'application/json; charset=UTF-8',
-    },
-  );
-  var data = json.decode(json.encode(response.body));
-  return data;
+  return AccountModel.fromJson(jsonDecode(response.body));
 }
