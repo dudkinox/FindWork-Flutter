@@ -182,11 +182,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             email.currentState.reset();
                             tel.currentState.reset();
                             final String status = await RegisterEmployee(
-                                register.username,
-                                register.password,
-                                register.confirmpassword,
-                                register.email,
-                                register.tel);
+                              register.email,
+                              register.tel,
+                              register.username,
+                              register.username,
+                              register.password,
+                            );
                             print(status);
                             if (status == "เพิ่มบัญชีสำเร็จ") {
                               showDialog(
