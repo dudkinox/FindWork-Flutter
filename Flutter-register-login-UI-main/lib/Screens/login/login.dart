@@ -100,7 +100,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 style: TextStyle(fontSize: 12, color: PrimaryColor),
               ),
             ),
-            SizedBox(height: size.height * 0.05),
+            SizedBox(height: size.height * 0.01),
             Container(
               alignment: Alignment.centerRight,
               margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
@@ -130,11 +130,29 @@ class _LoginScreenState extends State<LoginScreen> {
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                        height: 2,
+                        fontSize: 14,
+                        height: 2.8,
                       ),
                     ),
                   ),
+                ),
+              ),
+            ),
+            Container(
+              alignment: Alignment.centerRight,
+              padding: EdgeInsets.symmetric(),
+              margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
+              child: GestureDetector(
+                onTap: () => {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => RegisterScreen()))
+                },
+                child: Text(
+                  "สมัครสมาชิก/สมัครงาน",
+                  style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                      color: PrimaryColor),
                 ),
               ),
             ),
@@ -147,14 +165,14 @@ class _LoginScreenState extends State<LoginScreen> {
                       MaterialPageRoute(builder: (context) => RegisterScreen()))
                 },
                 child: Text(
-                  "สมัครสมาชิก",
+                  "สมัครสมาชิก/รับสมัครงาน",
                   style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.bold,
                       color: PrimaryColor),
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),
