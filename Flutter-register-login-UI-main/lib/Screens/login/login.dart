@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:login_ui/Controller/LoginController.dart';
 import 'package:login_ui/Screens/homehome.dart';
 import 'package:login_ui/Screens/register/register.dart';
+import 'package:login_ui/Screens/register/registerAddjob.dart';
 import 'package:login_ui/Themes/Themes.dart';
 import 'package:login_ui/components/alert.dart';
 import 'package:login_ui/components/background.dart';
@@ -161,8 +162,10 @@ class _LoginScreenState extends State<LoginScreen> {
               margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
               child: GestureDetector(
                 onTap: () => {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => RegisterScreen()))
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => RegisterAddjobScreen()))
                 },
                 child: Text(
                   "สมัครสมาชิก/รับสมัครงาน",
