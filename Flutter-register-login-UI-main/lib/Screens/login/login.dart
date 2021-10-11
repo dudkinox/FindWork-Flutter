@@ -5,6 +5,7 @@ import 'package:flutter_session/flutter_session.dart';
 import 'package:login_ui/Controller/LoginController.dart';
 import 'package:login_ui/Screens/homehome.dart';
 import 'package:login_ui/Screens/register/register.dart';
+import 'package:login_ui/Screens/register/registerAddjob.dart';
 import 'package:login_ui/Themes/Themes.dart';
 import 'package:login_ui/components/alert.dart';
 import 'package:login_ui/components/background.dart';
@@ -102,7 +103,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 style: TextStyle(fontSize: 12, color: PrimaryColor),
               ),
             ),
-            SizedBox(height: size.height * 0.05),
+            SizedBox(height: size.height * 0.01),
             Container(
               alignment: Alignment.centerRight,
               margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
@@ -153,8 +154,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                        height: 2,
+                        fontSize: 14,
+                        height: 2.8,
                       ),
                     ),
                   ),
@@ -163,6 +164,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             Container(
               alignment: Alignment.centerRight,
+              padding: EdgeInsets.symmetric(),
               margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
               child: GestureDetector(
                 onTap: () => {
@@ -170,14 +172,33 @@ class _LoginScreenState extends State<LoginScreen> {
                       MaterialPageRoute(builder: (context) => RegisterScreen()))
                 },
                 child: Text(
-                  "สมัครสมาชิก",
+                  "สมัครสมาชิก/สมัครงาน",
                   style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.bold,
                       color: PrimaryColor),
                 ),
               ),
-            )
+            ),
+            Container(
+              alignment: Alignment.centerRight,
+              margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
+              child: GestureDetector(
+                onTap: () => {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => RegisterAddjobScreen()))
+                },
+                child: Text(
+                  "สมัครสมาชิก/รับสมัครงาน",
+                  style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                      color: PrimaryColor),
+                ),
+              ),
+            ),
           ],
         ),
       ),
