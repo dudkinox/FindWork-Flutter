@@ -40,8 +40,7 @@ class _LoginScreenState extends State<LoginScreen> {
       print("ID => " + login.id);
       switch (login.type) {
         case "employee":
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => HomeHome(0)));
+          Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => HomeHome(0)));
           break;
         case "employer":
           break;

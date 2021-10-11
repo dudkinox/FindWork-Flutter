@@ -3,6 +3,7 @@
 import 'dart:math';
 
 import 'package:flutter_session/flutter_session.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:login_ui/Recommendation_List_Data/Recommendation_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:login_ui/Animation/Fade_Animation.dart';
@@ -13,16 +14,19 @@ import 'package:login_ui/Themes/Themes.dart';
 
 import 'login/login.dart';
 
+  DateTime backbuttonpressedTime;
 class HomePage extends StatelessWidget {
   TextEditingController fullname = TextEditingController();
   String token = "";
   HomePage(this.newindex);
   int newindex;
+
+  DateTime currentTime = DateTime.now();
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     print("ปัจจุบัน " + newindex.toString());
-    return Material(
-      color: Colors.white,
+    return WillPopScope(
+      onWillPop: onWillPop,
       child: Container(
         color: Colors.white,
         child: SingleChildScrollView(
@@ -410,4 +414,21 @@ Widget childCetegory() {
       ],
     ),
   );
+}
+
+Future<bool> onWillPop() async {
+  DateTime currentTime = DateTime.now();
+
+  bool backButton = backbuttonpressedTime == null ||
+      currentTime.difference(backbuttonpressedTime) > Duration(seconds: 3);
+
+  if (backButton) {
+    backbuttonpressedTime = currentTime;
+    Fluttertoast.showToast(
+        msg: "กดอีกครั้งเพื่อออก!!",
+        backgroundColor: Colors.black,
+        textColor: Colors.white);
+    return false;
+  }
+  return true;
 }

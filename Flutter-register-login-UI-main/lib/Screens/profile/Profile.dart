@@ -68,11 +68,7 @@ class MapScreenState extends State<ProfilePage>
                                     IconButton(
                                       icon: const Icon(Icons.arrow_back_ios),
                                       onPressed: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    HomeHome(0)));
+                                        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => HomeHome(0)));
                                       },
                                     ),
                                     Padding(
