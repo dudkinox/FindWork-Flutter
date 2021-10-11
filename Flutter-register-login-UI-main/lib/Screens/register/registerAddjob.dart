@@ -9,6 +9,7 @@ import 'package:login_ui/Themes/Themes.dart';
 import 'package:login_ui/components/alert.dart';
 import 'package:login_ui/components/background.dart';
 import 'package:login_ui/components/selcetChackbox.dart';
+import 'package:login_ui/components/selcetChackboxAddjob.dart';
 import 'package:login_ui/main.dart';
 import 'package:login_ui/model/loginModel.dart';
 
@@ -179,11 +180,11 @@ class _RegisterAddjobScreenState extends State<RegisterAddjobScreen> {
                 ),
               ),
               // matching
-              // Container(
-              //   alignment: Alignment.center,
-              //   margin: EdgeInsets.symmetric(horizontal: 40),
-              //   child: FeaturesMultiChips(),
-              // ),
+              Container(
+                alignment: Alignment.center,
+                margin: EdgeInsets.symmetric(horizontal: 40),
+                child: FeaturesAddjobMultiChips(),
+              ),
               SizedBox(height: size.height * 0.01),
               Container(
                 alignment: Alignment.centerRight,

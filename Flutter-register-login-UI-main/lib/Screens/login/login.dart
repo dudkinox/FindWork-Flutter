@@ -1,6 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
+import 'package:flutter_session/flutter_session.dart';
 import 'package:login_ui/Controller/LoginController.dart';
 import 'package:login_ui/Screens/homehome.dart';
 import 'package:login_ui/Screens/register/register.dart';
@@ -9,6 +10,7 @@ import 'package:login_ui/Themes/Themes.dart';
 import 'package:login_ui/components/alert.dart';
 import 'package:login_ui/components/background.dart';
 import 'package:login_ui/main.dart';
+import 'package:login_ui/model/loginModel.dart';
 
 class LoginScreen extends StatefulWidget {
   LoginScreen({Key key}) : super(key: key);
@@ -34,23 +36,23 @@ class _LoginScreenState extends State<LoginScreen> {
     Size size = MediaQuery.of(context).size;
 
     void login(String username, String password) async {
-      dynamic login = await Login(username, password);
-
-      if (login != "false") {
-        switch (login) {
-          case "employee":
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => HomeHome(0)));
-            break;
-          case "employer":
-            break;
-        }
-      } else {
-        showDialog(
-          context: context,
-          builder: (_) => AlertMessage(
-              "แจ้งเตือน", "บัญชีผู้ใช้หรือรหัสผ่านไม่ถูกต้อง", MyApp()),
-        );
+      LoginModel login = await Login(username, password);
+      await FlutterSession().set('token', login.id);
+      print("ID => " + login.id);
+      switch (login.type) {
+        case "employee":
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => HomeHome(0)));
+          break;
+        case "employer":
+          break;
+        default:
+          showDialog(
+            context: context,
+            builder: (_) => AlertMessage(
+                "แจ้งเตือน", "บัญชีผู้ใช้หรือรหัสผ่านไม่ถูกต้อง", MyApp()),
+          );
+          break;
       }
     }
 
@@ -123,8 +125,29 @@ class _LoginScreenState extends State<LoginScreen> {
                   padding: const EdgeInsets.all(0),
                   child: GestureDetector(
                     onTap: () => {
-                      login(username.text, password.text),
-                      print("object"),
+                      if (username.text != "")
+                        {
+                          if (password.text != "")
+                            {
+                              login(username.text, password.text),
+                            }
+                          else
+                            {
+                              showDialog(
+                                context: context,
+                                builder: (_) => AlertMessage(
+                                    "แจ้งเตือน", "กรุงณากรอกรหัสผ่าน", null),
+                              ),
+                            }
+                        }
+                      else
+                        {
+                          showDialog(
+                            context: context,
+                            builder: (_) => AlertMessage(
+                                "แจ้งเตือน", "กรุงณากรอกบัญชีผู้ใช้", null),
+                          ),
+                        }
                     },
                     child: Text(
                       "เข้าสู่ระบบ",
