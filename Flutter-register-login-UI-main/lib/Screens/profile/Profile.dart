@@ -33,13 +33,12 @@ class MapScreenState extends State<ProfilePage>
       color: Colors.white,
       child: new ListView(
         children: <Widget>[
-          FutureBuilder<String>(
+          FutureBuilder(
               future: FlutterSession().get('token'),
               builder: (context, snapshot) {
                 print("token => " + snapshot.data.toString());
-                AccountModel data =
-                    DataProfile(snapshot.data.toString()) as AccountModel;
-                username.text = data.fullname;
+                // DataProfile(snapshot.data.toString());
+                username.text = "ทดสอบ";
                 return FadeAnimation(
                   1.0,
                   Column(
