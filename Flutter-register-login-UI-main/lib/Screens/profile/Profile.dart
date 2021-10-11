@@ -1,21 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_session/flutter_session.dart';
 import 'package:login_ui/Animation/Fade_Animation.dart';
 import 'package:login_ui/Themes/Themes.dart';
 
+import 'ProfileController.dart';
+
 class ProfilePage extends StatefulWidget {
+  ProfilePage({Key key}) : super(key: key);
+  final TextEditingController username = new TextEditingController();
   @override
   MapScreenState createState() => MapScreenState();
 }
 
 class MapScreenState extends State<ProfilePage>
     with SingleTickerProviderStateMixin {
+  var username = new TextEditingController();
   bool _status = true;
   final FocusNode myFocusNode = FocusNode();
 
   @override
   void initState() {
-    // TODO: implement initState
+    username.text = Username().fullname;
     super.initState();
   }
 
@@ -26,6 +32,12 @@ class MapScreenState extends State<ProfilePage>
       color: Colors.white,
       child: new ListView(
         children: <Widget>[
+          FutureBuilder(
+              future: FlutterSession().get('token'),
+              builder: (context, snapshot) {
+                print("token => " + snapshot.data.toString());
+                return Text("snapshot");
+              }),
           FadeAnimation(
             1.0,
             Column(
@@ -96,7 +108,7 @@ class MapScreenState extends State<ProfilePage>
                   color: Color(0xffFFFFFF),
                   child: Padding(
                     padding: EdgeInsets.only(bottom: 25.0),
-                    child: new Column(
+                    child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: <Widget>[
@@ -158,6 +170,7 @@ class MapScreenState extends State<ProfilePage>
                               children: <Widget>[
                                 new Flexible(
                                   child: new TextField(
+                                    controller: username,
                                     decoration: const InputDecoration(
                                       hintText: "ใส่ชื่อของคุณ",
                                     ),

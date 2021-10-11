@@ -1,6 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
+import 'package:flutter_session/flutter_session.dart';
 import 'package:login_ui/Controller/LoginController.dart';
 import 'package:login_ui/Screens/homehome.dart';
 import 'package:login_ui/Screens/register/register.dart';
@@ -8,6 +9,7 @@ import 'package:login_ui/Themes/Themes.dart';
 import 'package:login_ui/components/alert.dart';
 import 'package:login_ui/components/background.dart';
 import 'package:login_ui/main.dart';
+import 'package:login_ui/model/loginModel.dart';
 
 class LoginScreen extends StatefulWidget {
   LoginScreen({Key key}) : super(key: key);
@@ -33,10 +35,11 @@ class _LoginScreenState extends State<LoginScreen> {
     Size size = MediaQuery.of(context).size;
 
     void login(String username, String password) async {
-      dynamic login = await Login(username, password);
-
+      LoginModel login = await Login(username, password);
+      await FlutterSession().set('token', login.id);
+      print("ID => " + login.id);
       if (login != "false") {
-        switch (login) {
+        switch (login.type) {
           case "employee":
             Navigator.push(
                 context, MaterialPageRoute(builder: (context) => HomeHome(0)));

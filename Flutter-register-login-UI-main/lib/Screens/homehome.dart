@@ -3,6 +3,7 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_session/flutter_session.dart';
 import 'package:login_ui/Screens/alertPage/alertPage.dart';
 import 'package:login_ui/Screens/favorite/favorite.dart';
 import 'package:login_ui/Screens/home_screen.dart';
