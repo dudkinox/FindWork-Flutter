@@ -252,10 +252,11 @@ class HomePage extends StatelessWidget {
                                 Container(
                                   height: 400.0,
                                   width: 400.0,
-                                  child: FutureBuilder<List<String>>(
+                                  child: FutureBuilder<List<JobDataModel>>(
                                     future: Image_location(),
                                     builder: (context, snapshot) {
-                                      print(" ข้อมูล " + snapshot.data.toString());
+                                      List<JobDataModel> data = snapshot.data;
+                                      print(" ข้อมูล " + snapshot.data.length.toString());
                                       return ListView.builder(
                                         scrollDirection: Axis.horizontal,
                                         itemCount: snapshot.data.length,

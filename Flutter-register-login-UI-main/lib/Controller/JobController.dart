@@ -17,7 +17,21 @@ Future<JobDataModel> Jobdata() async {
   return JobDataModel.fromJson(jsonDecode(response.body));
 }
 
-Future<List<String>> Image_location() async {
+// Future<List<String>> Image_location() async {
+//   final String url = Host + "/api/employer/";
+//   final response = await http.get(
+//     Uri.parse(url),
+//     headers: <String, String>{
+//       'Content-Type': 'application/json; charset=UTF-8',
+//     },
+//   );
+//   var result = json.decode(response.body);
+//   print("data " + response.body);
+//   return result.map<JobDataModel>((json) => JobDataModel.fromJson(json))
+//           .toList();
+// }
+
+Future <List<JobDataModel>> Image_location() async {
   final String url = Host + "/api/employer/";
   final response = await http.get(
     Uri.parse(url),
@@ -25,8 +39,12 @@ Future<List<String>> Image_location() async {
       'Content-Type': 'application/json; charset=UTF-8',
     },
   );
-  var result = json.decode(response.body);
-  print("data " + response.body);
-  return result.map<JobDataModel>((json) => JobDataModel.fromJson(json))
-          .toList();
+  if (response.statusCode == 200) {
+    List jsonResponse = json.decode(response.body);
+    print("Data API");
+    print(jsonResponse);
+      return jsonResponse.map((data) => new JobDataModel.fromJson(data)).toList();
+  } else {
+    throw Exception('Unexpected error occured!');
+  }
 }

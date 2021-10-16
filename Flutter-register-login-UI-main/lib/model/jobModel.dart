@@ -60,7 +60,7 @@ class DepartmentId {
     });
 
     List<String> salary;
-    bool status;
+    List<bool> status;
     List<String> detail;
     List<String> name;
     List<String> type;
@@ -69,7 +69,7 @@ class DepartmentId {
 
     factory DepartmentId.fromJson(Map<String, dynamic> json) => DepartmentId(
         salary: List<String>.from(json["salary"].map((x) => x)),
-        status: json["status"],
+        status: List<bool>.from(json["status"].map((x) => x)),
         detail: List<String>.from(json["detail"].map((x) => x)),
         name: List<String>.from(json["name"].map((x) => x)),
         type: List<String>.from(json["type"].map((x) => x)),
