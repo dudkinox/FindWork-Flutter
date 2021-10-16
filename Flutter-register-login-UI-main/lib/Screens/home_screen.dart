@@ -4,6 +4,7 @@ import 'dart:math';
 
 import 'package:flutter_session/flutter_session.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:login_ui/Controller/JobController.dart';
 import 'package:login_ui/Recommendation_List_Data/Recommendation_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:login_ui/Animation/Fade_Animation.dart';
@@ -11,6 +12,7 @@ import 'package:login_ui/Screens/homehome.dart';
 import 'package:login_ui/Screens/profile/Profile.dart';
 import 'package:login_ui/Screens/profile/ProfileController.dart';
 import 'package:login_ui/Themes/Themes.dart';
+import 'package:login_ui/model/jobModel.dart';
 
 import 'login/login.dart';
 
@@ -248,15 +250,22 @@ class HomePage extends StatelessWidget {
                                 ),
                                 //  SizedBox(height: 10.0,),
                                 Container(
-                                    height: 400.0,
-                                    width: 400.0,
-                                    child: ListView.builder(
-                                      scrollDirection: Axis.horizontal,
-                                      itemCount: RecommendationList.length,
-                                      itemBuilder: (context, index) {
-                                        return RecommendationList[index];
-                                      },
-                                    )),
+                                  height: 400.0,
+                                  width: 400.0,
+                                  child: FutureBuilder<List<String>>(
+                                    future: Image_location(),
+                                    builder: (context, snapshot) {
+                                      print(" ข้อมูล " + snapshot.data.toString());
+                                      return ListView.builder(
+                                        scrollDirection: Axis.horizontal,
+                                        itemCount: snapshot.data.length,
+                                        itemBuilder: (context, index) {
+                                          return RecommendationList[index];
+                                        },
+                                      );
+                                    },
+                                  ),
+                                ),
                               ],
                             ),
                           ),

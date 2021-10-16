@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:login_ui/Controller/JobController.dart';
 import 'package:login_ui/Themes/Themes.dart';
 import 'package:login_ui/details_screen.dart';
+import 'package:login_ui/model/jobModel.dart';
+
+JobDataModel JobData = JobDataModel();
+
+List JobDataList = [
+  Recommendation(JobData.image, JobData.province),
+];
 
 List RecommendationList = [
   Recommendation(
@@ -19,6 +27,7 @@ class Recommendation extends StatelessWidget {
   final String location;
 
   const Recommendation(this.imgUlr, this.location);
+
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -47,14 +56,22 @@ class Recommendation extends StatelessWidget {
                     Container(
                       height: 250.0,
                       width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: PrimaryColor,
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(20.0),
-                          topRight: Radius.circular(20.0),
-                        ),
-                        image: DecorationImage(
-                            image: NetworkImage(imgUlr), fit: BoxFit.cover),
+                      child: FutureBuilder<JobDataModel>(
+                        future: Jobdata(),
+                        builder: (context, snapshot) {
+                          return new Container(
+                            decoration: BoxDecoration(
+                              color: PrimaryColor,
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(20.0),
+                                topRight: Radius.circular(20.0),
+                              ),
+                              image: DecorationImage(
+                                  image: NetworkImage(JobData.image),
+                                  fit: BoxFit.cover),
+                            ),
+                          );
+                        },
                       ),
                     ),
                     SizedBox(
