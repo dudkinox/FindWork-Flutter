@@ -183,8 +183,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             tel.currentState.reset();
                             final String status = await RegisterEmployee(
                               register.email,
-                              register.tel,
                               register.username,
+                              register.tel,
                               register.username,
                               register.password,
                             );
