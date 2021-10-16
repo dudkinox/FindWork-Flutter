@@ -51,8 +51,7 @@ class HomePage extends StatelessWidget {
                             color: PrimaryColor,
                             icon: const Icon(Icons.exit_to_app_rounded),
                             onPressed: () {
-                              Navigator.push(
-                                  context,
+                              Navigator.of(context).pushReplacement(
                                   MaterialPageRoute(
                                       builder: (context) => LoginScreen()));
                             },
