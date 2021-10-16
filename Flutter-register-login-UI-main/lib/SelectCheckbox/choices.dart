@@ -1,3 +1,5 @@
+import 'package:login_ui/ScreensAddjob/modelsAddjob/job.dart';
+
 import 'src/model/choice_item.dart';
 
 List<S2Choice<String>> days = [
@@ -310,3 +312,69 @@ List<Map<String, dynamic>> smartphones = [
 //     'image': 'https://source.unsplash.com/2LTMNCN4nEg/100x100',
 //   },
 // ];
+
+List<Jobs> demoFeatured = [
+  Jobs(
+      image: 'assets/images/youtube.png',
+      title: 'Backend Developer',
+      subTitle: 'Youtube',
+      renumeration: '\฿2000 / บาท',
+      datePosted: '3 Weeks ago',
+      text1: 'Part Time',
+      text2: 'Remote',
+      text3: 'Junior',
+      text4: '4 yrs'),
+  Jobs(
+      image: 'assets/images/youtube.png',
+      title: 'Backend Developer',
+      subTitle: 'Youtube',
+      renumeration: '\฿2000 / บาท',
+      datePosted: '3 Weeks ago',
+      text1: 'Part Time',
+      text2: 'Remote',
+      text3: 'Junior',
+      text4: '4 yrs'),
+  Jobs(
+      image: 'assets/images/youtube.png',
+      title: 'Backend Developer',
+      subTitle: 'Youtube',
+      renumeration: '\฿2000 / บาท',
+      datePosted: '3 Weeks ago',
+      text1: 'Part Time',
+      text2: 'Remote',
+      text3: 'Junior',
+      text4: '4 yrs'),
+  Jobs(
+      image: 'assets/images/youtube.png',
+      title: 'Backend Developer',
+      subTitle: 'Youtube',
+      renumeration: '\฿2000 / บาท',
+      datePosted: '3 Weeks ago',
+      text1: 'Part Time',
+      text2: 'Remote',
+      text3: 'Junior',
+      text4: '4 yrs'),
+  Jobs(
+      image: 'assets/images/apple.jpeg',
+      title: 'Customer Care',
+      subTitle: 'Apple',
+      renumeration: '\฿5000 / บาท',
+      datePosted: '2 days ago',
+      text1: 'Full Time',
+      text2: 'Remote',
+      text3: 'Senior',
+      text4: '2 yrs')
+];
+
+List<String> getJobsRequirements() {
+  return <String>[
+    "Exceptional communication skills and team-working skills",
+    "Know the principles of animation and you can create high fidelity prototypes",
+    "Direct experience using Adobe Premiere, Adobe After Effects & other tools used to create videos, animations, etc.",
+    "Good UI/UX knowledge",
+    "Exceptional communication skills and team-working skills",
+    "Know the principles of animation and you can create high fidelity prototypes",
+    "Direct experience using Adobe Premiere, Adobe After Effects & other tools used to create videos, animations, etc.",
+    "Good UI/UX knowledge",
+  ];
+}

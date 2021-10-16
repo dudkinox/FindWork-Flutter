@@ -189,25 +189,3 @@ class _FavoriteState extends State<Favorite> {
     );
   }
 }
-
-//  child: Container(
-//                               child: Transform.translate(
-//                                 offset: Offset(0, -150),
-//                                 child: Container(
-//                                   margin: EdgeInsets.symmetric(
-//                                       horizontal: 150, vertical: 150),
-//                                   decoration: BoxDecoration(
-//                                       borderRadius: BorderRadius.circular(20.0),
-//                                       color: Colors.grey[300]),
-//                                 ),
-//                               ),
-//                             ),
-
-
-// child: Container(
-//                             decoration: BoxDecoration(
-//                                 borderRadius: BorderRadius.circular(20),
-//                                 image: DecorationImage(
-//                                     image: AssetImage(item),
-//                                     fit: BoxFit.cover)),
-//                           ),

@@ -14,7 +14,8 @@ import 'package:login_ui/Themes/Themes.dart';
 
 import 'login/login.dart';
 
-  DateTime backbuttonpressedTime;
+DateTime backbuttonpressedTime;
+
 class HomePage extends StatelessWidget {
   TextEditingController fullname = TextEditingController();
   String token = "";
@@ -23,7 +24,7 @@ class HomePage extends StatelessWidget {
 
   DateTime currentTime = DateTime.now();
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     print("ปัจจุบัน " + newindex.toString());
     return WillPopScope(
       onWillPop: onWillPop,
@@ -119,7 +120,9 @@ class HomePage extends StatelessWidget {
                                 builder: (context, snapshot) {
                                   fullname = snapshot.data;
                                   return Text(
-                                    "สวัสดี, " + fullname.text,
+                                    "สวัสดี, " + fullname.text == null
+                                        ? 'กำลังโหลด..'
+                                        : '',
                                     style: TextStyle(
                                         fontWeight: FontWeight.w600,
                                         color: Colors.black54,
