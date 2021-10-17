@@ -13,41 +13,42 @@ class Recommendation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      child: Padding(
-        padding: EdgeInsets.only(left: 10.0, top: 10.0),
-        child: GestureDetector(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (BuildContext context) => DetailsPage(imgUlr),
-              ),
-            );
-          },
-          child: Container(
-            height: 370.0,
-            width: 300.0,
-            decoration: BoxDecoration(
-              color: Colors.grey[300],
-              borderRadius: BorderRadius.circular(20.0),
-            ),
-            child: Column(
-              children: [
-                FutureBuilder<List<JobDataModel>>(
-                  future: TopicWork(),
-                  builder: (context, snapshot) {
-                    JobDataModel data = new JobDataModel();
-                    for (var item in snapshot.data) {
-                      data.company = item.company;
-                      data.departmentId = item.departmentId;
-                      data.district = item.district;
-                      data.id = item.id;
-                      data.image = item.image;
-                      data.jobId = item.jobId;
-                      data.province = item.province;
-                      data.subDistrict = item.subDistrict;
-                    }
-                    return Column(
+      child: FutureBuilder<List<JobDataModel>>(
+        future: TopicWork(),
+        builder: (context, snapshot) {
+          JobDataModel data = new JobDataModel();
+          for (var item in snapshot.data) {
+            data.company = item.company;
+            data.departmentId = item.departmentId;
+            data.district = item.district;
+            data.id = item.id;
+            data.image = item.image;
+            data.jobId = item.jobId;
+            data.province = item.province;
+            data.subDistrict = item.subDistrict;
+          }
+          return Padding(
+            padding: EdgeInsets.only(left: 10.0, top: 10.0),
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (BuildContext context) =>
+                        DetailsPage(imgUlr, data.id),
+                  ),
+                );
+              },
+              child: Container(
+                height: 370.0,
+                width: 300.0,
+                decoration: BoxDecoration(
+                  color: Colors.grey[300],
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+                child: Column(
+                  children: [
+                    Column(
                       children: [
                         Container(
                           height: 250.0,
@@ -146,13 +147,13 @@ class Recommendation extends StatelessWidget {
                           ),
                         ),
                       ],
-                    );
-                  },
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
-          ),
-        ),
+          );
+        },
       ),
     );
   }
