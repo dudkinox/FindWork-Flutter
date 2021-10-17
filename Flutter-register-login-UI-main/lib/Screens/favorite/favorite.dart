@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:login_ui/Animation/Fade_Animation.dart';
 import 'package:login_ui/Themes/Themes.dart';
-
-import '../home_screen.dart';
+import 'package:login_ui/components/WillPop.dart';
 
 class Favorite extends StatefulWidget {
   @override
@@ -194,21 +192,4 @@ class _FavoriteState extends State<Favorite> {
       ),
     );
   }
-}
-
-Future<bool> onWillPop() async {
-  DateTime currentTime = DateTime.now();
-
-  bool backButton = backbuttonpressedTime == null ||
-      currentTime.difference(backbuttonpressedTime) > Duration(seconds: 3);
-
-  if (backButton) {
-    backbuttonpressedTime = currentTime;
-    Fluttertoast.showToast(
-        msg: "กดอีกครั้งเพื่อออก!!",
-        backgroundColor: Colors.black,
-        textColor: Colors.white);
-    return false;
-  }
-  return true;
 }

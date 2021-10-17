@@ -1,18 +1,12 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
-import 'package:flutter_session/flutter_session.dart';
-import 'package:login_ui/Controller/LoginController.dart';
 import 'package:login_ui/Screens/register/register.dart';
 import 'package:login_ui/Screens/register/registerAddjob.dart';
-import 'package:login_ui/ScreensAddjob/HomeAddjob.dart';
 import 'package:login_ui/Themes/Themes.dart';
 import 'package:login_ui/components/alert.dart';
 import 'package:login_ui/components/background.dart';
-import 'package:login_ui/main.dart';
-import 'package:login_ui/model/loginModel.dart';
-
-import '../homehome.dart';
+import 'loginController.dart';
 
 class LoginScreen extends StatefulWidget {
   LoginScreen({Key key}) : super(key: key);
@@ -36,30 +30,6 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-
-    void login(String username, String password) async {
-      LoginModel login = await Login(username, password);
-      await FlutterSession().set('token', login.id);
-      print("ID => " + login.id);
-      switch (login.type) {
-        case "employee":
-          Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (context) => HomeHome(0)));
-          break;
-        case "employer":
-          Navigator.of(context).pushReplacement(MaterialPageRoute(
-              builder: (context) => HomeAddjob(
-                  "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.matichon.co.th%2Flifestyle%2Fnews_2916482&psig=AOvVaw3S9Bsn-Qez3zeaScwl_iOR&ust=1634221433947000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCPjfpbLLx_MCFQAAAAAdAAAAABAD")));
-          break;
-        default:
-          showDialog(
-            context: context,
-            builder: (_) => AlertMessage(
-                "แจ้งเตือน", "บัญชีผู้ใช้หรือรหัสผ่านไม่ถูกต้อง", MyApp()),
-          );
-          break;
-      }
-    }
 
     return Scaffold(
       body: Background(
@@ -134,7 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         {
                           if (password.text != "")
                             {
-                              login(username.text, password.text),
+                              login(context, username.text, password.text),
                             }
                           else
                             {

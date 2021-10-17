@@ -1,26 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:login_ui/Controller/JobController.dart';
 import 'package:login_ui/Themes/Themes.dart';
 import 'package:login_ui/details_screen.dart';
-import 'package:login_ui/model/jobModel.dart';
-
-JobDataModel JobData = JobDataModel();
-
-List JobDataList = [
-  Recommendation(JobData.image, JobData.province),
-];
-
-List RecommendationList = [
-  Recommendation(
-      "https://cdn.pixabay.com/photo/2018/07/14/15/27/cafe-3537801__480.jpg",
-      "จันเกษม"),
-  Recommendation(
-      "https://cdn.pixabay.com/photo/2016/11/19/16/46/architecture-1840263__480.jpg",
-      "จันเกษม"),
-  Recommendation(
-      "https://cdn.pixabay.com/photo/2018/07/14/15/27/cafe-3537801__480.jpg",
-      "จันเกษม"),
-];
 
 class Recommendation extends StatelessWidget {
   final String imgUlr;
@@ -56,22 +36,16 @@ class Recommendation extends StatelessWidget {
                     Container(
                       height: 250.0,
                       width: double.infinity,
-                      child: FutureBuilder<JobDataModel>(
-                        future: Jobdata(),
-                        builder: (context, snapshot) {
-                          return new Container(
-                            decoration: BoxDecoration(
-                              color: PrimaryColor,
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(20.0),
-                                topRight: Radius.circular(20.0),
-                              ),
-                              image: DecorationImage(
-                                  image: NetworkImage(JobData.image),
-                                  fit: BoxFit.cover),
-                            ),
-                          );
-                        },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: PrimaryColor,
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(20.0),
+                            topRight: Radius.circular(20.0),
+                          ),
+                          image: DecorationImage(
+                              image: NetworkImage(imgUlr), fit: BoxFit.cover),
+                        ),
                       ),
                     ),
                     SizedBox(
@@ -83,7 +57,7 @@ class Recommendation extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            " คาเฟ่",
+                            " คาเฟ่ทดสอบ",
                             style: TextStyle(
                                 color: PrimaryColor,
                                 fontWeight: FontWeight.bold,

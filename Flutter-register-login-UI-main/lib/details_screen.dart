@@ -73,7 +73,7 @@ class DetailsPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        " คาเฟ่",
+                        " คาเฟ่ทดสอบ",
                         style: TextStyle(
                             fontSize: 20.0,
                             fontWeight: FontWeight.bold,

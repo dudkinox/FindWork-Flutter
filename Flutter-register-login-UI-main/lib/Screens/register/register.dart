@@ -1,8 +1,8 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
-import 'package:login_ui/Controller/LoginController.dart';
 import 'package:login_ui/Screens/login/login.dart';
+import 'package:login_ui/Service/LoginService.dart';
 
 import 'package:login_ui/Themes/Themes.dart';
 import 'package:login_ui/components/alert.dart';
@@ -188,7 +188,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               register.username,
                               register.password,
                             );
-                            print(status);
                             if (status == "เพิ่มบัญชีสำเร็จ") {
                               showDialog(
                                 context: context,

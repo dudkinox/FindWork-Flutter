@@ -1,16 +1,11 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
-import 'package:login_ui/Controller/LoginController.dart';
-import 'package:login_ui/Screens/alertPage/infinite.dart';
 import 'package:login_ui/Screens/login/login.dart';
 
 import 'package:login_ui/Themes/Themes.dart';
-import 'package:login_ui/components/alert.dart';
 import 'package:login_ui/components/background.dart';
-import 'package:login_ui/components/selcetChackbox.dart';
 import 'package:login_ui/components/selcetChackboxAddjob.dart';
-import 'package:login_ui/main.dart';
 import 'package:login_ui/model/loginModel.dart';
 
 class RegisterAddjobScreen extends StatefulWidget {

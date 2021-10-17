@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_session/flutter_session.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:login_ui/Animation/Fade_Animation.dart';
-import 'package:login_ui/Controller/LoginController.dart';
-import 'package:login_ui/Screens/home_screen.dart';
 import 'package:login_ui/Screens/homehome.dart';
+import 'package:login_ui/Service/LoginService.dart';
 import 'package:login_ui/Themes/Themes.dart';
+import 'package:login_ui/components/WillPop.dart';
 import 'package:login_ui/components/alert.dart';
 
 import 'ProfileController.dart';
@@ -51,7 +50,6 @@ class MapScreenState extends State<ProfilePage>
             FutureBuilder(
                 future: FlutterSession().get('token'),
                 builder: (context, snapshot) {
-                  print("token => " + snapshot.data.toString());
                   // DataProfile(snapshot.data.toString());
                   token = snapshot.data;
                   return FadeAnimation(
@@ -64,9 +62,11 @@ class MapScreenState extends State<ProfilePage>
                           child: new Column(
                             children: <Widget>[
                               Padding(
-                                  padding: EdgeInsets.only(left: 20.0, top: 20.0),
+                                  padding:
+                                      EdgeInsets.only(left: 20.0, top: 20.0),
                                   child: new Row(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: <Widget>[
                                       IconButton(
                                         icon: const Icon(Icons.arrow_back_ios),
@@ -213,7 +213,8 @@ class MapScreenState extends State<ProfilePage>
                                               fullname = snapshot.data;
                                               return new TextField(
                                                 controller: fullname,
-                                                decoration: const InputDecoration(
+                                                decoration:
+                                                    const InputDecoration(
                                                   hintText: "ใส่ชื่อของคุณ",
                                                 ),
                                                 enabled: !_status,
@@ -442,7 +443,8 @@ class MapScreenState extends State<ProfilePage>
                                         left: 25.0, right: 25.0, top: 15.0),
                                     child: new Row(
                                       mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
                                       children: <Widget>[],
                                     )),
                                 Padding(
@@ -450,10 +452,13 @@ class MapScreenState extends State<ProfilePage>
                                         left: 25.0, right: 25.0, top: 2.0),
                                     child: new Row(
                                       mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
                                       children: <Widget>[],
                                     )),
-                                !_status ? _getActionButtons() : new Container(),
+                                !_status
+                                    ? _getActionButtons()
+                                    : new Container(),
                               ],
                             ),
                           ),
@@ -491,7 +496,6 @@ class MapScreenState extends State<ProfilePage>
                 textColor: Colors.white,
                 color: Color(0xFF25888E),
                 onPressed: () async {
-                  print(token);
                   if (password.text != "") {
                     if (password.text == confirmpassword.text) {
                       final String status = await UpdateProfilePassword(
@@ -500,8 +504,6 @@ class MapScreenState extends State<ProfilePage>
                           tel.text,
                           password.text,
                           token);
-                      print(status);
-
                       if (status == "แก้ไขข้อมูลแล้ว") {
                         showDialog(
                             context: context,
@@ -530,15 +532,13 @@ class MapScreenState extends State<ProfilePage>
                   } else {
                     final String status = await UpdateProfile(
                         email.text, fullname.text, tel.text, token);
-                    print(status);
-
                     if (status == "แก้ไขข้อมูลแล้ว") {
                       showDialog(
                           context: context,
                           builder: (_) => AlertMessage(
                               "แจ้งเตือน", "แก้ไขข้อมูลสำเร็จ", null));
-                              Navigator.of(context).pushReplacement(MaterialPageRoute(
-                            builder: (context) => ProfilePage()));
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(
+                          builder: (context) => ProfilePage()));
                     } else {
                       showDialog(
                           context: context,
@@ -602,21 +602,4 @@ class MapScreenState extends State<ProfilePage>
       },
     );
   }
-}
-
-Future<bool> onWillPop() async {
-  DateTime currentTime = DateTime.now();
-
-  bool backButton = backbuttonpressedTime == null ||
-      currentTime.difference(backbuttonpressedTime) > Duration(seconds: 3);
-
-  if (backButton) {
-    backbuttonpressedTime = currentTime;
-    Fluttertoast.showToast(
-        msg: "กดอีกครั้งเพื่อออก!!",
-        backgroundColor: Colors.black,
-        textColor: Colors.white);
-    return false;
-  }
-  return true;
 }

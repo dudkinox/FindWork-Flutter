@@ -1,12 +1,7 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:login_ui/Animation/Fade_Animation.dart';
-import 'package:login_ui/Screens/home_screen.dart';
 import 'package:login_ui/Themes/Themes.dart';
-import 'package:login_ui/components/background.dart';
+import 'package:login_ui/components/WillPop.dart';
 
 import 'infinite.dart';
 
@@ -95,21 +90,4 @@ class _AlertPageState extends State<AlertPage> {
       anchor: 0.5,
     );
   }
-}
-
-Future<bool> onWillPop() async {
-  DateTime currentTime = DateTime.now();
-
-  bool backButton = backbuttonpressedTime == null ||
-      currentTime.difference(backbuttonpressedTime) > Duration(seconds: 3);
-
-  if (backButton) {
-    backbuttonpressedTime = currentTime;
-    Fluttertoast.showToast(
-        msg: "กดอีกครั้งเพื่อออก!!",
-        backgroundColor: Colors.black,
-        textColor: Colors.white);
-    return false;
-  }
-  return true;
 }

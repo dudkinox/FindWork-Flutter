@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'Screens/login/login.dart';
+import 'Themes/Themes.dart';
 
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Login',
+      title: 'แอปพลิเคชันหางานใกล้คุณ',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primaryColor: Color(0xFF2661FA),
-        scaffoldBackgroundColor: Colors.white,
+        primaryColor: PrimaryColor,
+        scaffoldBackgroundColor: NoneColor,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: LoginScreen(),
