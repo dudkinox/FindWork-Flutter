@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:login_ui/Service/JobService.dart';
 import 'package:login_ui/Themes/Themes.dart';
 import 'package:login_ui/details_screen.dart';
+import 'package:login_ui/model/jobModel.dart';
 
 class Recommendation extends StatelessWidget {
   final String imgUlr;
@@ -31,79 +33,68 @@ class Recommendation extends StatelessWidget {
             ),
             child: Column(
               children: [
-                Column(
-                  children: [
-                    Container(
-                      height: 250.0,
-                      width: double.infinity,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: PrimaryColor,
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(20.0),
-                            topRight: Radius.circular(20.0),
+                FutureBuilder<List<JobDataModel>>(
+                  future: TopicWork(),
+                  builder: (context, snapshot) {
+                    JobDataModel data = new JobDataModel();
+                    for (var item in snapshot.data) {
+                      data.company = item.company;
+                      data.departmentId = item.departmentId;
+                      data.district = item.district;
+                      data.id = item.id;
+                      data.image = item.image;
+                      data.jobId = item.jobId;
+                      data.province = item.province;
+                      data.subDistrict = item.subDistrict;
+                    }
+                    return Column(
+                      children: [
+                        Container(
+                          height: 250.0,
+                          width: double.infinity,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: PrimaryColor,
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(20.0),
+                                topRight: Radius.circular(20.0),
+                              ),
+                              image: DecorationImage(
+                                  image: NetworkImage(imgUlr),
+                                  fit: BoxFit.cover),
+                            ),
                           ),
-                          image: DecorationImage(
-                              image: NetworkImage(imgUlr), fit: BoxFit.cover),
                         ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10.0,
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 10.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            " คาเฟ่ทดสอบ",
-                            style: TextStyle(
-                                color: PrimaryColor,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20.0),
-                          ),
-                          SizedBox(
-                            height: 10.0,
-                          ),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.end,
+                        SizedBox(
+                          height: 10.0,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 10.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Icon(
-                                Icons.location_on_outlined,
-                                color: PrimaryColor,
-                              ),
-                              SizedBox(
-                                width: 4.0,
-                              ),
                               Text(
-                                location,
+                                data.company,
                                 style: TextStyle(
                                     color: PrimaryColor,
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 15.0),
+                                    fontSize: 20.0),
                               ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 10.0,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
+                              SizedBox(
+                                height: 10.0,
+                              ),
                               Row(
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
                                   Icon(
-                                    Icons.star,
+                                    Icons.location_on_outlined,
                                     color: PrimaryColor,
                                   ),
                                   SizedBox(
                                     width: 4.0,
                                   ),
                                   Text(
-                                    "4(24 รีวิว)",
+                                    location,
                                     style: TextStyle(
                                         color: PrimaryColor,
                                         fontWeight: FontWeight.bold,
@@ -111,18 +102,52 @@ class Recommendation extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                              Text(
-                                "รายละเอียด >",
-                                style: TextStyle(
-                                  color: PrimaryColor,
-                                ),
-                              )
+                              SizedBox(
+                                height: 10.0,
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  Row(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      Icon(
+                                        Icons.star,
+                                        color: PrimaryColor,
+                                      ),
+                                      SizedBox(
+                                        width: 4.0,
+                                      ),
+                                      Text(
+                                        data.departmentId.status[0] == true
+                                            ? 'มีตำแหน่งงานเปิดรับอยู่'
+                                            : data.departmentId.status[0] ==
+                                                    false
+                                                ? 'ไม่มีตำแหน่งเปิดรับสมัครแล้ว'
+                                                : '',
+                                        style: TextStyle(
+                                            color: PrimaryColor,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 15.0),
+                                      ),
+                                    ],
+                                  ),
+                                  Text(
+                                    "รายละเอียด >",
+                                    style: TextStyle(
+                                      color: PrimaryColor,
+                                    ),
+                                  )
+                                ],
+                              ),
                             ],
                           ),
-                        ],
-                      ),
-                    ),
-                  ],
+                        ),
+                      ],
+                    );
+                  },
                 ),
               ],
             ),
