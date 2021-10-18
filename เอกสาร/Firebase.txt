@@ -3,11 +3,3 @@ https://myaccount.google.com/u/2/?utm_source=sign_in_no_continue
 	-- username pass --
 username: findjobmobileapp@gmail.com
 password: Qwertyui-12345678
-
-email
-fullname
-job_id
-matching
-password
-tel
-username
