@@ -24,7 +24,7 @@ class _HomeHomeState extends State<HomeHome> {
   bool loading = false;
   @override
   Widget build(BuildContext context) {
-    return loading? Loading() : WillPopScope(
+    return loading? LoadingCube() : WillPopScope(
       onWillPop: onWillPop,
       child: Scaffold(
         bottomNavigationBar: CurvedNavigationBar(

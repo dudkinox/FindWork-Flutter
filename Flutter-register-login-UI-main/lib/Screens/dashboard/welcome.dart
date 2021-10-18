@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_session/flutter_session.dart';
 import 'package:login_ui/Animation/Fade_Animation.dart';
+import 'package:login_ui/Screens/loading.dart';
 import 'package:login_ui/Screens/profile/ProfileController.dart';
 import 'package:login_ui/Themes/Themes.dart';
 
@@ -26,15 +27,20 @@ class Welcome extends StatelessWidget {
               children: [
                 FutureBuilder<TextEditingController>(
                     future: datafullname(snapshot.data.toString()),
-                    builder: (context, snapshot) {
-                      fullname = snapshot.data;
-                      return Text(
-                        "สวัสดี, " + fullname.text == null ? 'กำลังโหลด..' : '',
-                        style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            color: Colors.black54,
-                            fontSize: 20.0),
-                      );
+                    builder: (context, AsyncSnapshot snapshot) {
+                      if(snapshot.connectionState == ConnectionState.done){
+                        fullname = snapshot?.data;
+                        print(fullname);
+                        return Text(
+                          "สวัสดี, " + fullname?.text ?? "กำลังโหลด...",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              color: Colors.black54,
+                              fontSize: 20.0),
+                        );
+                      } else {
+                        return LoadingRipple();
+                      }
                     }),
                 SizedBox(
                   height: 10.0,

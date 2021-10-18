@@ -25,7 +25,7 @@ Future<List<JobDataModel>> TopicWork() async {
       'Content-Type': 'application/json; charset=UTF-8',
     },
   );
-  List jsonResponse = json.decode(response.body);
+  List jsonResponse = json.decode(response?.body);
   return jsonResponse.map((data) => new JobDataModel.fromJson(data)).toList();
 }
 

@@ -43,7 +43,7 @@ class MapScreenState extends State<ProfilePage>
   
   @override
   Widget build(BuildContext context) {
-    return loading ? Loading() : WillPopScope(
+    return loading ? LoadingCube() : WillPopScope(
       onWillPop: onWillPop,
       child: new Scaffold(
           body: new Container(
@@ -213,6 +213,9 @@ class MapScreenState extends State<ProfilePage>
                                             future: datafullname(snapshot.data.toString()),
                                             builder: (context, snapshot) {
                                               fullname = snapshot.data;
+                                              // Future.delayed(Duration(seconds: 5), () {
+
+                                              // });
                                               return new TextField(
                                                 controller: fullname,
                                                 decoration:

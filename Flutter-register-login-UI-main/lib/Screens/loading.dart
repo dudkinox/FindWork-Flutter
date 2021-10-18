@@ -163,13 +163,28 @@ class Dot extends StatelessWidget {
 }
 
 
-class Loading extends StatelessWidget {
+class LoadingCube extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
       child: Center(
         child: SpinKitCubeGrid(
+          color: Colors.blue[300],
+          size: 50.0,
+        ),
+      ),
+    );
+  }
+}
+
+class LoadingRipple extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.white,
+      child: Center(
+        child: SpinKitRipple(
           color: Colors.blue[300],
           size: 50.0,
         ),

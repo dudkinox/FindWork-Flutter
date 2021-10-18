@@ -34,7 +34,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
-    return loading? Loading() : Scaffold(
+    return loading? LoadingCube() : Scaffold(
       body: Background(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
