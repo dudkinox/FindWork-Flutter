@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:login_ui/Animation/Fade_Animation.dart';
@@ -32,22 +34,16 @@ class HomeAddjob extends StatelessWidget {
                       color: PrimaryColor,
                       image: DecorationImage(
                           image: NetworkImage(
-                              "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.matichon.co.th%2Flifestyle%2Fnews_2916482&psig=AOvVaw3S9Bsn-Qez3zeaScwl_iOR&ust=1634221433947000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCPjfpbLLx_MCFQAAAAAdAAAAABAD"),
+                              "https://pbs.twimg.com/ext_tw_video_thumb/1399022595240988682/pu/img/x9LcyM0ZKbiv67-Z.jpg"),
                           fit: BoxFit.cover),
                     ),
                     child: Padding(
-                      padding:
-                          EdgeInsets.only(bottom: 160.0, left: 20.0, right: 20.0),
+                      padding: EdgeInsets.only(
+                          bottom: 160.0, left: 20.0, right: 20.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => LoginScreen()));
-                            },
                             child: Container(
                               height: 50.0,
                               width: 50.0,
@@ -55,7 +51,19 @@ class HomeAddjob extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(20.0),
                                 color: Colors.white.withOpacity(.5),
                               ),
-                              child: Icon(Icons.arrow_back),
+                              child: Transform.rotate(
+                                  angle: 180 * pi / 180,
+                                  child: IconButton(
+                                    iconSize: 30,
+                                    color: Colors.black,
+                                    icon: const Icon(Icons.exit_to_app_rounded),
+                                    onPressed: () {
+                                      Navigator.of(context).pushReplacement(
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  LoginScreen()));
+                                    },
+                                  )),
                             ),
                           ),
                           Container(
@@ -109,11 +117,11 @@ class HomeAddjob extends StatelessWidget {
                             ),
                           ],
                         ),
-    
+
                         SizedBox(
                           height: 10.0,
                         ),
-    
+
                         Container(
                           height: 300.0,
                           width: double.infinity,
@@ -236,7 +244,7 @@ class HomeAddjob extends StatelessWidget {
                         SizedBox(
                           height: 16,
                         ),
-    
+
                         SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
                           child: Row(
@@ -248,11 +256,11 @@ class HomeAddjob extends StatelessWidget {
                             ),
                           ),
                         ),
-    
+
                         // color: Colors.red,
                         // child: ListView(
                         //   children: [
-    
+
                         //     PopularMenu(
                         //         "https://cdn.pixabay.com/photo/2016/03/23/15/00/ice-cream-1274894__480.jpg"),
                         //     PopularMenu(
