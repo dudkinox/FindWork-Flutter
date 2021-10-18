@@ -5,6 +5,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:login_ui/Screens/alertPage/alertPage.dart';
 import 'package:login_ui/Screens/home_screen.dart';
+import 'package:login_ui/Screens/loading.dart';
 import 'package:login_ui/Screens/profile/Profile.dart';
 import 'package:login_ui/Themes/Themes.dart';
 import 'package:login_ui/components/WillPop.dart';
@@ -20,9 +21,10 @@ class HomeHome extends StatefulWidget {
 class _HomeHomeState extends State<HomeHome> {
   _HomeHomeState(this.newindex);
   int newindex;
+  bool loading = false;
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
+    return loading? Loading() : WillPopScope(
       onWillPop: onWillPop,
       child: Scaffold(
         bottomNavigationBar: CurvedNavigationBar(

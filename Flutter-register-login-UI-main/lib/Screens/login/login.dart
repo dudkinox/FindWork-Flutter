@@ -1,6 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
+import 'package:login_ui/Screens/loading.dart';
 import 'package:login_ui/Screens/register/register.dart';
 import 'package:login_ui/Screens/register/registerAddjob.dart';
 import 'package:login_ui/Themes/Themes.dart';
@@ -27,11 +28,13 @@ class _LoginScreenState extends State<LoginScreen> {
     super.initState();
   }
 
+  bool loading = false;
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
-    return Scaffold(
+    return loading? Loading() : Scaffold(
       body: Background(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -104,6 +107,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         {
                           if (password.text != "")
                             {
+                              setState(() => loading = true),
                               login(context, username.text, password.text),
                             }
                           else

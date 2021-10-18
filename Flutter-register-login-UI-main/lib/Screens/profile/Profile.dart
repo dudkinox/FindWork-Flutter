@@ -3,10 +3,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_session/flutter_session.dart';
 import 'package:login_ui/Animation/Fade_Animation.dart';
 import 'package:login_ui/Screens/homehome.dart';
+import 'package:login_ui/Screens/loading.dart';
 import 'package:login_ui/Service/LoginService.dart';
 import 'package:login_ui/Themes/Themes.dart';
 import 'package:login_ui/components/WillPop.dart';
 import 'package:login_ui/components/alert.dart';
+import 'package:login_ui/model/loginModel.dart';
 
 import 'ProfileController.dart';
 
@@ -37,10 +39,11 @@ class MapScreenState extends State<ProfilePage>
   void initState() {
     super.initState();
   }
-
+  bool loading = false;
+  
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
+    return loading ? Loading() : WillPopScope(
       onWillPop: onWillPop,
       child: new Scaffold(
           body: new Container(
@@ -93,6 +96,7 @@ class MapScreenState extends State<ProfilePage>
                                 child: new Stack(
                                     fit: StackFit.loose,
                                     children: <Widget>[
+                                      
                                       new Row(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.center,
@@ -205,10 +209,8 @@ class MapScreenState extends State<ProfilePage>
                                       mainAxisSize: MainAxisSize.max,
                                       children: <Widget>[
                                         new Flexible(
-                                          child: FutureBuilder<
-                                              TextEditingController>(
-                                            future: datafullname(
-                                                snapshot.data.toString()),
+                                          child: FutureBuilder<TextEditingController>(
+                                            future: datafullname(snapshot.data.toString()),
                                             builder: (context, snapshot) {
                                               fullname = snapshot.data;
                                               return new TextField(

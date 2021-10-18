@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:login_ui/Animation/Fade_Animation.dart';
 import 'package:login_ui/Screens/dashboard/welcome.dart';
 import 'package:login_ui/Screens/dashboard/work.dart';
+import 'package:login_ui/Screens/loading.dart';
 import 'package:login_ui/Service/JobService.dart';
 import 'package:login_ui/Themes/Themes.dart';
 import 'package:login_ui/components/WillPop.dart';
@@ -18,11 +19,11 @@ class HomePage extends StatelessWidget {
   String token = "";
   HomePage(this.newindex);
   int newindex;
-
+  bool loading = false;
   DateTime currentTime = DateTime.now();
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
+    return loading? Loader() : WillPopScope(
       onWillPop: onWillPop,
       child: Container(
         color: Colors.white,
