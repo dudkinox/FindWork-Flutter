@@ -256,18 +256,6 @@ class HomeAddjob extends StatelessWidget {
                             ),
                           ),
                         ),
-
-                        // color: Colors.red,
-                        // child: ListView(
-                        //   children: [
-
-                        //     PopularMenu(
-                        //         "https://cdn.pixabay.com/photo/2016/03/23/15/00/ice-cream-1274894__480.jpg"),
-                        //     PopularMenu(
-                        //         "https://cdn.pixabay.com/photo/2016/09/01/22/43/coffee-1637907__480.jpg"),
-                        //   ],
-                        // ),
-                        // ),
                       ],
                     ),
                   ),
@@ -280,115 +268,6 @@ class HomeAddjob extends StatelessWidget {
     );
   }
 }
-
-// Widget PopularMenu(String imgUrl) {
-//   return Padding(
-//     padding: EdgeInsets.only(bottom: 20.0),
-//     child: Container(
-//       height: 120.0,
-//       width: double.infinity,
-//       // color: Colors.bull,
-//       child: Row(
-//         children: [
-//           Container(
-//             height: 120.0,
-//             width: 80.0,
-//             decoration: BoxDecoration(
-//               color: PrimaryColor,
-//               borderRadius: BorderRadius.circular(20.0),
-//             ),
-//             child: Center(
-//               child: Icon(
-//                 Icons.date_range_outlined,
-//                 color: Colors.white,
-//                 size: 30.0,
-//               ),
-//             ),
-//           ),
-//           SizedBox(
-//             width: 10.0,
-//           ),
-//           Container(
-//             height: 120.0,
-//             width: 300.0,
-//             decoration: BoxDecoration(
-//               color: Colors.grey.withOpacity(.2),
-//               borderRadius: BorderRadius.circular(20.0),
-//             ),
-//             child: Row(
-//               children: [
-//                 SizedBox(
-//                   width: 10.0,
-//                 ),
-//                 Container(
-//                   height: 100.0,
-//                   width: 100.0,
-//                   decoration: BoxDecoration(
-//                     color: Colors.white,
-//                     borderRadius: BorderRadius.circular(20.0),
-//                     image: DecorationImage(
-//                         image: NetworkImage(imgUrl), fit: BoxFit.cover),
-//                   ),
-//                 ),
-//                 SizedBox(
-//                   width: 5.0,
-//                 ),
-//                 Column(
-//                   mainAxisAlignment: MainAxisAlignment.center,
-//                   crossAxisAlignment: CrossAxisAlignment.start,
-//                   children: [
-//                     Text(
-//                       "ไอศครีม",
-//                       style: TextStyle(
-//                           color: PrimaryColor,
-//                           fontWeight: FontWeight.bold,
-//                           fontSize: 17.0),
-//                     ),
-//                     Text(
-//                       "ไอศครีมสองรสชาติ",
-//                       style: TextStyle(color: Colors.grey, fontSize: 16.0),
-//                     ),
-//                     Row(
-//                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                       children: [
-//                         Text(
-//                           "\฿ 25",
-//                           style: TextStyle(
-//                               color: Colors.teal,
-//                               fontWeight: FontWeight.bold,
-//                               fontSize: 14.0),
-//                         ),
-//                         Container(
-//                           height: 30.0,
-//                           width: 100.0,
-//                           decoration: BoxDecoration(
-//                             color: PrimaryColor,
-//                             borderRadius: BorderRadius.only(
-//                               bottomLeft: Radius.circular(20.0),
-//                               topRight: Radius.circular(20.0),
-//                             ),
-//                           ),
-//                           child: Center(
-//                             child: Text(
-//                               "สมัครตอนนี้",
-//                               style: TextStyle(
-//                                   color: Colors.white,
-//                                   fontWeight: FontWeight.bold),
-//                             ),
-//                           ),
-//                         ),
-//                       ],
-//                     )
-//                   ],
-//                 ),
-//               ],
-//             ),
-//           ),
-//         ],
-//       ),
-//     ),
-//   );
-// }
 
 List<Widget> buildRequirements() {
   List<Widget> list = [];
@@ -428,38 +307,3 @@ Widget buildRequirement(String requirement) {
     ),
   );
 }
-
-
-
-
-
-// Widget FacilitiesChild(
-//   Icon icon,
-//   String title,
-// ) {
-//   return Padding(
-//     padding: EdgeInsets.only(left: 6.0),
-//     child: Container(
-//       height: 40.0,
-//       width: 90.0,
-//       decoration: BoxDecoration(
-//         color: PrimaryColor,
-//         borderRadius: BorderRadius.circular(20.0),
-//       ),
-//       child: Row(
-//         mainAxisAlignment: MainAxisAlignment.center,
-//         crossAxisAlignment: CrossAxisAlignment.center,
-//         children: [
-//           icon,
-//           SizedBox(
-//             width: 3.0,
-//           ),
-//           Text(title),
-//         ],
-//       ),
-//     ),
-//   );
-// }
-
-
-

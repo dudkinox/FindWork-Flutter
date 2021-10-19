@@ -313,8 +313,8 @@ List<Map<String, dynamic>> smartphones = [
 //   },
 // ];
 
-List<Jobs> demoFeatured = [
-  Jobs(
+List<JobsDetail> demoFeatured = [
+  JobsDetail(
       image: 'assets/images/youtube.png',
       title: 'Backend Developer',
       subTitle: 'Youtube',
@@ -324,7 +324,7 @@ List<Jobs> demoFeatured = [
       text2: 'Remote',
       text3: 'Junior',
       text4: '4 yrs'),
-  Jobs(
+  JobsDetail(
       image: 'assets/images/youtube.png',
       title: 'Backend Developer',
       subTitle: 'Youtube',
@@ -334,27 +334,7 @@ List<Jobs> demoFeatured = [
       text2: 'Remote',
       text3: 'Junior',
       text4: '4 yrs'),
-  Jobs(
-      image: 'assets/images/youtube.png',
-      title: 'Backend Developer',
-      subTitle: 'Youtube',
-      renumeration: '\฿2000 / บาท',
-      datePosted: '3 Weeks ago',
-      text1: 'Part Time',
-      text2: 'Remote',
-      text3: 'Junior',
-      text4: '4 yrs'),
-  Jobs(
-      image: 'assets/images/youtube.png',
-      title: 'Backend Developer',
-      subTitle: 'Youtube',
-      renumeration: '\฿2000 / บาท',
-      datePosted: '3 Weeks ago',
-      text1: 'Part Time',
-      text2: 'Remote',
-      text3: 'Junior',
-      text4: '4 yrs'),
-  Jobs(
+  JobsDetail(
       image: 'assets/images/apple.jpeg',
       title: 'Customer Care',
       subTitle: 'Apple',

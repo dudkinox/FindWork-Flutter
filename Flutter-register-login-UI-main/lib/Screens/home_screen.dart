@@ -1,11 +1,9 @@
 // ignore_for_file: deprecated_member_use, must_be_immutable
 
 import 'package:flutter/material.dart';
-import 'package:login_ui/Animation/Fade_Animation.dart';
 import 'package:login_ui/Screens/dashboard/welcome.dart';
 import 'package:login_ui/Screens/dashboard/work.dart';
 import 'package:login_ui/Screens/loading.dart';
-import 'package:login_ui/Service/JobService.dart';
 import 'package:login_ui/Themes/Themes.dart';
 import 'package:login_ui/components/WillPop.dart';
 
@@ -23,35 +21,37 @@ class HomePage extends StatelessWidget {
   DateTime currentTime = DateTime.now();
   @override
   Widget build(BuildContext context) {
-    return loading? Loader() : WillPopScope(
-      onWillPop: onWillPop,
-      child: Container(
-        color: Colors.white,
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: 60.0,
+    return loading
+        ? Loader()
+        : WillPopScope(
+            onWillPop: onWillPop,
+            child: Container(
+              color: Colors.white,
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: 60.0,
+                    ),
+                    Header(),
+                    SizedBox(
+                      height: 20.0,
+                    ),
+                    Welcome(token, fullname),
+                    SizedBox(
+                      height: 20.0,
+                    ),
+                    Search(),
+                    SizedBox(
+                      height: 15.0,
+                    ),
+                    Work(),
+                  ],
+                ),
               ),
-              Header(),
-              SizedBox(
-                height: 20.0,
-              ),
-              Welcome(token, fullname),
-              SizedBox(
-                height: 20.0,
-              ),
-              Search(),
-              SizedBox(
-                height: 15.0,
-              ),
-              Work(),
-            ],
-          ),
-        ),
-      ),
-    );
+            ),
+          );
   }
 }
 
