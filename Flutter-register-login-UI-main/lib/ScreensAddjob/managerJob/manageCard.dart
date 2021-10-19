@@ -45,13 +45,13 @@ class Itemcard extends StatelessWidget {
       children: [
         button(
           buttonName: "ยืนยันการร้องขอ",
-          color: Colors.green[700],
+          color: ButtonColor,
           onpress: {},
         ),
         Spacer(),
         button(
           buttonName: "ปฏิเศษการร้องขอ",
-          color: Colors.redAccent[400],
+          color: ButtonColor,
           onpress: {},
         ),
       ],
@@ -104,21 +104,29 @@ class Itemcard extends StatelessWidget {
   }
 
   Widget header(BuildContext context) {
-    return Row(
-      children: <Widget>[
+    return Column(
+      children: [
         Image.asset(
           'assets/images/user.png',
           height: MediaQuery.of(context).size.height * 0.06,
           width: MediaQuery.of(context).size.width * 0.1,
         ),
         SizedBox(width: 8),
-        Text(
-          person.name,
-          style: TextStyle(fontSize: 18),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              person.name,
+              style: TextStyle(fontSize: 18),
+            ),
+            Text(
+              person.date,
+              style: TextStyle(fontSize: 14),
+            ),
+          ],
         ),
-        SizedBox(width: 20),
+        SizedBox(height: 8),
       ],
-      
     );
   }
 
