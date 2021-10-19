@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:login_ui/Screens/alertPage/infinite.dart';
+import 'package:login_ui/Themes/Themes.dart';
 import 'manageJob.dart';
 
 class HomeAdmin extends StatefulWidget {
@@ -21,7 +22,7 @@ class _HomeAdminState extends State<HomeAdmin> {
         appBar: AppBar(
           title: const Text('หน้าจัดการผู้สมัคร'),
           centerTitle: true,
-          backgroundColor: Color(0xFFFEA4B0),
+          backgroundColor: HeaderColor,
           bottom: const TabBar(
             tabs: <Widget>[
               Tab(text: 'จัดการผู้ใช้'),

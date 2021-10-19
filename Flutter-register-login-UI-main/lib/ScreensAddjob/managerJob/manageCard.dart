@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:login_ui/Themes/Themes.dart';
 import 'managelistdata.dart';
 
 class Itemcard extends StatelessWidget {
@@ -15,7 +16,7 @@ class Itemcard extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(10),
       decoration: BoxDecoration(
-        color: (Colors.amberAccent),
+        color: SecondaryColor,
         borderRadius: BorderRadius.circular(6),
       ),
       child: Column(
@@ -104,7 +105,7 @@ class Itemcard extends StatelessWidget {
 
   Widget header(BuildContext context) {
     return Row(
-      children: [
+      children: <Widget>[
         Image.asset(
           'assets/images/user.png',
           height: MediaQuery.of(context).size.height * 0.06,
@@ -114,8 +115,10 @@ class Itemcard extends StatelessWidget {
         Text(
           person.name,
           style: TextStyle(fontSize: 18),
-        )
+        ),
+        SizedBox(width: 20),
       ],
+      
     );
   }
 
