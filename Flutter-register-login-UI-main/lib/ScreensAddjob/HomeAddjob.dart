@@ -193,7 +193,7 @@ class HomeAddjob extends StatelessWidget {
                             children: List.generate(
                               demoFeatured.length,
                               (HomeAddjob) => FeaturedCard(
-                                featuredJobs: demoFeatured[HomeAddjob],
+                                featuredJobs: demoFeatured[0],
                               ),
                             ),
                           ),

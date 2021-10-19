@@ -25,7 +25,9 @@ class FeaturedCard extends StatelessWidget {
         width: 350,
         height: 180,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20), color: PrimaryColor),
+          borderRadius: BorderRadius.circular(20),
+          color: Colors.grey[300],
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
