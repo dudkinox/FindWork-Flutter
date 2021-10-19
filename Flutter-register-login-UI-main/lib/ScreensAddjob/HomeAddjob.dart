@@ -34,7 +34,7 @@ class HomeAddjob extends StatelessWidget {
                       color: PrimaryColor,
                       image: DecorationImage(
                           image: NetworkImage(
-                              "https://pbs.twimg.com/ext_tw_video_thumb/1399022595240988682/pu/img/x9LcyM0ZKbiv67-Z.jpg"),
+                              "https://cdn.pixabay.com/photo/2018/12/02/06/33/skyscrapers-3850732_960_720.jpg"),
                           fit: BoxFit.cover),
                     ),
                     child: Padding(
@@ -117,11 +117,9 @@ class HomeAddjob extends StatelessWidget {
                             ),
                           ],
                         ),
-
                         SizedBox(
                           height: 10.0,
                         ),
-
                         Container(
                           height: 300.0,
                           width: double.infinity,
@@ -165,61 +163,6 @@ class HomeAddjob extends StatelessWidget {
                             ),
                           ),
                         ),
-                        // Container(
-                        //   height: 300.0,
-                        //   width: double.infinity,
-                        //   decoration: BoxDecoration(
-                        //     color: Colors.grey[300],
-                        //     borderRadius: BorderRadius.circular(40.0),
-                        //   ),
-                        //   child: Padding(
-                        //     padding: EdgeInsets.only(
-                        //         bottom: 160.0,
-                        //         left: 20.0,
-                        //         right: 20.0,
-                        //         top: 10.0),
-                        //     child: Column(
-                        //       crossAxisAlignment: CrossAxisAlignment.start,
-                        //       mainAxisAlignment: MainAxisAlignment.center,
-                        //       children: [
-                        //         FacilitiesChild(
-                        //             Icon(
-                        //               Icons.wifi,
-                        //               color: Colors.white,
-                        //             ),
-                        //             "Wifi"),
-                        //         FacilitiesChild(
-                        //             Icon(
-                        //               Icons.ac_unit,
-                        //               color: Colors.white,
-                        //             ),
-                        //             "AC"),
-                        //         FacilitiesChild(
-                        //             Icon(
-                        //               Icons.wash_outlined,
-                        //               color: Colors.white,
-                        //             ),
-                        //             "สุขอนามัย"),
-                        //         FacilitiesChild(
-                        //             Icon(
-                        //               Icons.audiotrack_outlined,
-                        //               color: Colors.white,
-                        //             ),
-                        //             "เพลง"),
-                        //       ],
-                        //     ),
-                        //   ),
-                        // ),
-                        // SizedBox(
-                        //   height: 15.0,
-                        // ),
-                        // Text(
-                        //   "งานทั้งหมด",
-                        //   style: TextStyle(
-                        //       color: PrimaryColor,
-                        //       fontWeight: FontWeight.bold,
-                        //       fontSize: 20.0),
-                        // ),
                         SizedBox(
                           height: 16,
                         ),
@@ -227,11 +170,11 @@ class HomeAddjob extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              "งานทั้งหมด",
+                              "ตำแหน่งงานที่รับสมัคร",
                               style: TextStyle(
                                   color: PrimaryColor,
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 20.0),
+                                  fontSize: 15.0),
                             ),
                             Text(
                               "รายชื่อผู้สมัคร",
@@ -244,7 +187,6 @@ class HomeAddjob extends StatelessWidget {
                         SizedBox(
                           height: 16,
                         ),
-
                         SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
                           child: Row(
