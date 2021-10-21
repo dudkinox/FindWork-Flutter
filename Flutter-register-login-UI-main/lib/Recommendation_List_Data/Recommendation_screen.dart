@@ -8,8 +8,9 @@ import 'package:login_ui/model/jobModel.dart';
 class Recommendation extends StatelessWidget {
   final String imgUlr;
   final String location;
+  final String company;
 
-  const Recommendation(this.imgUlr, this.location);
+  const Recommendation(this.imgUlr, this.company, this.location);
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +20,7 @@ class Recommendation extends StatelessWidget {
         builder: (context, AsyncSnapshot snapshot) {
           JobDataModel data = new JobDataModel();
           if (snapshot?.connectionState != ConnectionState.done) {
-            return LoadingCube();
+            return LoadingFadingCube();
           } else {
             for (var item in snapshot?.data) {
               data?.company = item.company;
@@ -79,7 +80,7 @@ class Recommendation extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  data.company,
+                                  company,
                                   style: TextStyle(
                                       color: PrimaryColor,
                                       fontWeight: FontWeight.bold,

@@ -60,6 +60,7 @@ class work_parttime extends StatelessWidget {
                     for (var data in snapshot.data) {
                       result.add(Recommendation(
                           data.image,
+                          data.company,
                           data.province +
                               " " +
                               data.district +
