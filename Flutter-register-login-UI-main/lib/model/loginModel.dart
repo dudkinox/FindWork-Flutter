@@ -19,6 +19,7 @@ class AccountModel {
     this.type,
     this.fullname,
     this.username,
+    this.image,
   });
 
   String email;
@@ -29,6 +30,7 @@ class AccountModel {
   String type;
   String fullname;
   String username;
+  String image;
 
   factory AccountModel.fromJson(Map<String, dynamic> json) => AccountModel(
         email: json["email"] == null ? null : json["email"],
@@ -39,6 +41,7 @@ class AccountModel {
         type: json["type"] == null ? null : json["type"],
         fullname: json["fullname"] == null ? null : json["fullname"],
         username: json["username"] == null ? null : json["username"],
+        image: json["image"] == null ? null : json["image"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -50,6 +53,7 @@ class AccountModel {
         "type": type == null ? null : type,
         "fullname": fullname == null ? null : fullname,
         "username": username == null ? null : username,
+        "image": image == null ? null : image,
       };
 }
 
@@ -81,5 +85,17 @@ class LoginModel {
   Map<String, dynamic> toJson() => {
         "type": type == null ? null : type,
         "id": id == null ? null : id,
+      };
+}
+
+class ResumeModel {
+  String link;
+  ResumeModel({this.link});
+  factory ResumeModel.fromJson(Map<String, dynamic> json) => ResumeModel(
+        link: json["link"] == null ? null : json["link"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "link": link == null ? null : link,
       };
 }

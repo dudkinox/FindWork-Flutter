@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:login_ui/Service/LoginService.dart';
 import 'package:login_ui/model/loginModel.dart';
 
@@ -26,4 +29,11 @@ Future<TextEditingController> datatel(String token) async {
   TextEditingController tel = new TextEditingController();
   tel.text = profile?.tel;
   return tel;
+}
+
+Future<File> setImage(File file) async {
+  file = File(await ImagePicker()
+      .getImage(source: ImageSource.gallery)
+      .then((pickedFile) => pickedFile.path));
+  return file;
 }

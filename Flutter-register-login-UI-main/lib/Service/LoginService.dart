@@ -1,6 +1,7 @@
 // ignore_for_file: non_constant_identifier_names, missing_return
 
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:http/http.dart' as http;
 import 'package:login_ui/Database/Host.dart';
@@ -55,8 +56,7 @@ Future<String> RegisterEmployee(
 }
 
 Future<AccountModel> FindID(String token) async {
-  try
-  {
+  try {
     final String url = Host + "/api/login/" + token;
     final response = await http.get(
       Uri.parse(url),
@@ -65,8 +65,7 @@ Future<AccountModel> FindID(String token) async {
       },
     );
     return AccountModel.fromJson(jsonDecode(response.body));
-  } 
-  catch (e) {
+  } catch (e) {
     print(e);
   }
 }
@@ -104,7 +103,6 @@ Future<String> UpdateProfilePassword(
   }
 }
 
-
 Future<String> UpdateProfile(
   String email,
   String fullname,
@@ -131,6 +129,47 @@ Future<String> UpdateProfile(
     }
     var data = json.decode(json.encode(response.body));
     return data;
+  } catch (e) {
+    print(e);
+  }
+}
+
+Future<String> UploadResume(String token, File image) async {
+  try {
+    final String Url = Host + "/api/login/uploadimage/" + token;
+    var request = http.MultipartRequest('POST', Uri.parse(Url));
+    request.files.add(await http.MultipartFile.fromPath('img', image.path));
+    request.headers.addAll({
+      'Access-Control-Allow-Origin': '*',
+      'Content-Type': 'multipart/form-data; charset=UTF-8',
+    });
+    request.send();
+
+    return "อัพโหลดรูปภาพเรียบร้อย";
+  } catch (e) {
+    print(e);
+  }
+}
+
+Future<ResumeModel> PreviewResume(String token) async {
+  try {
+    var searchLink = await FindID(token);
+    var image = searchLink.image;
+    if (image != "") {
+      final String url = Host + "/api/previewimage/login/" + image;
+      final response = await http.get(
+        Uri.parse(url),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+      );
+
+      return ResumeModel.fromJson(jsonDecode(response.body));
+    } else {
+      ResumeModel none = new ResumeModel();
+      none.link = "";
+      return none;
+    }
   } catch (e) {
     print(e);
   }
