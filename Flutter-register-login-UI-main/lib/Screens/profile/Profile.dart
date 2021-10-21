@@ -60,7 +60,7 @@ class MapScreenState extends State<ProfilePage>
                     Column(
                       children: <Widget>[
                         new Container(
-                          height: 250.0,
+                          height: 70.0,
                           color: Colors.white,
                           child: new Column(
                             children: <Widget>[
@@ -91,64 +91,20 @@ class MapScreenState extends State<ProfilePage>
                                       )
                                     ],
                                   )),
-                              Padding(
-                                padding: EdgeInsets.only(top: 20.0),
-                                child: new Stack(
-                                    fit: StackFit.loose,
-                                    children: <Widget>[
-                                      
-                                      new Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: <Widget>[
-                                          new Container(
-                                              width: 140.0,
-                                              height: 140.0,
-                                              decoration: new BoxDecoration(
-                                                shape: BoxShape.circle,
-                                                image: new DecorationImage(
-                                                  image: new ExactAssetImage(
-                                                      'assets/images/as.png'),
-                                                  fit: BoxFit.cover,
-                                                ),
-                                              )),
-                                        ],
-                                      ),
-                                      Padding(
-                                          padding: EdgeInsets.only(
-                                              top: 90.0, right: 100.0),
-                                          child: new Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: <Widget>[
-                                              new CircleAvatar(
-                                                backgroundColor: PrimaryColor,
-                                                radius: 25.0,
-                                                child: new Icon(
-                                                  Icons.camera_alt,
-                                                  color: Colors.white,
-                                                ),
-                                              )
-                                            ],
-                                          )),
-                                    ]),
-                              )
                             ],
                           ),
                         ),
                         new Container(
                           color: Color(0xffFFFFFF),
                           child: Padding(
-                            padding: EdgeInsets.only(bottom: 25.0),
+                            padding: EdgeInsets.only(bottom: 0.0),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: <Widget>[
                                 Padding(
                                     padding: EdgeInsets.only(
-                                        left: 25.0, right: 25.0, top: 25.0),
+                                        left: 25.0, right: 25.0, top: 10.0),
                                     child: new Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
