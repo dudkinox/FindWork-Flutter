@@ -63,8 +63,7 @@ class _FavoriteState extends State<Favorite> {
                                     Column(
                                       children: [
                                         Container(
-                                          height: 250.0,
-                                          width: double.infinity,
+                                          width: MediaQuery.of(context).size.width * 1,
                                           decoration: BoxDecoration(
                                             color: PrimaryColor,
                                             borderRadius: BorderRadius.only(
