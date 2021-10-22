@@ -40,7 +40,8 @@ Future<String> RegisterEmployee(
         "tel": tel,
         "type": "employee",
         "username": username,
-        "password": password
+        "password": password,
+        "image": ""
       }),
     );
 
