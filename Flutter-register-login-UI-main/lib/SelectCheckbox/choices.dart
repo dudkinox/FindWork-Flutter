@@ -367,3 +367,71 @@ List<String> getJobsRequirementsJob() {
     "Good UI/UX knowledge",
   ];
 }
+
+class Products {
+  final String image, title, description;
+  final int price, size, id;
+
+  Products({
+    this.id,
+    this.image,
+    this.description,
+    this.price,
+    this.size,
+    this.title,
+  });
+}
+
+List<Products> products = [
+  Products(
+    id: 1,
+    title: 'Office Code',
+    price: 204,
+    size: 32,
+    description: dummyText,
+    image: 'assets/images/three.jpg',
+  ),
+  Products(
+    id: 2,
+    title: 'Belt Bag',
+    price: 230,
+    size: 32,
+    description: dummyText,
+    image: 'assets/images/two.jpg',
+  ),
+  Products(
+    id: 3,
+    title: 'Office Code',
+    price: 237,
+    size: 10,
+    description: dummyText,
+    image: 'assets/images/two.jpg',
+  ),
+  Products(
+    id: 4,
+    title: 'Old Fashion',
+    price: 212,
+    size: 12,
+    description: dummyText,
+    image: 'assets/images/four.jpg',
+  ),
+  // Product(
+  //   id: 5,
+  //   title: 'Office Code',
+  //   price: 231,
+  //   size: 12,
+  //   description: dummyText,
+  //   image: 'assets/images/bag_5.png',
+  // ),
+  // Product(
+  //   id: 6,
+  //   title: 'Office Code',
+  //   price: 233,
+  //   size: 12,
+  //   description: dummyText,
+  //   image: 'assets/images/bag_6.png',
+  // ),
+];
+
+String dummyText =
+    "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since. When an unknown printer took a galley.";

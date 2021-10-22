@@ -10,7 +10,6 @@ import 'package:login_ui/Themes/Themes.dart';
 import 'package:login_ui/components/WillPop.dart';
 
 import 'managerJob/manageControl.dart';
-import 'managerJob/manageJob.dart';
 
 class HomeAddjob extends StatelessWidget {
   final String imgUrl;
@@ -182,9 +181,9 @@ class HomeAddjob extends StatelessWidget {
                             GestureDetector(
                               onTap: () {
                                 Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => HomeAdmin()));
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => HomeAdmin()));
                               },
                               child: Text(
                                 "รายชื่อผู้สมัคร",
