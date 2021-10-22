@@ -5,7 +5,7 @@ import 'package:login_ui/Service/JobService.dart';
 import 'package:login_ui/Themes/Themes.dart';
 import 'package:login_ui/model/jobModel.dart';
 
-class dashboard_favorite extends StatelessWidget {
+class work_favorite extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(

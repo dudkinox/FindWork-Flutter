@@ -5,6 +5,8 @@ import 'package:login_ui/Service/JobService.dart';
 import 'package:login_ui/Themes/Themes.dart';
 import 'package:login_ui/model/jobModel.dart';
 
+import 'dashboard_AllToolBar.dart';
+
 class work_fulltime extends StatelessWidget {
   bool loading = false;
   @override
@@ -37,9 +39,25 @@ class work_fulltime extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Text(
-                    "ดูทั้งหมด",
-                    style: TextStyle(color: PrimaryColor),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        child: GestureDetector(
+                          onTap: () => {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        dashboard_AllFulltime()))
+                          },
+                          child: Text(
+                            "ดูทั้งหมด",
+                            style: TextStyle(color: PrimaryColor),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -56,14 +74,14 @@ class work_fulltime extends StatelessWidget {
                   } else {
                     for (var data in snapshot.data) {
                       result?.add(Recommendation(
-                          data?.image,
-                          data?.company,
-                          data.province +
-                              " " +
-                              data?.district +
-                              " " +
-                              data?.subDistrict,
-                              ));
+                        data?.image,
+                        data?.company,
+                        data.province +
+                            " " +
+                            data?.district +
+                            " " +
+                            data?.subDistrict,
+                      ));
                     }
                     loading = false;
                     return ListView?.builder(
