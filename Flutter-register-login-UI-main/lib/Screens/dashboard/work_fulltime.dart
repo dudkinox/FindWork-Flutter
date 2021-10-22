@@ -5,7 +5,7 @@ import 'package:login_ui/Service/JobService.dart';
 import 'package:login_ui/Themes/Themes.dart';
 import 'package:login_ui/model/jobModel.dart';
 
-import 'dashboard_AllToolBar.dart';
+import 'dashboard_All.dart';
 
 class work_fulltime extends StatelessWidget {
   bool loading = false;
@@ -48,8 +48,7 @@ class work_fulltime extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) =>
-                                        dashboard_AllFulltime()))
+                                    builder: (context) => dashboard_All()))
                           },
                           child: Text(
                             "ดูทั้งหมด",

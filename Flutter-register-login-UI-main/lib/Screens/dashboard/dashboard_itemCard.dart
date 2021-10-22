@@ -8,30 +8,36 @@ class dashboard_itemCard extends StatelessWidget {
   const dashboard_itemCard({this.product});
 
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Expanded(
-          child: Container(
+    return Container(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Expanded(
+            child: Container(
               padding: EdgeInsets.all(kDefaultPadding),
-              height: 180.0,
-              width: 160.0,
-              child: Hero(
-                  tag: demoFeatured[0].title,
-                  child: Image.asset(demoFeatured[0].image)),
-              decoration: BoxDecoration(
-                  // color: product.color,
-                  borderRadius: BorderRadius.circular(16.0))),
-        ),
-        // Padding(
-        //     padding: EdgeInsets.symmetric(vertical: kDefaultPadding / 4),
-        //     child: Text("${product.title}",
-        //         style: TextStyle(color: kTextLightColor))),
-        // Text(
-        //   "\$ ${product.price}",
-        //   style: TextStyle(fontWeight: FontWeight.bold),
-        // )
-      ],
+              width: MediaQuery.of(context).size.width * 3.5,
+              child: Container(
+                decoration: BoxDecoration(
+                  // color: PrimaryColor,
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(10),
+                  ),
+                  image: DecorationImage(
+                      image: AssetImage(products[0].image), fit: BoxFit.cover),
+                ),
+              ),
+            ),
+          ),
+          Padding(
+              padding: EdgeInsets.symmetric(vertical: kDefaultPadding / 4),
+              child: Text("${demoFeatured[0].title}",
+                  style: TextStyle(color: SecondaryColor))),
+          Text(
+            "\$ ${demoFeatured[0].subTitle}",
+            style: TextStyle(fontWeight: FontWeight.bold),
+          )
+        ],
+      ),
     );
   }
 }

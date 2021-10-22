@@ -63,7 +63,14 @@ class _FavoriteState extends State<Favorite> {
                                     Column(
                                       children: [
                                         Container(
-                                          width: MediaQuery.of(context).size.width * 1,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              1,
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.3,
                                           decoration: BoxDecoration(
                                             color: PrimaryColor,
                                             borderRadius: BorderRadius.only(
@@ -76,7 +83,7 @@ class _FavoriteState extends State<Favorite> {
                                           ),
                                           child: Container(
                                             child: Transform.translate(
-                                              offset: Offset(145, -90),
+                                              offset: Offset(145, -80),
                                               child: Container(
                                                 margin: EdgeInsets.symmetric(
                                                     horizontal: 155,
