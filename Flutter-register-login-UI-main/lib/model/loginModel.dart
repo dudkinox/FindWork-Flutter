@@ -73,6 +73,26 @@ class RegisterInputModel {
   });
 }
 
+class RegisterInputModelEmployer {
+  String username;
+  String password;
+  String confirmpassword;
+  String email;
+  String tel;
+  String job_id;
+  String fullname;
+
+  RegisterInputModelEmployer({
+    this.username,
+    this.password,
+    this.confirmpassword,
+    this.email,
+    this.tel,
+    this.job_id,
+    this.fullname
+  });
+}
+
 class LoginModel {
   String type;
   String id;

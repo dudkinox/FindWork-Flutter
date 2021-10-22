@@ -2,19 +2,34 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_session/flutter_session.dart';
 import 'package:login_ui/Animation/Fade_Animation.dart';
+import 'package:login_ui/Screens/loading.dart';
 import 'package:login_ui/Screens/login/login.dart';
 import 'package:login_ui/ScreensAddjob/detailJob.dart';
 import 'package:login_ui/SelectCheckbox/choices.dart';
+import 'package:login_ui/Service/JobService.dart';
 import 'package:login_ui/Themes/Themes.dart';
 import 'package:login_ui/components/WillPop.dart';
+import 'package:login_ui/model/loginModel.dart';
 
 import 'managerJob/manageControl.dart';
 
-class HomeAddjob extends StatelessWidget {
+class HomeAddjob extends StatefulWidget {
   final String imgUrl;
 
-  const HomeAddjob(this.imgUrl);
+  const HomeAddjob(String s, {Key key, this.imgUrl}) : super(key: key);
+  @override
+  _HomeAddjobState createState() => _HomeAddjobState(imgUrl);
+}
+
+class _HomeAddjobState extends State<HomeAddjob> {
+  final String imgUrl;
+
+  String token = "";
+
+  _HomeAddjobState(this.imgUrl);
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -27,61 +42,90 @@ class HomeAddjob extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                FadeAnimation(
-                  1.0,
-                  Container(
-                    height: 350.0,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: PrimaryColor,
-                      image: DecorationImage(
-                          image: NetworkImage(
-                              "https://cdn.pixabay.com/photo/2018/12/02/06/33/skyscrapers-3850732_960_720.jpg"),
-                          fit: BoxFit.cover),
-                    ),
-                    child: Padding(
-                      padding: EdgeInsets.only(
-                          bottom: 160.0, left: 20.0, right: 20.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          GestureDetector(
-                            child: Container(
-                              height: 50.0,
-                              width: 50.0,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20.0),
-                                color: Colors.white.withOpacity(.5),
-                              ),
-                              child: Transform.rotate(
-                                  angle: 180 * pi / 180,
-                                  child: IconButton(
-                                    iconSize: 30,
-                                    color: Colors.black,
-                                    icon: const Icon(Icons.exit_to_app_rounded),
-                                    onPressed: () {
-                                      Navigator.of(context).pushReplacement(
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  LoginScreen()));
-                                    },
-                                  )),
-                            ),
-                          ),
-                          Container(
-                            height: 50.0,
-                            width: 50.0,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20.0),
-                              color: Colors.white.withOpacity(.5),
-                            ),
-                            child: Icon(Icons.settings_outlined),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
+                FutureBuilder(
+                    future: FlutterSession().get('token'),
+                    builder: (context, snapshot) {
+                      token = snapshot.data;
+                      if (snapshot.connectionState != ConnectionState.done) {
+                        return LoadingRipple();
+                      } else {
+                        return FadeAnimation(
+                          1.0,
+                          FutureBuilder<ResumeModel>(
+                              future: PreviewImageCopany(token),
+                              builder: (context, snapshot) {
+                                if (snapshot.connectionState !=
+                                    ConnectionState.done) {
+                                  return LoadingFadingCube();
+                                } else {
+                                  return Container(
+                                    height: 350.0,
+                                    width: double.infinity,
+                                    decoration: BoxDecoration(
+                                      color: PrimaryColor,
+                                      image: DecorationImage(
+                                          image:
+                                              NetworkImage(snapshot.data?.link),
+                                          fit: BoxFit.cover),
+                                    ),
+                                    child: Padding(
+                                      padding: EdgeInsets.only(
+                                          bottom: 160.0,
+                                          left: 20.0,
+                                          right: 20.0),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          GestureDetector(
+                                            child: Container(
+                                              height: 50.0,
+                                              width: 50.0,
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(20.0),
+                                                color: Colors.white
+                                                    .withOpacity(.5),
+                                              ),
+                                              child: Transform.rotate(
+                                                  angle: 180 * pi / 180,
+                                                  child: IconButton(
+                                                    iconSize: 30,
+                                                    color: Colors.black,
+                                                    icon: const Icon(Icons
+                                                        .exit_to_app_rounded),
+                                                    onPressed: () {
+                                                      Navigator.of(context)
+                                                          .pushReplacement(
+                                                              MaterialPageRoute(
+                                                                  builder:
+                                                                      (context) =>
+                                                                          LoginScreen()));
+                                                    },
+                                                  )),
+                                            ),
+                                          ),
+                                          Container(
+                                            height: 50.0,
+                                            width: 50.0,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(20.0),
+                                              color:
+                                                  Colors.white.withOpacity(.5),
+                                            ),
+                                            child:
+                                                Icon(Icons.settings_outlined),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                }
+                              }),
+                        );
+                      }
+                    }),
                 SizedBox(
                   height: 20.0,
                 ),

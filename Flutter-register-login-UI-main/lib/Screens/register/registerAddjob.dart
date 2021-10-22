@@ -2,10 +2,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:login_ui/Screens/login/login.dart';
+import 'package:login_ui/Service/LoginService.dart';
 
 import 'package:login_ui/Themes/Themes.dart';
+import 'package:login_ui/components/alert.dart';
 import 'package:login_ui/components/background.dart';
 import 'package:login_ui/components/selcetChackboxAddjob.dart';
+import 'package:login_ui/main.dart';
 import 'package:login_ui/model/loginModel.dart';
 
 class RegisterAddjobScreen extends StatefulWidget {
@@ -14,13 +17,15 @@ class RegisterAddjobScreen extends StatefulWidget {
 }
 
 class _RegisterAddjobScreenState extends State<RegisterAddjobScreen> {
-  // final username = GlobalKey<FormState>();
-  // final password = GlobalKey<FormState>();
-  // final confirmpassword = GlobalKey<FormState>();
-  // final email = GlobalKey<FormState>();
-  // final tel = GlobalKey<FormState>();
+  final username = GlobalKey<FormState>();
+  final password = GlobalKey<FormState>();
+  final confirmpassword = GlobalKey<FormState>();
+  final fullname = GlobalKey<FormState>();
+  final job_id = GlobalKey<FormState>();
+  final email = GlobalKey<FormState>();
+  final tel = GlobalKey<FormState>();
 
-  RegisterInputModel register = RegisterInputModel();
+  RegisterInputModelEmployer register = RegisterInputModelEmployer();
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -48,14 +53,14 @@ class _RegisterAddjobScreenState extends State<RegisterAddjobScreen> {
                 alignment: Alignment.center,
                 margin: EdgeInsets.symmetric(horizontal: 40),
                 child: Form(
-                  // key: username,
+                  key: username,
                   child: TextFormField(
                     decoration: InputDecoration(
                         icon: Icon(Icons.account_circle_outlined),
                         labelText: "ชื่อผู้ใช้"),
-                    // onSaved: (String username) {
-                    //   register.username = username;
-                    // },
+                    onSaved: (String username) {
+                      register.username = username;
+                    },
                   ),
                 ),
               ),
@@ -64,16 +69,16 @@ class _RegisterAddjobScreenState extends State<RegisterAddjobScreen> {
                 alignment: Alignment.center,
                 margin: EdgeInsets.symmetric(horizontal: 40),
                 child: Form(
-                  // key: password,
+                  key: password,
                   child: TextFormField(
                     decoration: InputDecoration(
                       icon: Icon(Icons.vpn_key_outlined),
                       labelText: "รหัสผ่าน",
                     ),
                     obscureText: true,
-                    // onSaved: (String password) {
-                    //   register.password = password;
-                    // },
+                    onSaved: (String password) {
+                      register.password = password;
+                    },
                   ),
                 ),
               ),
@@ -82,15 +87,15 @@ class _RegisterAddjobScreenState extends State<RegisterAddjobScreen> {
                 alignment: Alignment.center,
                 margin: EdgeInsets.symmetric(horizontal: 40),
                 child: Form(
-                  // key: confirmpassword,
+                  key: confirmpassword,
                   child: TextFormField(
                     decoration: InputDecoration(
                         icon: Icon(Icons.vpn_key_outlined),
                         labelText: "ยืนยันรหัสผ่าน"),
                     obscureText: true,
-                    // onSaved: (String confirmpassword) {
-                    //   register.confirmpassword = confirmpassword;
-                    // },
+                    onSaved: (String confirmpassword) {
+                      register.confirmpassword = confirmpassword;
+                    },
                   ),
                 ),
               ),
@@ -112,15 +117,15 @@ class _RegisterAddjobScreenState extends State<RegisterAddjobScreen> {
                 alignment: Alignment.center,
                 margin: EdgeInsets.symmetric(horizontal: 40),
                 child: Form(
-                  // key: email,
+                  key: fullname,
                   child: TextFormField(
                     decoration: InputDecoration(
                       icon: Icon(Icons.location_city_outlined),
                       labelText: "ชื่อบริษัท",
                     ),
-                    // onSaved: (String email) {
-                    //   register.email = email;
-                    // },
+                    onSaved: (String fullname) {
+                      register.fullname = fullname;
+                    },
                   ),
                 ),
               ),
@@ -129,15 +134,15 @@ class _RegisterAddjobScreenState extends State<RegisterAddjobScreen> {
                 alignment: Alignment.center,
                 margin: EdgeInsets.symmetric(horizontal: 40),
                 child: Form(
-                  // key: email,
+                  key: job_id,
                   child: TextFormField(
                     decoration: InputDecoration(
                       icon: Icon(Icons.badge_outlined),
                       labelText: "เลขประจำตัวผู้เสียภาษีอากร",
                     ),
-                    // onSaved: (String email) {
-                    //   register.email = email;
-                    // },
+                    onSaved: (String job_id) {
+                      register.job_id = job_id;
+                    },
                   ),
                 ),
               ),
@@ -146,15 +151,15 @@ class _RegisterAddjobScreenState extends State<RegisterAddjobScreen> {
                 alignment: Alignment.center,
                 margin: EdgeInsets.symmetric(horizontal: 40),
                 child: Form(
-                  // key: email,
+                  key: email,
                   child: TextFormField(
                     decoration: InputDecoration(
                       icon: Icon(Icons.account_circle_outlined),
-                      labelText: "ชื่อผู้ติดต่อ",
+                      labelText: "อีเมลบริษัท",
                     ),
-                    // onSaved: (String email) {
-                    //   register.email = email;
-                    // },
+                    onSaved: (String email) {
+                      register.email = email;
+                    },
                   ),
                 ),
               ),
@@ -163,14 +168,14 @@ class _RegisterAddjobScreenState extends State<RegisterAddjobScreen> {
                 alignment: Alignment.center,
                 margin: EdgeInsets.symmetric(horizontal: 40),
                 child: Form(
-                  // key: tel,
+                  key: tel,
                   child: TextFormField(
                     decoration: InputDecoration(
                         icon: Icon(Icons.call_outlined),
                         labelText: "เบอร์โทรศัพท์"),
-                    // onSaved: (String tel) {
-                    //   register.tel = tel;
-                    // },
+                    onSaved: (String tel) {
+                      register.tel = tel;
+                    },
                   ),
                 ),
               ),
@@ -186,74 +191,95 @@ class _RegisterAddjobScreenState extends State<RegisterAddjobScreen> {
                 margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
                 child: RaisedButton(
                   onPressed: () async {
-                    //   username.currentState.save();
-                    //   password.currentState.save();
-                    //   confirmpassword.currentState.save();
-                    //   email.currentState.save();
-                    //   tel.currentState.save();
-                    //   if (register.username == "") {
-                    //     showDialog(
-                    //         context: context,
-                    //         builder: (BuildContext context) => AlertMessage(
-                    //             "แจ้งเตือน", "กรุณากรอกบัญชีผู้ใช้", null));
-                    //   } else {
-                    //     if (register.password == "") {
-                    //       showDialog(
-                    //           context: context,
-                    //           builder: (_) => AlertMessage(
-                    //               "แจ้งเตือน", "กรุณากรอกรหัสผ่าน", null));
-                    //     } else {
-                    //       if (register.email == "") {
-                    //         showDialog(
-                    //             context: context,
-                    //             builder: (_) => AlertMessage(
-                    //                 "แจ้งเตือน", "กรุณากรอกอีเมล์", null));
-                    //       } else {
-                    //         if (register.tel == "") {
-                    //           showDialog(
-                    //               context: context,
-                    //               builder: (_) => AlertMessage(
-                    //                   "แจ้งเตือน", "กรุณากรอกเบอร์โทรศัพท์", null));
-                    //         } else {
-                    //           if (register.password != register.confirmpassword) {
-                    //             showDialog(
-                    //                 context: context,
-                    //                 builder: (_) => AlertMessage("แจ้งเตือน",
-                    //                     "กรอกรหัสผ่านไม่ตรงกัน", null));
-                    //           } else {
-                    //             username.currentState.reset();
-                    //             password.currentState.reset();
-                    //             confirmpassword.currentState.reset();
-                    //             email.currentState.reset();
-                    //             tel.currentState.reset();
-                    //             final String status = await RegisterEmployee(
-                    //               register.email,
-                    //               register.tel,
-                    //               register.username,
-                    //               register.username,
-                    //               register.password,
-                    //             );
-                    //             print(status);
-                    //             if (status == "เพิ่มบัญชีสำเร็จ") {
-                    //               showDialog(
-                    //                 context: context,
-                    //                 builder: (_) => AlertMessage("แจ้งเตือน",
-                    //                     "สมัครสามาชิกรเรียบร้อยแล้ว", MyApp()),
-                    //               );
-                    //             } else {
-                    //               showDialog(
-                    //                 context: context,
-                    //                 builder: (_) => AlertMessage(
-                    //                     "แจ้งเตือน",
-                    //                     "การสมัครสมาชิกปิดปรับปรุงเนื่องจาก server มีปัญหา โปรดลองใหม่ภายหลัง",
-                    //                     null),
-                    //               );
-                    //             }
-                    //           }
-                    //         }
-                    //       }
-                    //     }
-                    //   }
+                    username.currentState.save();
+                    password.currentState.save();
+                    confirmpassword.currentState.save();
+                    email.currentState.save();
+                    tel.currentState.save();
+                    job_id.currentState.save();
+                    fullname.currentState.save();
+                    if (register.username == "") {
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) => AlertMessage(
+                              "แจ้งเตือน", "กรุณากรอกบัญชีผู้ใช้", null));
+                    } else {
+                      if (register.password == "") {
+                        showDialog(
+                            context: context,
+                            builder: (_) => AlertMessage(
+                                "แจ้งเตือน", "กรุณากรอกรหัสผ่าน", null));
+                      } else {
+                        if (register.fullname == "") {
+                          showDialog(
+                              context: context,
+                              builder: (_) => AlertMessage(
+                                  "แจ้งเตือน", "กรุณากรอกชื่อบริษัท", null));
+                        } else {
+                          if (register.job_id == "") {
+                            showDialog(
+                                context: context,
+                                builder: (_) => AlertMessage("แจ้งเตือน",
+                                    "กรุณากรอกเลขประจำตัวผู้เสียภาษี", null));
+                          } else {
+                            if (register.email == "") {
+                              showDialog(
+                                  context: context,
+                                  builder: (_) => AlertMessage(
+                                      "แจ้งเตือน", "กรุณากรอกอีเมล", null));
+                            } else {
+                              if (register.tel == "") {
+                                showDialog(
+                                    context: context,
+                                    builder: (_) => AlertMessage("แจ้งเตือน",
+                                        "กรุณากรอกเบอร์โทรศัพท์", null));
+                              } else {
+                                if (register.password !=
+                                    register.confirmpassword) {
+                                  showDialog(
+                                      context: context,
+                                      builder: (_) => AlertMessage("แจ้งเตือน",
+                                          "กรอกรหัสผ่านไม่ตรงกัน", null));
+                                } else {
+                                  username.currentState.reset();
+                                  password.currentState.reset();
+                                  confirmpassword.currentState.reset();
+                                  fullname.currentState.reset();
+                                  job_id.currentState.reset();
+                                  email.currentState.reset();
+                                  tel.currentState.reset();
+                                  final String status = await RegisterEmployer(
+                                      register.email,
+                                      register.fullname,
+                                      register.job_id,
+                                      register.tel,
+                                      register.username,
+                                      register.password);
+                                  print(status);
+                                  if (status == "เพิ่มบัญชีสำเร็จ") {
+                                    showDialog(
+                                      context: context,
+                                      builder: (_) => AlertMessage(
+                                          "แจ้งเตือน",
+                                          "สมัครสามาชิกรเรียบร้อยแล้ว",
+                                          MyApp()),
+                                    );
+                                  } else {
+                                    showDialog(
+                                      context: context,
+                                      builder: (_) => AlertMessage(
+                                          "แจ้งเตือน",
+                                          "การสมัครสมาชิกปิดปรับปรุงเนื่องจาก server มีปัญหา โปรดลองใหม่ภายหลัง",
+                                          null),
+                                    );
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
                   },
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(80.0)),

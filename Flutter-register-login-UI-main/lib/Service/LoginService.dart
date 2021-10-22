@@ -56,6 +56,45 @@ Future<String> RegisterEmployee(
   }
 }
 
+Future<String> RegisterEmployer(
+  String email,
+  String fullname,
+  String job_id,
+  String tel,
+  String username,
+  String password,
+) async {
+  try {
+    final String Url = Host + "/api/login";
+    final response = await http.post(
+      Uri.parse(Url),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, String>{
+        "email": email,
+        "fullname": fullname,
+        "job_id": job_id,
+        "matching": "",
+        "tel": tel,
+        "type": "employer",
+        "username": username,
+        "password": password,
+        "image": ""
+      }),
+    );
+
+    if (response.statusCode == 400) {
+      var err = json.decode(json.encode(response.body));
+      return err;
+    }
+    var data = json.decode(json.encode(response.body));
+    return data;
+  } catch (e) {
+    print(e);
+  }
+}
+
 Future<AccountModel> FindID(String token) async {
   try {
     final String url = Host + "/api/login/" + token;
