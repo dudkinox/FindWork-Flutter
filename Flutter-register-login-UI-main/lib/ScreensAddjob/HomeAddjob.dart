@@ -13,6 +13,7 @@ import 'package:login_ui/Themes/Themes.dart';
 import 'package:login_ui/components/WillPop.dart';
 import 'package:login_ui/model/loginModel.dart';
 
+import 'EditingCompany.dart';
 import 'managerJob/manageControl.dart';
 
 class HomeAddjob extends StatefulWidget {
