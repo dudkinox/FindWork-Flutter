@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:login_ui/SelectCheckbox/choices.dart';
 import 'package:login_ui/Themes/Themes.dart';
+import 'package:login_ui/components/notification.dart';
 
 class JobJob extends StatelessWidget {
   @override
@@ -219,6 +220,22 @@ class JobJob extends StatelessWidget {
                   child: Column(
                     children: buildRequirements(),
                   ),
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Container(
+                alignment: Alignment.center,
+                child: RaisedButton(
+                  child: new Text("ยื่นสมัครงาน"),
+                  textColor: Colors.white,
+                  color: PrimaryColor,
+                  onPressed: () async {
+                    await showNotification();
+                  },
+                  shape: new RoundedRectangleBorder(
+                      borderRadius: new BorderRadius.circular(20.0)),
                 ),
               ),
             ],
