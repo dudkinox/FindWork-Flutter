@@ -152,7 +152,8 @@ class DetailsPage extends StatelessWidget {
                                       child: SingleChildScrollView(
                                         physics: BouncingScrollPhysics(),
                                         child: Column(
-                                          children: buildRequirements(),
+                                          children: buildRequirements(
+                                              data.departmentId.detail[0]),
                                         ),
                                       ),
                                     ),
@@ -176,12 +177,6 @@ class DetailsPage extends StatelessWidget {
                                       fontWeight: FontWeight.bold,
                                       fontSize: 15.0),
                                 ),
-                                Text(
-                                  "รายชื่อผู้สมัคร",
-                                  style: TextStyle(
-                                    color: PrimaryColor,
-                                  ),
-                                ),
                               ],
                             ),
                             SizedBox(
@@ -191,7 +186,7 @@ class DetailsPage extends StatelessWidget {
                               scrollDirection: Axis.horizontal,
                               child: Row(
                                 children: List.generate(
-                                  demoFeatured.length,
+                                  data.departmentId.name.length,
                                   (HomeAddjob) => FeaturedCard(
                                     featuredJobs: demoFeatured[0],
                                   ),

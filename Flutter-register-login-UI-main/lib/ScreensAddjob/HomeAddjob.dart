@@ -198,7 +198,7 @@ class _HomeAddjobState extends State<HomeAddjob> {
                                   child: SingleChildScrollView(
                                     physics: BouncingScrollPhysics(),
                                     child: Column(
-                                      children: buildRequirements(),
+                                      children: buildRequirements(""),
                                     ),
                                   ),
                                 ),
@@ -265,10 +265,10 @@ class _HomeAddjobState extends State<HomeAddjob> {
   }
 }
 
-List<Widget> buildRequirements() {
+List<Widget> buildRequirements(String Detail) {
   List<Widget> list = [];
-  for (var i = 0; i < getJobsRequirements().length; i++) {
-    list.add(buildRequirement(getJobsRequirements()[i]));
+  for (var i = 0; i < getJobsRequirements(Detail).length; i++) {
+    list.add(buildRequirement(getJobsRequirements(Detail)[i]));
   }
   return list;
 }

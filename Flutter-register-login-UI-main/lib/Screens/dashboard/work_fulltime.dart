@@ -28,7 +28,7 @@ class work_fulltime extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("คำแนะนำ",
+                      Text("งานแนะนำ",
                           style: TextStyle(
                               color: PrimaryColor,
                               fontWeight: FontWeight.bold,
@@ -71,8 +71,8 @@ class work_fulltime extends StatelessWidget {
                   if (snapshot?.connectionState != ConnectionState.done) {
                     return LoadingCube();
                   } else {
-                    for (var data in snapshot.data) {
-                      result?.add(Recommendation(
+                    for (JobDataModel data in snapshot.data) {
+                      result.add(Recommendation(
                         data?.image,
                         data?.company,
                         data.province +

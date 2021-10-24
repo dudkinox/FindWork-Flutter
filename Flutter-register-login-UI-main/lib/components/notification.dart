@@ -5,7 +5,7 @@ Future<void> showNotification() async {
   const AndroidNotificationDetails androidNotificationDetails =
       AndroidNotificationDetails(
     'NBB Part-time',
-    'แจ้งเตือน',
+    'แจ้งเตือนสำคัญ',
     'แจ้งเตือนสำคัญ',
     importance: Importance.max,
     priority: Priority.high,
@@ -17,7 +17,7 @@ Future<void> showNotification() async {
 
   await flutterLocalNotificationsPlugin.show(
     0,
-    'แจ้งเตือนสมัครงาน',
+    'NBB Part-time',
     'ยื่นสมัครงาน บริษัทรับเหมา ตำแหน่ง youtuber แล้ว!',
     plateformChanelDetail,
   );
