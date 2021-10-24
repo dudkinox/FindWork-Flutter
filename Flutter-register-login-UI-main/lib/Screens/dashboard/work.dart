@@ -5,7 +5,7 @@ import 'package:login_ui/Screens/dashboard/work_parttime.dart';
 import 'package:login_ui/Screens/loading.dart';
 import 'package:login_ui/Themes/Themes.dart';
 
-import 'dashboard_favorite.dart';
+import 'work_favorite.dart';
 
 class Work extends StatelessWidget {
   bool loading = false;
@@ -44,7 +44,7 @@ class Work extends StatelessWidget {
                   body: TabBarView(children: [
                     work_fulltime(),
                     work_parttime(),
-                    dashboard_favorite()
+                    work_favorite()
                   ]),
                 ),
               ),

@@ -5,7 +5,9 @@ import 'package:login_ui/Service/JobService.dart';
 import 'package:login_ui/Themes/Themes.dart';
 import 'package:login_ui/model/jobModel.dart';
 
-class dashboard_favorite extends StatelessWidget {
+import 'dashboard_All.dart';
+
+class work_favorite extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -38,11 +40,24 @@ class dashboard_favorite extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Text(
-                    "ดูทั้งหมด",
-                    style: TextStyle(
-                      color: PrimaryColor,
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        child: GestureDetector(
+                          onTap: () => {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => dashboard_All()))
+                          },
+                          child: Text(
+                            "ดูทั้งหมด",
+                            style: TextStyle(color: PrimaryColor),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),

@@ -204,7 +204,7 @@ class JobJob extends StatelessWidget {
                 height: 32,
               ),
               Text(
-                "Requirements",
+                "คุณสมบัติ",
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,

@@ -459,7 +459,7 @@ class MapScreenState extends State<ProfilePage>
                                                               source:
                                                                   ImageSource
                                                                       .gallery);
-                                                  if (image.path != null) {
+                                                  if (image?.path != null) {
                                                     String status =
                                                         await UploadResume(
                                                             token,
@@ -473,7 +473,7 @@ class MapScreenState extends State<ProfilePage>
                                                             AlertMessage(
                                                                 "แจ้งเตือน",
                                                                 "อัพเดตรูปภาพแล้ว",
-                                                                HomeHome(0)),
+                                                                ProfilePage()),
                                                       );
                                                       setState(() {
                                                         file = File(image.path);
