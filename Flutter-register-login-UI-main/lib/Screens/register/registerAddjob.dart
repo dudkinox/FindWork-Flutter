@@ -255,7 +255,6 @@ class _RegisterAddjobScreenState extends State<RegisterAddjobScreen> {
                                       register.tel,
                                       register.username,
                                       register.password);
-                                  print(status);
                                   if (status == "เพิ่มบัญชีสำเร็จ") {
                                     showDialog(
                                       context: context,

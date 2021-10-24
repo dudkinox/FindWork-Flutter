@@ -8,6 +8,8 @@ import 'package:login_ui/model/jobModel.dart';
 import 'dashboard_All.dart';
 
 class work_favorite extends StatelessWidget {
+  work_favorite(this.token);
+  var token;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -49,7 +51,7 @@ class work_favorite extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => dashboard_All()))
+                                    builder: (context) => dashboard_All(token)))
                           },
                           child: Text(
                             "ดูทั้งหมด",
@@ -83,7 +85,9 @@ class work_favorite extends StatelessWidget {
                               " " +
                               data.district +
                               " " +
-                              data.subDistrict));
+                              data.subDistrict,
+                              data.id,
+                              token));
                     }
                     return ListView.builder(
                       scrollDirection: Axis.horizontal,

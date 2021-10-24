@@ -9,8 +9,10 @@ class Recommendation extends StatelessWidget {
   final String imgUlr;
   final String location;
   final String company;
+  final String id;
+  final String token;
 
-  const Recommendation(this.imgUlr, this.company, this.location);
+  const Recommendation(this.imgUlr, this.company, this.location, this.id, this.token);
 
   @override
   Widget build(BuildContext context) {
@@ -23,14 +25,14 @@ class Recommendation extends StatelessWidget {
             return LoadingFadingCube();
           } else {
             for (var item in snapshot?.data) {
-              data?.company = item.company;
-              data?.departmentId = item.departmentId;
-              data?.district = item.district;
-              data?.id = item.id;
-              data?.image = item.image;
-              data?.jobId = item.jobId;
-              data?.province = item.province;
-              data?.subDistrict = item.subDistrict;
+              data.company = item.company;
+              data.departmentId = item.departmentId;
+              data.district = item.district;
+              data.id = item.id;
+              data.image = item.image;
+              data.jobId = item.jobId;
+              data.province = item.province;
+              data.subDistrict = item.subDistrict;
             }
             return Padding(
               padding: EdgeInsets.only(left: 10.0, top: 10.0),
@@ -40,7 +42,7 @@ class Recommendation extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (BuildContext context) =>
-                          DetailsPage(imgUlr, data.id),
+                          DetailsPage(imgUlr, id, token),
                     ),
                   );
                 },

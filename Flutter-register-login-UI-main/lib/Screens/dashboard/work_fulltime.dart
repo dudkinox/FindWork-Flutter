@@ -8,6 +8,8 @@ import 'package:login_ui/model/jobModel.dart';
 import 'dashboard_All.dart';
 
 class work_fulltime extends StatelessWidget {
+  work_fulltime(this.token);
+  var token;
   bool loading = false;
   @override
   Widget build(BuildContext context) {
@@ -48,7 +50,7 @@ class work_fulltime extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => dashboard_All()))
+                                    builder: (context) => dashboard_All(token)))
                           },
                           child: Text(
                             "ดูทั้งหมด",
@@ -80,6 +82,8 @@ class work_fulltime extends StatelessWidget {
                             data?.district +
                             " " +
                             data?.subDistrict,
+                            data?.id,
+                            token
                       ));
                     }
                     loading = false;

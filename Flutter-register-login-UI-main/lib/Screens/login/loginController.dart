@@ -13,7 +13,7 @@ void login(BuildContext context, String username, String password) async {
   switch (login.type) {
     case "employee":
       Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => HomeHome(0)));
+          MaterialPageRoute(builder: (context) => HomeHome(0,login.id)));
       break;
     case "employer":
       Navigator.of(context).pushReplacement(MaterialPageRoute(

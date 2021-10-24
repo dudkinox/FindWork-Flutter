@@ -4,6 +4,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:login_ui/Database/Host.dart';
+import 'package:login_ui/model/favoriteModel.dart';
 import 'package:login_ui/model/jobModel.dart';
 import 'package:login_ui/model/loginModel.dart';
 
@@ -29,7 +30,6 @@ Future<List<JobDataModel>> TopicWork() async {
     },
   );
   List jsonResponse = json.decode(response?.body);
-  print(jsonResponse);
   return jsonResponse.map((data) => new JobDataModel.fromJson(data)).toList();
 }
 
@@ -63,6 +63,77 @@ Future<ResumeModel> PreviewImageCopany(String token) async {
       none.link = "";
       return none;
     }
+  } catch (e) {
+    print(e);
+  }
+}
+
+Future<String> AddFavorite(
+  String job_id,
+  String user_id,
+) async {
+  try {
+    final String Url = Host + "/api/favorite/" + job_id + "/" + user_id;
+    final response = await http.put(
+      Uri.parse(Url),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, String>{
+        "job_user": user_id,
+        "job_id": job_id,
+      }),
+    );
+
+    if (response.statusCode == 400) {
+      var err = json.decode(json.encode(response.body));
+      return err;
+    }
+    var data = json.decode(json.encode(response.body));
+    return data;
+  } catch (e) {
+    print(e);
+  }
+}
+
+Future<String> DelFavorite(
+  String job_id,
+  String user_id,
+) async {
+  try {
+    final String Url = Host + "/api/favorite/delete/" + job_id + "/" + user_id;
+    final response = await http.delete(
+      Uri.parse(Url),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, String>{
+        "job_user": user_id,
+        "job_id": job_id,
+      }),
+    );
+
+    if (response.statusCode == 400) {
+      var err = json.decode(json.encode(response.body));
+      return err;
+    }
+    var data = json.decode(json.encode(response.body));
+    return data;
+  } catch (e) {
+    print(e);
+  }
+}
+
+Future<FavoriteModel> GetFavorite(String token) async {
+  try { 
+    final String url = Host + "/api/favorite/" + token;
+    final response = await http.get(
+      Uri.parse(url),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    );
+    return FavoriteModel.fromJson(jsonDecode(response.body));
   } catch (e) {
     print(e);
   }

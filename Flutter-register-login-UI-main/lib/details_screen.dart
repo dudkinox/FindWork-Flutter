@@ -1,5 +1,7 @@
+import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:login_ui/model/favoriteModel.dart';
 import 'package:login_ui/model/jobModel.dart';
 
 import 'Animation/Fade_Animation.dart';
@@ -13,8 +15,22 @@ import 'Themes/Themes.dart';
 class DetailsPage extends StatelessWidget {
   final String imgUrl;
   final String id;
+  final String token;
 
-  const DetailsPage(this.imgUrl, this.id);
+  Future<bool> status(String token, String jobId) async {
+    FavoriteModel status = await GetFavorite(token);
+    for (var i = 0; i < status.jobId.length; i++) {
+      if (status.jobId[i] == null) {
+        return false;
+      }
+      if (status.jobId[i] == jobId) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  const DetailsPage(this.imgUrl, this.id, this.token);
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -69,7 +85,27 @@ class DetailsPage extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(20.0),
                                   color: Colors.white.withOpacity(.5),
                                 ),
-                                child: Icon(Icons.date_range_outlined),
+                                child: FutureBuilder<bool>(
+                                  future: status(token, id),
+                                  builder: (context, AsyncSnapshot snapshot) {
+                                    bool favorite = snapshot?.data;
+                                    if (snapshot.connectionState !=
+                                        ConnectionState.done) {
+                                      return Text("");
+                                    } else {
+                                      return FavoriteButton(
+                                        isFavorite: favorite,
+                                        valueChanged: (_isFavorite) {
+                                          if (_isFavorite == true) {
+                                            AddFavorite(id, token);
+                                          } else {
+                                            DelFavorite(id, token);
+                                          }
+                                        },
+                                      );
+                                    }
+                                  },
+                                ),
                               ),
                             ],
                           ),

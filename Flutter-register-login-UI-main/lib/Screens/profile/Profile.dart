@@ -88,7 +88,7 @@ class MapScreenState extends State<ProfilePage>
                                                             builder:
                                                                 (context) =>
                                                                     HomeHome(
-                                                                        0)));
+                                                                        0,token)));
                                               },
                                             ),
                                             Padding(
@@ -464,7 +464,6 @@ class MapScreenState extends State<ProfilePage>
                                                         await UploadResume(
                                                             token,
                                                             File(image.path));
-                                                    print(status);
                                                     if (status ==
                                                         "อัพโหลดรูปภาพเรียบร้อย") {
                                                       showDialog(

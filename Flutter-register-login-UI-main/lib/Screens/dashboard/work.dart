@@ -8,6 +8,8 @@ import 'package:login_ui/Themes/Themes.dart';
 import 'work_favorite.dart';
 
 class Work extends StatelessWidget {
+  Work(this.token);
+  var token;
   bool loading = false;
   @override
   Widget build(BuildContext context) {
@@ -42,9 +44,9 @@ class Work extends StatelessWidget {
                         ),
                       ]),
                   body: TabBarView(children: [
-                    work_fulltime(),
-                    work_parttime(),
-                    work_favorite()
+                    work_fulltime(token),
+                    work_parttime(token),
+                    work_favorite(token)
                   ]),
                 ),
               ),

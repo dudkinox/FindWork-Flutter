@@ -8,11 +8,15 @@ import '../homehome.dart';
 import 'dashboard_itemCard.dart';
 
 class dashboard_All extends StatefulWidget {
+  dashboard_All(this.token);
+  var token;
   @override
-  _dashboard_AllState createState() => _dashboard_AllState();
+  _dashboard_AllState createState() => _dashboard_AllState(token);
 }
 
 class _dashboard_AllState extends State<dashboard_All> {
+  _dashboard_AllState(this.token);
+  var token;
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -34,7 +38,7 @@ class _dashboard_AllState extends State<dashboard_All> {
             icon: Icon(Icons.arrow_back_ios, color: Colors.black),
             onPressed: () => {
               Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => HomeHome(0))),
+                  MaterialPageRoute(builder: (context) => HomeHome(0,token))),
             },
           ),
         ),

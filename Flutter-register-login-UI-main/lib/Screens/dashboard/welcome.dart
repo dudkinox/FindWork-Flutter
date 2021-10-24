@@ -30,7 +30,6 @@ class Welcome extends StatelessWidget {
                     builder: (context, AsyncSnapshot snapshot) {
                       if(snapshot.connectionState == ConnectionState.done){
                         fullname = snapshot?.data;
-                        print(fullname);
                         return Text(
                           "สวัสดี, " + fullname?.text ?? "กำลังโหลด...",
                           style: TextStyle(
