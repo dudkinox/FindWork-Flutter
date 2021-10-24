@@ -5,8 +5,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_session/flutter_session.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:login_ui/Animation/Fade_Animation.dart';
-import 'package:login_ui/Screens/homehome.dart';
+
 import 'package:login_ui/Screens/loading.dart';
+import 'package:login_ui/Screens/profile/ProfileController.dart';
 import 'package:login_ui/Service/LoginService.dart';
 import 'package:login_ui/Themes/Themes.dart';
 import 'package:login_ui/components/WillPop.dart';
@@ -14,10 +15,10 @@ import 'package:login_ui/components/alert.dart';
 import 'package:login_ui/model/loginModel.dart';
 import 'dart:io';
 
-import 'ProfileController.dart';
+import 'HomeAddjob.dart';
 
-class ProfilePage extends StatefulWidget {
-  ProfilePage({Key key}) : super(key: key);
+class EditingCompany extends StatefulWidget {
+  EditingCompany({Key key}) : super(key: key);
   final TextEditingController fullname = new TextEditingController();
   final TextEditingController email = new TextEditingController();
   final TextEditingController tel = new TextEditingController();
@@ -27,7 +28,7 @@ class ProfilePage extends StatefulWidget {
   MapScreenState createState() => MapScreenState();
 }
 
-class MapScreenState extends State<ProfilePage>
+class MapScreenState extends State<EditingCompany>
     with SingleTickerProviderStateMixin {
   var fullname = new TextEditingController();
   var email = new TextEditingController();
@@ -68,8 +69,8 @@ class MapScreenState extends State<ProfilePage>
                   leading: IconButton(
                     icon: Icon(Icons.arrow_back_ios, color: Colors.black),
                     onPressed: () => {
-                      Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(builder: (context) => HomeHome(0))),
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(
+                          builder: (context) => HomeAddjob(""))),
                     },
                   ),
                 ),
@@ -155,7 +156,7 @@ class MapScreenState extends State<ProfilePage>
                                                         MainAxisSize.min,
                                                     children: <Widget>[
                                                       new Text(
-                                                        'ชื่อ',
+                                                        'ชื่อบริษัท',
                                                         style: TextStyle(
                                                             fontSize: 16.0,
                                                             color: PrimaryColor,
@@ -193,7 +194,7 @@ class MapScreenState extends State<ProfilePage>
                                                           decoration:
                                                               const InputDecoration(
                                                             hintText:
-                                                                "ใส่ชื่อของคุณ",
+                                                                "ใส่ชื่อบริษัทของคุณ",
                                                           ),
                                                           enabled: !_status,
                                                           autofocus: !_status,
@@ -203,117 +204,117 @@ class MapScreenState extends State<ProfilePage>
                                                   ),
                                                 ],
                                               )),
-                                          Padding(
-                                              padding: EdgeInsets.only(
-                                                  left: 25.0,
-                                                  right: 25.0,
-                                                  top: 25.0),
-                                              child: new Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: <Widget>[
-                                                  new Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.start,
-                                                    mainAxisSize:
-                                                        MainAxisSize.min,
-                                                    children: <Widget>[
-                                                      new Text(
-                                                        'ชื่ออีเมล์',
-                                                        style: TextStyle(
-                                                            fontSize: 16.0,
-                                                            color: PrimaryColor,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .bold),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ],
-                                              )),
-                                          Padding(
-                                              padding: EdgeInsets.only(
-                                                  left: 25.0,
-                                                  right: 25.0,
-                                                  top: 2.0),
-                                              child: new Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: <Widget>[
-                                                  new Flexible(
-                                                      child: FutureBuilder<
-                                                              TextEditingController>(
-                                                          future: dataemail(
-                                                              snapshot.data
-                                                                  .toString()),
-                                                          builder: (context,
-                                                              snapshot) {
-                                                            email =
-                                                                snapshot.data;
-                                                            return new TextField(
-                                                              controller: email,
-                                                              decoration:
-                                                                  const InputDecoration(
-                                                                      hintText:
-                                                                          "ป้อน ID อีเมล"),
-                                                              enabled: !_status,
-                                                            );
-                                                          })),
-                                                ],
-                                              )),
-                                          Padding(
-                                              padding: EdgeInsets.only(
-                                                  left: 25.0,
-                                                  right: 25.0,
-                                                  top: 25.0),
-                                              child: new Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: <Widget>[
-                                                  new Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.start,
-                                                    mainAxisSize:
-                                                        MainAxisSize.min,
-                                                    children: <Widget>[
-                                                      new Text(
-                                                        'เบอร์โทรศัพท์',
-                                                        style: TextStyle(
-                                                            fontSize: 16.0,
-                                                            color: PrimaryColor,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .bold),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ],
-                                              )),
-                                          Padding(
-                                              padding: EdgeInsets.only(
-                                                  left: 25.0,
-                                                  right: 25.0,
-                                                  top: 2.0),
-                                              child: new Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: <Widget>[
-                                                  new Flexible(
-                                                      child: FutureBuilder<
-                                                              TextEditingController>(
-                                                          future: datatel(
-                                                              snapshot.data
-                                                                  .toString()),
-                                                          builder: (context,
-                                                              snapshot) {
-                                                            tel = snapshot.data;
-                                                            return new TextField(
-                                                              controller: tel,
-                                                              decoration:
-                                                                  const InputDecoration(
-                                                                      hintText:
-                                                                          "ใส่เบอร์โทรศัพท์"),
-                                                              enabled: !_status,
-                                                            );
-                                                          })),
-                                                ],
-                                              )),
+                                          // Padding(
+                                          //     padding: EdgeInsets.only(
+                                          //         left: 25.0,
+                                          //         right: 25.0,
+                                          //         top: 25.0),
+                                          //     child: new Row(
+                                          //       mainAxisSize: MainAxisSize.max,
+                                          //       children: <Widget>[
+                                          //         new Column(
+                                          //           mainAxisAlignment:
+                                          //               MainAxisAlignment.start,
+                                          //           mainAxisSize:
+                                          //               MainAxisSize.min,
+                                          //           children: <Widget>[
+                                          //             new Text(
+                                          //               'ข้อมูลบริษัท',
+                                          //               style: TextStyle(
+                                          //                   fontSize: 16.0,
+                                          //                   color: PrimaryColor,
+                                          //                   fontWeight:
+                                          //                       FontWeight
+                                          //                           .bold),
+                                          //             ),
+                                          //           ],
+                                          //         ),
+                                          //       ],
+                                          //     )),
+                                          // Padding(
+                                          //     padding: EdgeInsets.only(
+                                          //         left: 25.0,
+                                          //         right: 25.0,
+                                          //         top: 2.0),
+                                          //     child: new Row(
+                                          //       mainAxisSize: MainAxisSize.max,
+                                          //       children: <Widget>[
+                                          //         new Flexible(
+                                          //             child: FutureBuilder<
+                                          //                     TextEditingController>(
+                                          //                 future: dataemail(
+                                          //                     snapshot.data
+                                          //                         .toString()),
+                                          //                 builder: (context,
+                                          //                     snapshot) {
+                                          //                   email =
+                                          //                       snapshot.data;
+                                          //                   return new TextField(
+                                          //                     controller: email,
+                                          //                     decoration:
+                                          //                         const InputDecoration(
+                                          //                             hintText:
+                                          //                                 "ป้อน ID อีเมล"),
+                                          //                     enabled: !_status,
+                                          //                   );
+                                          //                 })),
+                                          //       ],
+                                          //     )),
+                                          // Padding(
+                                          //     padding: EdgeInsets.only(
+                                          //         left: 25.0,
+                                          //         right: 25.0,
+                                          //         top: 25.0),
+                                          //     child: new Row(
+                                          //       mainAxisSize: MainAxisSize.max,
+                                          //       children: <Widget>[
+                                          //         new Column(
+                                          //           mainAxisAlignment:
+                                          //               MainAxisAlignment.start,
+                                          //           mainAxisSize:
+                                          //               MainAxisSize.min,
+                                          //           children: <Widget>[
+                                          //             new Text(
+                                          //               'เบอร์โทรศัพท์',
+                                          //               style: TextStyle(
+                                          //                   fontSize: 16.0,
+                                          //                   color: PrimaryColor,
+                                          //                   fontWeight:
+                                          //                       FontWeight
+                                          //                           .bold),
+                                          //             ),
+                                          //           ],
+                                          //         ),
+                                          //       ],
+                                          //     )),
+                                          // Padding(
+                                          //     padding: EdgeInsets.only(
+                                          //         left: 25.0,
+                                          //         right: 25.0,
+                                          //         top: 2.0),
+                                          //     child: new Row(
+                                          //       mainAxisSize: MainAxisSize.max,
+                                          //       children: <Widget>[
+                                          //         new Flexible(
+                                          //             child: FutureBuilder<
+                                          //                     TextEditingController>(
+                                          //                 future: datatel(
+                                          //                     snapshot.data
+                                          //                         .toString()),
+                                          //                 builder: (context,
+                                          //                     snapshot) {
+                                          //                   tel = snapshot.data;
+                                          //                   return new TextField(
+                                          //                     controller: tel,
+                                          //                     decoration:
+                                          //                         const InputDecoration(
+                                          //                             hintText:
+                                          //                                 "ใส่เบอร์โทรศัพท์"),
+                                          //                     enabled: !_status,
+                                          //                   );
+                                          //                 })),
+                                          //       ],
+                                          //     )),
                                           Padding(
                                               padding: EdgeInsets.only(
                                                   left: 25.0,
@@ -362,6 +363,7 @@ class MapScreenState extends State<ProfilePage>
                                                   ),
                                                 ],
                                               )),
+
                                           Padding(
                                               padding: EdgeInsets.only(
                                                   left: 25.0,
@@ -411,6 +413,7 @@ class MapScreenState extends State<ProfilePage>
                                                   ),
                                                 ],
                                               )),
+
                                           Container(
                                             padding: EdgeInsets.only(
                                                 left: 25.0,
@@ -478,7 +481,7 @@ class MapScreenState extends State<ProfilePage>
                                                                 AlertMessage(
                                                                     "แจ้งเตือน",
                                                                     "อัพเดตรูปภาพแล้ว",
-                                                                    ProfilePage()),
+                                                                    EditingCompany()),
                                                           );
                                                           setState(() {
                                                             file = File(
@@ -576,7 +579,7 @@ class MapScreenState extends State<ProfilePage>
                             builder: (_) => AlertMessage(
                                 "แจ้งเตือน", "แก้ไขข้อมูลสำเร็จ", null));
                         Navigator.of(context).pushReplacement(MaterialPageRoute(
-                            builder: (context) => ProfilePage()));
+                            builder: (context) => EditingCompany()));
                       } else {
                         showDialog(
                             context: context,
@@ -604,7 +607,7 @@ class MapScreenState extends State<ProfilePage>
                           builder: (_) => AlertMessage(
                               "แจ้งเตือน", "แก้ไขข้อมูลสำเร็จ", null));
                       Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (context) => ProfilePage()));
+                          builder: (context) => EditingCompany()));
                     } else {
                       showDialog(
                           context: context,

@@ -1,28 +1,28 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
-import 'package:login_ui/Screens/ForgotPassword/SendEmail.dart';
+
 import 'package:login_ui/Screens/loading.dart';
-import 'package:login_ui/Screens/register/register.dart';
-import 'package:login_ui/Screens/register/registerAddjob.dart';
+import 'package:login_ui/Screens/login/login.dart';
+
 import 'package:login_ui/Themes/Themes.dart';
 import 'package:login_ui/components/alert.dart';
+
 import 'package:login_ui/components/background.dart';
-import 'loginController.dart';
 
-class LoginScreen extends StatefulWidget {
-  LoginScreen({Key key}) : super(key: key);
+class ForgotPassword extends StatefulWidget {
+  ForgotPassword({Key key}) : super(key: key);
 
-  final TextEditingController username = TextEditingController();
-  final TextEditingController password = TextEditingController();
+  // final TextEditingController username = TextEditingController();
+  // final TextEditingController password = TextEditingController();
 
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  _ForgotPasswordState createState() => _ForgotPasswordState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
-  TextEditingController username = TextEditingController();
-  TextEditingController password = TextEditingController();
+class _ForgotPasswordState extends State<ForgotPassword> {
+  // TextEditingController username = TextEditingController();
+  // TextEditingController password = TextEditingController();
 
   @override
   void initState() {
@@ -46,7 +46,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     alignment: Alignment.centerLeft,
                     padding: EdgeInsets.symmetric(horizontal: 40),
                     child: Text(
-                      "เข้าสู่ระบบ",
+                      "ขอรหัสผ่านใหม่",
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Color(0xFF31B4BC),
@@ -59,10 +59,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     alignment: Alignment.center,
                     margin: EdgeInsets.symmetric(horizontal: 40),
                     child: TextField(
-                      controller: username,
+                      // controller: username,
                       decoration: InputDecoration(
                           icon: Icon(Icons.account_circle_outlined),
-                          labelText: "ชื่อผู้ใช้"),
+                          labelText: "รหัสผ่านใหม่"),
                     ),
                   ),
                   SizedBox(height: size.height * 0.03),
@@ -72,25 +72,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: TextField(
                       decoration: InputDecoration(
                           icon: Icon(Icons.vpn_key_outlined),
-                          labelText: "รหัสผ่าน"),
+                          labelText: "ยืนยันรหัสผ่านอีกครั้ง"),
                       obscureText: true,
-                      controller: password,
-                    ),
-                  ),
-                  Container(
-                    alignment: Alignment.centerRight,
-                    margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
-                    child: GestureDetector(
-                      onTap: () => {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => SendEmail()))
-                      },
-                      child: Text(
-                        "ลืมรหัสผ่าน?",
-                        style: TextStyle(fontSize: 12, color: PrimaryColor),
-                      ),
+                      // controller: password,
                     ),
                   ),
                   SizedBox(height: size.height * 0.01),
@@ -114,35 +98,35 @@ class _LoginScreenState extends State<LoginScreen> {
                             ])),
                         padding: const EdgeInsets.all(0),
                         child: GestureDetector(
-                          onTap: () => {
-                            if (username.text != "")
-                              {
-                                if (password.text != "")
-                                  {
-                                    setState(() => loading = true),
-                                    login(
-                                        context, username.text, password.text),
-                                  }
-                                else
-                                  {
-                                    showDialog(
-                                      context: context,
-                                      builder: (_) => AlertMessage("แจ้งเตือน",
-                                          "กรุงณากรอกรหัสผ่าน", null),
-                                    ),
-                                  }
-                              }
-                            else
-                              {
-                                showDialog(
-                                  context: context,
-                                  builder: (_) => AlertMessage("แจ้งเตือน",
-                                      "กรุงณากรอกบัญชีผู้ใช้", null),
-                                ),
-                              }
-                          },
+                          // onTap: () => {
+                          //   if (username.text != "")
+                          //     {
+                          //       if (password.text != "")
+                          //         {
+                          //           setState(() => loading = true),
+                          //           login(
+                          //               context, username.text, password.text),
+                          //         }
+                          //       else
+                          //         {
+                          //           showDialog(
+                          //             context: context,
+                          //             builder: (_) => AlertMessage("แจ้งเตือน",
+                          //                 "กรุงณากรอกรหัสผ่าน", null),
+                          //           ),
+                          //         }
+                          //     }
+                          //   else
+                          //     {
+                          //       showDialog(
+                          //         context: context,
+                          //         builder: (_) => AlertMessage("แจ้งเตือน",
+                          //             "กรุงณากรอกบัญชีผู้ใช้", null),
+                          //       ),
+                          //     }
+                          // },
                           child: Text(
-                            "เข้าสู่ระบบ",
+                            "ยืนยัน",
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
@@ -156,36 +140,16 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   Container(
                     alignment: Alignment.centerRight,
-                    padding: EdgeInsets.symmetric(),
                     margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
                     child: GestureDetector(
                       onTap: () => {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => RegisterScreen()))
+                                builder: (context) => LoginScreen()))
                       },
                       child: Text(
-                        "สมัครสมาชิก/สมัครงาน",
-                        style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold,
-                            color: PrimaryColor),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    alignment: Alignment.centerRight,
-                    margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
-                    child: GestureDetector(
-                      onTap: () => {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => RegisterAddjobScreen()))
-                      },
-                      child: Text(
-                        "สมัครสมาชิก/รับสมัครงาน",
+                        "ย้อนกลับไปเข้าสู่เข้าสู่ระบบ",
                         style: TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.bold,
