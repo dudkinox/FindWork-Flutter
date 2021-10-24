@@ -5,19 +5,21 @@ import 'package:login_ui/Screens/loading.dart';
 import 'package:login_ui/Screens/login/login.dart';
 
 import 'package:login_ui/Themes/Themes.dart';
+import 'package:login_ui/components/alert.dart';
 
 import 'package:login_ui/components/background.dart';
 
-import 'ForgotPassword.dart';
+import 'ForGotController.dart';
 
 class EmailMessage extends StatefulWidget {
   EmailMessage({Key key}) : super(key: key);
-
+  final TextEditingController verify = TextEditingController();
   @override
   _EmailMessageState createState() => _EmailMessageState();
 }
 
 class _EmailMessageState extends State<EmailMessage> {
+  TextEditingController verify = TextEditingController();
   @override
   void initState() {
     super.initState();
@@ -57,6 +59,7 @@ class _EmailMessageState extends State<EmailMessage> {
                       decoration: InputDecoration(
                           icon: Icon(Icons.email_outlined),
                           labelText: "กรุณากรอกเลข "),
+                      controller: verify,
                     ),
                   ),
                   SizedBox(height: size.height * 0.03),
@@ -82,11 +85,25 @@ class _EmailMessageState extends State<EmailMessage> {
                         padding: const EdgeInsets.all(0),
                         child: GestureDetector(
                           onTap: () => {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => ForgotPassword()))
+                            if (verify.text != "")
+                              {
+                                SendEmailForGot(context, verify.text),
+                              }
+                            else
+                              {
+                                showDialog(
+                                  context: context,
+                                  builder: (_) => AlertMessage(
+                                      "แจ้งเตือน", "กรุงณากรอกเลขยืนยัน", null),
+                                ),
+                              }
                           },
+                          // onTap: () => {
+                          //   Navigator.push(
+                          //       context,
+                          //       MaterialPageRoute(
+                          //           builder: (context) => ForgotPassword()))
+                          // },
                           child: Text(
                             "ยืนยัน",
                             textAlign: TextAlign.center,

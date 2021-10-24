@@ -1,6 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
+import 'package:form_field_validator/form_field_validator.dart';
 import 'package:login_ui/Screens/loading.dart';
 import 'package:login_ui/Screens/login/login.dart';
 
@@ -8,13 +9,12 @@ import 'package:login_ui/Themes/Themes.dart';
 import 'package:login_ui/components/alert.dart';
 
 import 'package:login_ui/components/background.dart';
+import 'package:login_ui/model/loginModel.dart';
 
-import 'EmailMessage.dart';
 import 'ForGotController.dart';
 
 class SendEmail extends StatefulWidget {
   SendEmail({Key key}) : super(key: key);
-
   final TextEditingController email = TextEditingController();
 
   @override
@@ -22,7 +22,7 @@ class SendEmail extends StatefulWidget {
 }
 
 class _SendEmailState extends State<SendEmail> {
-  TextEditingController email = TextEditingController();
+  final TextEditingController email = TextEditingController();
   @override
   void initState() {
     super.initState();
@@ -58,7 +58,7 @@ class _SendEmailState extends State<SendEmail> {
                   Container(
                     alignment: Alignment.center,
                     margin: EdgeInsets.symmetric(horizontal: 40),
-                    child: TextField(
+                    child: TextFormField(
                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
                           icon: Icon(Icons.email_outlined),
