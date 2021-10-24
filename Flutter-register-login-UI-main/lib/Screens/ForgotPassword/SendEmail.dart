@@ -87,7 +87,12 @@ class _SendEmailState extends State<SendEmail> {
                         child: GestureDetector(
                           onTap: () => {
                             if (email.text != "")
-                              {}
+                              {
+                                {
+                                  setState(() => loading = true),
+                                  login(context, email.text, password.text),
+                                }
+                              }
                             else
                               {
                                 showDialog(
@@ -97,6 +102,12 @@ class _SendEmailState extends State<SendEmail> {
                                 ),
                               }
                           },
+                          // onTap: () => {
+                          //   Navigator.push(
+                          //       context,
+                          //       MaterialPageRoute(
+                          //           builder: (context) => EmailMessage()))
+                          // },
                           child: Text(
                             "ส่งอีเมล",
                             textAlign: TextAlign.center,
