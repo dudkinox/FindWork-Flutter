@@ -13,17 +13,11 @@ import 'EmailMessage.dart';
 class SendEmail extends StatefulWidget {
   SendEmail({Key key}) : super(key: key);
 
-  // final TextEditingController username = TextEditingController();
-  // final TextEditingController password = TextEditingController();
-
   @override
   _SendEmailState createState() => _SendEmailState();
 }
 
 class _SendEmailState extends State<SendEmail> {
-  // TextEditingController username = TextEditingController();
-  // TextEditingController password = TextEditingController();
-
   @override
   void initState() {
     super.initState();
@@ -60,11 +54,10 @@ class _SendEmailState extends State<SendEmail> {
                     alignment: Alignment.center,
                     margin: EdgeInsets.symmetric(horizontal: 40),
                     child: TextField(
+                      keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
                           icon: Icon(Icons.email_outlined),
                           labelText: "กรุณากรอกอีเมลผู้ใช้"),
-
-                      // controller: password,
                     ),
                   ),
                   SizedBox(height: size.height * 0.03),
@@ -95,34 +88,6 @@ class _SendEmailState extends State<SendEmail> {
                                 MaterialPageRoute(
                                     builder: (context) => EmailMessage()))
                           },
-
-                          // onTap: () => {
-                          //   if (username.text != "")
-                          //     {
-                          //       if (password.text != "")
-                          //         {
-                          //           setState(() => loading = true),
-                          //           login(
-                          //               context, username.text, password.text),
-                          //         }
-                          //       else
-                          //         {
-                          //           showDialog(
-                          //             context: context,
-                          //             builder: (_) => AlertMessage("แจ้งเตือน",
-                          //                 "กรุงณากรอกรหัสผ่าน", null),
-                          //           ),
-                          //         }
-                          //     }
-                          //   else
-                          //     {
-                          //       showDialog(
-                          //         context: context,
-                          //         builder: (_) => AlertMessage("แจ้งเตือน",
-                          //             "กรุงณากรอกบัญชีผู้ใช้", null),
-                          //       ),
-                          //     }
-                          // },
                           child: Text(
                             "ส่งอีเมล",
                             textAlign: TextAlign.center,

@@ -13,17 +13,11 @@ import 'ForgotPassword.dart';
 class EmailMessage extends StatefulWidget {
   EmailMessage({Key key}) : super(key: key);
 
-  // final TextEditingController username = TextEditingController();
-  // final TextEditingController password = TextEditingController();
-
   @override
   _EmailMessageState createState() => _EmailMessageState();
 }
 
 class _EmailMessageState extends State<EmailMessage> {
-  // TextEditingController username = TextEditingController();
-  // TextEditingController password = TextEditingController();
-
   @override
   void initState() {
     super.initState();
@@ -63,8 +57,6 @@ class _EmailMessageState extends State<EmailMessage> {
                       decoration: InputDecoration(
                           icon: Icon(Icons.email_outlined),
                           labelText: "กรุณากรอกเลข "),
-
-                      // controller: password,
                     ),
                   ),
                   SizedBox(height: size.height * 0.03),
@@ -95,34 +87,6 @@ class _EmailMessageState extends State<EmailMessage> {
                                 MaterialPageRoute(
                                     builder: (context) => ForgotPassword()))
                           },
-
-                          // onTap: () => {
-                          //   if (username.text != "")
-                          //     {
-                          //       if (password.text != "")
-                          //         {
-                          //           setState(() => loading = true),
-                          //           login(
-                          //               context, username.text, password.text),
-                          //         }
-                          //       else
-                          //         {
-                          //           showDialog(
-                          //             context: context,
-                          //             builder: (_) => AlertMessage("แจ้งเตือน",
-                          //                 "กรุงณากรอกรหัสผ่าน", null),
-                          //           ),
-                          //         }
-                          //     }
-                          //   else
-                          //     {
-                          //       showDialog(
-                          //         context: context,
-                          //         builder: (_) => AlertMessage("แจ้งเตือน",
-                          //             "กรุงณากรอกบัญชีผู้ใช้", null),
-                          //       ),
-                          //     }
-                          // },
                           child: Text(
                             "ยืนยัน",
                             textAlign: TextAlign.center,

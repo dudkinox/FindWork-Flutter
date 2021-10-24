@@ -13,17 +13,11 @@ import 'package:login_ui/components/background.dart';
 class ForgotPassword extends StatefulWidget {
   ForgotPassword({Key key}) : super(key: key);
 
-  // final TextEditingController username = TextEditingController();
-  // final TextEditingController password = TextEditingController();
-
   @override
   _ForgotPasswordState createState() => _ForgotPasswordState();
 }
 
 class _ForgotPasswordState extends State<ForgotPassword> {
-  // TextEditingController username = TextEditingController();
-  // TextEditingController password = TextEditingController();
-
   @override
   void initState() {
     super.initState();
@@ -59,7 +53,6 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                     alignment: Alignment.center,
                     margin: EdgeInsets.symmetric(horizontal: 40),
                     child: TextField(
-                      // controller: username,
                       decoration: InputDecoration(
                           icon: Icon(Icons.account_circle_outlined),
                           labelText: "รหัสผ่านใหม่"),
@@ -74,7 +67,6 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                           icon: Icon(Icons.vpn_key_outlined),
                           labelText: "ยืนยันรหัสผ่านอีกครั้ง"),
                       obscureText: true,
-                      // controller: password,
                     ),
                   ),
                   SizedBox(height: size.height * 0.01),
@@ -98,33 +90,6 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                             ])),
                         padding: const EdgeInsets.all(0),
                         child: GestureDetector(
-                          // onTap: () => {
-                          //   if (username.text != "")
-                          //     {
-                          //       if (password.text != "")
-                          //         {
-                          //           setState(() => loading = true),
-                          //           login(
-                          //               context, username.text, password.text),
-                          //         }
-                          //       else
-                          //         {
-                          //           showDialog(
-                          //             context: context,
-                          //             builder: (_) => AlertMessage("แจ้งเตือน",
-                          //                 "กรุงณากรอกรหัสผ่าน", null),
-                          //           ),
-                          //         }
-                          //     }
-                          //   else
-                          //     {
-                          //       showDialog(
-                          //         context: context,
-                          //         builder: (_) => AlertMessage("แจ้งเตือน",
-                          //             "กรุงณากรอกบัญชีผู้ใช้", null),
-                          //       ),
-                          //     }
-                          // },
                           child: Text(
                             "ยืนยัน",
                             textAlign: TextAlign.center,
