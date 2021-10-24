@@ -6,7 +6,6 @@ import 'package:login_ui/Screens/loading.dart';
 import 'package:login_ui/Screens/login/login.dart';
 
 import 'package:login_ui/Themes/Themes.dart';
-import 'package:login_ui/components/alert.dart';
 
 import 'package:login_ui/components/background.dart';
 

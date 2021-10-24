@@ -9,6 +9,9 @@ import 'package:login_ui/components/alert.dart';
 
 import 'package:login_ui/components/background.dart';
 
+import 'EmailMessage.dart';
+import 'ForGotController.dart';
+
 class SendEmail extends StatefulWidget {
   SendEmail({Key key}) : super(key: key);
 
@@ -88,10 +91,7 @@ class _SendEmailState extends State<SendEmail> {
                           onTap: () => {
                             if (email.text != "")
                               {
-                                {
-                                  setState(() => loading = true),
-                                  login(context, email.text, password.text),
-                                }
+                                SendEmailForGot(context, email.text),
                               }
                             else
                               {
@@ -102,12 +102,6 @@ class _SendEmailState extends State<SendEmail> {
                                 ),
                               }
                           },
-                          // onTap: () => {
-                          //   Navigator.push(
-                          //       context,
-                          //       MaterialPageRoute(
-                          //           builder: (context) => EmailMessage()))
-                          // },
                           child: Text(
                             "ส่งอีเมล",
                             textAlign: TextAlign.center,
