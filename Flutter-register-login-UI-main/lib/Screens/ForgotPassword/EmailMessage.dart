@@ -3,29 +3,45 @@
 import 'package:flutter/material.dart';
 import 'package:login_ui/Screens/loading.dart';
 import 'package:login_ui/Screens/login/login.dart';
+import 'package:login_ui/Service/EmailService.dart';
 
 import 'package:login_ui/Themes/Themes.dart';
 import 'package:login_ui/components/alert.dart';
 
 import 'package:login_ui/components/background.dart';
 
-import 'ForGotController.dart';
+import 'ForgotPassword.dart';
 
 class EmailMessage extends StatefulWidget {
-  EmailMessage({Key key}) : super(key: key);
+  EmailMessage(this.token);
+  var token;
   final TextEditingController verify = TextEditingController();
   @override
-  _EmailMessageState createState() => _EmailMessageState();
+  _EmailMessageState createState() => _EmailMessageState(token);
 }
 
 class _EmailMessageState extends State<EmailMessage> {
+  _EmailMessageState(this.token);
+  var token;
   TextEditingController verify = TextEditingController();
+  bool loading = false;
   @override
   void initState() {
     super.initState();
   }
 
-  bool loading = false;
+  void VerifyCode(String code, String token) async {
+    String verify = await VerifyEmail(code);
+    if (verify == "true") {
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => ForgotPassword(token)));
+    } else {
+      showDialog(
+        context: context,
+        builder: (_) => AlertMessage("แจ้งเตือน", "รหัสยืนยันไม่ถูกต้อง", null),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,6 +72,7 @@ class _EmailMessageState extends State<EmailMessage> {
                     alignment: Alignment.center,
                     margin: EdgeInsets.symmetric(horizontal: 40),
                     child: TextField(
+                      keyboardType: TextInputType.number,
                       decoration: InputDecoration(
                           icon: Icon(Icons.email_outlined),
                           labelText: "กรุณากรอกเลข "),
@@ -87,7 +104,7 @@ class _EmailMessageState extends State<EmailMessage> {
                           onTap: () => {
                             if (verify.text != "")
                               {
-                                SendEmailForGot(context, verify.text),
+                                VerifyCode(verify.text, token),
                               }
                             else
                               {
@@ -98,12 +115,6 @@ class _EmailMessageState extends State<EmailMessage> {
                                 ),
                               }
                           },
-                          // onTap: () => {
-                          //   Navigator.push(
-                          //       context,
-                          //       MaterialPageRoute(
-                          //           builder: (context) => ForgotPassword()))
-                          // },
                           child: Text(
                             "ยืนยัน",
                             textAlign: TextAlign.center,

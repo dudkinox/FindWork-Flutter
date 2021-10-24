@@ -11,6 +11,7 @@ String sorenerToJson(AccountModel data) => json.encode(data.toJson());
 
 class AccountModel {
   AccountModel({
+    this.id,
     this.email,
     this.matching,
     this.tel,
@@ -22,6 +23,7 @@ class AccountModel {
     this.image,
   });
 
+  String id;
   String email;
   String matching;
   String tel;
@@ -33,6 +35,7 @@ class AccountModel {
   String image;
 
   factory AccountModel.fromJson(Map<String, dynamic> json) => AccountModel(
+        id: json["id"] == null ? null : json["id"],
         email: json["email"] == null ? null : json["email"],
         matching: json["matching"] == null ? null : json["matching"],
         tel: json["tel"] == null ? null : json["tel"],
@@ -45,6 +48,7 @@ class AccountModel {
       );
 
   Map<String, dynamic> toJson() => {
+        "id": id == null ? null : id,
         "email": email == null ? null : email,
         "matching": matching == null ? null : matching,
         "tel": tel == null ? null : tel,
@@ -82,15 +86,14 @@ class RegisterInputModelEmployer {
   String job_id;
   String fullname;
 
-  RegisterInputModelEmployer({
-    this.username,
-    this.password,
-    this.confirmpassword,
-    this.email,
-    this.tel,
-    this.job_id,
-    this.fullname
-  });
+  RegisterInputModelEmployer(
+      {this.username,
+      this.password,
+      this.confirmpassword,
+      this.email,
+      this.tel,
+      this.job_id,
+      this.fullname});
 }
 
 class LoginModel {

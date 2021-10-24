@@ -4,25 +4,34 @@ import 'package:flutter/material.dart';
 
 import 'package:login_ui/Screens/loading.dart';
 import 'package:login_ui/Screens/login/login.dart';
+import 'package:login_ui/Service/EmailService.dart';
 
 import 'package:login_ui/Themes/Themes.dart';
+import 'package:login_ui/components/alert.dart';
 
 import 'package:login_ui/components/background.dart';
 
 class ForgotPassword extends StatefulWidget {
-  ForgotPassword({Key key}) : super(key: key);
+  ForgotPassword(this.token);
+  var token;
+  TextEditingController password = new TextEditingController();
+  TextEditingController confirmpassword = new TextEditingController();
 
   @override
-  _ForgotPasswordState createState() => _ForgotPasswordState();
+  _ForgotPasswordState createState() => _ForgotPasswordState(token);
 }
 
 class _ForgotPasswordState extends State<ForgotPassword> {
+  _ForgotPasswordState(this.token);
+  var token;
   @override
   void initState() {
     super.initState();
   }
 
   bool loading = false;
+  TextEditingController password = new TextEditingController();
+  TextEditingController confirmpassword = new TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -52,9 +61,11 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                     alignment: Alignment.center,
                     margin: EdgeInsets.symmetric(horizontal: 40),
                     child: TextField(
+                      controller: password,
                       decoration: InputDecoration(
-                          icon: Icon(Icons.account_circle_outlined),
+                          icon: Icon(Icons.vpn_key_outlined),
                           labelText: "รหัสผ่านใหม่"),
+                      obscureText: true,
                     ),
                   ),
                   SizedBox(height: size.height * 0.03),
@@ -62,6 +73,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                     alignment: Alignment.center,
                     margin: EdgeInsets.symmetric(horizontal: 40),
                     child: TextField(
+                      controller: confirmpassword,
                       decoration: InputDecoration(
                           icon: Icon(Icons.vpn_key_outlined),
                           labelText: "ยืนยันรหัสผ่านอีกครั้ง"),
@@ -73,7 +85,41 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                     alignment: Alignment.centerRight,
                     margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
                     child: RaisedButton(
-                      onPressed: () {},
+                      onPressed: () async {
+                        if (password.text != "") {
+                          if (confirmpassword.text != "") {
+                            String status =
+                                await ChangePassword(password.text, token);
+                            if (status == "แก้ไขข้อมูลแล้ว") {
+                              showDialog(
+                                context: context,
+                                builder: (_) => AlertMessage("แจ้งเตือน",
+                                    "เปลี่ยนรหัสเรียบร้อยแล้ว", LoginScreen()),
+                              );
+                            } else {
+                              showDialog(
+                                context: context,
+                                builder: (_) => AlertMessage(
+                                    "แจ้งเตือน",
+                                    "เซิฟเวอร์เกิดข้อผิดพลาด โปรดลองใหม่ภายหลัง",
+                                    null),
+                              );
+                            }
+                          } else {
+                            showDialog(
+                              context: context,
+                              builder: (_) => AlertMessage(
+                                  "แจ้งเตือน", "กรุณากรอกยืนยันรหัสผ่าน", null),
+                            );
+                          }
+                        } else {
+                          showDialog(
+                            context: context,
+                            builder: (_) => AlertMessage(
+                                "แจ้งเตือน", "กรุณากรอกรหัสผ่าน", null),
+                          );
+                        }
+                      },
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(80.0)),
                       textColor: Colors.white,

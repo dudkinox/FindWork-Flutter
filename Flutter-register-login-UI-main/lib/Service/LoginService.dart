@@ -7,6 +7,18 @@ import 'package:http/http.dart' as http;
 import 'package:login_ui/Database/Host.dart';
 import 'package:login_ui/model/loginModel.dart';
 
+Future<List<AccountModel>> DataUser() async {
+  final String url = Host + "/api/login";
+  final response = await http.get(
+    Uri.parse(url),
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+  );
+  List jsonResponse = json.decode(response?.body);
+  return jsonResponse.map((data) => new AccountModel.fromJson(data)).toList();
+}
+
 Future<LoginModel> Login(String username, String password) async {
   final String url = Host + "/api/login/" + username + "/" + password;
   final response = await http.get(
