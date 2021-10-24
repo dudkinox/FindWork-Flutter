@@ -5,19 +5,21 @@ import 'package:login_ui/Screens/loading.dart';
 import 'package:login_ui/Screens/login/login.dart';
 
 import 'package:login_ui/Themes/Themes.dart';
+import 'package:login_ui/components/alert.dart';
 
 import 'package:login_ui/components/background.dart';
 
-import 'EmailMessage.dart';
-
 class SendEmail extends StatefulWidget {
   SendEmail({Key key}) : super(key: key);
+
+  final TextEditingController email = TextEditingController();
 
   @override
   _SendEmailState createState() => _SendEmailState();
 }
 
 class _SendEmailState extends State<SendEmail> {
+  TextEditingController email = TextEditingController();
   @override
   void initState() {
     super.initState();
@@ -58,6 +60,7 @@ class _SendEmailState extends State<SendEmail> {
                       decoration: InputDecoration(
                           icon: Icon(Icons.email_outlined),
                           labelText: "กรุณากรอกอีเมลผู้ใช้"),
+                      controller: email,
                     ),
                   ),
                   SizedBox(height: size.height * 0.03),
@@ -83,10 +86,16 @@ class _SendEmailState extends State<SendEmail> {
                         padding: const EdgeInsets.all(0),
                         child: GestureDetector(
                           onTap: () => {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => EmailMessage()))
+                            if (email.text != "")
+                              {}
+                            else
+                              {
+                                showDialog(
+                                  context: context,
+                                  builder: (_) => AlertMessage(
+                                      "แจ้งเตือน", "กรุงณากรอกอีเมล", null),
+                                ),
+                              }
                           },
                           child: Text(
                             "ส่งอีเมล",
