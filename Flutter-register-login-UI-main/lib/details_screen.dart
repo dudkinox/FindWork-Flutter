@@ -19,12 +19,14 @@ class DetailsPage extends StatelessWidget {
 
   Future<bool> status(String token, String jobId) async {
     FavoriteModel status = await GetFavorite(token);
-    for (var i = 0; i < status.jobId.length; i++) {
-      if (status.jobId[i] == null) {
-        return false;
-      }
-      if (status.jobId[i] == jobId) {
-        return true;
+    if (status != null) {
+      for (var i = 0; i < status.jobId.length; i++) {
+        if (status.jobId[i] == null) {
+          return false;
+        }
+        if (status.jobId[i] == jobId) {
+          return true;
+        }
       }
     }
     return false;
@@ -123,7 +125,7 @@ class DetailsPage extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              data.company,
+                              data?.company,
                               style: TextStyle(
                                   fontSize: 20.0,
                                   fontWeight: FontWeight.bold,

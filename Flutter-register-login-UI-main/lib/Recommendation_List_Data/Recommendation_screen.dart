@@ -1,9 +1,12 @@
+import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
 import 'package:login_ui/Screens/loading.dart';
 import 'package:login_ui/Service/JobService.dart';
 import 'package:login_ui/Themes/Themes.dart';
 import 'package:login_ui/details_screen.dart';
+import 'package:login_ui/model/favoriteModel.dart';
 import 'package:login_ui/model/jobModel.dart';
+
 
 class Recommendation extends StatelessWidget {
   final String imgUlr;
@@ -14,6 +17,22 @@ class Recommendation extends StatelessWidget {
 
   const Recommendation(this.imgUlr, this.company, this.location, this.id, this.token);
 
+
+  Future<bool> status(String token, String jobId) async {
+    FavoriteModel status = await GetFavorite(token);
+    if(status != null){
+      for (var i = 0; i < status.jobId.length; i++) {
+        if (status.jobId[i] == null) {
+          return false;
+        }
+        if (status.jobId[i] == jobId) {
+          return true;
+        }
+      }
+    }
+      return false;
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -67,11 +86,44 @@ class Recommendation extends StatelessWidget {
                                   topLeft: Radius.circular(20.0),
                                   topRight: Radius.circular(20.0),
                                 ),
+                                
                                 image: DecorationImage(
                                     image: NetworkImage(imgUlr),
                                     fit: BoxFit.cover),
+                                    
                               ),
+                              child: 
+                              Stack(
+                                children: [
+                                  Positioned(
+                                    right: 10,
+                                    top: 10,
+                                    child: FutureBuilder<bool>(
+                                  future: status(token, id),
+                                  builder: (context, AsyncSnapshot snapshot) {
+                                    bool favorite = snapshot?.data;
+                                    if (snapshot.connectionState !=
+                                        ConnectionState.done) {
+                                      return Text("");
+                                    } else {
+                                      return FavoriteButton(
+                                        isFavorite: favorite,
+                                        valueChanged: (_isFavorite) {
+                                          if (_isFavorite == true) {
+                                            AddFavorite(id, token);
+                                            
+                                          } else {
+                                            DelFavorite(id, token);
+                                          }
+                                        },
+                                      );
+                                    }
+                                  },
+                                ),)],)
+                              
+                              
                             ),
+                            
                           ),
                           SizedBox(
                             height: 10.0,

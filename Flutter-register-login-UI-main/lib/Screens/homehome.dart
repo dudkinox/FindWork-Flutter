@@ -66,7 +66,7 @@ class _HomeHomeState extends State<HomeHome> {
             : newindex == 1
                 ? ProfilePage()
                 : newindex == 2
-                    ? Favorite()
+                    ? Favorite(token)
                     : newindex == 3
                         ? AlertPage()
                         : null,
