@@ -74,17 +74,19 @@ class work_parttime extends StatelessWidget {
                   if (snapshot?.connectionState != ConnectionState.done) {
                     return LoadingCube();
                   } else {
-                    for (var data in snapshot.data) {
-                      result.add(Recommendation(
-                          data.image,
-                          data.company,
-                          data.province +
-                              " " +
-                              data.district +
-                              " " +
-                              data.subDistrict,
-                              data.id,
-                              token));
+                    for (JobDataModel data in snapshot.data) {
+                      if (data.departmentId.type.single == "parttime") {
+                        result.add(Recommendation(
+                            data?.image,
+                            data?.company,
+                            data.province +
+                                " " +
+                                data?.district +
+                                " " +
+                                data?.subDistrict,
+                            data?.id,
+                            token));
+                      }
                     }
                     return ListView.builder(
                       scrollDirection: Axis.horizontal,

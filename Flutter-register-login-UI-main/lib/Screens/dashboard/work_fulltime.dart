@@ -10,7 +10,6 @@ import 'dashboard_All.dart';
 class work_fulltime extends StatelessWidget {
   work_fulltime(this.token);
   var token;
-  bool loading = false;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -74,19 +73,19 @@ class work_fulltime extends StatelessWidget {
                     return LoadingCube();
                   } else {
                     for (JobDataModel data in snapshot.data) {
-                      result.add(Recommendation(
-                        data?.image,
-                        data?.company,
-                        data.province +
-                            " " +
-                            data?.district +
-                            " " +
-                            data?.subDistrict,
+                      if (data.departmentId.type.single == "salary") {
+                        result.add(Recommendation(
+                            data?.image,
+                            data?.company,
+                            data.province +
+                                " " +
+                                data?.district +
+                                " " +
+                                data?.subDistrict,
                             data?.id,
-                            token
-                      ));
+                            token));
+                      }
                     }
-                    loading = false;
                     return ListView?.builder(
                       scrollDirection: Axis.horizontal,
                       itemCount: result?.length,

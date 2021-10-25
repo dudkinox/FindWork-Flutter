@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:login_ui/Animation/Fade_Animation.dart';
 import 'package:login_ui/Recommendation_List_Data/Recommendation_screen.dart';
 import 'package:login_ui/Screens/loading.dart';
 import 'package:login_ui/Service/JobService.dart';
@@ -86,48 +85,51 @@ class _FavoriteState extends State<Favorite> {
                   SizedBox(
                     height: 20,
                   ),
-                  Container(
-                    height: MediaQuery.of(context).size.height * 0.72,
-                    width: MediaQuery.of(context).size.width * 0.9,
-                    child: FutureBuilder<List<JobDataModel>>(
-                      future: listFavorite(token),
-                      builder: (context, AsyncSnapshot snapshot) {
-                        List result = [];
-                        if (snapshot?.connectionState != ConnectionState.done) {
-                          return LoadingCube();
-                        } else {
-                          for (JobDataModel data in snapshot?.data) {
-                            result.add(Recommendation(
-                                data.image,
-                                data.company,
-                                data.province +
-                                    " " +
-                                    data.district +
-                                    " " +
-                                    data.subDistrict,
-                                data.id,
-                                token));
-                          }
-                          loading = false;
-                          if (result.length == 0) {
-                            return Text(
-                              "ไม่มีข้อมูลที่ชื่นชอบ",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black,
-                                  fontSize: 15),
-                              textAlign: TextAlign.center,
-                            );
+                  Expanded(
+                    child: Container(
+                      height: MediaQuery.of(context).size.height * 0.72,
+                      width: MediaQuery.of(context).size.width * 0.9,
+                      child: FutureBuilder<List<JobDataModel>>(
+                        future: listFavorite(token),
+                        builder: (context, AsyncSnapshot snapshot) {
+                          List result = [];
+                          if (snapshot?.connectionState !=
+                              ConnectionState.done) {
+                            return LoadingCube();
                           } else {
-                            return ListView?.builder(
-                                scrollDirection: Axis.vertical,
-                                itemCount: result?.length,
-                                itemBuilder: (context, index) {
-                                  return result[index];
-                                });
+                            for (JobDataModel data in snapshot?.data) {
+                              result.add(Recommendation(
+                                  data.image,
+                                  data.company,
+                                  data.province +
+                                      " " +
+                                      data.district +
+                                      " " +
+                                      data.subDistrict,
+                                  data.id,
+                                  token));
+                            }
+                            loading = false;
+                            if (result.length == 0) {
+                              return Text(
+                                "ไม่มีข้อมูลที่ชื่นชอบ",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black,
+                                    fontSize: 15),
+                                textAlign: TextAlign.center,
+                              );
+                            } else {
+                              return ListView?.builder(
+                                  scrollDirection: Axis.vertical,
+                                  itemCount: result?.length,
+                                  itemBuilder: (context, index) {
+                                    return result[index];
+                                  });
+                            }
                           }
-                        }
-                      },
+                        },
+                      ),
                     ),
                   ),
                 ],
