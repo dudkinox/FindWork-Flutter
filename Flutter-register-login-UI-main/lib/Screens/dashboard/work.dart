@@ -5,7 +5,7 @@ import 'package:login_ui/Screens/dashboard/work_parttime.dart';
 import 'package:login_ui/Screens/loading.dart';
 import 'package:login_ui/Themes/Themes.dart';
 
-import 'work_favorite.dart';
+import 'work_progress.dart';
 
 class Work extends StatelessWidget {
   Work(this.token);
@@ -36,14 +36,14 @@ class Work extends StatelessWidget {
                     text: "พาร์ทไทม์",
                   ),
                   Tab(
-                    icon: Icon(Icons.favorite_border),
-                    text: "ชื่นชอบ",
+                    icon: Icon(Icons.add_task),
+                    text: "ที่กำลังสมัคร",
                   ),
                 ]),
             body: TabBarView(children: [
               work_fulltime(token),
               work_parttime(token),
-              work_favorite(token)
+              work_progress(token)
             ]),
           ),
         ),

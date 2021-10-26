@@ -30,7 +30,7 @@ class work_parttime extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "คำแนะนำ",
+                        "งานแนะนำ",
                         style: TextStyle(
                             color: PrimaryColor,
                             fontWeight: FontWeight.bold,

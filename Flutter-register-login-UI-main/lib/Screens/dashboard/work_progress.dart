@@ -7,8 +7,8 @@ import 'package:login_ui/model/jobModel.dart';
 
 import 'dashboard_All.dart';
 
-class work_favorite extends StatelessWidget {
-  work_favorite(this.token);
+class work_progress extends StatelessWidget {
+  work_progress(this.token);
   var token;
   @override
   Widget build(BuildContext context) {
@@ -30,14 +30,14 @@ class work_favorite extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "คำแนะนำ",
+                        "ติดตามสถานะ",
                         style: TextStyle(
                             color: PrimaryColor,
                             fontWeight: FontWeight.bold,
                             fontSize: 18.0),
                       ),
                       Text(
-                        "งานที่คุณอาจชอบ",
+                        "งานที่คุณรอตรวจสอบอนุมัติ",
                         style: TextStyle(color: Colors.grey, fontSize: 14.0),
                       ),
                     ],
@@ -86,8 +86,8 @@ class work_favorite extends StatelessWidget {
                               data.district +
                               " " +
                               data.subDistrict,
-                              data.id,
-                              token));
+                          data.id,
+                          token));
                     }
                     return ListView.builder(
                       scrollDirection: Axis.horizontal,
