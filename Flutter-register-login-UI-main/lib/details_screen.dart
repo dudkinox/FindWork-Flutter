@@ -5,9 +5,10 @@ import 'package:login_ui/model/favoriteModel.dart';
 import 'package:login_ui/model/jobModel.dart';
 
 import 'Animation/Fade_Animation.dart';
+
 import 'Screens/loading.dart';
-import 'ScreensAddjob/HomeAddjob.dart';
-import 'ScreensAddjob/detailJob.dart';
+
+import 'ScreensAddjob/FeaturedCardJob.dart';
 import 'SelectCheckbox/choices.dart';
 import 'Service/JobService.dart';
 import 'Themes/Themes.dart';
@@ -225,7 +226,7 @@ class DetailsPage extends StatelessWidget {
                               child: Row(
                                 children: List.generate(
                                   data.departmentId.name.length,
-                                  (HomeAddjob) => FeaturedCard(
+                                  (HomeAddjob) => FeaturedCardJob(
                                     featuredJobs: demoFeatured[0],
                                   ),
                                 ),
@@ -247,4 +248,43 @@ class DetailsPage extends StatelessWidget {
       ),
     );
   }
+}
+
+List<Widget> buildRequirements(String Detail) {
+  List<Widget> list = [];
+  for (var i = 0; i < getJobsRequirements(Detail).length; i++) {
+    list.add(buildRequirement(getJobsRequirements(Detail)[i]));
+  }
+  return list;
+}
+
+Widget buildRequirement(String requirement) {
+  return Container(
+    margin: EdgeInsets.symmetric(vertical: 8),
+    child: Row(
+      children: [
+        Container(
+          width: 4,
+          height: 4,
+          decoration: BoxDecoration(
+            color: Colors.grey,
+            shape: BoxShape.circle,
+          ),
+        ),
+        SizedBox(
+          width: 16,
+        ),
+        Flexible(
+          child: Text(
+            requirement,
+            style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+              color: Colors.grey,
+            ),
+          ),
+        ),
+      ],
+    ),
+  );
 }

@@ -6,7 +6,7 @@ import 'package:flutter_session/flutter_session.dart';
 import 'package:login_ui/Animation/Fade_Animation.dart';
 import 'package:login_ui/Screens/loading.dart';
 import 'package:login_ui/Screens/login/login.dart';
-import 'package:login_ui/ScreensAddjob/detailJob.dart';
+import 'package:login_ui/ScreensAddjob/FeaturedCardJob.dart';
 import 'package:login_ui/SelectCheckbox/choices.dart';
 import 'package:login_ui/Service/JobService.dart';
 import 'package:login_ui/Themes/Themes.dart';
@@ -115,8 +115,40 @@ class _HomeAddjobState extends State<HomeAddjob> {
                                               color:
                                                   Colors.white.withOpacity(.5),
                                             ),
-                                            child:
-                                                Icon(Icons.settings_outlined),
+                                            child: PopupMenuButton(
+                                              itemBuilder: (context) => [
+                                                PopupMenuItem(
+                                                  child: GestureDetector(
+                                                    onTap: () {
+                                                      Navigator.push(
+                                                          context,
+                                                          MaterialPageRoute(
+                                                              builder: (context) =>
+                                                                  EditingCompany()));
+                                                    },
+                                                    child: Row(
+                                                      children: [
+                                                        Icon(Icons
+                                                            .edit_outlined),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  left: 10),
+                                                          child: Text(
+                                                            "แก้ไขข้อมมูล",
+                                                            style: TextStyle(
+                                                                fontSize: 14.0),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                )
+                                              ],
+                                              child: Icon(
+                                                  Icons.more_vert_outlined),
+                                            ),
                                           ),
                                         ],
                                       ),
@@ -195,11 +227,35 @@ class _HomeAddjobState extends State<HomeAddjob> {
                                 SizedBox(
                                   height: 16,
                                 ),
-                                Expanded(
-                                  child: SingleChildScrollView(
-                                    physics: BouncingScrollPhysics(),
-                                    child: Column(
-                                      children: buildRequirements(""),
+                                SingleChildScrollView(
+                                  // physics: BouncingScrollPhysics(),
+                                  child: TextFormField(
+                                    maxLines: 8,
+                                    maxLength: 1000,
+                                    keyboardType: TextInputType.multiline,
+                                    decoration: new InputDecoration(
+                                      hintText: "ข้อมูลบริษัท",
+                                      border: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(30.0),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: Colors.grey[300],
+                                            width: 5.0),
+                                      ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: Colors.grey[300],
+                                            width: 5.0),
+                                      ),
+                                      errorBorder: InputBorder.none,
+                                      disabledBorder: InputBorder.none,
+                                      contentPadding: EdgeInsets.only(
+                                          left: 15,
+                                          bottom: 11,
+                                          top: 11,
+                                          right: 15),
                                     ),
                                   ),
                                 ),
@@ -247,7 +303,7 @@ class _HomeAddjobState extends State<HomeAddjob> {
                           child: Row(
                             children: List.generate(
                               demoFeatured.length,
-                              (HomeAddjob) => FeaturedCard(
+                              (HomeAddjob) => FeaturedCardJob(
                                 featuredJobs: demoFeatured[0],
                               ),
                             ),
@@ -264,43 +320,4 @@ class _HomeAddjobState extends State<HomeAddjob> {
       ),
     );
   }
-}
-
-List<Widget> buildRequirements(String Detail) {
-  List<Widget> list = [];
-  for (var i = 0; i < getJobsRequirements(Detail).length; i++) {
-    list.add(buildRequirement(getJobsRequirements(Detail)[i]));
-  }
-  return list;
-}
-
-Widget buildRequirement(String requirement) {
-  return Container(
-    margin: EdgeInsets.symmetric(vertical: 8),
-    child: Row(
-      children: [
-        Container(
-          width: 4,
-          height: 4,
-          decoration: BoxDecoration(
-            color: Colors.grey,
-            shape: BoxShape.circle,
-          ),
-        ),
-        SizedBox(
-          width: 16,
-        ),
-        Flexible(
-          child: Text(
-            requirement,
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.bold,
-              color: Colors.grey,
-            ),
-          ),
-        ),
-      ],
-    ),
-  );
 }
