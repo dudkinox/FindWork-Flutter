@@ -2,19 +2,20 @@ import 'package:flutter/material.dart';
 
 import 'package:login_ui/Themes/Themes.dart';
 
-import 'JobJob.dart';
+import 'DetailCardJob.dart';
+import 'EditingCardJob.dart';
 
-class FeaturedCard extends StatelessWidget {
+class FeaturedCardJob extends StatelessWidget {
   final featuredJobs;
 
-  const FeaturedCard({this.featuredJobs});
+  const FeaturedCardJob({this.featuredJobs});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => JobJob()));
+            context, MaterialPageRoute(builder: (context) => DetailCardJob()));
       },
       child: Container(
         padding: EdgeInsets.symmetric(
@@ -67,9 +68,56 @@ class FeaturedCard extends StatelessWidget {
                 Container(
                   width: (30),
                   height: (30),
-                  child: Icon(
-                    Icons.favorite_border,
-                    color: Colors.white,
+                  child: PopupMenuButton(
+                    itemBuilder: (context) => [
+                      PopupMenuItem(
+                        child: Row(
+                          children: [
+                            Icon(Icons.delete_forever_outlined),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            EditingCardJob()));
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.only(left: 10),
+                                child: Text(
+                                  "แก้ไขรายละเอียดงาน",
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      PopupMenuItem(
+                        child: Row(
+                          children: [
+                            Icon(Icons.delete_forever_outlined),
+                            GestureDetector(
+                              child: Padding(
+                                padding: const EdgeInsets.only(left: 10),
+                                child: Text(
+                                  "ลบงาน",
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                    child: Icon(
+                      Icons.more_vert_outlined,
+                      color: Colors.white,
+                    ),
                   ),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),

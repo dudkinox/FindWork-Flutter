@@ -59,6 +59,10 @@ class _SendEmailState extends State<SendEmail> {
                     alignment: Alignment.center,
                     margin: EdgeInsets.symmetric(horizontal: 40),
                     child: TextFormField(
+                      // validator: MultiValidator([
+                      //   RequiredValidator(errorText: "กรุณากรอกอีเมล"),
+                      //   EmailValidator(errorText: "รูปแบบอีเมลไม่ถูกต้อง")
+                      // ]),
                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
                           icon: Icon(Icons.email_outlined),

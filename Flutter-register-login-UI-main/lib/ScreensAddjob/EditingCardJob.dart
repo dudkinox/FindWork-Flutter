@@ -17,8 +17,8 @@ import 'dart:io';
 
 import 'HomeAddjob.dart';
 
-class EditingCompany extends StatefulWidget {
-  EditingCompany({Key key}) : super(key: key);
+class EditingCardJob extends StatefulWidget {
+  EditingCardJob({Key key}) : super(key: key);
   final TextEditingController fullname = new TextEditingController();
   final TextEditingController email = new TextEditingController();
   final TextEditingController tel = new TextEditingController();
@@ -28,7 +28,7 @@ class EditingCompany extends StatefulWidget {
   MapScreenState createState() => MapScreenState();
 }
 
-class MapScreenState extends State<EditingCompany>
+class MapScreenState extends State<EditingCardJob>
     with SingleTickerProviderStateMixin {
   var fullname = new TextEditingController();
   var email = new TextEditingController();
@@ -57,7 +57,7 @@ class MapScreenState extends State<EditingCompany>
             child: new Scaffold(
                 appBar: AppBar(
                   title: Text(
-                    "ข้อมูลส่วนตัว",
+                    "แก้ไขรายละเอียดงาน",
                     style: TextStyle(
                       color: SecondaryColor,
                       fontWeight: FontWeight.bold,
@@ -156,7 +156,7 @@ class MapScreenState extends State<EditingCompany>
                                                         MainAxisSize.min,
                                                     children: <Widget>[
                                                       new Text(
-                                                        'ชื่อบริษัท',
+                                                        'ชื่อตำแหน่งงาน',
                                                         style: TextStyle(
                                                             fontSize: 16.0,
                                                             color: PrimaryColor,
@@ -194,7 +194,7 @@ class MapScreenState extends State<EditingCompany>
                                                           decoration:
                                                               const InputDecoration(
                                                             hintText:
-                                                                "ใส่ชื่อบริษัทของคุณ",
+                                                                "ใส่ชื่อตำแหน่งงานของคุณ",
                                                           ),
                                                           enabled: !_status,
                                                           autofocus: !_status,
@@ -204,103 +204,350 @@ class MapScreenState extends State<EditingCompany>
                                                   ),
                                                 ],
                                               )),
+
+                                          // Padding(
+                                          SizedBox(
+                                            height: 25,
+                                          ),
                                           Padding(
-                                              padding: EdgeInsets.only(
-                                                  left: 25.0,
-                                                  right: 25.0,
-                                                  top: 25.0),
-                                              child: new Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: <Widget>[
-                                                  new Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.start,
-                                                    mainAxisSize:
-                                                        MainAxisSize.min,
-                                                    children: <Widget>[
-                                                      new Text(
-                                                        'ตั้งรหัสผ่านใหม่',
-                                                        style: TextStyle(
-                                                            fontSize: 16.0,
-                                                            color: PrimaryColor,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .bold),
-                                                      ),
-                                                    ],
+                                            padding: const EdgeInsets.only(
+                                                right: 25, left: 25),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: <Widget>[
+                                                new Text(
+                                                  'Text 1',
+                                                  style: TextStyle(
+                                                      fontSize: 16.0,
+                                                      color: PrimaryColor,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          right: 120),
+                                                  child: new Text(
+                                                    'Text 2',
+                                                    style: TextStyle(
+                                                        fontSize: 16.0,
+                                                        color: PrimaryColor,
+                                                        fontWeight:
+                                                            FontWeight.bold),
                                                   ),
-                                                ],
-                                              )),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 5,
+                                          ),
+
                                           Padding(
-                                              padding: EdgeInsets.only(
-                                                  left: 25.0,
-                                                  right: 25.0,
-                                                  top: 2.0),
-                                              child: new Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: <Widget>[
-                                                  new Flexible(
-                                                    child: new TextField(
-                                                      obscureText: true,
-                                                      controller: password,
-                                                      decoration:
-                                                          const InputDecoration(
-                                                              hintText:
-                                                                  "ตั้งรหัสผ่านใหม่"),
-                                                      enabled: !_status,
-                                                    ),
+                                            padding: const EdgeInsets.only(
+                                              left: 25,
+                                              right: 25.0,
+                                            ),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceAround,
+                                              children: [
+                                                new Flexible(
+                                                  child: FutureBuilder<
+                                                      TextEditingController>(
+                                                    future: datafullname(
+                                                        snapshot.data
+                                                            .toString()),
+                                                    builder:
+                                                        (context, snapshot) {
+                                                      fullname = snapshot.data;
+                                                      // Future.delayed(
+                                                      //     Duration(seconds: 5),
+                                                      //     () {});
+                                                      return Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .only(right: 5),
+                                                        child: new TextField(
+                                                          controller: fullname,
+                                                          decoration:
+                                                              const InputDecoration(
+                                                            hintText: "Text 1",
+                                                          ),
+                                                          enabled: !_status,
+                                                          autofocus: !_status,
+                                                        ),
+                                                      );
+                                                    },
                                                   ),
-                                                ],
-                                              )),
+                                                ),
+                                                new Flexible(
+                                                  child: FutureBuilder<
+                                                      TextEditingController>(
+                                                    future: datafullname(
+                                                        snapshot.data
+                                                            .toString()),
+                                                    builder:
+                                                        (context, snapshot) {
+                                                      fullname = snapshot.data;
+                                                      // Future.delayed(
+                                                      //     Duration(seconds: 5),
+                                                      //     () {});
+                                                      return Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .only(
+                                                                left: 15,
+                                                                right: 5),
+                                                        child: new TextField(
+                                                          controller: fullname,
+                                                          decoration:
+                                                              const InputDecoration(
+                                                            hintText: "Text 2",
+                                                          ),
+                                                          enabled: !_status,
+                                                          autofocus: !_status,
+                                                        ),
+                                                      );
+                                                    },
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 25,
+                                          ),
                                           Padding(
-                                              padding: EdgeInsets.only(
-                                                  left: 25.0,
-                                                  right: 25.0,
-                                                  top: 25.0),
-                                              child: new Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: <Widget>[
-                                                  new Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.start,
-                                                    mainAxisSize:
-                                                        MainAxisSize.min,
-                                                    children: <Widget>[
-                                                      new Text(
-                                                        'ยืนยัน ตั้งรหัสผ่านใหม่',
-                                                        style: TextStyle(
-                                                            fontSize: 16.0,
-                                                            color: PrimaryColor,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .bold),
-                                                      ),
-                                                    ],
+                                            padding: const EdgeInsets.only(
+                                                right: 25, left: 25),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: <Widget>[
+                                                new Text(
+                                                  'Text 3',
+                                                  style: TextStyle(
+                                                      fontSize: 16.0,
+                                                      color: PrimaryColor,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          right: 120),
+                                                  child: new Text(
+                                                    'Text 4',
+                                                    style: TextStyle(
+                                                        fontSize: 16.0,
+                                                        color: PrimaryColor,
+                                                        fontWeight:
+                                                            FontWeight.bold),
                                                   ),
-                                                ],
-                                              )),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 5,
+                                          ),
+
                                           Padding(
-                                              padding: EdgeInsets.only(
-                                                  left: 25.0,
-                                                  right: 25.0,
-                                                  top: 2.0),
-                                              child: new Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: <Widget>[
-                                                  new Flexible(
-                                                    child: new TextField(
-                                                      obscureText: true,
-                                                      controller:
-                                                          confirmpassword,
-                                                      decoration:
-                                                          const InputDecoration(
-                                                              hintText:
-                                                                  "ยืนยันตั้งรหัสผ่านใหม่"),
-                                                      enabled: !_status,
-                                                    ),
+                                            padding: const EdgeInsets.only(
+                                              left: 25,
+                                              right: 25.0,
+                                            ),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceAround,
+                                              children: [
+                                                new Flexible(
+                                                  child: FutureBuilder<
+                                                      TextEditingController>(
+                                                    future: datafullname(
+                                                        snapshot.data
+                                                            .toString()),
+                                                    builder:
+                                                        (context, snapshot) {
+                                                      fullname = snapshot.data;
+                                                      // Future.delayed(
+                                                      //     Duration(seconds: 5),
+                                                      //     () {});
+                                                      return Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .only(right: 5),
+                                                        child: new TextField(
+                                                          controller: fullname,
+                                                          decoration:
+                                                              const InputDecoration(
+                                                            hintText: "Text 3",
+                                                          ),
+                                                          enabled: !_status,
+                                                          autofocus: !_status,
+                                                        ),
+                                                      );
+                                                    },
                                                   ),
-                                                ],
-                                              )),
+                                                ),
+                                                new Flexible(
+                                                  child: FutureBuilder<
+                                                      TextEditingController>(
+                                                    future: datafullname(
+                                                        snapshot.data
+                                                            .toString()),
+                                                    builder:
+                                                        (context, snapshot) {
+                                                      fullname = snapshot.data;
+                                                      // Future.delayed(
+                                                      //     Duration(seconds: 5),
+                                                      //     () {});
+                                                      return Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .only(
+                                                                left: 15,
+                                                                right: 5),
+                                                        child: new TextField(
+                                                          controller: fullname,
+                                                          decoration:
+                                                              const InputDecoration(
+                                                            hintText: "Text 4",
+                                                          ),
+                                                          enabled: !_status,
+                                                          autofocus: !_status,
+                                                        ),
+                                                      );
+                                                    },
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 25,
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                right: 25, left: 25),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: <Widget>[
+                                                new Text(
+                                                  'เงินเดือน',
+                                                  style: TextStyle(
+                                                      fontSize: 16.0,
+                                                      color: PrimaryColor,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          right: 90),
+                                                  child: new Text(
+                                                    'วันที่ลงงาน',
+                                                    style: TextStyle(
+                                                        fontSize: 16.0,
+                                                        color: PrimaryColor,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 5,
+                                          ),
+
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                              left: 25,
+                                              right: 25.0,
+                                            ),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceAround,
+                                              children: [
+                                                new Flexible(
+                                                  child: FutureBuilder<
+                                                      TextEditingController>(
+                                                    future: datafullname(
+                                                        snapshot.data
+                                                            .toString()),
+                                                    builder:
+                                                        (context, snapshot) {
+                                                      fullname = snapshot.data;
+                                                      // Future.delayed(
+                                                      //     Duration(seconds: 5),
+                                                      //     () {});
+                                                      return Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .only(right: 5),
+                                                        child: new TextField(
+                                                          controller: fullname,
+                                                          decoration:
+                                                              const InputDecoration(
+                                                            hintText:
+                                                                "เงินเดือน",
+                                                          ),
+                                                          enabled: !_status,
+                                                          autofocus: !_status,
+                                                        ),
+                                                      );
+                                                    },
+                                                  ),
+                                                ),
+                                                new Flexible(
+                                                  child: FutureBuilder<
+                                                      TextEditingController>(
+                                                    future: datafullname(
+                                                        snapshot.data
+                                                            .toString()),
+                                                    builder:
+                                                        (context, snapshot) {
+                                                      fullname = snapshot.data;
+                                                      // Future.delayed(
+                                                      //     Duration(seconds: 5),
+                                                      //     () {});
+                                                      return Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .only(
+                                                                left: 15,
+                                                                right: 5),
+                                                        child: new TextField(
+                                                          controller: fullname,
+                                                          decoration:
+                                                              const InputDecoration(
+                                                            hintText:
+                                                                "วันที่ลงงาน",
+                                                          ),
+                                                          enabled: !_status,
+                                                          autofocus: !_status,
+                                                        ),
+                                                      );
+                                                    },
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+
                                           Container(
                                             padding: EdgeInsets.only(
                                                 left: 25.0,
@@ -368,7 +615,7 @@ class MapScreenState extends State<EditingCompany>
                                                                 AlertMessage(
                                                                     "แจ้งเตือน",
                                                                     "อัพเดตรูปภาพแล้ว",
-                                                                    EditingCompany()),
+                                                                    EditingCardJob()),
                                                           );
                                                           setState(() {
                                                             file = File(
@@ -466,7 +713,7 @@ class MapScreenState extends State<EditingCompany>
                             builder: (_) => AlertMessage(
                                 "แจ้งเตือน", "แก้ไขข้อมูลสำเร็จ", null));
                         Navigator.of(context).pushReplacement(MaterialPageRoute(
-                            builder: (context) => EditingCompany()));
+                            builder: (context) => EditingCardJob()));
                       } else {
                         showDialog(
                             context: context,
@@ -494,7 +741,7 @@ class MapScreenState extends State<EditingCompany>
                           builder: (_) => AlertMessage(
                               "แจ้งเตือน", "แก้ไขข้อมูลสำเร็จ", null));
                       Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (context) => EditingCompany()));
+                          builder: (context) => EditingCardJob()));
                     } else {
                       showDialog(
                           context: context,
