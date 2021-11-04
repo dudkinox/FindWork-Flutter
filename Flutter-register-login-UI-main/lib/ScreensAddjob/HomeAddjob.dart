@@ -11,6 +11,7 @@ import 'package:login_ui/SelectCheckbox/choices.dart';
 import 'package:login_ui/Service/JobService.dart';
 import 'package:login_ui/Themes/Themes.dart';
 import 'package:login_ui/components/WillPop.dart';
+import 'package:login_ui/components/image.dart';
 import 'package:login_ui/model/loginModel.dart';
 
 import 'EditingCompany.dart';
@@ -49,9 +50,9 @@ class _HomeAddjobState extends State<HomeAddjob> {
                         if (snapshot?.connectionState != ConnectionState.done) {
                           return LoadingFadingCube();
                         } else {
-                          if(snapshot.data?.link == ""){
+                          if (snapshot.data?.link == "") {
                             //Link รูป Default
-                            img = "";
+                            img = DefaultImage;
                           } else {
                             img = snapshot.data?.link;
                           }
@@ -61,8 +62,7 @@ class _HomeAddjobState extends State<HomeAddjob> {
                             decoration: BoxDecoration(
                               color: PrimaryColor,
                               image: DecorationImage(
-                                  image: NetworkImage(img),
-                                  fit: BoxFit.cover),
+                                  image: NetworkImage(img), fit: BoxFit.cover),
                             ),
                             child: Padding(
                               padding: EdgeInsets.only(
