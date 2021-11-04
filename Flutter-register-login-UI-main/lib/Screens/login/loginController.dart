@@ -17,8 +17,7 @@ void login(BuildContext context, String username, String password) async {
       break;
     case "employer":
       Navigator.of(context).pushReplacement(MaterialPageRoute(
-          builder: (context) => HomeAddjob(
-              "https://brandinside.asia/wp-content/uploads/2016/10/jobsDB-Topcompany12-e1475659499211.jpg")));
+          builder: (context) => HomeAddjob(login.id)));
       break;
     default:
       showDialog(

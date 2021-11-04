@@ -17,19 +17,16 @@ import 'EditingCompany.dart';
 import 'managerJob/manageControl.dart';
 
 class HomeAddjob extends StatefulWidget {
-  final String imgUrl;
+  HomeAddjob(this.token);
+  var token;
 
-  const HomeAddjob(String s, {Key key, this.imgUrl}) : super(key: key);
   @override
-  _HomeAddjobState createState() => _HomeAddjobState(imgUrl);
+  _HomeAddjobState createState() => _HomeAddjobState(token);
 }
 
 class _HomeAddjobState extends State<HomeAddjob> {
-  final String imgUrl;
-
-  String token = "";
-
-  _HomeAddjobState(this.imgUrl);
+  _HomeAddjobState(this.token);
+  var token;
 
   @override
   Widget build(BuildContext context) {
@@ -43,122 +40,109 @@ class _HomeAddjobState extends State<HomeAddjob> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                FutureBuilder(
-                    future: FlutterSession().get('token'),
-                    builder: (context, snapshot) {
-                      token = snapshot.data;
-                      if (snapshot.connectionState != ConnectionState.done) {
-                        return LoadingRipple();
-                      } else {
-                        return FadeAnimation(
-                          1.0,
-                          FutureBuilder<ResumeModel>(
-                              future: PreviewImageCopany(token),
-                              builder: (context, snapshot) {
-                                if (snapshot.connectionState !=
-                                    ConnectionState.done) {
-                                  return LoadingFadingCube();
-                                } else {
-                                  return Container(
-                                    height: 350.0,
-                                    width: double.infinity,
-                                    decoration: BoxDecoration(
-                                      color: PrimaryColor,
-                                      image: DecorationImage(
-                                          image:
-                                              NetworkImage(snapshot.data?.link),
-                                          fit: BoxFit.cover),
-                                    ),
-                                    child: Padding(
-                                      padding: EdgeInsets.only(
-                                          bottom: 160.0,
-                                          left: 20.0,
-                                          right: 20.0),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          GestureDetector(
-                                            child: Container(
-                                              height: 50.0,
-                                              width: 50.0,
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(20.0),
-                                                color: Colors.white
-                                                    .withOpacity(.5),
-                                              ),
-                                              child: Transform.rotate(
-                                                  angle: 180 * pi / 180,
-                                                  child: IconButton(
-                                                    iconSize: 30,
-                                                    color: Colors.black,
-                                                    icon: const Icon(Icons
-                                                        .exit_to_app_rounded),
-                                                    onPressed: () {
-                                                      Navigator.of(context)
-                                                          .pushReplacement(
-                                                              MaterialPageRoute(
-                                                                  builder:
-                                                                      (context) =>
-                                                                          LoginScreen()));
-                                                    },
-                                                  )),
-                                            ),
-                                          ),
-                                          Container(
-                                            height: 50.0,
-                                            width: 50.0,
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(20.0),
-                                              color:
-                                                  Colors.white.withOpacity(.5),
-                                            ),
-                                            child: PopupMenuButton(
-                                              itemBuilder: (context) => [
-                                                PopupMenuItem(
-                                                  child: GestureDetector(
-                                                    onTap: () {
-                                                      Navigator.push(
-                                                          context,
-                                                          MaterialPageRoute(
-                                                              builder: (context) =>
-                                                                  EditingCompany()));
-                                                    },
-                                                    child: Row(
-                                                      children: [
-                                                        Icon(Icons
-                                                            .edit_outlined),
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                      .only(
-                                                                  left: 10),
-                                                          child: Text(
-                                                            "แก้ไขข้อมมูล",
-                                                            style: TextStyle(
-                                                                fontSize: 14.0),
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                )
-                                              ],
-                                              child: Icon(
-                                                  Icons.more_vert_outlined),
-                                            ),
-                                          ),
-                                        ],
+                FadeAnimation(
+                  1.0,
+                  FutureBuilder<ResumeModel>(
+                      future: PreviewImageCopany(token),
+                      builder: (context, snapshot) {
+                        var img;
+                        if (snapshot?.connectionState != ConnectionState.done) {
+                          return LoadingFadingCube();
+                        } else {
+                          if(snapshot.data?.link == ""){
+                            //Link รูป Default
+                            img = "";
+                          } else {
+                            img = snapshot.data?.link;
+                          }
+                          return Container(
+                            height: 350.0,
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              color: PrimaryColor,
+                              image: DecorationImage(
+                                  image: NetworkImage(img),
+                                  fit: BoxFit.cover),
+                            ),
+                            child: Padding(
+                              padding: EdgeInsets.only(
+                                  bottom: 160.0, left: 20.0, right: 20.0),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  GestureDetector(
+                                    child: Container(
+                                      height: 50.0,
+                                      width: 50.0,
+                                      decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(20.0),
+                                        color: Colors.white.withOpacity(.5),
                                       ),
+                                      child: Transform.rotate(
+                                          angle: 180 * pi / 180,
+                                          child: IconButton(
+                                            iconSize: 30,
+                                            color: Colors.black,
+                                            icon: const Icon(
+                                                Icons.exit_to_app_rounded),
+                                            onPressed: () {
+                                              Navigator.of(context)
+                                                  .pushReplacement(
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              LoginScreen()));
+                                            },
+                                          )),
                                     ),
-                                  );
-                                }
-                              }),
-                        );
-                      }
-                    }),
+                                  ),
+                                  Container(
+                                    height: 50.0,
+                                    width: 50.0,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20.0),
+                                      color: Colors.white.withOpacity(.5),
+                                    ),
+                                    child: PopupMenuButton(
+                                      itemBuilder: (context) => [
+                                        PopupMenuItem(
+                                          child: GestureDetector(
+                                            onTap: () {
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          EditingCompany()));
+                                            },
+                                            child: Row(
+                                              children: [
+                                                Icon(Icons.edit_outlined),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 10),
+                                                  child: Text(
+                                                    "แก้ไขข้อมมูล",
+                                                    style: TextStyle(
+                                                        fontSize: 14.0),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                      child: Icon(Icons.more_vert_outlined),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        }
+                      }),
+                ),
                 SizedBox(
                   height: 20.0,
                 ),
