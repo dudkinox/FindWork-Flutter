@@ -12,15 +12,15 @@ class FeaturedCardJob extends StatelessWidget {
   final VoidCallback onClicked;
 
   const FeaturedCardJob(
-      {this.featuredJobs,  this.typeUser,this.token, this.onClicked, Key key})
+      {this.featuredJobs, this.typeUser, this.token, this.onClicked, Key key})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => DetailCardJob(typeUser , token)));
+        Navigator.of(context).pushReplacement(MaterialPageRoute(
+            builder: (context) => DetailCardJob(typeUser, token)));
       },
       child: Container(
         padding: EdgeInsets.symmetric(
