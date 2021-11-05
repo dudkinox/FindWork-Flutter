@@ -35,6 +35,7 @@ class _HomeAddjobState extends State<HomeAddjob> {
   _HomeAddjobState(this.token, this.typeUser);
   var token;
   var typeUser;
+  var img;
   TextEditingController detailCompany = new TextEditingController();
 
   @override
@@ -69,7 +70,6 @@ class _HomeAddjobState extends State<HomeAddjob> {
                                 FutureBuilder<ResumeModel>(
                                   future: PreviewImageCopany(token),
                                   builder: (context, snapshot) {
-                                    var img;
                                     if (snapshot?.connectionState !=
                                         ConnectionState.done) {
                                       return LoadingFadingCube();
@@ -386,6 +386,7 @@ class _HomeAddjobState extends State<HomeAddjob> {
                                               token: token,
                                               typeUser: typeUser,
                                               id: data.id,
+                                              img: img
                                             ),
                                           ),
                                         ),

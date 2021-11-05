@@ -14,6 +14,7 @@ class FeaturedCardJob extends StatelessWidget {
   final token;
   final typeUser;
   final id;
+  final img;
   final VoidCallback onClicked;
 
   const FeaturedCardJob(
@@ -21,6 +22,7 @@ class FeaturedCardJob extends StatelessWidget {
       this.typeUser,
       this.token,
       this.id,
+      this.img,
       this.onClicked,
       Key key})
       : super(key: key);
@@ -71,7 +73,7 @@ class FeaturedCardJob extends StatelessWidget {
                           width: (70),
                           height: (50),
                           child: Image(
-                              image: NetworkImage(data.image),
+                              image: NetworkImage(img),
                               fit: BoxFit.cover),
                         ),
                         Column(
