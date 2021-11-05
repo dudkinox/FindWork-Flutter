@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:login_ui/SelectCheckbox/choices.dart';
-
+import 'package:login_ui/Recommendation_List_Data/Recommendation_screen.dart';
+import 'package:login_ui/Screens/loading.dart';
+import 'package:login_ui/Service/JobService.dart';
 import 'package:login_ui/Themes/Themes.dart';
 import 'package:login_ui/components/WillPop.dart';
-
+import 'package:login_ui/model/jobModel.dart';
 import '../homehome.dart';
-import 'dashboard_itemCard.dart';
 
 class dashboard_All extends StatefulWidget {
   dashboard_All(this.token);
@@ -25,7 +25,7 @@ class _dashboard_AllState extends State<dashboard_All> {
         backgroundColor: Colors.white,
         appBar: AppBar(
           title: Text(
-            "งานประจำ",
+            "หางานทั้งหมด",
             style: TextStyle(
               color: SecondaryColor,
               fontWeight: FontWeight.bold,
@@ -38,32 +38,39 @@ class _dashboard_AllState extends State<dashboard_All> {
             icon: Icon(Icons.arrow_back_ios, color: Colors.black),
             onPressed: () => {
               Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => HomeHome(0,token))),
+                  MaterialPageRoute(builder: (context) => HomeHome(0, token))),
             },
           ),
         ),
         body: Container(
-          child: GridView.builder(
-            padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
-            itemCount: demoFeatured.length,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                mainAxisSpacing: kDefaultPadding,
-                crossAxisSpacing: kDefaultPadding,
-                childAspectRatio: 0.75),
-            itemBuilder: (context, index) => GestureDetector(
-              child: dashboard_itemCard(
-                product: demoFeatured[index],
-              ),
-              //   onTap: () => Navigator.push(
-              //       context,
-              //       MaterialPageRoute(
-              //           builder: (context) =>
-              //               DetailsPage(product: products[index]))),
-              // ),
-            ),
-          ),
-        ),
+            child: FutureBuilder<List<JobDataModel>>(
+                future: TopicWork(),
+                builder: (context, AsyncSnapshot snapshot) {
+                  List result = [];
+                  if (snapshot?.connectionState != ConnectionState.done) {
+                    return LoadingCube();
+                  } else {
+                    for (var data in snapshot?.data) {
+                      result.add(Recommendation(
+                          data?.image,
+                          data?.company,
+                          data.province +
+                              " " +
+                              data?.district +
+                              " " +
+                              data?.subDistrict,
+                          data?.id,
+                          token));
+                    }
+                    return ListView.builder(
+                      scrollDirection: Axis.vertical,
+                      itemCount: result.length,
+                      itemBuilder: (context, index) {
+                        return result[index];
+                      },
+                    );
+                  }
+                })),
       ),
     );
   }

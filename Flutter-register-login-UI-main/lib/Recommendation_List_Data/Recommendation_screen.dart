@@ -65,7 +65,7 @@ Future<bool> status(String token, String jobId) async {
               data?.subDistrict = item.subDistrict;
             }
             return Padding(
-              padding: EdgeInsets.only(left: 10.0, top: 10.0),
+              padding: EdgeInsets.only(top: 20.0, left: 15, right: 15),
               child: GestureDetector(
                 onTap: () {
                   Navigator.push(
