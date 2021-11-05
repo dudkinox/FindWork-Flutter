@@ -24,7 +24,7 @@ class FeaturedCardJob extends StatelessWidget {
           vertical: 10,
         ),
         margin: EdgeInsets.symmetric(horizontal: (10)),
-        width: 350,
+        width: MediaQuery.of(context).size.width * 0.9,
         height: 180,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
