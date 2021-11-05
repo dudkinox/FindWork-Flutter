@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:login_ui/Screens/alertPage/infinite.dart';
+import 'package:login_ui/ScreensAddjob/HomeAddjob.dart';
 import 'package:login_ui/Themes/Themes.dart';
 import 'manageJob.dart';
 
 class HomeAdmin extends StatefulWidget {
-  const HomeAdmin({Key key}) : super(key: key);
+  HomeAdmin(this.token);
+  var token;
 
   @override
-  _HomeAdminState createState() => _HomeAdminState();
+  _HomeAdminState createState() => _HomeAdminState(token);
 }
 
 class _HomeAdminState extends State<HomeAdmin> {
+  _HomeAdminState(this.token);
+  var token;
   final InfiniteScrollController _infiniteController = InfiniteScrollController(
     initialScrollOffset: 0.0,
   );
@@ -20,6 +24,14 @@ class _HomeAdminState extends State<HomeAdmin> {
       length: 1,
       child: Scaffold(
         appBar: AppBar(
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back_ios, color: Colors.black),
+            onPressed: () {
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (context) => HomeAddjob(token)),
+              );
+            },
+          ),
           title: const Text('หน้าจัดการผู้สมัคร'),
           centerTitle: true,
           backgroundColor: HeaderColor,

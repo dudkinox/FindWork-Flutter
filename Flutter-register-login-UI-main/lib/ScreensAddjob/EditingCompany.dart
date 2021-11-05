@@ -68,9 +68,9 @@ class MapScreenState extends State<EditingCompany>
                   elevation: 0,
                   leading: IconButton(
                     icon: Icon(Icons.arrow_back_ios, color: Colors.black),
-                    onPressed: () => {
+                    onPressed: () {
                       Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (context) => HomeAddjob(token)))
+                          builder: (context) => HomeAddjob(token)));
                     },
                   ),
                 ),

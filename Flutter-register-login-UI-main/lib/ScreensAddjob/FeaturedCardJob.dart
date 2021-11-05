@@ -12,6 +12,7 @@ class FeaturedCardJob extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(featuredJobs.image);
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -76,8 +77,7 @@ class FeaturedCardJob extends StatelessWidget {
                             Icon(Icons.delete_forever_outlined),
                             GestureDetector(
                               onTap: () {
-                                Navigator.push(
-                                    context,
+                                Navigator.of(context).pushReplacement(
                                     MaterialPageRoute(
                                         builder: (context) =>
                                             EditingCardJob()));

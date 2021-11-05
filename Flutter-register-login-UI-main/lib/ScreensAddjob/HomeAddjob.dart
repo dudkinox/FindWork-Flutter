@@ -88,13 +88,23 @@ class _HomeAddjobState extends State<HomeAddjob> {
                                             icon: const Icon(
                                                 Icons.exit_to_app_rounded),
                                             onPressed: () {
-                                              Navigator.of(context)
-                                                  .pushReplacement(
-                                                      MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              LoginScreen()));
+                                              Navigator.pushAndRemoveUntil(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder:
+                                                      (BuildContext context) =>
+                                                          LoginScreen(),
+                                                ),
+                                                (route) => false,
+                                              );
+                                            //   Navigator.of(context)
+                                            //       .pushReplacement(
+                                            //           MaterialPageRoute(
+                                            //               builder: (context) =>
+                                            //                   LoginScreen()));
                                             },
-                                          )),
+                                          ),
+                                          ),
                                     ),
                                   ),
                                   Container(
@@ -109,11 +119,11 @@ class _HomeAddjobState extends State<HomeAddjob> {
                                         PopupMenuItem(
                                           child: GestureDetector(
                                             onTap: () {
-                                              Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          EditingCompany()));
+                                              Navigator.of(context)
+                                                  .pushReplacement(
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              EditingCompany()));
                                             },
                                             child: Row(
                                               children: [
@@ -265,10 +275,10 @@ class _HomeAddjobState extends State<HomeAddjob> {
                             ),
                             GestureDetector(
                               onTap: () {
-                                Navigator.push(
-                                    context,
+                                Navigator.of(context).pushReplacement(
                                     MaterialPageRoute(
-                                        builder: (context) => HomeAdmin()));
+                                        builder: (context) =>
+                                            HomeAdmin(token)));
                               },
                               child: Text(
                                 "รายชื่อผู้สมัคร",
