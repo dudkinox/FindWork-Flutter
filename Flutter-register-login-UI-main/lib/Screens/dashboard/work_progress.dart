@@ -42,26 +42,6 @@ class work_progress extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        child: GestureDetector(
-                          onTap: () => {
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (BuildContext context) =>
-                                        dashboard_All(token)))
-                          },
-                          child: Text(
-                            "ดูทั้งหมด",
-                            style: TextStyle(color: PrimaryColor),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
                 ],
               ),
             ),
