@@ -18,25 +18,30 @@ import 'dart:io';
 import '../HomeAddjob.dart';
 
 class CloseTheAccount extends StatefulWidget {
-  CloseTheAccount({Key key}) : super(key: key);
+  CloseTheAccount(this.token,this.typeUser);
+  var token;
+  var typeUser;
   final TextEditingController fullname = new TextEditingController();
   final TextEditingController email = new TextEditingController();
   final TextEditingController tel = new TextEditingController();
   final TextEditingController password = new TextEditingController();
   final TextEditingController confirmpassword = new TextEditingController();
   @override
-  MapScreenState createState() => MapScreenState();
+  MapScreenState createState() => MapScreenState(token,typeUser);
 }
 
 class MapScreenState extends State<CloseTheAccount>
+
     with SingleTickerProviderStateMixin {
+      MapScreenState(this.token,this.typeUser);
+      var token;
+      var typeUser;
   var fullname = new TextEditingController();
   var email = new TextEditingController();
   var tel = new TextEditingController();
   var password = new TextEditingController();
   var confirmpassword = new TextEditingController();
   File file;
-  String token = "";
 
   bool _status = true;
   final FocusNode myFocusNode = FocusNode();
@@ -70,7 +75,7 @@ class MapScreenState extends State<CloseTheAccount>
                     icon: Icon(Icons.arrow_back_ios, color: Colors.black),
                     onPressed: () {
                       Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (context) => HomeAddjob(token)));
+                          builder: (context) => HomeAddjob(token,typeUser)));
                     },
                   ),
                 ),
@@ -307,7 +312,7 @@ class MapScreenState extends State<CloseTheAccount>
                             builder: (_) => AlertMessage(
                                 "แจ้งเตือน", "แก้ไขข้อมูลสำเร็จ", null));
                         Navigator.of(context).pushReplacement(MaterialPageRoute(
-                            builder: (context) => CloseTheAccount()));
+                            builder: (context) => CloseTheAccount(token,typeUser)));
                       } else {
                         showDialog(
                             context: context,
@@ -335,7 +340,7 @@ class MapScreenState extends State<CloseTheAccount>
                           builder: (_) => AlertMessage(
                               "แจ้งเตือน", "แก้ไขข้อมูลสำเร็จ", null));
                       Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (context) => CloseTheAccount()));
+                          builder: (context) => CloseTheAccount(token,typeUser)));
                     } else {
                       showDialog(
                           context: context,
