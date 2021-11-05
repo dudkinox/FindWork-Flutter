@@ -14,7 +14,6 @@ class Header extends StatelessWidget {
   var token;
   @override
   Widget build(BuildContext context) {
-    print("token " + token);
     return FadeAnimation(
       1.0,
       Padding(

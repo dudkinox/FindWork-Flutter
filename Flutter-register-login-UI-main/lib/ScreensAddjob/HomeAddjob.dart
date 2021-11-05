@@ -293,6 +293,7 @@ class _HomeAddjobState extends State<HomeAddjob> {
                             ),
                           ),
                         ),
+                        SizedBox(height: 25),
                       ],
                     ),
                   ),

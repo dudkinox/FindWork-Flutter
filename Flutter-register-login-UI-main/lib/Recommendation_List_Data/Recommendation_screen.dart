@@ -55,14 +55,14 @@ Future<bool> status(String token, String jobId) async {
             return LoadingFadingCube();
           } else {
             for (var item in snapshot?.data) {
-              data.company = item.company;
-              data.departmentId = item.departmentId;
-              data.district = item.district;
-              data.id = item.id;
-              data.image = item.image;
-              data.jobId = item.jobId;
-              data.province = item.province;
-              data.subDistrict = item.subDistrict;
+              data?.company = item.company;
+              data?.departmentId = item.departmentId;
+              data?.district = item.district;
+              data?.id = item.id;
+              data?.image = item.image;
+              data?.jobId = item.jobId;
+              data?.province = item.province;
+              data?.subDistrict = item.subDistrict;
             }
             return Padding(
               padding: EdgeInsets.only(left: 10.0, top: 10.0),
