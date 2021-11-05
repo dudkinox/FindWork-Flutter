@@ -18,6 +18,7 @@ class DetailsPage extends StatelessWidget {
   final String imgUrl;
   final String id;
   final String token;
+  final String typeUser;
 
   Future<bool> status(String token, String jobId) async {
     FavoriteModel status = await GetFavorite(token);
@@ -34,7 +35,7 @@ class DetailsPage extends StatelessWidget {
     return false;
   }
 
-  const DetailsPage(this.imgUrl, this.id, this.token);
+  const DetailsPage(this.imgUrl, this.id, this.token, this.typeUser);
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -73,7 +74,7 @@ class DetailsPage extends StatelessWidget {
                                   Navigator.of(context).pushReplacement(
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              HomeHome(0, token)));
+                                              HomeHome(0, token, typeUser)));
                                 },
                                 child: Container(
                                   height: 50.0,
@@ -231,8 +232,8 @@ class DetailsPage extends StatelessWidget {
                                 children: List.generate(
                                   data.departmentId.name.length,
                                   (HomeAddjob) => FeaturedCardJob(
-                                    featuredJobs: demoFeatured[0],
-                                  ),
+                                      featuredJobs: demoFeatured[0],
+                                      typeUser: typeUser),
                                 ),
                               ),
                             ),

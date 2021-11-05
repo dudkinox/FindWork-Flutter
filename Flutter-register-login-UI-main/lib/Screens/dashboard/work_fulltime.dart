@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:login_ui/Recommendation_List_Data/Recommendation_screen.dart';
 import 'package:login_ui/Screens/loading.dart';
@@ -8,8 +10,9 @@ import 'package:login_ui/model/jobModel.dart';
 import 'dashboard_All.dart';
 
 class work_fulltime extends StatelessWidget {
-  work_fulltime(this.token);
+  work_fulltime(this.token, this.typeUser);
   var token;
+  var typeUser;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -50,7 +53,7 @@ class work_fulltime extends StatelessWidget {
                                 context,
                                 MaterialPageRoute(
                                     builder: (BuildContext context) =>
-                                        dashboard_All(token)))
+                                        dashboard_All(token, typeUser)))
                           },
                           child: Text(
                             "ดูทั้งหมด",
@@ -84,7 +87,8 @@ class work_fulltime extends StatelessWidget {
                                 " " +
                                 data?.subDistrict,
                             data?.id,
-                            token));
+                            token,
+                            typeUser));
                       }
                     }
                     return ListView?.builder(

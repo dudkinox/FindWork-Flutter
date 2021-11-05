@@ -7,30 +7,34 @@ import 'package:login_ui/details_screen.dart';
 import 'package:login_ui/model/favoriteModel.dart';
 import 'package:login_ui/model/jobModel.dart';
 
-
 class Recommendation extends StatefulWidget {
   final String imgUlr;
   final String location;
   final String company;
   final String id;
   final String token;
+  final String typeUser;
 
-  const Recommendation(this.imgUlr, this.company, this.location, this.id, this.token);
+  const Recommendation(this.imgUlr, this.company, this.location, this.id,
+      this.token, this.typeUser);
   @override
-  _RecommendationState createState() => _RecommendationState(imgUlr,company,location,id,token);
+  _RecommendationState createState() =>
+      _RecommendationState(imgUlr, company, location, id, token, typeUser);
 }
 
 class _RecommendationState extends State<Recommendation> {
-_RecommendationState(this.imgUlr, this.company, this.location, this.id, this.token);
-var imgUlr;
-var company;
-var location;
-var id;
-var token;
+  _RecommendationState(this.imgUlr, this.company, this.location, this.id,
+      this.token, this.typeUser);
+  var imgUlr;
+  var company;
+  var location;
+  var id;
+  var token;
+  var typeUser;
 
-Future<bool> status(String token, String jobId) async {
+  Future<bool> status(String token, String jobId) async {
     FavoriteModel status = await GetFavorite(token);
-    if(status != null){
+    if (status != null) {
       for (var i = 0; i < status.jobId.length; i++) {
         if (status.jobId[i] == null) {
           return false;
@@ -40,9 +44,8 @@ Future<bool> status(String token, String jobId) async {
         }
       }
     }
-      return false;
+    return false;
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +75,7 @@ Future<bool> status(String token, String jobId) async {
                     context,
                     MaterialPageRoute(
                       builder: (BuildContext context) =>
-                          DetailsPage(imgUlr, id, token),
+                          DetailsPage(imgUlr, id, token, typeUser),
                     ),
                   );
                 },
@@ -91,49 +94,46 @@ Future<bool> status(String token, String jobId) async {
                             height: 250.0,
                             width: double.infinity,
                             child: Container(
-                              decoration: BoxDecoration(
-                                color: PrimaryColor,
-                                borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(20.0),
-                                  topRight: Radius.circular(20.0),
+                                decoration: BoxDecoration(
+                                  color: PrimaryColor,
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(20.0),
+                                    topRight: Radius.circular(20.0),
+                                  ),
+                                  image: DecorationImage(
+                                      image: NetworkImage(imgUlr),
+                                      fit: BoxFit.cover),
                                 ),
-                                
-                                image: DecorationImage(
-                                    image: NetworkImage(imgUlr),
-                                    fit: BoxFit.cover),
-                                    
-                              ),
-                              child: 
-                              Stack(
-                                children: [
-                                  Positioned(
-                                    right: 10,
-                                    top: 10,
-                                    child: FutureBuilder<bool>(
-                                  future: status(token, id),
-                                  builder: (context, AsyncSnapshot snapshot) {
-                                    bool favorite = snapshot?.data;
-                                    if (snapshot.connectionState !=
-                                        ConnectionState.done) {
-                                      return Text("");
-                                    } else {
-                                      return FavoriteButton(
-                                        isFavorite: favorite,
-                                        valueChanged: (_isFavorite) {
-                                          if (_isFavorite == true) {
-                                            AddFavorite(id, token);
+                                child: Stack(
+                                  children: [
+                                    Positioned(
+                                      right: 10,
+                                      top: 10,
+                                      child: FutureBuilder<bool>(
+                                        future: status(token, id),
+                                        builder:
+                                            (context, AsyncSnapshot snapshot) {
+                                          bool favorite = snapshot?.data;
+                                          if (snapshot.connectionState !=
+                                              ConnectionState.done) {
+                                            return Text("");
                                           } else {
-                                            DelFavorite(id, token);                                              
+                                            return FavoriteButton(
+                                              isFavorite: favorite,
+                                              valueChanged: (_isFavorite) {
+                                                if (_isFavorite == true) {
+                                                  AddFavorite(id, token);
+                                                } else {
+                                                  DelFavorite(id, token);
+                                                }
+                                              },
+                                            );
                                           }
                                         },
-                                      );
-                                    }
-                                  },
-                                ),)],)
-                              
-                              
-                            ),
-                            
+                                      ),
+                                    )
+                                  ],
+                                )),
                           ),
                           SizedBox(
                             height: 10.0,

@@ -12,12 +12,12 @@ void login(BuildContext context, String username, String password) async {
   await FlutterSession().set('token', login.id);
   switch (login.type) {
     case "employee":
-      Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => HomeHome(0,login.id)));
+      Navigator.of(context).pushReplacement(MaterialPageRoute(
+          builder: (context) => HomeHome(0, login.id, login.type)));
       break;
     case "employer":
-      Navigator.of(context).pushReplacement(MaterialPageRoute(
-          builder: (context) => HomeAddjob(login.id)));
+      Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => HomeAddjob(login.id)));
       break;
     default:
       showDialog(

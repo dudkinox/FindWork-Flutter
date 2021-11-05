@@ -1,4 +1,4 @@
-// ignore_for_file: deprecated_member_use
+// ignore_for_file: deprecated_member_use, must_be_immutable
 
 import 'package:flutter/material.dart';
 import 'package:login_ui/Screens/ForgotPassword/SendEmail.dart';
@@ -11,8 +11,6 @@ import 'package:login_ui/components/background.dart';
 import 'loginController.dart';
 
 class LoginScreen extends StatefulWidget {
-  LoginScreen({Key key}) : super(key: key);
-
   final TextEditingController username = TextEditingController();
   final TextEditingController password = TextEditingController();
 

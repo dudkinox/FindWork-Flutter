@@ -1,4 +1,4 @@
-// ignore_for_file: deprecated_member_use
+// ignore_for_file: deprecated_member_use, must_be_immutable
 
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
@@ -17,14 +17,15 @@ import 'dart:io';
 import 'ProfileController.dart';
 
 class ProfilePage extends StatefulWidget {
-  ProfilePage({Key key}) : super(key: key);
+  ProfilePage(this.typeUser);
+  var typeUser;
   final TextEditingController fullname = new TextEditingController();
   final TextEditingController email = new TextEditingController();
   final TextEditingController tel = new TextEditingController();
   final TextEditingController password = new TextEditingController();
   final TextEditingController confirmpassword = new TextEditingController();
   @override
-  MapScreenState createState() => MapScreenState();
+  MapScreenState createState() => MapScreenState(typeUser);
 }
 
 class MapScreenState extends State<ProfilePage>
@@ -36,6 +37,8 @@ class MapScreenState extends State<ProfilePage>
   var confirmpassword = new TextEditingController();
   File file;
   String token = "";
+  MapScreenState(this.typeUser);
+  var typeUser;
 
   bool _status = true;
   final FocusNode myFocusNode = FocusNode();
@@ -68,8 +71,8 @@ class MapScreenState extends State<ProfilePage>
                   leading: IconButton(
                     icon: Icon(Icons.arrow_back_ios, color: Colors.black),
                     onPressed: () => {
-                      Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(builder: (context) => HomeHome(0,token))),
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(
+                          builder: (context) => HomeHome(0, token, typeUser))),
                     },
                   ),
                 ),
@@ -421,8 +424,11 @@ class MapScreenState extends State<ProfilePage>
                                                 FutureBuilder<ResumeModel>(
                                                   future: PreviewResume(token),
                                                   builder: (context, snapshot) {
-                                                    if (snapshot?.connectionState == ConnectionState.done) {
-                                                      if (snapshot.data?.link == "") {
+                                                    if (snapshot
+                                                            ?.connectionState ==
+                                                        ConnectionState.done) {
+                                                      if (snapshot.data?.link ==
+                                                          "") {
                                                         return Text(
                                                           "ยังไม่ได้เลือกรูปภาพ",
                                                           textAlign:
@@ -453,12 +459,15 @@ class MapScreenState extends State<ProfilePage>
                                                     color: PrimaryColor,
                                                     onPressed: () async {
                                                       var image = await ImagePicker()
-                                                      .getImage(source:ImageSource?.gallery);
+                                                          .getImage(
+                                                              source: ImageSource
+                                                                  ?.gallery);
                                                       if (image?.path != null) {
                                                         String status =
                                                             await UploadResume(
                                                                 token,
-                                                                File(image?.path));
+                                                                File(image
+                                                                    ?.path));
                                                         print(status);
                                                         if (status ==
                                                             "อัพโหลดรูปภาพเรียบร้อย") {
@@ -468,7 +477,8 @@ class MapScreenState extends State<ProfilePage>
                                                                 AlertMessage(
                                                                     "แจ้งเตือน",
                                                                     "อัพเดตรูปภาพแล้ว",
-                                                                    ProfilePage()),
+                                                                    ProfilePage(
+                                                                        typeUser)),
                                                           );
                                                           setState(() {
                                                             file = File(
@@ -566,7 +576,7 @@ class MapScreenState extends State<ProfilePage>
                             builder: (_) => AlertMessage(
                                 "แจ้งเตือน", "แก้ไขข้อมูลสำเร็จ", null));
                         Navigator.of(context).pushReplacement(MaterialPageRoute(
-                            builder: (context) => ProfilePage()));
+                            builder: (context) => ProfilePage(typeUser)));
                       } else {
                         showDialog(
                             context: context,
@@ -594,7 +604,7 @@ class MapScreenState extends State<ProfilePage>
                           builder: (_) => AlertMessage(
                               "แจ้งเตือน", "แก้ไขข้อมูลสำเร็จ", null));
                       Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (context) => ProfilePage()));
+                          builder: (context) => ProfilePage(typeUser)));
                     } else {
                       showDialog(
                           context: context,

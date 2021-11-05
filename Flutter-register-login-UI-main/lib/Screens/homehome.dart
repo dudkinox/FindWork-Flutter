@@ -12,16 +12,18 @@ import 'package:login_ui/components/WillPop.dart';
 import 'favorite/favorite.dart';
 
 class HomeHome extends StatefulWidget {
-  HomeHome(this.newindex, this.token);
+  HomeHome(this.newindex, this.token, this.typeUser);
   var token;
+  var typeUser;
   int newindex;
   @override
-  _HomeHomeState createState() => _HomeHomeState(newindex, token);
+  _HomeHomeState createState() => _HomeHomeState(newindex, token, typeUser);
 }
 
 class _HomeHomeState extends State<HomeHome> {
-  _HomeHomeState(this.newindex, this.token);
+  _HomeHomeState(this.newindex, this.token, this.typeUser);
   var token;
+  var typeUser;
   int newindex;
   bool loading = false;
 
@@ -72,11 +74,11 @@ class _HomeHomeState extends State<HomeHome> {
                   },
                 ),
                 body: newindex == 0
-                    ? HomePage(newindex, token)
+                    ? HomePage(newindex, token, typeUser)
                     : newindex == 1
-                        ? ProfilePage()
+                        ? ProfilePage(typeUser)
                         : newindex == 2
-                            ? Favorite(token)
+                            ? Favorite(token, typeUser)
                             : newindex == 3
                                 ? AlertPage()
                                 : null,

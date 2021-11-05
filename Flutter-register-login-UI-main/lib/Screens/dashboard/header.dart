@@ -1,4 +1,4 @@
-// ignore_for_file: deprecated_member_use
+// ignore_for_file: deprecated_member_use, must_be_immutable
 
 import 'dart:math';
 
@@ -10,8 +10,9 @@ import 'package:login_ui/Themes/Themes.dart';
 import 'package:login_ui/Themes/images.dart';
 
 class Header extends StatelessWidget {
-  Header(this.token);
+  Header(this.token, typeUser);
   var token;
+  var typeUser;
   @override
   Widget build(BuildContext context) {
     return FadeAnimation(
@@ -61,7 +62,7 @@ class Header extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                                 builder: (BuildContext context) =>
-                                    ProfilePage()));
+                                    ProfilePage(typeUser)));
                       },
                       child: null,
                     ),

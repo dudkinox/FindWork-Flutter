@@ -1,18 +1,16 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:login_ui/Animation/Fade_Animation.dart';
-import 'package:login_ui/Screens/loading.dart';
-import 'package:login_ui/Service/JobService.dart';
 import 'package:login_ui/Themes/Themes.dart';
 import 'package:login_ui/model/SearchModel.dart';
-
-import 'package:login_ui/model/jobModel.dart';
-
 import '../../details_screen.dart';
 
 class Search extends StatelessWidget {
-  Search(this.token);
+  Search(this.token, this.typeUser);
   var token;
+  var typeUser;
   @override
   Widget build(BuildContext context) {
     return FadeAnimation(
@@ -51,7 +49,8 @@ class Search extends StatelessWidget {
           onSuggestionSelected: (User suggestion) {
             final user = suggestion;
             Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => DetailsPage(user.image, user.id, token)));
+                builder: (context) =>
+                    DetailsPage(user.image, user.id, token, typeUser)));
 
             ScaffoldMessenger.of(context)
               ..removeCurrentSnackBar()
@@ -59,48 +58,6 @@ class Search extends StatelessWidget {
                 content: Text('Selected user: ${user.company}'),
               ));
           },
-          // child: FutureBuilder<List<JobDataModel>>(
-          //   future: TopicWork(),
-          //   builder: (context, AsyncSnapshot snapshot) {
-          //     List result = [];
-          //     if (snapshot?.connectionState != ConnectionState.done) {
-          //       return LoadingCube();
-          //     } else {
-          //       return TypeAheadField(
-          //         hideSuggestionsOnKeyboardHide: false,
-          //         textFieldConfiguration: TextFieldConfiguration(
-          //           autofocus: false,
-          //           style:
-          //               DefaultTextStyle.of(context).style.copyWith(fontSize: 14),
-          //           decoration: InputDecoration(
-          //               enabled: false,
-          //               prefixIcon: Icon(Icons.search_outlined),
-          //               enabledBorder: OutlineInputBorder(
-          //                 borderRadius: BorderRadius.circular(20.0),
-          //                 borderSide: BorderSide(color: PrimaryColor),
-          //               ),
-          //               disabledBorder: OutlineInputBorder(
-          //                   borderSide: BorderSide(color: PrimaryColor),
-          //                   borderRadius: BorderRadius.circular(20.0)),
-          //               hintText: 'ค้นหาที่นี้'),
-          //         ),
-          //         suggestionsCallback: (Pattern) async {
-          //           return await BackendService.getSuggestions(Pattern);
-          //         },
-          //         itemBuilder: (context, suggestion) {
-          //           return ListTile(
-          //             title: Text(suggestion['company']),
-          //             // subtitle: Text('\$${suggestion['price']}'),
-          //           );
-          //         },
-          //         onSuggestionSelected: (suggestion) {
-          //           // Navigator.of(context).push(MaterialPageRoute(
-          //           //     builder: (context) => ProductPage(product: suggestion)));
-          //         },
-          //       );
-          //     }
-          //   },
-          // ),
         ),
       ),
     );

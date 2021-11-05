@@ -1,15 +1,17 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:login_ui/Animation/Fade_Animation.dart';
 import 'package:login_ui/Screens/dashboard/work_fulltime.dart';
 import 'package:login_ui/Screens/dashboard/work_parttime.dart';
-import 'package:login_ui/Screens/loading.dart';
 import 'package:login_ui/Themes/Themes.dart';
 
 import 'work_progress.dart';
 
 class Work extends StatelessWidget {
-  Work(this.token);
+  Work(this.token, this.typeUser);
   var token;
+  var typeUser;
   @override
   Widget build(BuildContext context) {
     return FadeAnimation(
@@ -41,9 +43,9 @@ class Work extends StatelessWidget {
                   ),
                 ]),
             body: TabBarView(children: [
-              work_fulltime(token),
-              work_parttime(token),
-              work_progress(token)
+              work_fulltime(token, typeUser),
+              work_parttime(token, typeUser),
+              work_progress(token, typeUser),
             ]),
           ),
         ),

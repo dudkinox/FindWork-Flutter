@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:login_ui/SelectCheckbox/choices.dart';
 
@@ -8,15 +10,17 @@ import '../homehome.dart';
 import 'dashboard_itemCard.dart';
 
 class dashboard_All extends StatefulWidget {
-  dashboard_All(this.token);
+  dashboard_All(this.token, this.typeUser);
   var token;
+  var typeUser;
   @override
-  _dashboard_AllState createState() => _dashboard_AllState(token);
+  _dashboard_AllState createState() => _dashboard_AllState(token, typeUser);
 }
 
 class _dashboard_AllState extends State<dashboard_All> {
-  _dashboard_AllState(this.token);
+  _dashboard_AllState(this.token, this.typeUser);
   var token;
+  var typeUser;
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -37,8 +41,8 @@ class _dashboard_AllState extends State<dashboard_All> {
           leading: IconButton(
             icon: Icon(Icons.arrow_back_ios, color: Colors.black),
             onPressed: () => {
-              Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => HomeHome(0,token))),
+              Navigator.of(context).pushReplacement(MaterialPageRoute(
+                  builder: (context) => HomeHome(0, token, typeUser))),
             },
           ),
         ),
@@ -55,12 +59,6 @@ class _dashboard_AllState extends State<dashboard_All> {
               child: dashboard_itemCard(
                 product: demoFeatured[index],
               ),
-              //   onTap: () => Navigator.push(
-              //       context,
-              //       MaterialPageRoute(
-              //           builder: (context) =>
-              //               DetailsPage(product: products[index]))),
-              // ),
             ),
           ),
         ),

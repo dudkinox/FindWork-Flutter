@@ -1,9 +1,13 @@
+// ignore_for_file: must_be_immutable, deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:login_ui/SelectCheckbox/choices.dart';
 import 'package:login_ui/Themes/Themes.dart';
 import 'package:login_ui/components/notification.dart';
 
 class DetailCardJob extends StatelessWidget {
+  DetailCardJob(this.typeUser);
+  var typeUser;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -241,19 +245,33 @@ class DetailCardJob extends StatelessWidget {
                 SizedBox(
                   height: 20,
                 ),
-                Container(
-                  alignment: Alignment.center,
-                  child: RaisedButton(
-                    child: new Text("ยืนยันการแก้ไขงาน"),
-                    textColor: Colors.white,
-                    color: PrimaryColor,
-                    onPressed: () async {
-                      await updaetJobNotification();
-                    },
-                    shape: new RoundedRectangleBorder(
-                        borderRadius: new BorderRadius.circular(20.0)),
-                  ),
-                ),
+                typeUser == "employee"
+                    ? Container(
+                        alignment: Alignment.center,
+                        child: RaisedButton(
+                          child: new Text("ยื่นสมัครงาน"),
+                          textColor: Colors.white,
+                          color: PrimaryColor,
+                          onPressed: () async {
+                            await showNotification();
+                          },
+                          shape: new RoundedRectangleBorder(
+                              borderRadius: new BorderRadius.circular(20.0)),
+                        ),
+                      )
+                    : Container(
+                        alignment: Alignment.center,
+                        child: RaisedButton(
+                          child: new Text("ยืนยันการแก้ไขงาน"),
+                          textColor: Colors.white,
+                          color: PrimaryColor,
+                          onPressed: () async {
+                            await updaetJobNotification();
+                          },
+                          shape: new RoundedRectangleBorder(
+                              borderRadius: new BorderRadius.circular(20.0)),
+                        ),
+                      ),
               ],
             ),
           ),

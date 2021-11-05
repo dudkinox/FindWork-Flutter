@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:login_ui/Recommendation_List_Data/Recommendation_screen.dart';
 import 'package:login_ui/Screens/loading.dart';
@@ -9,15 +11,17 @@ import 'package:login_ui/model/jobModel.dart';
 import 'favoriteController.dart';
 
 class Favorite extends StatefulWidget {
-  Favorite(this.token);
+  Favorite(this.token, this.typeUser);
   var token;
+  var typeUser;
   @override
-  _FavoriteState createState() => _FavoriteState(token);
+  _FavoriteState createState() => _FavoriteState(token, typeUser);
 }
 
 class _FavoriteState extends State<Favorite> {
-  _FavoriteState(this.token);
+  _FavoriteState(this.token, this.typeUser);
   var token;
+  var typeUser;
   var refreshKey = GlobalKey<RefreshIndicatorState>();
 
   bool loading = false;
@@ -101,7 +105,8 @@ class _FavoriteState extends State<Favorite> {
                                       " " +
                                       data?.subDistrict,
                                   data?.id,
-                                  token));
+                                  token,
+                                  typeUser));
                             }
                             loading = false;
                             if (result.length == 0) {
