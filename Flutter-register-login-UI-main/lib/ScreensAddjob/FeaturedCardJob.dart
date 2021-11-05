@@ -39,7 +39,7 @@ class FeaturedCardJob extends StatelessWidget {
           builder: (context, AsyncSnapshot snapshot) {
             JobDataModel data = snapshot?.data;
             if (snapshot?.connectionState != ConnectionState.done) {
-              return LoadingCube();
+              return Text("");
             } else {
               String money = "";
               if (data.departmentId.type[0] == "salary") {
@@ -107,7 +107,9 @@ class FeaturedCardJob extends StatelessWidget {
                                                   .pushReplacement(
                                                       MaterialPageRoute(
                                                           builder: (context) =>
-                                                              EditingCardJob(token,typeUser)));
+                                                              EditingCardJob(
+                                                                  token,
+                                                                  typeUser)));
                                             },
                                             child: Padding(
                                               padding: const EdgeInsets.only(
