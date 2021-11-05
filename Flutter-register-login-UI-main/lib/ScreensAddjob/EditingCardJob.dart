@@ -18,25 +18,31 @@ import 'dart:io';
 import 'HomeAddjob.dart';
 
 class EditingCardJob extends StatefulWidget {
-  EditingCardJob({Key key}) : super(key: key);
+  EditingCardJob(this.token,this.typeUser);
+  var token;
+  var typeUser;
   final TextEditingController fullname = new TextEditingController();
   final TextEditingController email = new TextEditingController();
   final TextEditingController tel = new TextEditingController();
   final TextEditingController password = new TextEditingController();
   final TextEditingController confirmpassword = new TextEditingController();
   @override
-  MapScreenState createState() => MapScreenState();
+  MapScreenState createState() => MapScreenState(token,typeUser);
 }
 
 class MapScreenState extends State<EditingCardJob>
+  
     with SingleTickerProviderStateMixin {
+      MapScreenState(this.token,this.typeUser);
+      var token;
+      var typeUser;
   var fullname = new TextEditingController();
   var email = new TextEditingController();
   var tel = new TextEditingController();
   var password = new TextEditingController();
   var confirmpassword = new TextEditingController();
   File file;
-  String token = "";
+  
 
   bool _status = true;
   final FocusNode myFocusNode = FocusNode();
@@ -71,7 +77,7 @@ class MapScreenState extends State<EditingCardJob>
                     onPressed: () {
                       Navigator.of(context).pushReplacement(
                           MaterialPageRoute(builder: (context) {
-                        return HomeAddjob(token);
+                        return HomeAddjob(token,typeUser);
                       }));
                     },
                   ),
@@ -617,7 +623,7 @@ class MapScreenState extends State<EditingCardJob>
                                                                 AlertMessage(
                                                                     "แจ้งเตือน",
                                                                     "อัพเดตรูปภาพแล้ว",
-                                                                    EditingCardJob()),
+                                                                    EditingCardJob(token,typeUser)),
                                                           );
                                                           setState(() {
                                                             file = File(
@@ -715,7 +721,7 @@ class MapScreenState extends State<EditingCardJob>
                             builder: (_) => AlertMessage(
                                 "แจ้งเตือน", "แก้ไขข้อมูลสำเร็จ", null));
                         Navigator.of(context).pushReplacement(MaterialPageRoute(
-                            builder: (context) => EditingCardJob()));
+                            builder: (context) => EditingCardJob(token,typeUser)));
                       } else {
                         showDialog(
                             context: context,
@@ -743,7 +749,7 @@ class MapScreenState extends State<EditingCardJob>
                           builder: (_) => AlertMessage(
                               "แจ้งเตือน", "แก้ไขข้อมูลสำเร็จ", null));
                       Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (context) => EditingCardJob()));
+                          builder: (context) => EditingCardJob(token,typeUser)));
                     } else {
                       showDialog(
                           context: context,

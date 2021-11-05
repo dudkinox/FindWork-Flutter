@@ -5,16 +5,18 @@ import 'package:login_ui/Themes/Themes.dart';
 import 'manageJob.dart';
 
 class HomeAdmin extends StatefulWidget {
-  HomeAdmin(this.token);
+  HomeAdmin(this.token,this.typeUser);
   var token;
+  var typeUser;
 
   @override
-  _HomeAdminState createState() => _HomeAdminState(token);
+  _HomeAdminState createState() => _HomeAdminState(token,typeUser);
 }
 
 class _HomeAdminState extends State<HomeAdmin> {
-  _HomeAdminState(this.token);
+  _HomeAdminState(this.token,this.typeUser);
   var token;
+  var typeUser;
   final InfiniteScrollController _infiniteController = InfiniteScrollController(
     initialScrollOffset: 0.0,
   );
@@ -28,7 +30,7 @@ class _HomeAdminState extends State<HomeAdmin> {
             icon: Icon(Icons.arrow_back_ios, color: Colors.black),
             onPressed: () {
               Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => HomeAddjob(token)),
+                MaterialPageRoute(builder: (context) => HomeAddjob(token,typeUser)),
               );
             },
           ),

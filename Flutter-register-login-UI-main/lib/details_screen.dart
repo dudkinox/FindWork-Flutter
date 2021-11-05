@@ -234,7 +234,8 @@ class DetailsPage extends StatelessWidget {
                                   (HomeAddjob) => FeaturedCardJob(
                                       featuredJobs: demoFeatured[0],
                                       typeUser: typeUser,
-                                      token: token),
+                                      token: token,
+                                      id: id),
                                 ),
                               ),
                             ),

@@ -17,7 +17,7 @@ void login(BuildContext context, String username, String password) async {
       break;
     case "employer":
       Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => HomeAddjob(login.id)));
+          MaterialPageRoute(builder: (context) => HomeAddjob(login.id , login.type)));
       break;
     default:
       showDialog(

@@ -18,25 +18,29 @@ import 'dart:io';
 import 'HomeAddjob.dart';
 
 class EditingCompany extends StatefulWidget {
-  EditingCompany({Key key}) : super(key: key);
+  EditingCompany(this.token,this.typeUser);
+  var token;
+  var typeUser;
   final TextEditingController fullname = new TextEditingController();
   final TextEditingController email = new TextEditingController();
   final TextEditingController tel = new TextEditingController();
   final TextEditingController password = new TextEditingController();
   final TextEditingController confirmpassword = new TextEditingController();
   @override
-  MapScreenState createState() => MapScreenState();
+  MapScreenState createState() => MapScreenState(token,typeUser);
 }
 
 class MapScreenState extends State<EditingCompany>
     with SingleTickerProviderStateMixin {
+      MapScreenState(this.token,this.typeUser);
+      var token;
+      var typeUser;
   var fullname = new TextEditingController();
   var email = new TextEditingController();
   var tel = new TextEditingController();
   var password = new TextEditingController();
   var confirmpassword = new TextEditingController();
   File file;
-  String token = "";
 
   bool _status = true;
   final FocusNode myFocusNode = FocusNode();
@@ -70,7 +74,7 @@ class MapScreenState extends State<EditingCompany>
                     icon: Icon(Icons.arrow_back_ios, color: Colors.black),
                     onPressed: () {
                       Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (context) => HomeAddjob(token)));
+                          builder: (context) => HomeAddjob(token,typeUser)));
                     },
                   ),
                 ),
@@ -368,7 +372,7 @@ class MapScreenState extends State<EditingCompany>
                                                                 AlertMessage(
                                                                     "แจ้งเตือน",
                                                                     "อัพเดตรูปภาพแล้ว",
-                                                                    EditingCompany()),
+                                                                    EditingCompany(token,typeUser)),
                                                           );
                                                           setState(() {
                                                             file = File(
@@ -466,7 +470,7 @@ class MapScreenState extends State<EditingCompany>
                             builder: (_) => AlertMessage(
                                 "แจ้งเตือน", "แก้ไขข้อมูลสำเร็จ", null));
                         Navigator.of(context).pushReplacement(MaterialPageRoute(
-                            builder: (context) => EditingCompany()));
+                            builder: (context) => EditingCompany(token,typeUser)));
                       } else {
                         showDialog(
                             context: context,
@@ -494,7 +498,7 @@ class MapScreenState extends State<EditingCompany>
                           builder: (_) => AlertMessage(
                               "แจ้งเตือน", "แก้ไขข้อมูลสำเร็จ", null));
                       Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (context) => EditingCompany()));
+                          builder: (context) => EditingCompany(token,typeUser)));
                     } else {
                       showDialog(
                           context: context,

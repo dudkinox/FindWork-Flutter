@@ -26,10 +26,7 @@ class DetailCardJob extends StatelessWidget {
         ),
         leading: GestureDetector(
           onTap: () {
-            Navigator.of(context)
-                .pushReplacement(MaterialPageRoute(builder: (context) {
-              return HomeAddjob(token);
-            }));
+            Navigator.pop(context);
           },
           child: Icon(
             Icons.arrow_back_ios,
