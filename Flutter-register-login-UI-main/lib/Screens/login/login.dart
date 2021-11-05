@@ -102,7 +102,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       textColor: Colors.white,
                       padding: const EdgeInsets.all(0),
                       child: Container(
-                        height: 50.0,
+                        height: size.height * 0.07,
                         width: size.width * 0.5,
                         decoration: new BoxDecoration(
                             borderRadius: BorderRadius.circular(80.0),

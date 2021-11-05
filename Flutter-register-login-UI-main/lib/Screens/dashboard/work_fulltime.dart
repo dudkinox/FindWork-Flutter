@@ -67,8 +67,8 @@ class work_fulltime extends StatelessWidget {
               ),
             ),
             Container(
-              height: 400.0,
-              width: 400.0,
+              height: MediaQuery.of(context).size.height * 0.52,
+              width: MediaQuery.of(context).size.width * 1,
               child: FutureBuilder<List<JobDataModel>>(
                 future: TopicWork(),
                 builder: (context, AsyncSnapshot snapshot) {

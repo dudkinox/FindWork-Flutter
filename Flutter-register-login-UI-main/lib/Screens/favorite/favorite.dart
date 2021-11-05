@@ -85,7 +85,7 @@ class _FavoriteState extends State<Favorite> {
                   ),
                   Expanded(
                     child: Container(
-                      height: MediaQuery.of(context).size.height * 0.72,
+                      // height: MediaQuery.of(context).size.height * 0.72,
                       width: MediaQuery.of(context).size.width * 0.9,
                       child: FutureBuilder<List<JobDataModel>>(
                         future: listFavorite(token),

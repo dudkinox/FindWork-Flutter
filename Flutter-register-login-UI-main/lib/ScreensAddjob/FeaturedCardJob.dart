@@ -56,7 +56,7 @@ class FeaturedCardJob extends StatelessWidget {
                     Text(
                       featuredJobs.title,
                       style: TextStyle(
-                          color: Colors.white,
+                          color: Colors.black,
                           fontWeight: FontWeight.bold,
                           fontSize: 18),
                     ),
@@ -76,7 +76,7 @@ class FeaturedCardJob extends StatelessWidget {
                             PopupMenuItem(
                               child: Row(
                                 children: [
-                                  Icon(Icons.delete_forever_outlined),
+                                  Icon(Icons.edit_outlined),
                                   GestureDetector(
                                     onTap: () {
                                       Navigator.of(context).pushReplacement(

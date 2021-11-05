@@ -323,7 +323,7 @@ List<JobsDetail> demoFeatured = [
       text1: 'Part Time',
       text2: 'Remote',
       text3: 'Junior',
-      text4: '4 yrs'),
+      text4: '4 yrs',),
 ];
 
 List<String> getJobsRequirements(String Detail) {

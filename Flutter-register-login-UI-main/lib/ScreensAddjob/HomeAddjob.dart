@@ -81,30 +81,22 @@ class _HomeAddjobState extends State<HomeAddjob> {
                                         color: Colors.white.withOpacity(.5),
                                       ),
                                       child: Transform.rotate(
-                                          angle: 180 * pi / 180,
-                                          child: IconButton(
-                                            iconSize: 30,
-                                            color: Colors.black,
-                                            icon: const Icon(
-                                                Icons.exit_to_app_rounded),
-                                            onPressed: () {
-                                              Navigator.pushAndRemoveUntil(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder:
-                                                      (BuildContext context) =>
-                                                          LoginScreen(),
-                                                ),
-                                                (route) => false,
-                                              );
-                                            //   Navigator.of(context)
-                                            //       .pushReplacement(
-                                            //           MaterialPageRoute(
-                                            //               builder: (context) =>
-                                            //                   LoginScreen()));
-                                            },
-                                          ),
-                                          ),
+                                        angle: 180 * pi / 180,
+                                        child: IconButton(
+                                          iconSize: 30,
+                                          color: Colors.black,
+                                          icon: const Icon(
+                                              Icons.exit_to_app_rounded),
+                                          onPressed: () {
+                                            Navigator.of(context)
+                                                .pushReplacement(
+                                                    MaterialPageRoute(
+                                                        builder: (context) {
+                                              return LoginScreen();
+                                            }));
+                                          },
+                                        ),
+                                      ),
                                     ),
                                   ),
                                   Container(
