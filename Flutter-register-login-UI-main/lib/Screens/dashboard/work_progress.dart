@@ -69,7 +69,7 @@ class work_progress extends StatelessWidget {
               height: 10.0,
             ),
             Container(
-              height: MediaQuery.of(context).size.height * 0.55,
+              height: MediaQuery.of(context).size.height * 0.52,
               width: MediaQuery.of(context).size.width * 1,
               child: FutureBuilder<List<JobDataModel>>(
                 future: TopicWork(),
