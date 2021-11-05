@@ -233,7 +233,8 @@ class DetailsPage extends StatelessWidget {
                                   data.departmentId.name.length,
                                   (HomeAddjob) => FeaturedCardJob(
                                       featuredJobs: demoFeatured[0],
-                                      typeUser: typeUser),
+                                      typeUser: typeUser,
+                                      token: token),
                                 ),
                               ),
                             ),

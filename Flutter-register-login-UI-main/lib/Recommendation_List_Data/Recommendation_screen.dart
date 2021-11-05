@@ -72,7 +72,7 @@ class _RecommendationState extends State<Recommendation> {
               child: GestureDetector(
                 onTap: () {
                   Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(
+                    MaterialPageRoute(
                       builder: (BuildContext context) =>
                           DetailsPage(imgUlr, id, token, typeUser),
                     ),
