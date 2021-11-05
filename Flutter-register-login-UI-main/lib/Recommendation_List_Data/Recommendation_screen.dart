@@ -8,7 +8,7 @@ import 'package:login_ui/model/favoriteModel.dart';
 import 'package:login_ui/model/jobModel.dart';
 
 
-class Recommendation extends StatelessWidget {
+class Recommendation extends StatefulWidget {
   final String imgUlr;
   final String location;
   final String company;
@@ -16,9 +16,19 @@ class Recommendation extends StatelessWidget {
   final String token;
 
   const Recommendation(this.imgUlr, this.company, this.location, this.id, this.token);
+  @override
+  _RecommendationState createState() => _RecommendationState(imgUlr,company,location,id,token);
+}
 
+class _RecommendationState extends State<Recommendation> {
+_RecommendationState(this.imgUlr, this.company, this.location, this.id, this.token);
+var imgUlr;
+var company;
+var location;
+var id;
+var token;
 
-  Future<bool> status(String token, String jobId) async {
+Future<bool> status(String token, String jobId) async {
     FavoriteModel status = await GetFavorite(token);
     if(status != null){
       for (var i = 0; i < status.jobId.length; i++) {
@@ -32,7 +42,8 @@ class Recommendation extends StatelessWidget {
     }
       return false;
   }
-  
+
+
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -111,9 +122,14 @@ class Recommendation extends StatelessWidget {
                                         valueChanged: (_isFavorite) {
                                           if (_isFavorite == true) {
                                             AddFavorite(id, token);
-                                            
+                                            setState(() {
+                                              
+                                            });
                                           } else {
                                             DelFavorite(id, token);
+                                            setState(() {
+                                              
+                                            });
                                           }
                                         },
                                       );

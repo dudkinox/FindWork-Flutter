@@ -18,9 +18,10 @@ class AlertMessage extends StatelessWidget {
           onPressed: () => {
             if (Path != null)
               {
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => Path)),
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (BuildContext context) => Path))
               }
+              
             else
               {
                 Navigator.pop(context),

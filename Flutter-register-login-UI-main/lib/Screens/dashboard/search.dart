@@ -15,7 +15,7 @@ class Search extends StatelessWidget {
         child: TypeAheadField(
           hideSuggestionsOnKeyboardHide: false,
           textFieldConfiguration: TextFieldConfiguration(
-            autofocus: true,
+            autofocus: false,
             style: DefaultTextStyle.of(context).style.copyWith(fontSize: 14),
             decoration: InputDecoration(
                 enabled: false,
