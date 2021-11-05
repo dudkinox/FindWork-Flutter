@@ -124,6 +124,27 @@ Future<String> DelFavorite(
   }
 }
 
+Future<String> DelJob(
+  String token,
+) async {
+  try {
+    final String Url = Host + "/api/employer/" + token;
+    final response =
+        await http.delete(Uri.parse(Url), headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    });
+
+    if (response.statusCode == 400) {
+      var err = json.decode(json.encode(response.body));
+      return err;
+    }
+    var data = json.decode(json.encode(response.body));
+    return data;
+  } catch (e) {
+    print(e);
+  }
+}
+
 Future<String> DelAllFavorite(
   String user_id,
 ) async {
@@ -148,7 +169,7 @@ Future<String> DelAllFavorite(
 }
 
 Future<FavoriteModel> GetFavorite(String token) async {
-  try { 
+  try {
     final String url = Host + "/api/favorite/" + token;
     final response = await http.get(
       Uri.parse(url),

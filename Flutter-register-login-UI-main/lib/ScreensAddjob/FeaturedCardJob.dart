@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:login_ui/Service/JobService.dart';
 
 import 'package:login_ui/Themes/Themes.dart';
+import 'package:login_ui/components/alert.dart';
+import 'package:login_ui/model/jobModel.dart';
 
 import 'DetailCardJob.dart';
 import 'EditingCardJob.dart';
@@ -106,6 +109,27 @@ class FeaturedCardJob extends StatelessWidget {
                                 children: [
                                   Icon(Icons.delete_forever_outlined),
                                   GestureDetector(
+                                    onTap: () async {
+                                      JobDataModel job_id =
+                                          await TopicWorkFindID(token);
+                                      String status =
+                                          await DelJob(job_id.jobId);
+                                      if (status == "ลบสำเร็จ") {
+                                        showDialog(
+                                            context: context,
+                                            builder: (_) => AlertMessage(
+                                                "แจ้งเตือน",
+                                                "ลบงานเรียบร้อยแล้ว",
+                                                null));
+                                      } else {
+                                        showDialog(
+                                            context: context,
+                                            builder: (_) => AlertMessage(
+                                                "แจ้งเตือน",
+                                                "server มีปัญหา กรุณาลองใหม่อีกครั้ง",
+                                                null));
+                                      }
+                                    },
                                     child: Padding(
                                       padding: const EdgeInsets.only(left: 10),
                                       child: Text(
