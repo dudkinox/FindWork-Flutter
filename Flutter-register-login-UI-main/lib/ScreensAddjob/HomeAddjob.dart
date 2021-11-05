@@ -16,6 +16,7 @@ import 'package:login_ui/model/loginModel.dart';
 
 import 'EditingCompany.dart';
 import 'managerJob/manageControl.dart';
+import 'modelsAddjob/CloseTheAccount.dart';
 
 class HomeAddjob extends StatefulWidget {
   HomeAddjob(this.token);
@@ -100,44 +101,117 @@ class _HomeAddjobState extends State<HomeAddjob> {
                                     ),
                                   ),
                                   Container(
-                                    height: 50.0,
-                                    width: 50.0,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20.0),
-                                      color: Colors.white.withOpacity(.5),
-                                    ),
+                                    height: 45.0,
+                                    width: 45.0,
                                     child: PopupMenuButton(
                                       itemBuilder: (context) => [
                                         PopupMenuItem(
-                                          child: GestureDetector(
-                                            onTap: () {
-                                              Navigator.of(context)
-                                                  .pushReplacement(
-                                                      MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              EditingCompany()));
-                                            },
-                                            child: Row(
-                                              children: [
-                                                Icon(Icons.edit_outlined),
-                                                Padding(
+                                          child: Row(
+                                            children: [
+                                              Icon(Icons.edit_outlined),
+                                              GestureDetector(
+                                                onTap: () {
+                                                  Navigator.of(context)
+                                                      .pushReplacement(
+                                                          MaterialPageRoute(
+                                                              builder: (context) =>
+                                                                  EditingCompany()));
+                                                },
+                                                child: Padding(
                                                   padding:
                                                       const EdgeInsets.only(
                                                           left: 10),
                                                   child: Text(
-                                                    "แก้ไขข้อมมูล",
+                                                    "แก้ไขรายละเอียดงาน",
                                                     style: TextStyle(
-                                                        fontSize: 14.0),
+                                                      fontSize: 14,
+                                                    ),
                                                   ),
                                                 ),
-                                              ],
-                                            ),
+                                              ),
+                                            ],
                                           ),
-                                        )
+                                        ),
+                                        PopupMenuItem(
+                                          child: Row(
+                                            children: [
+                                              Icon(Icons.person_outline),
+                                              GestureDetector(
+                                                onTap: () {
+                                                  Navigator.of(context)
+                                                      .pushReplacement(
+                                                          MaterialPageRoute(
+                                                              builder: (context) =>
+                                                                  CloseTheAccount()));
+                                                },
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 10),
+                                                  child: Text(
+                                                    "ปิดบัญชี",
+                                                    style: TextStyle(
+                                                      fontSize: 14,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
                                       ],
-                                      child: Icon(Icons.more_vert_outlined),
+                                      child: Icon(
+                                        Icons.more_vert_outlined,
+                                      ),
+                                    ),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(15),
+                                      color: Colors.white.withOpacity(.5),
                                     ),
                                   ),
+                                  // Container(
+                                  //   height: 50.0,
+                                  //   width: 50.0,
+                                  //   decoration: BoxDecoration(
+                                  //     borderRadius: BorderRadius.circular(20.0),
+                                  //     color: Colors.white.withOpacity(.5),
+                                  //   ),
+                                  //   child: PopupMenuButton(
+                                  //     itemBuilder: (context) => [
+                                  //       PopupMenuItem(
+                                  //         child: GestureDetector(
+                                  //           onTap: () {
+                                  //             Navigator.of(context)
+                                  //                 .pushReplacement(
+                                  //                     MaterialPageRoute(
+                                  //                         builder: (context) =>
+                                  //                             EditingCompany()));
+                                  //           },
+                                  //           child: Row(
+                                  //             children: [
+                                  //               Icon(Icons.edit_outlined),
+                                  //               Padding(
+                                  //                 padding:
+                                  //                     const EdgeInsets.only(
+                                  //                         left: 10),
+                                  //                 child: Text(
+                                  //                   "แก้ไขข้อมมูล",
+                                  //                   style: TextStyle(
+                                  //                       fontSize: 14.0),
+                                  //                 ),
+                                  //               ),
+
+                                  //             ],
+
+                                  //           ),
+
+                                  //         ),
+                                  //       )
+
+                                  //     ],
+                                  //     child: Icon(Icons.more_vert_outlined),
+                                  //   ),
+                                  // ),
                                 ],
                               ),
                             ),
