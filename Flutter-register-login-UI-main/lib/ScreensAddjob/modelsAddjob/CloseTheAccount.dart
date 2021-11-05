@@ -121,28 +121,13 @@ class MapScreenState extends State<CloseTheAccount>
                                                         MainAxisAlignment.start,
                                                     mainAxisSize:
                                                         MainAxisSize.min,
-                                                    children: <Widget>[
-                                                      new Text(
-                                                        'แก้ไขข้อมูล',
-                                                        style: TextStyle(
-                                                            fontSize: 18.0,
-                                                            color: PrimaryColor,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .bold),
-                                                      ),
-                                                    ],
                                                   ),
                                                   new Column(
                                                     mainAxisAlignment:
                                                         MainAxisAlignment.end,
                                                     mainAxisSize:
                                                         MainAxisSize.min,
-                                                    children: <Widget>[
-                                                      _status
-                                                          ? _getEditIcon()
-                                                          : new Container(),
-                                                    ],
+                                                    children: <Widget>[],
                                                   )
                                                 ],
                                               )),
@@ -189,7 +174,6 @@ class MapScreenState extends State<CloseTheAccount>
                                                           const InputDecoration(
                                                               hintText:
                                                                   "ใส่รหัสผ่านเพื่อปิดบัญชีผู้ใช้"),
-                                                      enabled: !_status,
                                                     ),
                                                   ),
                                                 ],
@@ -238,11 +222,49 @@ class MapScreenState extends State<CloseTheAccount>
                                                           const InputDecoration(
                                                               hintText:
                                                                   "ยืนยันรหัสผ่านอีกครั้งเพื่อปิดบัญชี"),
-                                                      enabled: !_status,
                                                     ),
                                                   ),
                                                 ],
                                               )),
+                                          Container(
+                                            alignment: Alignment.center,
+                                            margin: EdgeInsets.symmetric(
+                                                horizontal: 120, vertical: 20),
+                                            child: RaisedButton(
+                                              onPressed: () {},
+                                              shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          80.0)),
+                                              textColor: Colors.white,
+                                              padding: const EdgeInsets.all(0),
+                                              child: Container(
+                                                alignment: Alignment.center,
+                                                height: 50.0,
+                                                // width: size.width * 0.5,
+                                                decoration: new BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            80.0),
+                                                    gradient:
+                                                        new LinearGradient(
+                                                            colors: [
+                                                          Colors.red,
+                                                          Colors.red,
+                                                        ])),
+                                                padding:
+                                                    const EdgeInsets.all(0),
+                                                child: Text(
+                                                  "ยืนยัน",
+                                                  textAlign: TextAlign.center,
+                                                  style: TextStyle(
+                                                      fontSize: 16,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
                                           Padding(
                                               padding: EdgeInsets.only(
                                                   left: 25.0,
@@ -361,47 +383,8 @@ class MapScreenState extends State<CloseTheAccount>
             ),
             flex: 2,
           ),
-          Expanded(
-            child: Padding(
-              padding: EdgeInsets.only(left: 10.0),
-              child: Container(
-                  child: new RaisedButton(
-                child: new Text("Cancel"),
-                textColor: Colors.white,
-                color: Colors.red[600],
-                onPressed: () {
-                  setState(() {
-                    _status = true;
-                    FocusScope.of(context).requestFocus(new FocusNode());
-                  });
-                },
-                shape: new RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(20.0)),
-              )),
-            ),
-            flex: 2,
-          ),
         ],
       ),
-    );
-  }
-
-  Widget _getEditIcon() {
-    return new GestureDetector(
-      child: new CircleAvatar(
-        backgroundColor: PrimaryColor,
-        radius: 14.0,
-        child: new Icon(
-          Icons.edit,
-          color: Colors.white,
-          size: 16.0,
-        ),
-      ),
-      onTap: () {
-        setState(() {
-          _status = false;
-        });
-      },
     );
   }
 }
