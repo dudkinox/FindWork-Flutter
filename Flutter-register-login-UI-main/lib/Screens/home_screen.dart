@@ -35,7 +35,7 @@ class HomePage extends StatelessWidget {
                     SizedBox(
                       height: 60.0,
                     ),
-                    Header(),
+                    Header(id_token),
                     SizedBox(
                       height: 20.0,
                     ),

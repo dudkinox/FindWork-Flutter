@@ -24,24 +24,18 @@ class _FavoriteState extends State<Favorite> {
   @override
   void initState() {
     super.initState();
-    refreshList();
   }
 
-  Future<Null> refreshList() async {
-    refreshKey.currentState?.show(atTop: false);
-    await Future.delayed(Duration(seconds: 1));
-    setState(() {
-      loading = true;
-    });
-    return null;
+  Future<void> onPullToRefresh() async {
+    await Future.delayed(Duration(milliseconds: 500));
+    setState(() {});
   }
 
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: onWillPop,
       child: RefreshIndicator(
-        key: refreshKey,
-        onRefresh: refreshList,
+        onRefresh: onPullToRefresh,
         child: Scaffold(
           body: SafeArea(
             child: Container(
@@ -99,14 +93,14 @@ class _FavoriteState extends State<Favorite> {
                           } else {
                             for (JobDataModel data in snapshot?.data) {
                               result.add(Recommendation(
-                                  data.image,
-                                  data.company,
+                                  data?.image,
+                                  data?.company,
                                   data.province +
                                       " " +
-                                      data.district +
+                                      data?.district +
                                       " " +
-                                      data.subDistrict,
-                                  data.id,
+                                      data?.subDistrict,
+                                  data?.id,
                                   token));
                             }
                             loading = false;

@@ -10,8 +10,11 @@ import 'package:login_ui/Themes/Themes.dart';
 import 'package:login_ui/Themes/images.dart';
 
 class Header extends StatelessWidget {
+  Header(this.token);
+  var token;
   @override
   Widget build(BuildContext context) {
+    print("token " + token);
     return FadeAnimation(
       1.0,
       Padding(
@@ -55,10 +58,11 @@ class Header extends StatelessWidget {
                     child: FlatButton(
                       padding: EdgeInsets.all(0.0),
                       onPressed: () {
-                        Navigator.push(
+                        Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => ProfilePage()));
+                                builder: (BuildContext context) =>
+                                    ProfilePage()));
                       },
                       child: null,
                     ),

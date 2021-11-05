@@ -308,8 +308,7 @@ class _RegisterAddjobScreenState extends State<RegisterAddjobScreen> {
                 margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
                 child: GestureDetector(
                   onTap: () => {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => LoginScreen()))
+                    Navigator.pop(context)
                   },
                   child: Text(
                     "มีบัญชีอยู่แล้ว / เข้าสู่ระบบ",

@@ -46,10 +46,11 @@ class work_fulltime extends StatelessWidget {
                       Container(
                         child: GestureDetector(
                           onTap: () => {
-                            Navigator.push(
+                            Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => dashboard_All(token)))
+                                    builder: (BuildContext context) =>
+                                        dashboard_All(token)))
                           },
                           child: Text(
                             "ดูทั้งหมด",

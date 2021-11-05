@@ -122,14 +122,8 @@ Future<bool> status(String token, String jobId) async {
                                         valueChanged: (_isFavorite) {
                                           if (_isFavorite == true) {
                                             AddFavorite(id, token);
-                                            setState(() {
-                                              
-                                            });
                                           } else {
-                                            DelFavorite(id, token);
-                                            setState(() {
-                                              
-                                            });
+                                            DelFavorite(id, token);                                              
                                           }
                                         },
                                       );

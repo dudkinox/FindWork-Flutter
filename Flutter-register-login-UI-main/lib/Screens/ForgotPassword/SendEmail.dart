@@ -124,10 +124,7 @@ class _SendEmailState extends State<SendEmail> {
                     margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
                     child: GestureDetector(
                       onTap: () => {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => LoginScreen()))
+                        Navigator.pop(context)
                       },
                       child: Text(
                         "ย้อนกลับไปเข้าสู่เข้าสู่ระบบ",

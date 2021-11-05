@@ -206,7 +206,7 @@ Future<String> UploadResume(String token, File image) async {
 Future<ResumeModel> PreviewResume(String token) async {
   try {
     var searchLink = await FindID(token);
-    var image = searchLink.image;
+    var image = searchLink?.image;
     if (image != "") {
       final String url = Host + "/api/previewimage/login/" + image;
       final response = await http.get(
@@ -216,10 +216,10 @@ Future<ResumeModel> PreviewResume(String token) async {
         },
       );
 
-      return ResumeModel.fromJson(jsonDecode(response.body));
+      return ResumeModel.fromJson(jsonDecode(response?.body));
     } else {
       ResumeModel none = new ResumeModel();
-      none.link = "";
+      none?.link = "";
       return none;
     }
   } catch (e) {

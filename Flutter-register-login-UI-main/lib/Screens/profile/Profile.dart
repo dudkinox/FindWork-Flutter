@@ -184,10 +184,7 @@ class MapScreenState extends State<ProfilePage>
                                                       builder:
                                                           (context, snapshot) {
                                                         fullname =
-                                                            snapshot.data;
-                                                        // Future.delayed(Duration(seconds: 5), () {
-
-                                                        // });
+                                                            snapshot?.data;
                                                         return new TextField(
                                                           controller: fullname,
                                                           decoration:
@@ -242,12 +239,12 @@ class MapScreenState extends State<ProfilePage>
                                                       child: FutureBuilder<
                                                               TextEditingController>(
                                                           future: dataemail(
-                                                              snapshot.data
+                                                              snapshot?.data
                                                                   .toString()),
                                                           builder: (context,
                                                               snapshot) {
                                                             email =
-                                                                snapshot.data;
+                                                                snapshot?.data;
                                                             return new TextField(
                                                               controller: email,
                                                               decoration:
@@ -424,11 +421,8 @@ class MapScreenState extends State<ProfilePage>
                                                 FutureBuilder<ResumeModel>(
                                                   future: PreviewResume(token),
                                                   builder: (context, snapshot) {
-                                                    if (snapshot
-                                                            .connectionState ==
-                                                        ConnectionState.done) {
-                                                      if (snapshot.data?.link ==
-                                                          "") {
+                                                    if (snapshot?.connectionState == ConnectionState.done) {
+                                                      if (snapshot.data?.link == "") {
                                                         return Text(
                                                           "ยังไม่ได้เลือกรูปภาพ",
                                                           textAlign:
@@ -436,7 +430,7 @@ class MapScreenState extends State<ProfilePage>
                                                         );
                                                       } else {
                                                         return Container(
-                                                          child: Image.network(
+                                                          child: Image?.network(
                                                             snapshot.data?.link,
                                                             fit: BoxFit.fill,
                                                           ),
@@ -459,16 +453,12 @@ class MapScreenState extends State<ProfilePage>
                                                     color: PrimaryColor,
                                                     onPressed: () async {
                                                       var image = await ImagePicker()
-                                                          .getImage(
-                                                              source:
-                                                                  ImageSource
-                                                                      .gallery);
+                                                      .getImage(source:ImageSource?.gallery);
                                                       if (image?.path != null) {
                                                         String status =
                                                             await UploadResume(
                                                                 token,
-                                                                File(image
-                                                                    .path));
+                                                                File(image?.path));
                                                         print(status);
                                                         if (status ==
                                                             "อัพโหลดรูปภาพเรียบร้อย") {
@@ -482,7 +472,7 @@ class MapScreenState extends State<ProfilePage>
                                                           );
                                                           setState(() {
                                                             file = File(
-                                                                image.path);
+                                                                image?.path);
                                                           });
                                                         } else {
                                                           showDialog(
@@ -562,13 +552,13 @@ class MapScreenState extends State<ProfilePage>
                 textColor: Colors.white,
                 color: Color(0xFF25888E),
                 onPressed: () async {
-                  if (password.text != "") {
-                    if (password.text == confirmpassword.text) {
+                  if (password?.text != "") {
+                    if (password?.text == confirmpassword.text) {
                       final String status = await UpdateProfilePassword(
-                          email.text,
-                          fullname.text,
-                          tel.text,
-                          password.text,
+                          email?.text,
+                          fullname?.text,
+                          tel?.text,
+                          password?.text,
                           token);
                       if (status == "แก้ไขข้อมูลแล้ว") {
                         showDialog(

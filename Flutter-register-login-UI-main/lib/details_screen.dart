@@ -1,6 +1,7 @@
 import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:login_ui/Screens/homehome.dart';
 import 'package:login_ui/model/favoriteModel.dart';
 import 'package:login_ui/model/jobModel.dart';
 
@@ -69,7 +70,10 @@ class DetailsPage extends StatelessWidget {
                             children: [
                               GestureDetector(
                                 onTap: () {
-                                  Navigator.pop(context);
+                                  Navigator.of(context).pushReplacement(
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              HomeHome(0, token)));
                                 },
                                 child: Container(
                                   height: 50.0,
