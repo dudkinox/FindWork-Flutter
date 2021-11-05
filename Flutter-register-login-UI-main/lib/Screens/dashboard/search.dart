@@ -4,8 +4,8 @@ import 'package:login_ui/Animation/Fade_Animation.dart';
 import 'package:login_ui/Screens/loading.dart';
 import 'package:login_ui/Service/JobService.dart';
 import 'package:login_ui/Themes/Themes.dart';
+import 'package:login_ui/model/SearchModel.dart';
 
-import 'package:login_ui/model/Search.dart';
 import 'package:login_ui/model/jobModel.dart';
 
 class Search extends StatelessWidget {

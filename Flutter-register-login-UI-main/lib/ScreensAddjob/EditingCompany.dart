@@ -70,7 +70,7 @@ class MapScreenState extends State<EditingCompany>
                     icon: Icon(Icons.arrow_back_ios, color: Colors.black),
                     onPressed: () => {
                       Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (context) => HomeAddjob(""))),
+                          builder: (context) => HomeAddjob(token)))
                     },
                   ),
                 ),

@@ -122,7 +122,7 @@ class FeaturedCardJob extends StatelessWidget {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       color: ButtonColor),
-                )
+                ),
               ],
             ),
             Row(
@@ -144,7 +144,7 @@ class FeaturedCardJob extends StatelessWidget {
                 ),
                 Text(featuredJobs.datePosted)
               ],
-            )
+            ),
           ],
         ),
       ),

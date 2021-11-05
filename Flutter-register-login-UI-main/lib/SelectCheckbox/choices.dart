@@ -324,26 +324,6 @@ List<JobsDetail> demoFeatured = [
       text2: 'Remote',
       text3: 'Junior',
       text4: '4 yrs'),
-  JobsDetail(
-      image: 'assets/images/youtube.png',
-      title: 'Backend Developer',
-      subTitle: 'Youtube',
-      renumeration: '\฿2000 / บาท',
-      datePosted: '3 Weeks ago',
-      text1: 'Part Time',
-      text2: 'Remote',
-      text3: 'Junior',
-      text4: '4 yrs'),
-  JobsDetail(
-      image: 'assets/images/apple.jpeg',
-      title: 'Customer Care',
-      subTitle: 'Apple',
-      renumeration: '\฿5000 / บาท',
-      datePosted: '2 days ago',
-      text1: 'Full Time',
-      text2: 'Remote',
-      text3: 'Senior',
-      text4: '2 yrs')
 ];
 
 List<String> getJobsRequirements(String Detail) {
