@@ -28,11 +28,13 @@ class Header extends StatelessWidget {
                   color: PrimaryColor,
                   icon: const Icon(Icons.exit_to_app_rounded),
                   onPressed: () {
-                    Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(builder: (context) => LoginScreen()));
+                    Navigator.of(context)
+                        .pushReplacement(MaterialPageRoute(builder: (context) {
+                      return LoginScreen();
+                    }));
                   },
                 )),
-            IconButton(icon: Icon(null), onPressed: () {}),
+            // IconButton(icon: Icon(null), onPressed: () {}),
             Row(
               children: [
                 ClipOval(

@@ -50,7 +50,8 @@ class Search extends StatelessWidget {
           ),
           onSuggestionSelected: (User suggestion) {
             final user = suggestion;
-            Navigator.of(context).push(MaterialPageRoute(
+            Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
                 builder: (context) => DetailsPage(user.image, user.id, token)));
 
             ScaffoldMessenger.of(context)

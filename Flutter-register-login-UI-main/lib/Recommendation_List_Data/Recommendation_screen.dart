@@ -68,9 +68,8 @@ Future<bool> status(String token, String jobId) async {
               padding: EdgeInsets.only(top: 20.0, left: 15, right: 15),
               child: GestureDetector(
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
+                  Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
                       builder: (BuildContext context) =>
                           DetailsPage(imgUlr, id, token),
                     ),
