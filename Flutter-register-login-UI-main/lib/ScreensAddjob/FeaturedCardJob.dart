@@ -7,16 +7,20 @@ import 'EditingCardJob.dart';
 
 class FeaturedCardJob extends StatelessWidget {
   final featuredJobs;
+  final token;
   final typeUser;
+  final VoidCallback onClicked;
 
-  const FeaturedCardJob({this.featuredJobs, this.typeUser});
+  const FeaturedCardJob(
+      {this.featuredJobs,  this.typeUser,this.token, this.onClicked, Key key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => DetailCardJob(typeUser)));
+        Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (context) => DetailCardJob(typeUser , token)));
       },
       child: Container(
         padding: EdgeInsets.symmetric(

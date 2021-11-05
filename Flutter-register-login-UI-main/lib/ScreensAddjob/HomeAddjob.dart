@@ -291,6 +291,7 @@ class _HomeAddjobState extends State<HomeAddjob> {
                               demoFeatured.length,
                               (HomeAddjob) => FeaturedCardJob(
                                 featuredJobs: demoFeatured[0],
+                                token: token,
                               ),
                             ),
                           ),

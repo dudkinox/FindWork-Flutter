@@ -68,9 +68,11 @@ class MapScreenState extends State<EditingCardJob>
                   elevation: 0,
                   leading: IconButton(
                     icon: Icon(Icons.arrow_back_ios, color: Colors.black),
-                    onPressed: () => {
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (context) => HomeAddjob(token)))
+                    onPressed: () {
+                      Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(builder: (context) {
+                        return HomeAddjob(token);
+                      }));
                     },
                   ),
                 ),
@@ -180,12 +182,12 @@ class MapScreenState extends State<EditingCardJob>
                                                     child: FutureBuilder<
                                                         TextEditingController>(
                                                       future: datafullname(
-                                                          snapshot.data
+                                                          snapshot?.data
                                                               .toString()),
                                                       builder:
                                                           (context, snapshot) {
                                                         fullname =
-                                                            snapshot.data;
+                                                            snapshot?.data;
                                                         // Future.delayed(Duration(seconds: 5), () {
 
                                                         // });

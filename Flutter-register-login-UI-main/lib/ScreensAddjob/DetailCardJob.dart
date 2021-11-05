@@ -1,13 +1,13 @@
-// ignore_for_file: must_be_immutable, deprecated_member_use
-
 import 'package:flutter/material.dart';
+import 'package:login_ui/ScreensAddjob/HomeAddjob.dart';
 import 'package:login_ui/SelectCheckbox/choices.dart';
 import 'package:login_ui/Themes/Themes.dart';
 import 'package:login_ui/components/notification.dart';
 
 class DetailCardJob extends StatelessWidget {
-  DetailCardJob(this.typeUser);
+  DetailCardJob(this.typeUser, this.token);
   var typeUser;
+  var token;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +24,10 @@ class DetailCardJob extends StatelessWidget {
         ),
         leading: GestureDetector(
           onTap: () {
-            Navigator.pop(context);
+            Navigator.of(context)
+                .pushReplacement(MaterialPageRoute(builder: (context) {
+              return HomeAddjob(token);
+            }));
           },
           child: Icon(
             Icons.arrow_back_ios,
