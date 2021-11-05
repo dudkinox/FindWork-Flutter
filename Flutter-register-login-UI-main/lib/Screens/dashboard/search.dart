@@ -59,48 +59,6 @@ class Search extends StatelessWidget {
                 content: Text('Selected user: ${user.company}'),
               ));
           },
-          // child: FutureBuilder<List<JobDataModel>>(
-          //   future: TopicWork(),
-          //   builder: (context, AsyncSnapshot snapshot) {
-          //     List result = [];
-          //     if (snapshot?.connectionState != ConnectionState.done) {
-          //       return LoadingCube();
-          //     } else {
-          //       return TypeAheadField(
-          //         hideSuggestionsOnKeyboardHide: false,
-          //         textFieldConfiguration: TextFieldConfiguration(
-          //           autofocus: false,
-          //           style:
-          //               DefaultTextStyle.of(context).style.copyWith(fontSize: 14),
-          //           decoration: InputDecoration(
-          //               enabled: false,
-          //               prefixIcon: Icon(Icons.search_outlined),
-          //               enabledBorder: OutlineInputBorder(
-          //                 borderRadius: BorderRadius.circular(20.0),
-          //                 borderSide: BorderSide(color: PrimaryColor),
-          //               ),
-          //               disabledBorder: OutlineInputBorder(
-          //                   borderSide: BorderSide(color: PrimaryColor),
-          //                   borderRadius: BorderRadius.circular(20.0)),
-          //               hintText: 'ค้นหาที่นี้'),
-          //         ),
-          //         suggestionsCallback: (Pattern) async {
-          //           return await BackendService.getSuggestions(Pattern);
-          //         },
-          //         itemBuilder: (context, suggestion) {
-          //           return ListTile(
-          //             title: Text(suggestion['company']),
-          //             // subtitle: Text('\$${suggestion['price']}'),
-          //           );
-          //         },
-          //         onSuggestionSelected: (suggestion) {
-          //           // Navigator.of(context).push(MaterialPageRoute(
-          //           //     builder: (context) => ProductPage(product: suggestion)));
-          //         },
-          //       );
-          //     }
-          //   },
-          // ),
         ),
       ),
     );
