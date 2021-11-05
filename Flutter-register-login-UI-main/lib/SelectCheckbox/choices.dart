@@ -290,40 +290,18 @@ List<Map<String, dynamic>> smartphones = [
   },
 ];
 
-// List<Map<String, dynamic>> transports = [
-//   {
-//     'title': 'Plane',
-//     'image': 'https://source.unsplash.com/Eu1xLlWuTWY/100x100',
-//   },
-//   {
-//     'title': 'Train',
-//     'image': 'https://source.unsplash.com/Njq3Nz6-5rQ/100x100',
-//   },
-//   {
-//     'title': 'Bus',
-//     'image': 'https://source.unsplash.com/qoXgaF27zBc/100x100',
-//   },
-//   {
-//     'title': 'Car',
-//     'image': 'https://source.unsplash.com/p7tai9P7H-s/100x100',
-//   },
-//   {
-//     'title': 'Bike',
-//     'image': 'https://source.unsplash.com/2LTMNCN4nEg/100x100',
-//   },
-// ];
-
 List<JobsDetail> demoFeatured = [
   JobsDetail(
-      image: 'assets/images/youtube.png',
-      title: 'Backend Developer',
-      subTitle: 'Youtube',
-      renumeration: '\฿2000 / บาท',
-      datePosted: '3 Weeks ago',
-      text1: 'Part Time',
-      text2: 'Remote',
-      text3: 'Junior',
-      text4: '4 yrs',),
+    image: 'assets/images/youtube.png',
+    title: 'Backend Developer',
+    subTitle: 'Youtube',
+    renumeration: '\฿2000 / บาท',
+    datePosted: '3 Weeks ago',
+    text1: 'Part Time',
+    text2: 'Remote',
+    text3: 'Junior',
+    text4: '4 yrs',
+  ),
 ];
 
 List<String> getJobsRequirements(String Detail) {
@@ -388,22 +366,6 @@ List<Products> products = [
     description: dummyText,
     image: 'assets/images/four.jpg',
   ),
-  // Product(
-  //   id: 5,
-  //   title: 'Office Code',
-  //   price: 231,
-  //   size: 12,
-  //   description: dummyText,
-  //   image: 'assets/images/bag_5.png',
-  // ),
-  // Product(
-  //   id: 6,
-  //   title: 'Office Code',
-  //   price: 233,
-  //   size: 12,
-  //   description: dummyText,
-  //   image: 'assets/images/bag_6.png',
-  // ),
 ];
 
 String dummyText =

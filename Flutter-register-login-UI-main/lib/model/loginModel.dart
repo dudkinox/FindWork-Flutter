@@ -1,7 +1,3 @@
-// To parse this JSON data, do
-//
-//     final sorener = sorenerFromJson(jsonString);
-
 import 'dart:convert';
 
 AccountModel sorenerFromJson(String str) =>
