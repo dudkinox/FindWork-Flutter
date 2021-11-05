@@ -608,7 +608,7 @@ class MapScreenState extends State<EditingCardJob>
                                                                 token,
                                                                 File(image
                                                                     .path));
-                                                        print(status);
+
                                                         if (status ==
                                                             "อัพโหลดรูปภาพเรียบร้อย") {
                                                           showDialog(

@@ -468,7 +468,7 @@ class MapScreenState extends State<ProfilePage>
                                                                 token,
                                                                 File(image
                                                                     ?.path));
-                                                        print(status);
+                                                      
                                                         if (status ==
                                                             "อัพโหลดรูปภาพเรียบร้อย") {
                                                           showDialog(
