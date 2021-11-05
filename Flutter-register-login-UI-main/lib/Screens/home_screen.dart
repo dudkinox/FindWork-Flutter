@@ -14,7 +14,6 @@ DateTime backbuttonpressedTime;
 
 class HomePage extends StatelessWidget {
   TextEditingController fullname = TextEditingController();
-  String token = "";
   HomePage(this.newindex, this.id_token);
   var id_token;
   int newindex;
@@ -39,11 +38,11 @@ class HomePage extends StatelessWidget {
                     SizedBox(
                       height: 20.0,
                     ),
-                    Welcome(token, fullname),
+                    Welcome(id_token, fullname),
                     SizedBox(
                       height: 20.0,
                     ),
-                    Search(token),
+                    Search(id_token),
                     SizedBox(
                       height: 15.0,
                     ),
