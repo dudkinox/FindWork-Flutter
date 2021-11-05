@@ -73,7 +73,7 @@ class work_fulltime extends StatelessWidget {
                   if (snapshot?.connectionState != ConnectionState.done) {
                     return LoadingCube();
                   } else {
-                    for (JobDataModel data in snapshot.data) {
+                    for (JobDataModel data in snapshot?.data) {
                       if (data.departmentId.type.single == "salary") {
                         result.add(Recommendation(
                             data?.image,

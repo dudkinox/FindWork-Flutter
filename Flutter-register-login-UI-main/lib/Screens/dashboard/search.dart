@@ -40,11 +40,11 @@ class Search extends StatelessWidget {
             );
           },
           noItemsFoundBuilder: (context) => Container(
-            height: 100,
+            height: 60,
             child: Center(
               child: Text(
-                'ค้าหาไม่เจอ.',
-                style: TextStyle(fontSize: 24),
+                'ค้าหาไม่เจอ',
+                style: TextStyle(fontSize: 16),
               ),
             ),
           ),

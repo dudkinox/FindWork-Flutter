@@ -75,7 +75,7 @@ class work_parttime extends StatelessWidget {
                   if (snapshot?.connectionState != ConnectionState.done) {
                     return LoadingCube();
                   } else {
-                    for (JobDataModel data in snapshot.data) {
+                    for (JobDataModel data in snapshot?.data) {
                       if (data.departmentId.type.single == "parttime") {
                         result.add(Recommendation(
                             data?.image,
@@ -91,7 +91,7 @@ class work_parttime extends StatelessWidget {
                     }
                     return ListView.builder(
                       scrollDirection: Axis.horizontal,
-                      itemCount: result.length,
+                      itemCount: result?.length,
                       itemBuilder: (context, index) {
                         return result[index];
                       },

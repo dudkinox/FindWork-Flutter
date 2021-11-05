@@ -78,16 +78,16 @@ class work_progress extends StatelessWidget {
                   if (snapshot?.connectionState != ConnectionState.done) {
                     return LoadingCube();
                   } else {
-                    for (var data in snapshot.data) {
+                    for (var data in snapshot?.data) {
                       result.add(Recommendation(
-                          data.image,
-                          data.company,
+                          data?.image,
+                          data?.company,
                           data.province +
                               " " +
-                              data.district +
+                              data?.district +
                               " " +
-                              data.subDistrict,
-                          data.id,
+                              data?.subDistrict,
+                          data?.id,
                           token));
                     }
                     return ListView.builder(
