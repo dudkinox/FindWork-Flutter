@@ -7,11 +7,23 @@ import 'package:login_ui/Themes/Themes.dart';
 import 'package:login_ui/components/notification.dart';
 
 class DetailCardJob extends StatelessWidget {
-  DetailCardJob(this.typeUser, this.token);
+  DetailCardJob(this.typeUser, this.token, this.img, this.name, this.company,
+      this.type, this.detail,this.money, this.jobTime);
   var typeUser;
   var token;
+  var img;
+  var name;
+  var company;
+  var type;
+  var detail;
+  var money;
+  var jobTime;
+
+  TextEditingController detailCompany = new TextEditingController();
+
   @override
   Widget build(BuildContext context) {
+    detailCompany.text = detail;
     return Scaffold(
       backgroundColor: Colors.grey[200],
       appBar: AppBar(
@@ -19,7 +31,7 @@ class DetailCardJob extends StatelessWidget {
         elevation: 0,
         centerTitle: true,
         title: Text(
-          demoFeatured[0].subTitle,
+          company,
           style: TextStyle(
             color: Colors.black,
           ),
@@ -51,16 +63,8 @@ class DetailCardJob extends StatelessWidget {
                 Center(
                   child: Container(
                     padding: EdgeInsets.all((4)),
-                    width: (70),
-                    height: (50),
-                    child: Image.asset(
-                      demoFeatured[0].image,
-                      fit: BoxFit.cover,
-                    ),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.white,
-                    ),
+                    width: MediaQuery.of(context).size.width * 1,
+                    child: Image(image: NetworkImage(img), fit: BoxFit.cover),
                   ),
                 ),
                 SizedBox(
@@ -68,7 +72,7 @@ class DetailCardJob extends StatelessWidget {
                 ),
                 Center(
                   child: Text(
-                    demoFeatured[0].subTitle,
+                    company,
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -81,7 +85,7 @@ class DetailCardJob extends StatelessWidget {
                 ),
                 Center(
                   child: Text(
-                    demoFeatured[0].title,
+                    name,
                     style: TextStyle(
                       fontSize: 32,
                       fontWeight: FontWeight.bold,
@@ -96,7 +100,7 @@ class DetailCardJob extends StatelessWidget {
                   children: [
                     Expanded(
                       child: Container(
-                        height: 45,
+                        height: MediaQuery.of(context).size.height * 0.06,
                         decoration: BoxDecoration(
                           color: ButtonColor,
                           borderRadius: BorderRadius.all(
@@ -105,7 +109,7 @@ class DetailCardJob extends StatelessWidget {
                         ),
                         child: Center(
                           child: Text(
-                            demoFeatured[0].text1,
+                            (type == "salary" ? "งานประจำ" : "พาร์ทไทม์"),
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 16,
@@ -195,13 +199,13 @@ class DetailCardJob extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      demoFeatured[0].renumeration,
+                      money,
                       style: TextStyle(
                         fontSize: 20,
                       ),
                     ),
                     Text(
-                      demoFeatured[0].datePosted,
+                      jobTime,
                       style: TextStyle(
                         fontSize: 20,
                       ),
@@ -222,10 +226,12 @@ class DetailCardJob extends StatelessWidget {
                   height: 10,
                 ),
                 SingleChildScrollView(
-                  child: TextFormField(
+                  child: typeUser == "employee" ? TextFormField(
+                    readOnly: true,
                     maxLines: 8,
                     maxLength: 1000,
                     keyboardType: TextInputType.multiline,
+                    controller: detailCompany,
                     decoration: new InputDecoration(
                       hintText: "คุณสมบัติ",
                       border: OutlineInputBorder(
@@ -242,7 +248,29 @@ class DetailCardJob extends StatelessWidget {
                       contentPadding: EdgeInsets.only(
                           left: 15, bottom: 11, top: 11, right: 15),
                     ),
-                  ),
+                  ) : TextFormField(
+                    readOnly: false,
+                    maxLines: 8,
+                    maxLength: 1000,
+                    keyboardType: TextInputType.multiline,
+                    controller: detailCompany,
+                    decoration: new InputDecoration(
+                      hintText: "คุณสมบัติ",
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30.0),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white, width: 5.0),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white, width: 5.0),
+                      ),
+                      errorBorder: InputBorder.none,
+                      disabledBorder: InputBorder.none,
+                      contentPadding: EdgeInsets.only(
+                          left: 15, bottom: 11, top: 11, right: 15),
+                    ),
+                  )
                 ),
                 SizedBox(
                   height: 20,

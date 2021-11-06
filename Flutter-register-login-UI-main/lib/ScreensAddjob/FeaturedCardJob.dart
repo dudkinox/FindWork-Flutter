@@ -29,27 +29,38 @@ class FeaturedCardJob extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => DetailCardJob(typeUser, token)));
-      },
-      child: FutureBuilder<JobDataModel>(
-          future: TopicWorkFindID(id),
-          builder: (context, AsyncSnapshot snapshot) {
-            JobDataModel data = snapshot?.data;
-            if (snapshot?.connectionState != ConnectionState.done) {
-              return Text("");
+    return FutureBuilder<JobDataModel>(
+        future: TopicWorkFindID(id),
+        builder: (context, AsyncSnapshot snapshot) {
+          JobDataModel data = snapshot?.data;
+          if (snapshot?.connectionState != ConnectionState.done) {
+            return Text("");
+          } else {
+            String money = "";
+            if (data.departmentId.type[0] == "salary") {
+              money = data.departmentId.salary[0];
             } else {
-              String money = "";
-              if (data.departmentId.type[0] == "salary") {
-                money = data.departmentId.salary[0];
-              } else {
-                money = data.departmentId.partTime[0];
-              }
-              return Container(
+              money = data.departmentId.partTime[0];
+            }
+            return GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => DetailCardJob(
+                        typeUser,
+                        token,
+                        img,
+                        data.departmentId.name[0],
+                        data.company,
+                        data.departmentId.type[0],
+                        data.departmentId.detail[0],
+                        money,
+                        data.departmentId.jobTime[0]),
+                  ),
+                );
+              },
+              child: Container(
                 padding: EdgeInsets.symmetric(
                   horizontal: 10,
                   vertical: 10,
@@ -73,8 +84,7 @@ class FeaturedCardJob extends StatelessWidget {
                           width: (70),
                           height: (50),
                           child: Image(
-                              image: NetworkImage(img),
-                              fit: BoxFit.cover),
+                              image: NetworkImage(img), fit: BoxFit.cover),
                         ),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -183,10 +193,10 @@ class FeaturedCardJob extends StatelessWidget {
                     ),
                   ],
                 ),
-              );
-            }
-          }),
-    );
+              ),
+            );
+          }
+        });
   }
 
   Chip buildChip(String text) {
