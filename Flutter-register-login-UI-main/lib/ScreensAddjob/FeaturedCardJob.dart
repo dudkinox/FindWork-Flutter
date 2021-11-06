@@ -57,7 +57,8 @@ class FeaturedCardJob extends StatelessWidget {
                         data.departmentId.type[0],
                         data.departmentId.detail[0],
                         money,
-                        data.departmentId.jobTime[0]),
+                        data.departmentId.jobTime[0],
+                        id),
                   ),
                 );
               },

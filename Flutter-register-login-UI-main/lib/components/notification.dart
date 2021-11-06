@@ -1,7 +1,7 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:login_ui/main.dart';
 
-Future<void> showNotification() async {
+Future<void> showNotification(String company, String name) async {
   const AndroidNotificationDetails androidNotificationDetails =
       AndroidNotificationDetails(
     'NBB Part-time',
@@ -18,7 +18,7 @@ Future<void> showNotification() async {
   await flutterLocalNotificationsPlugin.show(
     0,
     'NBB Part-time',
-    'ยื่นสมัครงาน บริษัทรับเหมา ตำแหน่ง youtuber แล้ว!',
+    'ยื่นสมัครงาน '+ company + ' ตำแหน่ง ' + name + ' แล้ว!',
     plateformChanelDetail,
   );
 }

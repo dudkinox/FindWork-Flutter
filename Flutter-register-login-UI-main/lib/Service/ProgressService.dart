@@ -34,17 +34,23 @@ Future<dynamic> GetProgressID(String token) async {
   }
 }
 
-Future<List<JobDataModel>> AddProgress(String token, String job_id) async {
+Future<String> AddProgress(String token, String job_id) async {
   try {
-    final String url = Host + "/api/login/" + token;
+    final String url = Host + "/api/progress";
     final response = await http.put(
       Uri.parse(url),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
-      body: jsonEncode(<String, String>{
-        "job_id": job_id,
-      }),
+      body: jsonEncode(<String, dynamic>{
+        "id_user": token,
+        "job_id": [
+            {
+                "id": job_id,
+                "status": "รอ"
+            }
+        ]
+}),
     );
     if (response.statusCode == 400) {
       var err = json.decode(json.encode(response.body));
@@ -56,3 +62,4 @@ Future<List<JobDataModel>> AddProgress(String token, String job_id) async {
     print(e);
   }
 }
+

@@ -3,12 +3,15 @@
 import 'package:flutter/material.dart';
 import 'package:login_ui/ScreensAddjob/HomeAddjob.dart';
 import 'package:login_ui/SelectCheckbox/choices.dart';
+import 'package:login_ui/Service/ProgressService.dart';
 import 'package:login_ui/Themes/Themes.dart';
+import 'package:login_ui/components/alert.dart';
 import 'package:login_ui/components/notification.dart';
+import 'package:login_ui/model/ProgressModel.dart';
 
 class DetailCardJob extends StatelessWidget {
   DetailCardJob(this.typeUser, this.token, this.img, this.name, this.company,
-      this.type, this.detail, this.money, this.jobTime);
+      this.type, this.detail, this.money, this.jobTime, this.id_job);
   var typeUser;
   var token;
   var img;
@@ -18,6 +21,7 @@ class DetailCardJob extends StatelessWidget {
   var detail;
   var money;
   var jobTime;
+  var id_job;
 
   TextEditingController detailCompany = new TextEditingController();
 
@@ -295,7 +299,19 @@ class DetailCardJob extends StatelessWidget {
                           textColor: Colors.white,
                           color: PrimaryColor,
                           onPressed: () async {
-                            await showNotification();
+                            final String status =
+                                await AddProgress(token, id_job);
+                            if (status == "เพิ่มสำเร็จ") {
+                              await showNotification(company,name);
+                            } else {
+                              showDialog(
+                                context: context,
+                                builder: (_) => AlertMessage(
+                                    "แจ้งเตือน",
+                                    "เซิฟเวอร์เกิดข้อผิดพลาด โปรดลองใหม่ภายหลัง",
+                                    null),
+                              );
+                            }
                           },
                           shape: new RoundedRectangleBorder(
                               borderRadius: new BorderRadius.circular(20.0)),
