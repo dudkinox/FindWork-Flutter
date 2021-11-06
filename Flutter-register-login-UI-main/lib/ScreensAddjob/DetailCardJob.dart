@@ -8,7 +8,7 @@ import 'package:login_ui/components/notification.dart';
 
 class DetailCardJob extends StatelessWidget {
   DetailCardJob(this.typeUser, this.token, this.img, this.name, this.company,
-      this.type, this.detail,this.money, this.jobTime);
+      this.type, this.detail, this.money, this.jobTime);
   var typeUser;
   var token;
   var img;
@@ -64,7 +64,14 @@ class DetailCardJob extends StatelessWidget {
                   child: Container(
                     padding: EdgeInsets.all((4)),
                     width: MediaQuery.of(context).size.width * 1,
-                    child: Image(image: NetworkImage(img), fit: BoxFit.cover),
+                    height: MediaQuery.of(context).size.height * 0.5,
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: NetworkImage(img),
+                          fit: BoxFit.cover,
+                        ),
+                        color: Colors.lightBlueAccent,
+                        borderRadius: BorderRadius.circular(15.0)),
                   ),
                 ),
                 SizedBox(
@@ -226,52 +233,57 @@ class DetailCardJob extends StatelessWidget {
                   height: 10,
                 ),
                 SingleChildScrollView(
-                  child: typeUser == "employee" ? TextFormField(
-                    readOnly: true,
-                    // maxLines: 8,
-                    // maxLength: 1000,
-                    keyboardType: TextInputType.multiline,
-                    controller: detailCompany,
-                    decoration: new InputDecoration(
-                      hintText: "คุณสมบัติ",
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30.0),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 5.0),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 5.0),
-                      ),
-                      errorBorder: InputBorder.none,
-                      disabledBorder: InputBorder.none,
-                      contentPadding: EdgeInsets.only(
-                          left: 15, bottom: 11, top: 11, right: 15),
-                    ),
-                  ) : TextFormField(
-                    readOnly: false,
-                    maxLines: 8,
-                    maxLength: 1000,
-                    keyboardType: TextInputType.multiline,
-                    controller: detailCompany,
-                    decoration: new InputDecoration(
-                      hintText: "คุณสมบัติ",
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30.0),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 5.0),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 5.0),
-                      ),
-                      errorBorder: InputBorder.none,
-                      disabledBorder: InputBorder.none,
-                      contentPadding: EdgeInsets.only(
-                          left: 15, bottom: 11, top: 11, right: 15),
-                    ),
-                  )
-                ),
+                    child: typeUser == "employee"
+                        ? TextFormField(
+                            readOnly: true,
+                            // maxLines: 8,
+                            // maxLength: 1000,
+                            keyboardType: TextInputType.multiline,
+                            controller: detailCompany,
+                            decoration: new InputDecoration(
+                              hintText: "คุณสมบัติ",
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(30.0),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.white, width: 5.0),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.white, width: 5.0),
+                              ),
+                              errorBorder: InputBorder.none,
+                              disabledBorder: InputBorder.none,
+                              contentPadding: EdgeInsets.only(
+                                  left: 15, bottom: 11, top: 11, right: 15),
+                            ),
+                          )
+                        : TextFormField(
+                            readOnly: false,
+                            maxLines: 8,
+                            maxLength: 1000,
+                            keyboardType: TextInputType.multiline,
+                            controller: detailCompany,
+                            decoration: new InputDecoration(
+                              hintText: "คุณสมบัติ",
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(30.0),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.white, width: 5.0),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.white, width: 5.0),
+                              ),
+                              errorBorder: InputBorder.none,
+                              disabledBorder: InputBorder.none,
+                              contentPadding: EdgeInsets.only(
+                                  left: 15, bottom: 11, top: 11, right: 15),
+                            ),
+                          )),
                 SizedBox(
                   height: 20,
                 ),
