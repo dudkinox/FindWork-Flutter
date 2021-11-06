@@ -70,10 +70,7 @@ class DetailsPage extends StatelessWidget {
                             children: [
                               GestureDetector(
                                 onTap: () {
-                                  Navigator.of(context).pushReplacement(
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              HomeHome(0, token, typeUser)));
+                                  Navigator.pop(context);
                                 },
                                 child: Container(
                                   height: 50.0,

@@ -5,6 +5,7 @@ import 'package:login_ui/Recommendation_List_Data/Recommendation_screen.dart';
 import 'package:login_ui/Screens/loading.dart';
 import 'package:login_ui/Service/JobService.dart';
 import 'package:login_ui/Themes/Themes.dart';
+import 'package:login_ui/components/image.dart';
 import 'package:login_ui/model/jobModel.dart';
 
 import 'dashboard_All.dart';
@@ -13,6 +14,7 @@ class work_fulltime extends StatelessWidget {
   work_fulltime(this.token, this.typeUser);
   var token;
   var typeUser;
+  var img;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -78,8 +80,13 @@ class work_fulltime extends StatelessWidget {
                   } else {
                     for (JobDataModel data in snapshot?.data) {
                       if (data.departmentId.type.single == "salary") {
+                        if(data?.image == ""){
+                          img = DefaultImage;
+                        } else {
+                          img = data?.image;
+                        }
                         result.add(Recommendation(
-                            data?.image,
+                            img,
                             data?.company,
                             data.province +
                                 " " +

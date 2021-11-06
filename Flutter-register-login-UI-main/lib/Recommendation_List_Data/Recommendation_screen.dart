@@ -23,9 +23,9 @@ class Recommendation extends StatefulWidget {
 }
 
 class _RecommendationState extends State<Recommendation> {
-  _RecommendationState(this.imgUlr, this.company, this.location, this.id,
+  _RecommendationState(this.imgUrl, this.company, this.location, this.id,
       this.token, this.typeUser);
-  var imgUlr;
+  var imgUrl;
   var company;
   var location;
   var id;
@@ -74,13 +74,13 @@ class _RecommendationState extends State<Recommendation> {
                   Navigator.of(context).pushReplacement(
                     MaterialPageRoute(
                       builder: (BuildContext context) =>
-                          DetailsPage(imgUlr, id, token, typeUser),
+                          DetailsPage(imgUrl, id, token, typeUser),
                     ),
                   );
                 },
                 child: Container(
                   height: 370.0,
-                  width: 300.0,
+                  width: MediaQuery.of(context).size.width * 0.85,
                   decoration: BoxDecoration(
                     color: Colors.grey[300],
                     borderRadius: BorderRadius.circular(20.0),
@@ -100,7 +100,7 @@ class _RecommendationState extends State<Recommendation> {
                                     topRight: Radius.circular(20.0),
                                   ),
                                   image: DecorationImage(
-                                      image: NetworkImage(imgUlr),
+                                      image: NetworkImage(imgUrl),
                                       fit: BoxFit.cover),
                                 ),
                                 child: Stack(

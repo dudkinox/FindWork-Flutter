@@ -77,37 +77,6 @@ class DepartmentId {
         "job_time": List<dynamic>.from(jobTime.map((x) => x)),
       };
 }
-// class UserApi {
-//   static Future<List<User>> getUserSuggestions(String query) async {
-//     final url = Uri.parse('https://jsonplaceholder.typicode.com/users');
-//     final response = await http.get(url);
-
-//     if (response.statusCode == 200) {
-//       final List users = json.decode(response.body);
-
-//       return users.map((json) => User.fromJson(json)).where((user) {
-//         final nameLower = user.name.toLowerCase();
-//         final queryLower = query.toLowerCase();
-
-//         return nameLower.contains(queryLower);
-//       }).toList();
-//     } else {
-//       throw Exception();
-//     }
-//   }
-// }
-
-// Future<List<JobDataModel>> TopicWork() async {
-//   final String url = Host + "/api/employer";
-//   final response = await http.get(
-//     Uri.parse(url),
-//     headers: <String, String>{
-//       'Content-Type': 'application/json; charset=UTF-8',
-//     },
-//   );
-//   List jsonResponse = json.decode(response?.body);
-//   return jsonResponse.map((data) => new JobDataModel.fromJson(data)).toList();
-// }
 
 class UserApi {
   static Future<List<User>> getUserSuggestions(String query) async {
