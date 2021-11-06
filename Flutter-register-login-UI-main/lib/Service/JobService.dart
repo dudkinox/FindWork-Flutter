@@ -57,8 +57,8 @@ Future<String> JobCrate(
       body: jsonEncode(<String, dynamic>{
         "company": "",
         "department_id": {
-          "salary" : [""],
-          "name" : [""],
+          "salary": [""],
+          "name": [""],
           "detail": [""],
           "part_time": [""],
           "job_time": [""],
@@ -70,6 +70,45 @@ Future<String> JobCrate(
         "job_id": job_id,
         "province": "",
         "sub_district": "",
+      }),
+    );
+
+    if (response.statusCode == 400) {
+      var err = json.decode(json.encode(response.body));
+      return err;
+    }
+    var data = json.decode(json.encode(response.body));
+    return data;
+  } catch (e) {
+    print(e);
+  }
+}
+
+Future<String> UpdateJob(String token, JobDataModel request,
+    JobDataModel OldData, String detail) async {
+  try {
+    final String Url = Host + "/api/employer/" + token;
+    final response = await http.put(
+      Uri.parse(Url),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, dynamic>{
+        "company": request.company,
+        "department_id": {
+          "salary": [OldData.departmentId.salary[0]],
+          "detail": [detail],
+          "name": [OldData.departmentId.name[0]],
+          "part_time": [OldData.departmentId.partTime[0]],
+          "job_time": [OldData.departmentId.jobTime[0]],
+          "status": [OldData.departmentId.status[0]],
+          "type": [OldData.departmentId.type[0]],
+        },
+        "district": request.district,
+        "province": request.province,
+        "sub_district": request.subDistrict,
+        "image": OldData.image,
+        "job_id": OldData.jobId,
       }),
     );
 
@@ -241,7 +280,7 @@ Future<String> DelJobDetail(
 }
 
 Future<FavoriteModel> GetFavorite(String token) async {
-  try { 
+  try {
     final String url = Host + "/api/favorite/" + token;
     final response = await http.get(
       Uri.parse(url),

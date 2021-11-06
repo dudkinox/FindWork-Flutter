@@ -112,10 +112,12 @@ class _HomeAddjobState extends State<HomeAddjob> {
                                                       child: Container(
                                                         height: 50.0,
                                                         width: 50.0,
-                                                        decoration: BoxDecoration(
+                                                        decoration:
+                                                            BoxDecoration(
                                                           borderRadius:
                                                               BorderRadius
-                                                                  .circular(20.0),
+                                                                  .circular(
+                                                                      20.0),
                                                           color: Colors.white
                                                               .withOpacity(.5),
                                                         ),
@@ -150,34 +152,33 @@ class _HomeAddjobState extends State<HomeAddjob> {
                                                               Navigator.of(
                                                                       context)
                                                                   .pushReplacement(MaterialPageRoute(
-                                                                      builder: (context) =>
-                                                                          EditingCompany(
-                                                                              token,
-                                                                              typeUser)));
+                                                                      builder: (context) => EditingCompany(
+                                                                          token,
+                                                                          typeUser,
+                                                                          data?.id)));
                                                               break;
                                                             case 'remove':
-                                                              Navigator.of(context).pushReplacement(MaterialPageRoute(
-                                                                  builder: (context) =>
-                                                                      CloseTheAccount(
+                                                              Navigator.of(
+                                                                      context)
+                                                                  .pushReplacement(MaterialPageRoute(
+                                                                      builder: (context) => CloseTheAccount(
                                                                           token,
                                                                           typeUser,
                                                                           data?.id)));
                                                               break;
                                                           }
                                                         },
-                                                        itemBuilder: (context) =>
-                                                            [
+                                                        itemBuilder:
+                                                            (context) => [
                                                           PopupMenuItem(
                                                             child: Row(
                                                               children: [
                                                                 Icon(Icons
                                                                     .edit_outlined),
                                                                 Padding(
-                                                                  padding:
-                                                                      const EdgeInsets
-                                                                              .only(
-                                                                          left:
-                                                                              10),
+                                                                  padding: const EdgeInsets
+                                                                          .only(
+                                                                      left: 10),
                                                                   child: Text(
                                                                     "แก้ไขรายละเอียดงาน",
                                                                     style:
@@ -197,11 +198,9 @@ class _HomeAddjobState extends State<HomeAddjob> {
                                                                 Icon(Icons
                                                                     .person_outline),
                                                                 Padding(
-                                                                  padding:
-                                                                      const EdgeInsets
-                                                                              .only(
-                                                                          left:
-                                                                              10),
+                                                                  padding: const EdgeInsets
+                                                                          .only(
+                                                                      left: 10),
                                                                   child: Text(
                                                                     "ปิดบัญชี",
                                                                     style:
@@ -223,8 +222,8 @@ class _HomeAddjobState extends State<HomeAddjob> {
                                                       ),
                                                       decoration: BoxDecoration(
                                                         borderRadius:
-                                                            BorderRadius.circular(
-                                                                15),
+                                                            BorderRadius
+                                                                .circular(15),
                                                         color: Colors.white
                                                             .withOpacity(.5),
                                                       ),
@@ -309,7 +308,8 @@ class _HomeAddjobState extends State<HomeAddjob> {
                                                             style: TextStyle(
                                                               fontSize: 18,
                                                               fontWeight:
-                                                                  FontWeight.bold,
+                                                                  FontWeight
+                                                                      .bold,
                                                             ),
                                                           ),
                                                           SizedBox(
@@ -321,10 +321,9 @@ class _HomeAddjobState extends State<HomeAddjob> {
                                                               physics:
                                                                   BouncingScrollPhysics(),
                                                               child: Column(
-                                                                children:
-                                                                    buildRequirements(data
-                                                                        .departmentId
-                                                                        .detail[0]),
+                                                                children: buildRequirements(data
+                                                                    .departmentId
+                                                                    .detail[0]),
                                                               ),
                                                             ),
                                                           ),
