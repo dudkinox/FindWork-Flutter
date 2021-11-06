@@ -1,14 +1,13 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:login_ui/Screens/homehome.dart';
 import 'package:login_ui/model/favoriteModel.dart';
 import 'package:login_ui/model/jobModel.dart';
-
 import 'Animation/Fade_Animation.dart';
-
 import 'Screens/loading.dart';
-
 import 'ScreensAddjob/FeaturedCardJob.dart';
 import 'SelectCheckbox/choices.dart';
 import 'Service/JobService.dart';
