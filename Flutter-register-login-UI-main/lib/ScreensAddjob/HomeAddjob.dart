@@ -15,6 +15,8 @@ import 'package:login_ui/Themes/Themes.dart';
 import 'package:login_ui/components/WillPop.dart';
 import 'package:login_ui/components/alert.dart';
 import 'package:login_ui/components/image.dart';
+import 'package:login_ui/details_screen.dart';
+import 'package:login_ui/main.dart';
 import 'package:login_ui/model/jobModel.dart';
 import 'package:login_ui/model/loginModel.dart';
 
@@ -126,7 +128,7 @@ class _HomeAddjobState extends State<HomeAddjob> {
                                                                     MaterialPageRoute(
                                                                         builder:
                                                                             (context) {
-                                                              return LoginScreen();
+                                                              return MyApp();
                                                             }));
                                                           },
                                                         ),
@@ -137,6 +139,27 @@ class _HomeAddjobState extends State<HomeAddjob> {
                                                     height: 45.0,
                                                     width: 45.0,
                                                     child: PopupMenuButton(
+                                                      onSelected: (choice) {
+                                                        switch (choice) {
+                                                          case 'edit':
+                                                            Navigator.of(
+                                                                    context)
+                                                                .pushReplacement(MaterialPageRoute(
+                                                                    builder: (context) =>
+                                                                        EditingCompany(
+                                                                            token,
+                                                                            typeUser)));
+                                                            break;
+                                                          case 'remove':
+                                                            Navigator.of(context).pushReplacement(MaterialPageRoute(
+                                                                builder: (context) =>
+                                                                    CloseTheAccount(
+                                                                        token,
+                                                                        typeUser,
+                                                                        data?.id)));
+                                                            break;
+                                                        }
+                                                      },
                                                       itemBuilder: (context) =>
                                                           [
                                                         PopupMenuItem(
@@ -144,63 +167,48 @@ class _HomeAddjobState extends State<HomeAddjob> {
                                                             children: [
                                                               Icon(Icons
                                                                   .edit_outlined),
-                                                              GestureDetector(
-                                                                onTap: () {
-                                                                  Navigator.of(
-                                                                          context)
-                                                                      .pushReplacement(MaterialPageRoute(
-                                                                          builder: (context) => EditingCompany(
-                                                                              token,
-                                                                              typeUser)));
-                                                                },
-                                                                child: Padding(
-                                                                  padding: const EdgeInsets
-                                                                          .only(
-                                                                      left: 10),
-                                                                  child: Text(
-                                                                    "แก้ไขรายละเอียดงาน",
-                                                                    style:
-                                                                        TextStyle(
-                                                                      fontSize:
-                                                                          14,
-                                                                    ),
+                                                              Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                            .only(
+                                                                        left:
+                                                                            10),
+                                                                child: Text(
+                                                                  "แก้ไขรายละเอียดงาน",
+                                                                  style:
+                                                                      TextStyle(
+                                                                    fontSize:
+                                                                        14,
                                                                   ),
                                                                 ),
                                                               ),
                                                             ],
                                                           ),
+                                                          value: 'edit',
                                                         ),
                                                         PopupMenuItem(
                                                           child: Row(
                                                             children: [
                                                               Icon(Icons
                                                                   .person_outline),
-                                                              GestureDetector(
-                                                                onTap: () {
-                                                                  Navigator.of(
-                                                                          context)
-                                                                      .pushReplacement(MaterialPageRoute(
-                                                                          builder: (context) => CloseTheAccount(
-                                                                              token,
-                                                                              typeUser,
-                                                                              data?.id)));
-                                                                },
-                                                                child: Padding(
-                                                                  padding: const EdgeInsets
-                                                                          .only(
-                                                                      left: 10),
-                                                                  child: Text(
-                                                                    "ปิดบัญชี",
-                                                                    style:
-                                                                        TextStyle(
-                                                                      fontSize:
-                                                                          14,
-                                                                    ),
+                                                              Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                            .only(
+                                                                        left:
+                                                                            10),
+                                                                child: Text(
+                                                                  "ปิดบัญชี",
+                                                                  style:
+                                                                      TextStyle(
+                                                                    fontSize:
+                                                                        14,
                                                                   ),
                                                                 ),
                                                               ),
                                                             ],
                                                           ),
+                                                          value: 'remove',
                                                         ),
                                                       ],
                                                       child: Icon(
@@ -270,9 +278,10 @@ class _HomeAddjobState extends State<HomeAddjob> {
                                                   height: 10.0,
                                                 ),
                                                 Container(
+                                                  height: 300.0,
                                                   width: double.infinity,
                                                   decoration: BoxDecoration(
-                                                    // color: Colors.grey[300],
+                                                    color: Colors.grey[300],
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             40.0),
@@ -282,105 +291,45 @@ class _HomeAddjobState extends State<HomeAddjob> {
                                                       left: 20.0,
                                                       right: 20.0,
                                                     ),
-                                                    child: new Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      children: <Widget>[
-                                                        new Column(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .start,
-                                                          mainAxisSize:
-                                                              MainAxisSize.min,
-                                                          children: <Widget>[
-                                                            new Text(
-                                                              'ข้อมูลบริษัท',
-                                                              style: TextStyle(
-                                                                  fontSize:
-                                                                      18.0,
-                                                                  color:
-                                                                      PrimaryColor,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                            ),
-                                                          ],
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        SizedBox(
+                                                          height: 25,
                                                         ),
-                                                        new Column(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .end,
-                                                          mainAxisSize:
-                                                              MainAxisSize.min,
-                                                          children: <Widget>[
-                                                            _status
-                                                                ? _getEditIcon()
-                                                                : new Container(),
-                                                          ],
-                                                        )
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 25, right: 25),
-                                                  child: SingleChildScrollView(
-                                                    child: new Row(
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      children: <Widget>[
-                                                        new Flexible(
-                                                          child: new TextField(
-                                                            maxLines: 8,
-                                                            maxLength: 1000,
-                                                            keyboardType:
-                                                                TextInputType
-                                                                    .multiline,
-                                                            decoration:
-                                                                const InputDecoration(
-                                                                    hintText:
-                                                                        "ข้อมูลบริษัท"),
-                                                            enabled: !_status,
+                                                        Text(
+                                                          "ข้อมูลบริษัท",
+                                                          style: TextStyle(
+                                                            fontSize: 18,
+                                                            fontWeight:
+                                                                FontWeight.bold,
                                                           ),
                                                         ),
+                                                        SizedBox(
+                                                          height: 16,
+                                                        ),
+                                                        Expanded(
+                                                          child:
+                                                              SingleChildScrollView(
+                                                            physics:
+                                                                BouncingScrollPhysics(),
+                                                            child: Column(
+                                                              children:
+                                                                  buildRequirements(data
+                                                                      .departmentId
+                                                                      .detail[0]),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        SizedBox(
+                                                          height: 16,
+                                                        ),
                                                       ],
                                                     ),
                                                   ),
                                                 ),
-                                                Padding(
-                                                    padding: EdgeInsets.only(
-                                                        left: 25.0,
-                                                        right: 25.0,
-                                                        top: 15.0),
-                                                    child: new Row(
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .start,
-                                                      children: <Widget>[],
-                                                    )),
-                                                Padding(
-                                                    padding: EdgeInsets.only(
-                                                        left: 25.0,
-                                                        right: 25.0,
-                                                        top: 2.0),
-                                                    child: new Row(
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .start,
-                                                      children: <Widget>[],
-                                                    )),
-                                                !_status
-                                                    ? _getActionButtons()
-                                                    : new Container(),
                                                 SizedBox(
                                                   height: 16,
                                                 ),
@@ -452,72 +401,6 @@ class _HomeAddjobState extends State<HomeAddjob> {
                     }),
               ));
         }
-      },
-    );
-  }
-
-  Widget _getActionButtons() {
-    return Padding(
-      padding: EdgeInsets.only(left: 25.0, right: 25.0, top: 0),
-      child: new Row(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[
-          Expanded(
-            child: Padding(
-              padding: EdgeInsets.only(right: 10.0),
-              child: Container(
-                  child: new RaisedButton(
-                child: new Text("Save"),
-                textColor: Colors.white,
-                color: Color(0xFF25888E),
-                onPressed: () {},
-                shape: new RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(20.0)),
-              )),
-            ),
-            flex: 2,
-          ),
-          Expanded(
-            child: Padding(
-              padding: EdgeInsets.only(left: 10.0),
-              child: Container(
-                  child: new RaisedButton(
-                child: new Text("Cancel"),
-                textColor: Colors.white,
-                color: Colors.red[600],
-                onPressed: () {
-                  setState(() {
-                    _status = true;
-                    FocusScope.of(context).requestFocus(new FocusNode());
-                  });
-                },
-                shape: new RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(20.0)),
-              )),
-            ),
-            flex: 2,
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _getEditIcon() {
-    return new GestureDetector(
-      child: new CircleAvatar(
-        backgroundColor: PrimaryColor,
-        radius: 14.0,
-        child: new Icon(
-          Icons.edit,
-          color: Colors.white,
-          size: 16.0,
-        ),
-      ),
-      onTap: () {
-        setState(() {
-          _status = false;
-        });
       },
     );
   }
