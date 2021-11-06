@@ -71,7 +71,8 @@ class _RecommendationState extends State<Recommendation> {
               padding: EdgeInsets.only(top: 20.0, left: 15, right: 15),
               child: GestureDetector(
                 onTap: () {
-                  Navigator.of(context).pushReplacement(
+                  Navigator.push(
+                    context,
                     MaterialPageRoute(
                       builder: (BuildContext context) =>
                           DetailsPage(imgUrl, id, token, typeUser),

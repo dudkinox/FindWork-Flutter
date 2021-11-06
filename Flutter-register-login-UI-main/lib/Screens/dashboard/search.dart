@@ -33,11 +33,15 @@ class Search extends StatelessWidget {
           ),
           suggestionsCallback: UserApi.getUserSuggestions,
           itemBuilder: (context, User suggestion) {
-            final user = suggestion;
-
-            return ListTile(
-              title: Text(user.company),
+            var temp;
+            if (suggestion?.company != "") {
+              temp = ListTile(
+              title: Text(suggestion?.company),
             );
+            } else {
+              temp = Container(child: null);
+            }
+            return temp;
           },
           noItemsFoundBuilder: (context) => Container(
             height: 60,

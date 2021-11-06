@@ -89,7 +89,6 @@ class UserApi {
       return users.map((json) => User.fromJson(json)).where((user) {
         final nameLower = user.company.toLowerCase();
         final queryLower = query.toLowerCase();
-
         return nameLower.contains(queryLower);
       }).toList();
     } else {

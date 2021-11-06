@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:login_ui/Recommendation_List_Data/Recommendation_screen.dart';
 import 'package:login_ui/Screens/loading.dart';
 import 'package:login_ui/Service/JobService.dart';
+import 'package:login_ui/Service/ProgressService.dart';
 import 'package:login_ui/Themes/Themes.dart';
 import 'package:login_ui/components/image.dart';
+import 'package:login_ui/model/ProgressModel.dart';
 import 'package:login_ui/model/jobModel.dart';
 
 import 'dashboard_All.dart';
@@ -47,26 +49,6 @@ class work_progress extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        child: GestureDetector(
-                          onTap: () => {
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (BuildContext context) =>
-                                        dashboard_All(token, typeUser)))
-                          },
-                          child: Text(
-                            "ดูทั้งหมด",
-                            style: TextStyle(color: PrimaryColor),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
                 ],
               ),
             ),
@@ -76,41 +58,73 @@ class work_progress extends StatelessWidget {
             Container(
               height: MediaQuery.of(context).size.height * 0.52,
               width: MediaQuery.of(context).size.width * 1,
-              child: FutureBuilder<List<JobDataModel>>(
-                future: TopicWork(),
-                builder: (context, AsyncSnapshot snapshot) {
-                  List result = [];
-                  if (snapshot?.connectionState != ConnectionState.done) {
-                    return LoadingCube();
-                  } else {
-                    for (var data in snapshot?.data) {
-                      if(data?.image == ""){
-                          img = DefaultImage;
-                        } else {
-                          img = data?.image;
-                        }
-                      result.add(Recommendation(
-                          img,
-                          data?.company,
-                          data.province +
-                              " " +
-                              data?.district +
-                              " " +
-                              data?.subDistrict,
-                          data?.id,
-                          token,
-                          typeUser));
+              child: FutureBuilder<dynamic>(
+                  future: GetProgressID(token),
+                  builder: (context, AsyncSnapshot snapshot) {
+                    var progressID = snapshot?.data;
+                    if (snapshot?.connectionState != ConnectionState.done) {
+                      return LoadingCube();
+                    } else {
+                      if (progressID == "ไม่พบ") {
+                        return Container(
+                            child: Column(
+                          children: [
+                            SizedBox(height: MediaQuery.of(context).size.height * 0.1),
+                            Text(
+                              "ไม่พบข้อมูล",
+                              style: TextStyle(
+                                  fontSize: 20.0,
+                                  fontWeight: FontWeight.bold,
+                                  color: PrimaryColor),
+                            )
+                          ],
+                        ));
+                      } else {
+                        return FutureBuilder<List<JobDataModel>>(
+                          future: TopicWork(),
+                          builder: (context, AsyncSnapshot snapshot) {
+                            List result = [];
+                            if (snapshot?.connectionState !=
+                                ConnectionState.done) {
+                              return LoadingCube();
+                            } else {
+                              for (var data in snapshot?.data) {
+                                for (var i = 0;
+                                    i < progressID.jobId.length;
+                                    i++) {
+                                  if (progressID?.jobId[i].id == data?.id) {
+                                    if (data?.image == "") {
+                                      img = DefaultImage;
+                                    } else {
+                                      img = data?.image;
+                                    }
+                                    result.add(Recommendation(
+                                        img,
+                                        data?.company,
+                                        data.province +
+                                            " " +
+                                            data?.district +
+                                            " " +
+                                            data?.subDistrict,
+                                        data?.id,
+                                        token,
+                                        typeUser));
+                                  }
+                                }
+                              }
+                              return ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemCount: result.length,
+                                itemBuilder: (context, index) {
+                                  return result[index];
+                                },
+                              );
+                            }
+                          },
+                        );
+                      }
                     }
-                    return ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: result.length,
-                      itemBuilder: (context, index) {
-                        return result[index];
-                      },
-                    );
-                  }
-                },
-              ),
+                  }),
             ),
           ],
         ),
