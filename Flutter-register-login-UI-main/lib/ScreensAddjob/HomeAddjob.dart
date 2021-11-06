@@ -180,7 +180,8 @@ class _HomeAddjobState extends State<HomeAddjob> {
                                                                       .pushReplacement(MaterialPageRoute(
                                                                           builder: (context) => CloseTheAccount(
                                                                               token,
-                                                                              typeUser)));
+                                                                              typeUser,
+                                                                              data?.id)));
                                                                 },
                                                                 child: Padding(
                                                                   padding: const EdgeInsets

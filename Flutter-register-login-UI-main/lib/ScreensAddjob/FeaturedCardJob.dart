@@ -173,7 +173,7 @@ class FeaturedCardJob extends StatelessWidget {
                       children: [
                         buildChip(data.departmentId.type[0] == "salary"
                             ? "งานประจำ"
-                            : "พาร์ทไทม์"),
+                           : data.departmentId.type[0] == "" ? "ยังไม่ระบุ": "พาร์ทไทม์"),
                         buildChip(featuredJobs.text2),
                         buildChip(featuredJobs.text3),
                         buildChip(featuredJobs.text4)

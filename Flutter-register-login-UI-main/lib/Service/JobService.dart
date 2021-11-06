@@ -44,6 +44,46 @@ Future<JobDataModel> TopicWorkFindID(String token) async {
   return JobDataModel.fromJson(jsonDecode(response.body));
 }
 
+Future<String> JobCrate(
+  String job_id,
+) async {
+  try {
+    final String Url = Host + "/api/employer/";
+    final response = await http.post(
+      Uri.parse(Url),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, dynamic>{
+        "company": "",
+        "department_id": {
+          "salary" : [""],
+          "name" : [""],
+          "detail": [""],
+          "part_time": [""],
+          "job_time": [""],
+          "status": [true],
+          "type": [""]
+        },
+        "district": "",
+        "image": "",
+        "job_id": job_id,
+        "province": "",
+        "sub_district": "",
+      }),
+    );
+
+    if (response.statusCode == 400) {
+      var err = json.decode(json.encode(response.body));
+      return err;
+    }
+    var data = json.decode(json.encode(response.body));
+    return data;
+  } catch (e) {
+    print(e);
+  }
+}
+
 Future<JobDataModel> TopicWorkFindJob_ID(String Job_id) async {
   final String url = Host + "/api/employer/find/" + Job_id;
   final response = await http.get(
@@ -162,7 +202,7 @@ Future<String> DelJob(
   String token,
 ) async {
   try {
-    final String Url = Host + "/api/employer/" + token;
+    final String Url = Host + "/api/employer/delete/" + token;
     final response =
         await http.delete(Uri.parse(Url), headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',

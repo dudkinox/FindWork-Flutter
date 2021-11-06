@@ -226,3 +226,24 @@ Future<ResumeModel> PreviewResume(String token) async {
     print(e);
   }
 }
+
+Future<String> DelLogin(
+  String token,
+) async {
+  try {
+    final String Url = Host + "/api/login/" + token;
+    final response =
+        await http.delete(Uri.parse(Url), headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    });
+
+    if (response.statusCode == 400) {
+      var err = json.decode(json.encode(response.body));
+      return err;
+    }
+    var data = json.decode(json.encode(response.body));
+    return data;
+  } catch (e) {
+    print(e);
+  }
+}

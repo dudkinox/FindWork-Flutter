@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:login_ui/components/WillPop.dart';
 import 'Screens/login/login.dart';
 import 'Themes/Themes.dart';
 
@@ -17,18 +18,22 @@ Future<void> main() async {
   runApp(MyApp());
 }
 
+
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'แอปพลิเคชันหางานใกล้คุณ',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primaryColor: PrimaryColor,
-        scaffoldBackgroundColor: NoneColor,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
+    return WillPopScope(
+      onWillPop: onWillPop,
+      child: MaterialApp(
+        title: 'แอปพลิเคชันหางานใกล้คุณ',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primaryColor: PrimaryColor,
+          scaffoldBackgroundColor: NoneColor,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+        ),
+        home: LoginScreen(),
       ),
-      home: LoginScreen(),
     );
   }
 }

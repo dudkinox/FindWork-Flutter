@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:login_ui/Screens/login/login.dart';
+import 'package:login_ui/Service/JobService.dart';
 import 'package:login_ui/Service/LoginService.dart';
 
 import 'package:login_ui/Themes/Themes.dart';
@@ -256,13 +257,24 @@ class _RegisterAddjobScreenState extends State<RegisterAddjobScreen> {
                                       register.username,
                                       register.password);
                                   if (status == "เพิ่มบัญชีสำเร็จ") {
-                                    showDialog(
+                                    final String result = await JobCrate(register.job_id);
+                                    if(result == "เพิ่มงานสำเร็จ"){
+                                      showDialog(
+                                        context: context,
+                                        builder: (_) => AlertMessage(
+                                            "แจ้งเตือน",
+                                            "สมัครสามาชิกรเรียบร้อยแล้ว",
+                                            MyApp()),
+                                      );
+                                    } else {
+                                      showDialog(
                                       context: context,
                                       builder: (_) => AlertMessage(
                                           "แจ้งเตือน",
-                                          "สมัครสามาชิกรเรียบร้อยแล้ว",
-                                          MyApp()),
+                                          "การสมัครสมาชิกปิดปรับปรุงเนื่องจาก server มีปัญหา โปรดลองใหม่ภายหลัง",
+                                          null),
                                     );
+                                    }
                                   } else {
                                     showDialog(
                                       context: context,
