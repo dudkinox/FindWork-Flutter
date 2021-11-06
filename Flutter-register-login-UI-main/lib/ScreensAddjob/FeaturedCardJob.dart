@@ -8,6 +8,7 @@ import 'package:login_ui/model/jobModel.dart';
 
 import 'DetailCardJob.dart';
 import 'EditingCardJob.dart';
+import 'HomeAddjob.dart';
 
 class FeaturedCardJob extends StatelessWidget {
   final featuredJobs;
@@ -114,17 +115,36 @@ class FeaturedCardJob extends StatelessWidget {
                                   width: (30),
                                   height: (30),
                                   child: PopupMenuButton(
-                                    onSelected: (choice) {
+                                    onSelected: (choice) async {
                                       switch (choice) {
                                         case 'edit':
-                                          Navigator.of(context).pushReplacement(
+                                          Navigator.push(
+                                              context,
                                               MaterialPageRoute(
                                                   builder: (context) =>
                                                       EditingCardJob(
                                                           token, typeUser)));
                                           break;
                                         case 'remove':
-                                          print("Remove");
+                                          final String status =
+                                              await DelJobDetail(data?.jobId);
+                                          if (status == "ลบสำเร็จ") {
+                                            showDialog(
+                                              context: context,
+                                              builder: (_) => AlertMessage(
+                                                  "แจ้งเตือน",
+                                                  "ลบตำแหน่งงานที่สมัครเรียบร้อยแล้ว",
+                                                  HomeAddjob(token, typeUser)),
+                                            );
+                                          } else {
+                                            showDialog(
+                                              context: context,
+                                              builder: (_) => AlertMessage(
+                                                  "แจ้งเตือน",
+                                                  "ลบข้อมูลมีปัญหา โปรดลองใหม่ภายหลัง",
+                                                  null),
+                                            );
+                                          }
                                           break;
                                       }
                                     },

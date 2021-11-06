@@ -18,7 +18,7 @@ import 'dart:io';
 import 'HomeAddjob.dart';
 
 class EditingCardJob extends StatefulWidget {
-  EditingCardJob(this.token,this.typeUser);
+  EditingCardJob(this.token, this.typeUser);
   var token;
   var typeUser;
   final TextEditingController fullname = new TextEditingController();
@@ -27,22 +27,20 @@ class EditingCardJob extends StatefulWidget {
   final TextEditingController password = new TextEditingController();
   final TextEditingController confirmpassword = new TextEditingController();
   @override
-  MapScreenState createState() => MapScreenState(token,typeUser);
+  MapScreenState createState() => MapScreenState(token, typeUser);
 }
 
 class MapScreenState extends State<EditingCardJob>
-  
     with SingleTickerProviderStateMixin {
-      MapScreenState(this.token,this.typeUser);
-      var token;
-      var typeUser;
+  MapScreenState(this.token, this.typeUser);
+  var token;
+  var typeUser;
   var fullname = new TextEditingController();
   var email = new TextEditingController();
   var tel = new TextEditingController();
   var password = new TextEditingController();
   var confirmpassword = new TextEditingController();
   File file;
-  
 
   bool _status = true;
   final FocusNode myFocusNode = FocusNode();
@@ -75,10 +73,7 @@ class MapScreenState extends State<EditingCardJob>
                   leading: IconButton(
                     icon: Icon(Icons.arrow_back_ios, color: Colors.black),
                     onPressed: () {
-                      Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(builder: (context) {
-                        return HomeAddjob(token,typeUser);
-                      }));
+                      Navigator.pop(context);
                     },
                   ),
                 ),
@@ -619,11 +614,12 @@ class MapScreenState extends State<EditingCardJob>
                                                             "อัพโหลดรูปภาพเรียบร้อย") {
                                                           showDialog(
                                                             context: context,
-                                                            builder: (_) =>
-                                                                AlertMessage(
-                                                                    "แจ้งเตือน",
-                                                                    "อัพเดตรูปภาพแล้ว",
-                                                                    EditingCardJob(token,typeUser)),
+                                                            builder: (_) => AlertMessage(
+                                                                "แจ้งเตือน",
+                                                                "อัพเดตรูปภาพแล้ว",
+                                                                EditingCardJob(
+                                                                    token,
+                                                                    typeUser)),
                                                           );
                                                           setState(() {
                                                             file = File(
@@ -721,7 +717,8 @@ class MapScreenState extends State<EditingCardJob>
                             builder: (_) => AlertMessage(
                                 "แจ้งเตือน", "แก้ไขข้อมูลสำเร็จ", null));
                         Navigator.of(context).pushReplacement(MaterialPageRoute(
-                            builder: (context) => EditingCardJob(token,typeUser)));
+                            builder: (context) =>
+                                EditingCardJob(token, typeUser)));
                       } else {
                         showDialog(
                             context: context,
@@ -749,7 +746,8 @@ class MapScreenState extends State<EditingCardJob>
                           builder: (_) => AlertMessage(
                               "แจ้งเตือน", "แก้ไขข้อมูลสำเร็จ", null));
                       Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (context) => EditingCardJob(token,typeUser)));
+                          builder: (context) =>
+                              EditingCardJob(token, typeUser)));
                     } else {
                       showDialog(
                           context: context,
