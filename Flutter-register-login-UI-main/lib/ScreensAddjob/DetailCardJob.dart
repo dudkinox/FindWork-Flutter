@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
+import 'package:login_ui/Screens/loading.dart';
 import 'package:login_ui/ScreensAddjob/HomeAddjob.dart';
 import 'package:login_ui/SelectCheckbox/choices.dart';
 import 'package:login_ui/Service/ProgressService.dart';
@@ -9,7 +10,7 @@ import 'package:login_ui/components/alert.dart';
 import 'package:login_ui/components/notification.dart';
 import 'package:login_ui/model/ProgressModel.dart';
 
-class DetailCardJob extends StatelessWidget {
+class DetailCardJob extends StatefulWidget {
   DetailCardJob(this.typeUser, this.token, this.img, this.name, this.company,
       this.type, this.detail, this.money, this.jobTime, this.id_job);
   var typeUser;
@@ -23,7 +24,40 @@ class DetailCardJob extends StatelessWidget {
   var jobTime;
   var id_job;
 
+  @override
+  _DetailCardJobState createState() => _DetailCardJobState(typeUser, token, img,
+      name, company, type, detail, money, jobTime, id_job);
+}
+
+class _DetailCardJobState extends State<DetailCardJob> {
+  _DetailCardJobState(
+      this.typeUser,
+      this.token,
+      this.img,
+      this.name,
+      this.company,
+      this.type,
+      this.detail,
+      this.money,
+      this.jobTime,
+      this.id_job);
+  var typeUser;
+  var token;
+  var img;
+  var name;
+  var company;
+  var type;
+  var detail;
+  var money;
+  var jobTime;
+  var id_job;
+
   TextEditingController detailCompany = new TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -292,31 +326,66 @@ class DetailCardJob extends StatelessWidget {
                   height: 20,
                 ),
                 typeUser == "employee"
-                    ? Container(
-                        alignment: Alignment.center,
-                        child: RaisedButton(
-                          child: new Text("ยื่นสมัครงาน"),
-                          textColor: Colors.white,
-                          color: PrimaryColor,
-                          onPressed: () async {
-                            final String status =
-                                await AddProgress(token, id_job);
-                            if (status == "เพิ่มสำเร็จ") {
-                              await showNotification(company,name);
-                            } else {
-                              showDialog(
-                                context: context,
-                                builder: (_) => AlertMessage(
-                                    "แจ้งเตือน",
-                                    "เซิฟเวอร์เกิดข้อผิดพลาด โปรดลองใหม่ภายหลัง",
-                                    null),
-                              );
+                    ? FutureBuilder<dynamic>(
+                        future: GetProgressID(token),
+                        builder: (context, snapshot) {
+                          bool statusRegister = true;
+                          if (snapshot?.connectionState !=
+                              ConnectionState.done) {
+                            return Text("");
+                          } else {
+                            var result = snapshot?.data;
+                            if (result != "ไม่พบ") {
+                              for (var i = 0; i < result.jobId.length; i++) {
+                                if (result.jobId[i].id == id_job) {
+                                  statusRegister = false;
+                                  break;
+                                }
+                              }
                             }
-                          },
-                          shape: new RoundedRectangleBorder(
-                              borderRadius: new BorderRadius.circular(20.0)),
-                        ),
-                      )
+                            return Container(
+                                alignment: Alignment.center,
+                                child: statusRegister == true
+                                    ? RaisedButton(
+                                        child: new Text("ยื่นสมัครงาน"),
+                                        textColor: Colors.white,
+                                        color: PrimaryColor,
+                                        onPressed: () async {
+                                          final String status =
+                                              await AddProgress(token, id_job);
+                                          if (status == "เพิ่มสำเร็จ") {
+                                            await showNotification(
+                                                company, name);
+                                            setState(() {});
+                                          } else {
+                                            showDialog(
+                                              context: context,
+                                              builder: (_) => AlertMessage(
+                                                  "แจ้งเตือน",
+                                                  "เซิฟเวอร์เกิดข้อผิดพลาด โปรดลองใหม่ภายหลัง",
+                                                  null),
+                                            );
+                                          }
+                                        },
+                                        shape: new RoundedRectangleBorder(
+                                            borderRadius:
+                                                new BorderRadius.circular(
+                                                    20.0)),
+                                      )
+                                    : RaisedButton(
+                                        child: new Text(
+                                          "รอการติดต่อกลับ",
+                                          style: TextStyle(color: NoneColor),
+                                        ),
+                                        textColor: Colors.white,
+                                        color: Danger,
+                                        shape: new RoundedRectangleBorder(
+                                            borderRadius:
+                                                new BorderRadius.circular(
+                                                    20.0)),
+                                      ));
+                          }
+                        })
                     : Container(
                         alignment: Alignment.center,
                         child: RaisedButton(

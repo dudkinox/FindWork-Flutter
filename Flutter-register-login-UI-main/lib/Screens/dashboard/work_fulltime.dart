@@ -6,6 +6,7 @@ import 'package:login_ui/Screens/loading.dart';
 import 'package:login_ui/Service/JobService.dart';
 import 'package:login_ui/Themes/Themes.dart';
 import 'package:login_ui/components/image.dart';
+import 'package:login_ui/components/notfound.dart';
 import 'package:login_ui/model/jobModel.dart';
 
 import 'dashboard_All.dart';
@@ -98,7 +99,7 @@ class work_fulltime extends StatelessWidget {
                             typeUser));
                       }
                     }
-                    return ListView?.builder(
+                    return result.length <= 0 ? notFound() : ListView?.builder(
                       scrollDirection: Axis.horizontal,
                       itemCount: result?.length,
                       itemBuilder: (context, index) {

@@ -7,6 +7,7 @@ import 'package:login_ui/Service/JobService.dart';
 import 'package:login_ui/Service/ProgressService.dart';
 import 'package:login_ui/Themes/Themes.dart';
 import 'package:login_ui/components/image.dart';
+import 'package:login_ui/components/notfound.dart';
 import 'package:login_ui/model/ProgressModel.dart';
 import 'package:login_ui/model/jobModel.dart';
 
@@ -61,24 +62,12 @@ class work_progress extends StatelessWidget {
               child: FutureBuilder<dynamic>(
                   future: GetProgressID(token),
                   builder: (context, AsyncSnapshot snapshot) {
-                    var progressID = snapshot?.data;
+                    ProgressModel progressID = snapshot?.data;
                     if (snapshot?.connectionState != ConnectionState.done) {
                       return LoadingCube();
                     } else {
                       if (progressID == "ไม่พบ") {
-                        return Container(
-                            child: Column(
-                          children: [
-                            SizedBox(height: MediaQuery.of(context).size.height * 0.1),
-                            Text(
-                              "ไม่พบข้อมูล",
-                              style: TextStyle(
-                                  fontSize: 20.0,
-                                  fontWeight: FontWeight.bold,
-                                  color: PrimaryColor),
-                            )
-                          ],
-                        ));
+                        return notFound();
                       } else {
                         return FutureBuilder<List<JobDataModel>>(
                           future: TopicWork(),
@@ -92,23 +81,27 @@ class work_progress extends StatelessWidget {
                                 for (var i = 0;
                                     i < progressID.jobId.length;
                                     i++) {
-                                  if (progressID?.jobId[i].id == data?.id) {
-                                    if (data?.image == "") {
-                                      img = DefaultImage;
-                                    } else {
-                                      img = data?.image;
+                                  if (progressID.jobId[i].status == "รอ") {
+                                    if (progressID?.jobId[i].id == data?.id) {
+                                      if (data?.image == "") {
+                                        img = DefaultImage;
+                                      } else {
+                                        img = data?.image;
+                                      }
+                                      result.add(Recommendation(
+                                          img,
+                                          data?.company,
+                                          data.province +
+                                              " " +
+                                              data?.district +
+                                              " " +
+                                              data?.subDistrict,
+                                          data?.id,
+                                          token,
+                                          typeUser));
                                     }
-                                    result.add(Recommendation(
-                                        img,
-                                        data?.company,
-                                        data.province +
-                                            " " +
-                                            data?.district +
-                                            " " +
-                                            data?.subDistrict,
-                                        data?.id,
-                                        token,
-                                        typeUser));
+                                  } else {
+                                    return notFound();
                                   }
                                 }
                               }
