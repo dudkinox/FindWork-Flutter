@@ -76,100 +76,107 @@ class FeaturedCardJob extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Container(
-                          padding: EdgeInsets.all((4)),
-                          width: (70),
-                          height: (50),
-                          child: Image(
-                              image: NetworkImage(img), fit: BoxFit.cover),
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              data.departmentId.name[0],
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18),
-                            ),
-                            Text(
-                              data.company,
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                          ],
-                        ),
-                        typeUser == "employee"
-                            ? Text("")
-                            : Container(
-                                width: (30),
-                                height: (30),
-                                child: PopupMenuButton(
-                                  onSelected: (choice) {
-                                    switch (choice) {
-                                      case 'edit':
-                                        Navigator.of(context).pushReplacement(
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    EditingCardJob(
-                                                        token, typeUser)));
-                                        break;
-                                      case 'remove':
-                                        print("Remove");
-                                        break;
-                                    }
-                                  },
-                                  itemBuilder: (context) => [
-                                    PopupMenuItem(
-                                      child: Row(
-                                        children: [
-                                          Icon(Icons.edit_outlined),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 10),
-                                            child: Text(
-                                              "แก้ไขรายละเอียดงาน",
-                                              style: TextStyle(
-                                                fontSize: 14,
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      value: 'edit',
-                                    ),
-                                    PopupMenuItem(
-                                      child: Row(
-                                        children: [
-                                          Icon(Icons.delete_forever_outlined),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 10),
-                                            child: Text(
-                                              "ลบงาน",
-                                              style: TextStyle(
-                                                fontSize: 14,
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      value: 'remove',
-                                    ),
-                                  ],
-                                  child: Icon(
-                                    Icons.more_vert_outlined,
-                                    color: Colors.white,
-                                  ),
+                    Padding(
+                      padding: EdgeInsets.only(left: 25, right: 25),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            width: (70),
+                            height: (50),
+                            decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  image: NetworkImage(img),
+                                  fit: BoxFit.fill,
                                 ),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: ButtonColor),
+                                color: Colors.lightBlueAccent,
+                                borderRadius: BorderRadius.circular(15.0)),
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                data.departmentId.name[0],
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18),
                               ),
-                      ],
+                              Text(
+                                data.company,
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                          typeUser == "employee"
+                              ? Text("")
+                              : Container(
+                                  width: (30),
+                                  height: (30),
+                                  child: PopupMenuButton(
+                                    onSelected: (choice) {
+                                      switch (choice) {
+                                        case 'edit':
+                                          Navigator.of(context).pushReplacement(
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      EditingCardJob(
+                                                          token, typeUser)));
+                                          break;
+                                        case 'remove':
+                                          print("Remove");
+                                          break;
+                                      }
+                                    },
+                                    itemBuilder: (context) => [
+                                      PopupMenuItem(
+                                        child: Row(
+                                          children: [
+                                            Icon(Icons.edit_outlined),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 10),
+                                              child: Text(
+                                                "แก้ไขรายละเอียดงาน",
+                                                style: TextStyle(
+                                                  fontSize: 14,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        value: 'edit',
+                                      ),
+                                      PopupMenuItem(
+                                        child: Row(
+                                          children: [
+                                            Icon(Icons.delete_forever_outlined),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 10),
+                                              child: Text(
+                                                "ลบงาน",
+                                                style: TextStyle(
+                                                  fontSize: 14,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        value: 'remove',
+                                      ),
+                                    ],
+                                    child: Icon(
+                                      Icons.more_vert_outlined,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: ButtonColor),
+                                ),
+                        ],
+                      ),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
