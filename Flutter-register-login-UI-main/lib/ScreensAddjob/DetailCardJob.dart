@@ -228,8 +228,8 @@ class DetailCardJob extends StatelessWidget {
                 SingleChildScrollView(
                   child: typeUser == "employee" ? TextFormField(
                     readOnly: true,
-                    maxLines: 8,
-                    maxLength: 1000,
+                    // maxLines: 8,
+                    // maxLength: 1000,
                     keyboardType: TextInputType.multiline,
                     controller: detailCompany,
                     decoration: new InputDecoration(
