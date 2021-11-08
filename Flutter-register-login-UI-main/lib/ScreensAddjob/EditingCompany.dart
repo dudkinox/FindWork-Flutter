@@ -60,7 +60,7 @@ class MapScreenState extends State<EditingCompany>
       this.token,
       this.typeUser,
       this.tokenJob,
-      this.companay,
+      this.company,
       this.detail,
       this.province,
       this.district,
@@ -70,7 +70,7 @@ class MapScreenState extends State<EditingCompany>
   var tokenJob;
   var jobID = new AccountModel();
   var typeUser;
-  var companay;
+  var company;
   var detail;
   var province;
   var district;
@@ -103,7 +103,7 @@ class MapScreenState extends State<EditingCompany>
 
   @override
   Widget build(BuildContext context) {
-    title_company.text = companay;
+    title_company.text = company;
     title_detail.text = detail;
     title_province.text = province;
     title_district.text = district;
@@ -545,7 +545,7 @@ class MapScreenState extends State<EditingCompany>
                                                                   token,
                                                                   typeUser,
                                                                   tokenJob,
-                                                                  companay,
+                                                                  company,
                                                                   detail,
                                                                   province,
                                                                   district,
@@ -625,6 +625,7 @@ class MapScreenState extends State<EditingCompany>
                 textColor: NoneColor,
                 color: ButtonColor,
                 onPressed: () async {
+                  setState(() => loading = true);
                   if (password.text != "") {
                     if (password.text == confirmpassword.text) {
                       final String status = await UpdateProfilePassword(
@@ -676,7 +677,6 @@ class MapScreenState extends State<EditingCompany>
                       subDistrict: title_subDistrict.text,
                     );
 
-                    // request.departmentId.detail = [detail.text];
                     final JobDataModel OldData =
                         await TopicWorkFindJob_ID(Job_JobID);
                     final String status =
@@ -688,7 +688,7 @@ class MapScreenState extends State<EditingCompany>
                           builder: (_) => AlertMessage(
                               "แจ้งเตือน", "แก้ไขข้อมูลสำเร็จ", null));
                       setState(() {
-                        companay = request.company;
+                        company = request.company;
                         detail = title_detail.text;
                         district = request.district;
                         province = request.province;
@@ -702,8 +702,8 @@ class MapScreenState extends State<EditingCompany>
                               "Server มีปัญหา ปิดปรับปรุงชั่วคราว กรุณาลองใหม่ภายหลัง",
                               null));
                     }
+                    setState(() => loading = false);
                     _status = true;
-                    FocusScope.of(context).requestFocus(new FocusNode());
                   }
                 },
                 shape: new RoundedRectangleBorder(
@@ -721,8 +721,9 @@ class MapScreenState extends State<EditingCompany>
                 textColor: Colors.white,
                 color: Colors.red[600],
                 onPressed: () {
+                  setState(() {
+                      });
                   _status = true;
-                  FocusScope.of(context).requestFocus(new FocusNode());
                 },
                 shape: new RoundedRectangleBorder(
                     borderRadius: new BorderRadius.circular(20.0)),
