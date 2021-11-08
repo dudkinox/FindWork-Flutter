@@ -1,45 +1,94 @@
-// ignore_for_file: deprecated_member_use
+// ignore_for_file: deprecated_member_use, must_be_immutable
 
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_session/flutter_session.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:login_ui/Animation/Fade_Animation.dart';
 
 import 'package:login_ui/Screens/loading.dart';
-import 'package:login_ui/Screens/profile/ProfileController.dart';
+import 'package:login_ui/Service/JobService.dart';
 import 'package:login_ui/Service/LoginService.dart';
 import 'package:login_ui/Themes/Themes.dart';
 import 'package:login_ui/components/WillPop.dart';
 import 'package:login_ui/components/alert.dart';
+import 'package:login_ui/model/jobModel.dart';
 import 'package:login_ui/model/loginModel.dart';
 import 'dart:io';
 
 import 'HomeAddjob.dart';
 
 class EditingCompany extends StatefulWidget {
-  EditingCompany(this.token,this.typeUser);
+  EditingCompany(
+      this.token,
+      this.typeUser,
+      this.tokenJob,
+      this.company,
+      this.detail,
+      this.province,
+      this.district,
+      this.subDistrict,
+      this.Job_JobID);
+  var tokenJob;
   var token;
   var typeUser;
+  var company;
+  var detail;
+  var province;
+  var district;
+  var subDistrict;
+  var Job_JobID;
+
+  final TextEditingController title_company = new TextEditingController();
+  final TextEditingController title_detail = new TextEditingController();
+  final TextEditingController title_province = new TextEditingController();
+  final TextEditingController title_district = new TextEditingController();
+  final TextEditingController title_subDistrict = new TextEditingController();
+
   final TextEditingController fullname = new TextEditingController();
   final TextEditingController email = new TextEditingController();
   final TextEditingController tel = new TextEditingController();
   final TextEditingController password = new TextEditingController();
   final TextEditingController confirmpassword = new TextEditingController();
   @override
-  MapScreenState createState() => MapScreenState(token,typeUser);
+  MapScreenState createState() => MapScreenState(token, typeUser, tokenJob,
+      company, detail, province, district, subDistrict, Job_JobID);
 }
 
 class MapScreenState extends State<EditingCompany>
     with SingleTickerProviderStateMixin {
-      MapScreenState(this.token,this.typeUser);
-      var token;
-      var typeUser;
+  MapScreenState(
+      this.token,
+      this.typeUser,
+      this.tokenJob,
+      this.companay,
+      this.detail,
+      this.province,
+      this.district,
+      this.subDistrict,
+      this.Job_JobID);
+  var token;
+  var tokenJob;
+  var jobID = new AccountModel();
+  var typeUser;
+  var companay;
+  var detail;
+  var province;
+  var district;
+  var subDistrict;
+  var Job_JobID;
+
   var fullname = new TextEditingController();
   var email = new TextEditingController();
   var tel = new TextEditingController();
   var password = new TextEditingController();
   var confirmpassword = new TextEditingController();
+
+  var title_company = new TextEditingController();
+  var title_detail = new TextEditingController();
+  var title_province = new TextEditingController();
+  var title_district = new TextEditingController();
+  var title_subDistrict = new TextEditingController();
+
   File file;
 
   bool _status = true;
@@ -54,389 +103,509 @@ class MapScreenState extends State<EditingCompany>
 
   @override
   Widget build(BuildContext context) {
+    title_company.text = companay;
+    title_detail.text = detail;
+    title_province.text = province;
+    title_district.text = district;
+    title_subDistrict.text = subDistrict;
     return loading
         ? LoadingCube()
         : WillPopScope(
             onWillPop: onWillPop,
             child: new Scaffold(
-                appBar: AppBar(
-                  title: Text(
-                    "ข้อมูลส่วนตัว",
-                    style: TextStyle(
-                      color: SecondaryColor,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  centerTitle: true,
-                  backgroundColor: Colors.transparent,
-                  elevation: 0,
-                  leading: IconButton(
-                    icon: Icon(Icons.arrow_back_ios, color: Colors.black),
-                    onPressed: () {
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (context) => HomeAddjob(token,typeUser)));
-                    },
+              appBar: AppBar(
+                title: Text(
+                  "ข้อมูลส่วนตัว",
+                  style: TextStyle(
+                    color: SecondaryColor,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
-                body: new Container(
-                  color: Colors.white,
-                  child: new ListView(
-                    children: <Widget>[
-                      FutureBuilder(
-                          future: FlutterSession().get('token'),
-                          builder: (context, snapshot) {
-                            token = snapshot.data;
-                            return FadeAnimation(
-                              1.0,
-                              Column(
-                                children: <Widget>[
-                                  new Container(
-                                    height: 20.0,
-                                    color: Colors.white,
-                                  ),
-                                  new Container(
-                                    color: Color(0xffFFFFFF),
-                                    child: Padding(
-                                      padding: EdgeInsets.only(bottom: 0.0),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: <Widget>[
-                                          Padding(
-                                              padding: EdgeInsets.only(
-                                                  left: 25.0,
-                                                  right: 25.0,
-                                                  top: 10.0),
-                                              child: new Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: <Widget>[
-                                                  new Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.start,
-                                                    mainAxisSize:
-                                                        MainAxisSize.min,
-                                                    children: <Widget>[
-                                                      new Text(
-                                                        'แก้ไขข้อมูล',
-                                                        style: TextStyle(
-                                                            fontSize: 18.0,
-                                                            color: PrimaryColor,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .bold),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  new Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.end,
-                                                    mainAxisSize:
-                                                        MainAxisSize.min,
-                                                    children: <Widget>[
-                                                      _status
-                                                          ? _getEditIcon()
-                                                          : new Container(),
-                                                    ],
-                                                  )
-                                                ],
-                                              )),
-                                          Padding(
-                                              padding: EdgeInsets.only(
-                                                  left: 25.0,
-                                                  right: 25.0,
-                                                  top: 25.0),
-                                              child: new Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: <Widget>[
-                                                  new Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.start,
-                                                    mainAxisSize:
-                                                        MainAxisSize.min,
-                                                    children: <Widget>[
-                                                      new Text(
-                                                        'ชื่อบริษัท',
-                                                        style: TextStyle(
-                                                            fontSize: 16.0,
-                                                            color: PrimaryColor,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .bold),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ],
-                                              )),
-                                          Padding(
-                                              padding: EdgeInsets.only(
-                                                  left: 25.0,
-                                                  right: 25.0,
-                                                  top: 2.0),
-                                              child: new Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: <Widget>[
-                                                  new Flexible(
-                                                    child: FutureBuilder<
-                                                        TextEditingController>(
-                                                      future: datafullname(
-                                                          snapshot.data
-                                                              .toString()),
-                                                      builder:
-                                                          (context, snapshot) {
-                                                        fullname =
-                                                            snapshot.data;
-                                                        // Future.delayed(Duration(seconds: 5), () {
-
-                                                        // });
-                                                        return new TextField(
-                                                          controller: fullname,
-                                                          decoration:
-                                                              const InputDecoration(
-                                                            hintText:
-                                                                "ใส่ชื่อบริษัทของคุณ",
-                                                          ),
-                                                          enabled: !_status,
-                                                          autofocus: !_status,
-                                                        );
-                                                      },
-                                                    ),
-                                                  ),
-                                                ],
-                                              )),
-                                          Padding(
-                                              padding: EdgeInsets.only(
-                                                  left: 25.0,
-                                                  right: 25.0,
-                                                  top: 25.0),
-                                              child: new Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: <Widget>[
-                                                  new Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.start,
-                                                    mainAxisSize:
-                                                        MainAxisSize.min,
-                                                    children: <Widget>[
-                                                      new Text(
-                                                        'ตั้งรหัสผ่านใหม่',
-                                                        style: TextStyle(
-                                                            fontSize: 16.0,
-                                                            color: PrimaryColor,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .bold),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ],
-                                              )),
-                                          Padding(
-                                              padding: EdgeInsets.only(
-                                                  left: 25.0,
-                                                  right: 25.0,
-                                                  top: 2.0),
-                                              child: new Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: <Widget>[
-                                                  new Flexible(
-                                                    child: new TextField(
-                                                      obscureText: true,
-                                                      controller: password,
-                                                      decoration:
-                                                          const InputDecoration(
-                                                              hintText:
-                                                                  "ตั้งรหัสผ่านใหม่"),
-                                                      enabled: !_status,
-                                                    ),
-                                                  ),
-                                                ],
-                                              )),
-                                          Padding(
-                                              padding: EdgeInsets.only(
-                                                  left: 25.0,
-                                                  right: 25.0,
-                                                  top: 25.0),
-                                              child: new Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: <Widget>[
-                                                  new Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.start,
-                                                    mainAxisSize:
-                                                        MainAxisSize.min,
-                                                    children: <Widget>[
-                                                      new Text(
-                                                        'ยืนยัน ตั้งรหัสผ่านใหม่',
-                                                        style: TextStyle(
-                                                            fontSize: 16.0,
-                                                            color: PrimaryColor,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .bold),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ],
-                                              )),
-                                          Padding(
-                                              padding: EdgeInsets.only(
-                                                  left: 25.0,
-                                                  right: 25.0,
-                                                  top: 2.0),
-                                              child: new Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: <Widget>[
-                                                  new Flexible(
-                                                    child: new TextField(
-                                                      obscureText: true,
-                                                      controller:
-                                                          confirmpassword,
-                                                      decoration:
-                                                          const InputDecoration(
-                                                              hintText:
-                                                                  "ยืนยันตั้งรหัสผ่านใหม่"),
-                                                      enabled: !_status,
-                                                    ),
-                                                  ),
-                                                ],
-                                              )),
-                                          Container(
-                                            padding: EdgeInsets.only(
-                                                left: 25.0,
-                                                right: 25.0,
-                                                top: 25.0),
-                                            alignment: Alignment.centerRight,
-                                            margin: EdgeInsets.symmetric(
-                                                horizontal: 5, vertical: 5),
-                                            child: Column(
-                                              children: [
-                                                FutureBuilder<ResumeModel>(
-                                                  future: PreviewResume(token),
-                                                  builder: (context, snapshot) {
-                                                    if (snapshot
-                                                            .connectionState ==
-                                                        ConnectionState.done) {
-                                                      if (snapshot.data?.link ==
-                                                          "") {
-                                                        return Text(
-                                                          "ยังไม่ได้เลือกรูปภาพ",
-                                                          textAlign:
-                                                              TextAlign.center,
-                                                        );
-                                                      } else {
-                                                        return Container(
-                                                          child: Image.network(
-                                                            snapshot.data?.link,
-                                                            fit: BoxFit.fill,
-                                                          ),
-                                                        );
-                                                      }
-                                                    } else {
-                                                      return LoadingRipple();
-                                                    }
-                                                  },
-                                                ),
-                                                SizedBox(
-                                                  height: 15,
-                                                ),
-                                                Container(
-                                                  alignment: Alignment.center,
-                                                  child: RaisedButton(
-                                                    child: new Text(
-                                                        "เพิ่ม รูปภาพ (image)"),
-                                                    textColor: Colors.white,
-                                                    color: PrimaryColor,
-                                                    onPressed: () async {
-                                                      var image = await ImagePicker()
-                                                          .getImage(
-                                                              source:
-                                                                  ImageSource
-                                                                      .gallery);
-                                                      if (image?.path != null) {
-                                                        String status =
-                                                            await UploadResume(
-                                                                token,
-                                                                File(image
-                                                                    .path));
-
-                                                        if (status ==
-                                                            "อัพโหลดรูปภาพเรียบร้อย") {
-                                                          showDialog(
-                                                            context: context,
-                                                            builder: (_) =>
-                                                                AlertMessage(
-                                                                    "แจ้งเตือน",
-                                                                    "อัพเดตรูปภาพแล้ว",
-                                                                    EditingCompany(token,typeUser)),
-                                                          );
-                                                          setState(() {
-                                                            file = File(
-                                                                image.path);
-                                                          });
-                                                        } else {
-                                                          showDialog(
-                                                            context: context,
-                                                            builder: (_) =>
-                                                                AlertMessage(
-                                                                    "แจ้งเตือน",
-                                                                    "การอัพโหลดมีปัญหา โปรดลองใหม่ภายหลัง",
-                                                                    null),
-                                                          );
-                                                        }
-                                                      }
-                                                    },
-                                                    shape:
-                                                        new RoundedRectangleBorder(
-                                                            borderRadius:
-                                                                new BorderRadius
-                                                                        .circular(
-                                                                    20.0)),
-                                                  ),
+                centerTitle: true,
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                leading: IconButton(
+                  icon: Icon(Icons.arrow_back_ios, color: Colors.black),
+                  onPressed: () {
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        builder: (context) => HomeAddjob(token, typeUser)));
+                  },
+                ),
+              ),
+              body: new Container(
+                color: NoneColor,
+                child: new ListView(
+                  children: <Widget>[
+                    FadeAnimation(
+                        1.0,
+                        Column(
+                          children: <Widget>[
+                            new Container(
+                              height: 20.0,
+                              color: NoneColor,
+                            ),
+                            new Container(
+                              color: NoneColor,
+                              child: Padding(
+                                padding: EdgeInsets.only(bottom: 0.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: <Widget>[
+                                    Padding(
+                                        padding: EdgeInsets.only(
+                                            left: 25.0, right: 25.0, top: 10.0),
+                                        child: new Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: <Widget>[
+                                            new Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: <Widget>[
+                                                new Text(
+                                                  'แก้ไขข้อมูล',
+                                                  style: TextStyle(
+                                                      fontSize: 18.0,
+                                                      color: PrimaryColor,
+                                                      fontWeight:
+                                                          FontWeight.bold),
                                                 ),
                                               ],
                                             ),
+                                            new Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.end,
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: <Widget>[
+                                                _status
+                                                    ? _getEditIcon()
+                                                    : new Container(),
+                                              ],
+                                            )
+                                          ],
+                                        )),
+                                    Padding(
+                                        padding: EdgeInsets.only(
+                                            left: 25.0, right: 25.0, top: 25.0),
+                                        child: new Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: <Widget>[
+                                            new Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: <Widget>[
+                                                new Text(
+                                                  'ชื่อบริษัท',
+                                                  style: TextStyle(
+                                                      fontSize: 16.0,
+                                                      color: PrimaryColor,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        )),
+                                    Padding(
+                                      padding: EdgeInsets.only(
+                                          left: 25.0, right: 25.0, top: 2.0),
+                                      child: new Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: <Widget>[
+                                          new Flexible(
+                                            child: TextField(
+                                              controller: title_company,
+                                              decoration: const InputDecoration(
+                                                hintText: "ใส่ชื่อบริษัทของคุณ",
+                                              ),
+                                              enabled: !_status,
+                                              autofocus: !_status,
+                                            ),
                                           ),
-                                          Padding(
-                                              padding: EdgeInsets.only(
-                                                  left: 25.0,
-                                                  right: 25.0,
-                                                  top: 15.0),
-                                              child: new Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                children: <Widget>[],
-                                              )),
-                                          Padding(
-                                              padding: EdgeInsets.only(
-                                                  left: 25.0,
-                                                  right: 25.0,
-                                                  top: 2.0),
-                                              child: new Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                children: <Widget>[],
-                                              )),
-                                          !_status
-                                              ? _getActionButtons()
-                                              : new Container(),
                                         ],
                                       ),
                                     ),
-                                  )
-                                ],
+                                    Padding(
+                                        padding: EdgeInsets.only(
+                                            left: 25.0, right: 25.0, top: 25.0),
+                                        child: new Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: <Widget>[
+                                            new Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: <Widget>[
+                                                new Text(
+                                                  'ข้อมูลบริษัท',
+                                                  style: TextStyle(
+                                                      fontSize: 16.0,
+                                                      color: PrimaryColor,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        )),
+                                    Padding(
+                                      padding: EdgeInsets.only(
+                                          left: 25.0, right: 25.0, top: 2.0),
+                                      child: new Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: <Widget>[
+                                          new Flexible(
+                                            child: new TextField(
+                                              controller: title_detail,
+                                              maxLines: 8,
+                                              maxLength: 1000,
+                                              keyboardType:
+                                                  TextInputType.multiline,
+                                              decoration: const InputDecoration(
+                                                  hintText: "ข้อมูลบริษัท"),
+                                              enabled: !_status,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Padding(
+                                        padding: EdgeInsets.only(
+                                            left: 25.0, right: 25.0, top: 25.0),
+                                        child: new Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: <Widget>[
+                                            new Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: <Widget>[
+                                                new Text(
+                                                  'ชื่อจังหวัด',
+                                                  style: TextStyle(
+                                                      fontSize: 16.0,
+                                                      color: PrimaryColor,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        )),
+                                    Padding(
+                                      padding: EdgeInsets.only(
+                                          left: 25.0, right: 25.0, top: 2.0),
+                                      child: new Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: <Widget>[
+                                          new Flexible(
+                                            child: TextField(
+                                              controller: title_province,
+                                              decoration: const InputDecoration(
+                                                hintText: "ใส่จังหวัด",
+                                              ),
+                                              enabled: !_status,
+                                              autofocus: !_status,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Padding(
+                                        padding: EdgeInsets.only(
+                                            left: 25.0, right: 25.0, top: 25.0),
+                                        child: new Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: <Widget>[
+                                            new Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: <Widget>[
+                                                new Text(
+                                                  'อำเภอ',
+                                                  style: TextStyle(
+                                                      fontSize: 16.0,
+                                                      color: PrimaryColor,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        )),
+                                    Padding(
+                                      padding: EdgeInsets.only(
+                                          left: 25.0, right: 25.0, top: 2.0),
+                                      child: new Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: <Widget>[
+                                          new Flexible(
+                                            child: TextField(
+                                              controller: title_district,
+                                              decoration: const InputDecoration(
+                                                hintText: "ใส่อำเภอ",
+                                              ),
+                                              enabled: !_status,
+                                              autofocus: !_status,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Padding(
+                                        padding: EdgeInsets.only(
+                                            left: 25.0, right: 25.0, top: 25.0),
+                                        child: new Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: <Widget>[
+                                            new Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: <Widget>[
+                                                new Text(
+                                                  'ตำบล',
+                                                  style: TextStyle(
+                                                      fontSize: 16.0,
+                                                      color: PrimaryColor,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        )),
+                                    Padding(
+                                      padding: EdgeInsets.only(
+                                          left: 25.0, right: 25.0, top: 2.0),
+                                      child: new Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: <Widget>[
+                                          new Flexible(
+                                            child: TextField(
+                                              controller: title_subDistrict,
+                                              decoration: const InputDecoration(
+                                                hintText: "ใส่ตำบล",
+                                              ),
+                                              enabled: !_status,
+                                              autofocus: !_status,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Padding(
+                                        padding: EdgeInsets.only(
+                                            left: 25.0, right: 25.0, top: 25.0),
+                                        child: new Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: <Widget>[
+                                            new Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: <Widget>[
+                                                new Text(
+                                                  'ตั้งรหัสผ่านใหม่',
+                                                  style: TextStyle(
+                                                      fontSize: 16.0,
+                                                      color: PrimaryColor,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        )),
+                                    Padding(
+                                        padding: EdgeInsets.only(
+                                            left: 25.0, right: 25.0, top: 2.0),
+                                        child: new Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: <Widget>[
+                                            new Flexible(
+                                              child: new TextField(
+                                                obscureText: true,
+                                                controller: password,
+                                                decoration:
+                                                    const InputDecoration(
+                                                        hintText:
+                                                            "ตั้งรหัสผ่านใหม่"),
+                                                enabled: !_status,
+                                              ),
+                                            ),
+                                          ],
+                                        )),
+                                    Padding(
+                                        padding: EdgeInsets.only(
+                                            left: 25.0, right: 25.0, top: 25.0),
+                                        child: new Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: <Widget>[
+                                            new Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: <Widget>[
+                                                new Text(
+                                                  'ยืนยัน ตั้งรหัสผ่านใหม่',
+                                                  style: TextStyle(
+                                                      fontSize: 16.0,
+                                                      color: PrimaryColor,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        )),
+                                    Padding(
+                                        padding: EdgeInsets.only(
+                                            left: 25.0, right: 25.0, top: 2.0),
+                                        child: new Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: <Widget>[
+                                            new Flexible(
+                                              child: new TextField(
+                                                obscureText: true,
+                                                controller: confirmpassword,
+                                                decoration: const InputDecoration(
+                                                    hintText:
+                                                        "ยืนยันตั้งรหัสผ่านใหม่"),
+                                                enabled: !_status,
+                                              ),
+                                            ),
+                                          ],
+                                        )),
+                                    Container(
+                                      padding: EdgeInsets.only(
+                                          left: 25.0, right: 25.0, top: 25.0),
+                                      alignment: Alignment.centerRight,
+                                      margin: EdgeInsets.symmetric(
+                                          horizontal: 5, vertical: 5),
+                                      child: Column(
+                                        children: [
+                                          FutureBuilder<ResumeModel>(
+                                            future: PreviewResume(token),
+                                            builder: (context, snapshot) {
+                                              if (snapshot.connectionState ==
+                                                  ConnectionState.done) {
+                                                if (snapshot.data?.link == "") {
+                                                  return Text(
+                                                    "ยังไม่ได้เลือกรูปภาพ",
+                                                    textAlign: TextAlign.center,
+                                                  );
+                                                } else {
+                                                  return Container(
+                                                    child: Image.network(
+                                                      snapshot.data?.link,
+                                                      fit: BoxFit.fill,
+                                                    ),
+                                                  );
+                                                }
+                                              } else {
+                                                return LoadingRipple();
+                                              }
+                                            },
+                                          ),
+                                          SizedBox(
+                                            height: 15,
+                                          ),
+                                          Container(
+                                            alignment: Alignment.center,
+                                            child: RaisedButton(
+                                              child: new Text(
+                                                  "เพิ่ม รูปภาพ (image)"),
+                                              textColor: Colors.white,
+                                              color: PrimaryColor,
+                                              onPressed: () async {
+                                                var image = await ImagePicker()
+                                                    .getImage(
+                                                        source: ImageSource
+                                                            .gallery);
+                                                if (image?.path != null) {
+                                                  String status =
+                                                      await UploadResume(token,
+                                                          File(image.path));
+
+                                                  if (status ==
+                                                      "อัพโหลดรูปภาพเรียบร้อย") {
+                                                    showDialog(
+                                                      context: context,
+                                                      builder: (_) =>
+                                                          AlertMessage(
+                                                              "แจ้งเตือน",
+                                                              "อัพเดตรูปภาพแล้ว",
+                                                              EditingCompany(
+                                                                  token,
+                                                                  typeUser,
+                                                                  tokenJob,
+                                                                  companay,
+                                                                  detail,
+                                                                  province,
+                                                                  district,
+                                                                  subDistrict,
+                                                                  Job_JobID)),
+                                                    );
+                                                    setState(() {
+                                                      file = File(image.path);
+                                                    });
+                                                  } else {
+                                                    showDialog(
+                                                      context: context,
+                                                      builder: (_) => AlertMessage(
+                                                          "แจ้งเตือน",
+                                                          "การอัพโหลดมีปัญหา โปรดลองใหม่ภายหลัง",
+                                                          null),
+                                                    );
+                                                  }
+                                                }
+                                              },
+                                              shape: new RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      new BorderRadius.circular(
+                                                          20.0)),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Padding(
+                                        padding: EdgeInsets.only(
+                                            left: 25.0, right: 25.0, top: 15.0),
+                                        child: new Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: <Widget>[],
+                                        )),
+                                    Padding(
+                                        padding: EdgeInsets.only(
+                                            left: 25.0, right: 25.0, top: 2.0),
+                                        child: new Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: <Widget>[],
+                                        )),
+                                    !_status
+                                        ? _getActionButtons()
+                                        : new Container(),
+                                  ],
+                                ),
                               ),
-                            );
-                          }),
-                    ],
-                  ),
-                )),
+                            )
+                          ],
+                        ))
+                  ],
+                ),
+              ),
+            ),
           );
   }
 
@@ -453,8 +622,8 @@ class MapScreenState extends State<EditingCompany>
               child: Container(
                   child: new RaisedButton(
                 child: new Text("Save"),
-                textColor: Colors.white,
-                color: Color(0xFF25888E),
+                textColor: NoneColor,
+                color: ButtonColor,
                 onPressed: () async {
                   if (password.text != "") {
                     if (password.text == confirmpassword.text) {
@@ -469,8 +638,20 @@ class MapScreenState extends State<EditingCompany>
                             context: context,
                             builder: (_) => AlertMessage(
                                 "แจ้งเตือน", "แก้ไขข้อมูลสำเร็จ", null));
-                        Navigator.of(context).pushReplacement(MaterialPageRoute(
-                            builder: (context) => EditingCompany(token,typeUser)));
+                                setState(() {
+                                  
+                                });
+                        // Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        //     builder: (context) => EditingCompany(
+                        //         token,
+                        //         typeUser,
+                        //         tokenJob,
+                        //         companay,
+                        //         detail,
+                        //         province,
+                        //         district,
+                        //         subDistrict,
+                        //         Job_JobID)));
                       } else {
                         showDialog(
                             context: context,
@@ -479,10 +660,8 @@ class MapScreenState extends State<EditingCompany>
                                 "Server มีปัญหา ปิดปรับปรุงชั่วคราว กรุณาลองใหม่ภายหลัง",
                                 null));
                       }
-                      setState(() {
-                        _status = true;
-                        FocusScope.of(context).requestFocus(new FocusNode());
-                      });
+                      _status = true;
+                      FocusScope.of(context).requestFocus(new FocusNode());
                     } else {
                       showDialog(
                           context: context,
@@ -490,15 +669,31 @@ class MapScreenState extends State<EditingCompany>
                               "แจ้งเตือน", "กรอกกรหัสให้ตรงกัน", null));
                     }
                   } else {
-                    final String status = await UpdateProfile(
-                        email.text, fullname.text, tel.text, token);
+                    var request = new JobDataModel(
+                      company: title_company.text,
+                      district: title_district.text,
+                      province: title_province.text,
+                      subDistrict: title_subDistrict.text,
+                    );
+
+                    // request.departmentId.detail = [detail.text];
+                    final JobDataModel OldData =
+                        await TopicWorkFindJob_ID(Job_JobID);
+                    final String status =
+                        await UpdateJob(tokenJob, request, OldData, title_detail.text);
+                    // print(status);
                     if (status == "แก้ไขข้อมูลแล้ว") {
                       showDialog(
                           context: context,
                           builder: (_) => AlertMessage(
                               "แจ้งเตือน", "แก้ไขข้อมูลสำเร็จ", null));
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (context) => EditingCompany(token,typeUser)));
+                      setState(() {
+                        companay = request.company;
+                        detail = title_detail.text;
+                        district = request.district;
+                        province = request.province;
+                        subDistrict = request.subDistrict;
+                      });
                     } else {
                       showDialog(
                           context: context,
@@ -507,10 +702,8 @@ class MapScreenState extends State<EditingCompany>
                               "Server มีปัญหา ปิดปรับปรุงชั่วคราว กรุณาลองใหม่ภายหลัง",
                               null));
                     }
-                    setState(() {
-                      _status = true;
-                      FocusScope.of(context).requestFocus(new FocusNode());
-                    });
+                    _status = true;
+                    FocusScope.of(context).requestFocus(new FocusNode());
                   }
                 },
                 shape: new RoundedRectangleBorder(
@@ -528,10 +721,8 @@ class MapScreenState extends State<EditingCompany>
                 textColor: Colors.white,
                 color: Colors.red[600],
                 onPressed: () {
-                  setState(() {
-                    _status = true;
-                    FocusScope.of(context).requestFocus(new FocusNode());
-                  });
+                  _status = true;
+                  FocusScope.of(context).requestFocus(new FocusNode());
                 },
                 shape: new RoundedRectangleBorder(
                     borderRadius: new BorderRadius.circular(20.0)),
@@ -556,9 +747,8 @@ class MapScreenState extends State<EditingCompany>
         ),
       ),
       onTap: () {
-        setState(() {
-          _status = false;
-        });
+        _status = false;
+        setState(() {});
       },
     );
   }
