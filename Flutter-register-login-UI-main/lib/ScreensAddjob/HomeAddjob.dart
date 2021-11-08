@@ -149,19 +149,19 @@ class _HomeAddjobState extends State<HomeAddjob> {
                                                         onSelected: (choice) {
                                                           switch (choice) {
                                                             case 'edit':
-                                                              Navigator.of(
-                                                                      context)
-                                                                  .pushReplacement(MaterialPageRoute(
-                                                                      builder: (context) => EditingCompany(
-                                                                          token,
-                                                                          typeUser,
-                                                                          data?.id,
-                                                                          data?.company,
-                                                                          data.departmentId.detail[0],
-                                                                          data?.province,
-                                                                          data?.district,
-                                                                          data?.subDistrict,
-                                                                          data?.jobId)));
+                                                              Navigator.of(context).pushReplacement(MaterialPageRoute(
+                                                                  builder: (context) => EditingCompany(
+                                                                      token,
+                                                                      typeUser,
+                                                                      data?.id,
+                                                                      data
+                                                                          ?.company,
+                                                                      data.departmentId
+                                                                          .detail[0],
+                                                                      data?.province,
+                                                                      data?.district,
+                                                                      data?.subDistrict,
+                                                                      data?.jobId)));
                                                               break;
                                                             case 'remove':
                                                               Navigator.of(
@@ -358,7 +358,8 @@ class _HomeAddjobState extends State<HomeAddjob> {
                                                       ),
                                                       GestureDetector(
                                                         onTap: () {
-                                                          Navigator.of(context).pushReplacement(
+                                                          Navigator.push(
+                                                              context,
                                                               MaterialPageRoute(
                                                                   builder: (context) =>
                                                                       HomeAdmin(
