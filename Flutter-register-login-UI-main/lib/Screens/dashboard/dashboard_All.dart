@@ -6,6 +6,7 @@ import 'package:login_ui/SelectCheckbox/choices.dart';
 import 'package:login_ui/Service/JobService.dart';
 import 'package:login_ui/Themes/Themes.dart';
 import 'package:login_ui/components/WillPop.dart';
+import 'package:login_ui/components/image.dart';
 import 'package:login_ui/model/jobModel.dart';
 import '../homehome.dart';
 import '../loading.dart';
@@ -23,6 +24,7 @@ class _dashboard_AllState extends State<dashboard_All> {
   _dashboard_AllState(this.token, this.typeUser);
   var token;
   var typeUser;
+  var img;
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -57,8 +59,13 @@ class _dashboard_AllState extends State<dashboard_All> {
                   return LoadingCube();
                 } else {
                   for (var data in snapshot?.data) {
+                    if (data?.image == "") {
+                      img = DefaultImage;
+                    } else {
+                      img = data?.image;
+                    }
                     result.add(Recommendation(
-                        data?.image,
+                        img,
                         data?.company,
                         data.province +
                             " " +

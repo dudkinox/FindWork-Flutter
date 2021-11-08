@@ -155,7 +155,13 @@ class _HomeAddjobState extends State<HomeAddjob> {
                                                                       builder: (context) => EditingCompany(
                                                                           token,
                                                                           typeUser,
-                                                                          data?.id)));
+                                                                          data?.id,
+                                                                          data?.company,
+                                                                          data.departmentId.detail[0],
+                                                                          data?.province,
+                                                                          data?.district,
+                                                                          data?.subDistrict,
+                                                                          data?.jobId)));
                                                               break;
                                                             case 'remove':
                                                               Navigator.of(
