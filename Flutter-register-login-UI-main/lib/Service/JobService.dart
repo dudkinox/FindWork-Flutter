@@ -41,7 +41,12 @@ Future<JobDataModel> TopicWorkFindID(String token) async {
       'Content-Type': 'application/json; charset=UTF-8',
     },
   );
-  return JobDataModel.fromJson(jsonDecode(response.body));
+  JobDataModel temp ;
+  if (response.body != "หาไม่เจอ") {
+    return JobDataModel.fromJson(jsonDecode(response.body));
+  } else {
+    return temp;
+  }
 }
 
 Future<String> JobCrate(

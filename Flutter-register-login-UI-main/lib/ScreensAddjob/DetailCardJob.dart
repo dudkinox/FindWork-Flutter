@@ -102,7 +102,7 @@ class _DetailCardJobState extends State<DetailCardJob> {
                   child: Container(
                     padding: EdgeInsets.all((4)),
                     width: MediaQuery.of(context).size.width * 1,
-                    height: MediaQuery.of(context).size.height * 0.5,
+                    height: MediaQuery.of(context).size.height * 0.3,
                     decoration: BoxDecoration(
                         image: DecorationImage(
                           image: NetworkImage(img),

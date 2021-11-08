@@ -6,6 +6,7 @@ import 'package:login_ui/Screens/loading.dart';
 import 'package:login_ui/Service/JobService.dart';
 import 'package:login_ui/Themes/Themes.dart';
 import 'package:login_ui/components/WillPop.dart';
+import 'package:login_ui/components/image.dart';
 import 'package:login_ui/model/jobModel.dart';
 
 import 'favoriteController.dart';
@@ -23,7 +24,7 @@ class _FavoriteState extends State<Favorite> {
   var token;
   var typeUser;
   var refreshKey = GlobalKey<RefreshIndicatorState>();
-
+  var img;
   bool loading = false;
   @override
   void initState() {
@@ -96,8 +97,13 @@ class _FavoriteState extends State<Favorite> {
                             return LoadingCube();
                           } else {
                             for (JobDataModel data in snapshot?.data) {
+                              if (data?.image == "") {
+                                img = DefaultImage;
+                              } else {
+                                img = data?.image;
+                              }
                               result.add(Recommendation(
-                                  data?.image,
+                                  img,
                                   data?.company,
                                   data.province +
                                       " " +

@@ -46,8 +46,6 @@ class DetailsPage extends StatelessWidget {
             return LoadingCube();
           } else {
             return Container(
-              height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width,
               child: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -55,8 +53,8 @@ class DetailsPage extends StatelessWidget {
                     FadeAnimation(
                       1.0,
                       Container(
-                        height: 350.0,
-                        width: double.infinity,
+                        height: MediaQuery.of(context).size.height * 0.4,
+                        width: MediaQuery.of(context).size.width * 1,
                         decoration: BoxDecoration(
                           color: Colors.red,
                           image: DecorationImage(

@@ -4,6 +4,7 @@ import 'package:login_ui/Screens/loading.dart';
 import 'package:login_ui/Service/JobService.dart';
 import 'package:login_ui/Themes/Themes.dart';
 import 'package:login_ui/details_screen.dart';
+import 'package:login_ui/model/ProgressModel.dart';
 import 'package:login_ui/model/favoriteModel.dart';
 import 'package:login_ui/model/jobModel.dart';
 
@@ -31,6 +32,7 @@ class _RecommendationState extends State<Recommendation> {
   var id;
   var token;
   var typeUser;
+
 
   Future<bool> status(String token, String jobId) async {
     FavoriteModel status = await GetFavorite(token);
