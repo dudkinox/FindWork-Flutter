@@ -23,6 +23,8 @@ class DetailCardJob extends StatefulWidget {
   var money;
   var jobTime;
   var id_job;
+  
+  final TextEditingController detailCompany = new TextEditingController();
 
   @override
   _DetailCardJobState createState() => _DetailCardJobState(typeUser, token, img,
@@ -52,7 +54,10 @@ class _DetailCardJobState extends State<DetailCardJob> {
   var jobTime;
   var id_job;
 
-  TextEditingController detailCompany = new TextEditingController();
+  var detailCompany = new TextEditingController();
+
+
+  bool _status = true;
 
   @override
   void initState() {
@@ -274,8 +279,6 @@ class _DetailCardJobState extends State<DetailCardJob> {
                     child: typeUser == "employee"
                         ? TextFormField(
                             readOnly: true,
-                            // maxLines: 8,
-                            // maxLength: 1000,
                             keyboardType: TextInputType.multiline,
                             controller: detailCompany,
                             decoration: new InputDecoration(
@@ -298,7 +301,6 @@ class _DetailCardJobState extends State<DetailCardJob> {
                             ),
                           )
                         : TextFormField(
-                            readOnly: false,
                             maxLines: 8,
                             maxLength: 1000,
                             keyboardType: TextInputType.multiline,
@@ -321,6 +323,7 @@ class _DetailCardJobState extends State<DetailCardJob> {
                               contentPadding: EdgeInsets.only(
                                   left: 15, bottom: 11, top: 11, right: 15),
                             ),
+                            enabled: _status,
                           )),
                 SizedBox(
                   height: 20,

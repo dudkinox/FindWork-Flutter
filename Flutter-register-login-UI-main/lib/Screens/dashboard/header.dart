@@ -10,7 +10,7 @@ import 'package:login_ui/Themes/Themes.dart';
 import 'package:login_ui/Themes/images.dart';
 
 class Header extends StatelessWidget {
-  Header(this.token, typeUser);
+  Header(this.token, this.typeUser);
   var token;
   var typeUser;
   @override
@@ -60,11 +60,11 @@ class Header extends StatelessWidget {
                     child: FlatButton(
                       padding: EdgeInsets.all(0.0),
                       onPressed: () {
-                        Navigator.pushReplacement(
+                        Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (BuildContext context) =>
-                                    ProfilePage(typeUser)));
+                                    ProfilePage(typeUser,token)));
                       },
                       child: null,
                     ),

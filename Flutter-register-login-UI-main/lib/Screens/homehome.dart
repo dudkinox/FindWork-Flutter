@@ -76,7 +76,7 @@ class _HomeHomeState extends State<HomeHome> {
                 body: newindex == 0
                     ? HomePage(newindex, token, typeUser)
                     : newindex == 1
-                        ? ProfilePage(typeUser)
+                        ? ProfilePage(typeUser, token)
                         : newindex == 2
                             ? Favorite(token, typeUser)
                             : newindex == 3
