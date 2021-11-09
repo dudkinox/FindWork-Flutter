@@ -5,45 +5,56 @@ import 'package:flutter/cupertino.dart';
 import 'package:login_ui/Animation/Fade_Animation.dart';
 
 import 'package:login_ui/Screens/loading.dart';
+import 'package:login_ui/Service/JobService.dart';
 import 'package:login_ui/Themes/Themes.dart';
 import 'package:login_ui/components/WillPop.dart';
+import 'package:login_ui/components/alert.dart';
 import 'dart:io';
+
+import 'package:login_ui/model/jobModel.dart';
 
 class EditingCardJob extends StatefulWidget {
   EditingCardJob(this.token, this.typeUser, this.name, this.type, this.money,
-      this.jobTime);
+      this.jobTime, this.id);
   var token;
   var typeUser;
   var name;
   var type;
   var money;
   var jobTime;
+  var id;
   final TextEditingController Title_company = new TextEditingController();
   final TextEditingController Title_type = new TextEditingController();
   final TextEditingController Title_money = new TextEditingController();
   final TextEditingController Title_jobTime = new TextEditingController();
   @override
   MapScreenState createState() =>
-      MapScreenState(token, typeUser, name, type, money, jobTime);
+      MapScreenState(token, typeUser, name, type, money, jobTime, id);
 }
 
 class MapScreenState extends State<EditingCardJob>
     with SingleTickerProviderStateMixin {
   MapScreenState(this.token, this.typeUser, this.name, this.type, this.money,
-      this.jobTime);
+      this.jobTime, this.id);
   var token;
   var typeUser;
   var name;
   var type;
   var money;
   var jobTime;
+  var id;
   var Title_company = new TextEditingController();
   var Title_type = new TextEditingController();
   var Title_money = new TextEditingController();
   var Title_jobTime = new TextEditingController();
   File file;
 
-  int _value = 0;
+  var tempName;
+  var tempType;
+  var tempMoney;
+  var tempJobTime;
+
+  var _value;
 
   bool _status = true;
   final FocusNode myFocusNode = FocusNode();
@@ -57,10 +68,24 @@ class MapScreenState extends State<EditingCardJob>
 
   @override
   Widget build(BuildContext context) {
-    Title_company.text = name;
-    Title_type.text = type;
-    Title_money.text = money;
-    Title_jobTime.text = jobTime;
+    if (_status == true) {
+      Title_company.text = name;
+      Title_type.text = _value;
+      Title_money.text = money;
+      Title_jobTime.text = jobTime;
+      if (type == "parttime") {
+        _value = "parttime";
+        Title_type.text = _value;
+      } else if (type == "fulltime") {
+        _value = "fulltime";
+        Title_type.text = _value;
+      }
+    } else {
+      Title_company.text = tempName;
+      Title_type.text = tempType;
+      Title_money.text = tempMoney;
+      Title_jobTime.text = tempJobTime;
+    }
     return loading
         ? LoadingCube()
         : WillPopScope(
@@ -185,156 +210,7 @@ class MapScreenState extends State<EditingCardJob>
                                     SizedBox(
                                       height: 25,
                                     ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          right: 25, left: 25),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: <Widget>[
-                                          new Text(
-                                            'Text 1',
-                                            style: TextStyle(
-                                                fontSize: 16.0,
-                                                color: PrimaryColor,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                right: 120),
-                                            child: new Text(
-                                              'Text 2',
-                                              style: TextStyle(
-                                                  fontSize: 16.0,
-                                                  color: PrimaryColor,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
 
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                        left: 25,
-                                        right: 25.0,
-                                      ),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
-                                        children: [
-                                          new Flexible(
-                                              child: Padding(
-                                            padding:
-                                                const EdgeInsets.only(right: 5),
-                                            child: new TextField(
-                                              controller: Title_type,
-                                              decoration: const InputDecoration(
-                                                hintText: "Text 1",
-                                              ),
-                                              enabled: !_status,
-                                              autofocus: !_status,
-                                            ),
-                                          )),
-                                          new Flexible(
-                                              child: Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 15, right: 5),
-                                            child: new TextField(
-                                              controller: Title_type,
-                                              decoration: const InputDecoration(
-                                                hintText: "Text 2",
-                                              ),
-                                              enabled: !_status,
-                                              autofocus: !_status,
-                                            ),
-                                          )),
-                                        ],
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 25,
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          right: 25, left: 25),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: <Widget>[
-                                          new Text(
-                                            'Text 3',
-                                            style: TextStyle(
-                                                fontSize: 16.0,
-                                                color: PrimaryColor,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                right: 120),
-                                            child: new Text(
-                                              'Text 4',
-                                              style: TextStyle(
-                                                  fontSize: 16.0,
-                                                  color: PrimaryColor,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                        left: 25,
-                                        right: 25.0,
-                                      ),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
-                                        children: [
-                                          new Flexible(
-                                              child: Padding(
-                                            padding:
-                                                const EdgeInsets.only(right: 5),
-                                            child: new TextField(
-                                              controller: Title_type,
-                                              decoration: const InputDecoration(
-                                                hintText: "Text 3",
-                                              ),
-                                              enabled: !_status,
-                                              autofocus: !_status,
-                                            ),
-                                          )),
-                                          new Flexible(
-                                              child: Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 15, right: 5),
-                                            child: new TextField(
-                                              controller: Title_type,
-                                              decoration: const InputDecoration(
-                                                hintText: "Text 4",
-                                              ),
-                                              enabled: !_status,
-                                              autofocus: !_status,
-                                            ),
-                                          )),
-                                        ],
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 25,
-                                    ),
                                     Padding(
                                       padding: const EdgeInsets.only(
                                           right: 25, left: 25),
@@ -355,7 +231,7 @@ class MapScreenState extends State<EditingCardJob>
                                             padding: const EdgeInsets.only(
                                                 right: 90),
                                             child: new Text(
-                                              'วันที่ลงงาน',
+                                              'เวลาทำงาน',
                                               style: TextStyle(
                                                   fontSize: 16.0,
                                                   color: PrimaryColor,
@@ -398,7 +274,7 @@ class MapScreenState extends State<EditingCardJob>
                                             child: new TextField(
                                               controller: Title_jobTime,
                                               decoration: const InputDecoration(
-                                                hintText: "วันที่ลงงาน",
+                                                hintText: "เวลาทำงาน",
                                               ),
                                               enabled: !_status,
                                               autofocus: !_status,
@@ -416,27 +292,50 @@ class MapScreenState extends State<EditingCardJob>
                                       crossAxisAlignment:
                                           CrossAxisAlignment.center,
                                       children: [
-                                        Row(children: [
-                                          Radio(
-                                              value: 1,
-                                              groupValue: _value,
-                                              onChanged: (value) {
-                                                setState(() {
-                                                  _value = value;
-                                                });
-                                              }),
-                                          Text("1"),
+                                        Text("ตำแหน่งงาน"),
+                                        Column(children: [
+                                          _status
+                                              ? Radio(value: null)
+                                              : Radio(
+                                                  value: "salary",
+                                                  groupValue: _value,
+                                                  onChanged: (value) {
+                                                    setState(() {
+                                                      _value = value;
+                                                      Title_type.text = _value;
+                                                      tempName =
+                                                          Title_company.text;
+                                                      tempMoney =
+                                                          Title_money.text;
+                                                      tempJobTime =
+                                                          Title_jobTime.text;
+                                                      tempType =
+                                                          Title_type.text;
+                                                    });
+                                                  }),
+                                          Text("FullTime"),
                                         ]),
-                                        Row(children: [
-                                          Radio(
-                                              value: 2,
-                                              groupValue: _value,
-                                              onChanged: (value) {
-                                                setState(() {
-                                                  _value = value;
-                                                });
-                                              }),
-                                          Text("2"),
+                                        Column(children: [
+                                          _status
+                                              ? Radio(value: null)
+                                              : Radio(
+                                                  value: "parttime",
+                                                  groupValue: _value,
+                                                  onChanged: (value) {
+                                                    setState(() {
+                                                      _value = value;
+                                                      Title_type.text = _value;
+                                                      tempName =
+                                                          Title_company.text;
+                                                      tempMoney =
+                                                          Title_money.text;
+                                                      tempJobTime =
+                                                          Title_jobTime.text;
+                                                      tempType =
+                                                          Title_type.text;
+                                                    });
+                                                  }),
+                                          Text("Partime"),
                                         ]),
                                       ],
                                     ),
@@ -492,62 +391,73 @@ class MapScreenState extends State<EditingCardJob>
                 child: new Text("Save"),
                 textColor: Colors.white,
                 color: Color(0xFF25888E),
-                // onPressed: () async {
-                //   if (password.text != "") {
-                //     if (password.text == confirmpassword.text) {
-                //       final String status = await UpdateProfilePassword(
-                //           email.text,
-                //           fullname.text,
-                //           tel.text,
-                //           password.text,
-                //           token);
-                //       if (status == "แก้ไขข้อมูลแล้ว") {
-                //         showDialog(
-                //             context: context,
-                //             builder: (_) => AlertMessage(
-                //                 "แจ้งเตือน", "แก้ไขข้อมูลสำเร็จ", null));
-                //         setState(() {});
-                //       } else {
-                //         showDialog(
-                //             context: context,
-                //             builder: (_) => AlertMessage(
-                //                 "แจ้งเตือน",
-                //                 "Server มีปัญหา ปิดปรับปรุงชั่วคราว กรุณาลองใหม่ภายหลัง",
-                //                 null));
-                //       }
-                //       setState(() {
-                //         _status = true;
-                //         FocusScope.of(context).requestFocus(new FocusNode());
-                //       });
-                //     } else {
-                //       showDialog(
-                //           context: context,
-                //           builder: (_) => AlertMessage(
-                //               "แจ้งเตือน", "กรอกกรหัสให้ตรงกัน", null));
-                //     }
-                //   } else {
-                //     final String status = await UpdateProfile(
-                //         email.text, fullname.text, tel.text, token);
-                //     if (status == "แก้ไขข้อมูลแล้ว") {
-                //       showDialog(
-                //           context: context,
-                //           builder: (_) => AlertMessage(
-                //               "แจ้งเตือน", "แก้ไขข้อมูลสำเร็จ", null));
-                //       setState(() {});
-                //     } else {
-                //       showDialog(
-                //           context: context,
-                //           builder: (_) => AlertMessage(
-                //               "แจ้งเตือน",
-                //               "Server มีปัญหา ปิดปรับปรุงชั่วคราว กรุณาลองใหม่ภายหลัง",
-                //               null));
-                //     }
-                //     setState(() {
-                //       _status = true;
-                //       FocusScope.of(context).requestFocus(new FocusNode());
-                //     });
-                //   }
-                // },
+                onPressed: () async {
+                  final JobDataModel OldData = await TopicWorkFindID(id);
+                  if (Title_type.text == "parttime") {
+                    final String status = await UpdateDetailJob(
+                        id,
+                        OldData,
+                        "",
+                        Title_company.text,
+                        Title_money.text,
+                        Title_jobTime.text,
+                        Title_type.text);
+                    if (status == "แก้ไขข้อมูลแล้ว") {
+                      showDialog(
+                          context: context,
+                          builder: (_) => AlertMessage(
+                              "แจ้งเตือน", "แก้ไขข้อมูลสำเร็จ", null));
+                      setState(() {
+                        name = Title_company.text;
+                        type = Title_type.text;
+                        money = Title_money.text;
+                        jobTime = Title_jobTime.text;
+                      });
+                    } else {
+                      showDialog(
+                          context: context,
+                          builder: (_) => AlertMessage(
+                              "แจ้งเตือน",
+                              "Server มีปัญหา ปิดปรับปรุงชั่วคราว กรุณาลองใหม่ภายหลัง",
+                              null));
+                    }
+                  } else if (Title_type.text == "salary") {
+                    final String status = await UpdateDetailJob(
+                        id,
+                        OldData,
+                        Title_money.text,
+                        Title_company.text,
+                        "",
+                        Title_jobTime.text,
+                        Title_type.text);
+                    if (status == "แก้ไขข้อมูลแล้ว") {
+                      showDialog(
+                          context: context,
+                          builder: (_) => AlertMessage(
+                              "แจ้งเตือน", "แก้ไขข้อมูลสำเร็จ", null));
+                      setState(() {
+                        name = Title_company.text;
+                        type = Title_type.text;
+                        money = Title_money.text;
+                        jobTime = Title_jobTime.text;
+                      });
+                    } else {
+                      showDialog(
+                          context: context,
+                          builder: (_) => AlertMessage(
+                              "แจ้งเตือน",
+                              "Server มีปัญหา ปิดปรับปรุงชั่วคราว กรุณาลองใหม่ภายหลัง",
+                              null));
+                    }
+                  } else {
+                    showDialog(
+                        context: context,
+                        builder: (_) => AlertMessage(
+                            "แจ้งเตือน", "กรุณากรอกเลือกตำแหน่งงาน", null));
+                  }
+                  setState(() => loading = false);
+                  _status = true;
+                },
                 shape: new RoundedRectangleBorder(
                     borderRadius: new BorderRadius.circular(20.0)),
               )),
@@ -565,6 +475,10 @@ class MapScreenState extends State<EditingCardJob>
                 onPressed: () {
                   setState(() {
                     _status = true;
+                    tempName = name;
+                    tempType = _value;
+                    tempMoney = money;
+                    tempJobTime = jobTime;
                   });
                 },
                 shape: new RoundedRectangleBorder(
@@ -592,6 +506,10 @@ class MapScreenState extends State<EditingCardJob>
       onTap: () {
         setState(() {
           _status = false;
+          // name = tempName;
+          // _value = tempType;
+          // money = tempMoney;
+          // jobTime = tempJobTime;
         });
       },
     );

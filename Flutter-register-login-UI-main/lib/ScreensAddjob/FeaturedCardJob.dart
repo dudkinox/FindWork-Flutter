@@ -129,7 +129,8 @@ class FeaturedCardJob extends StatelessWidget {
                                                           data.departmentId.name[0],
                                                           data.departmentId.type[0],
                                                           money,
-                                                          data.departmentId.jobTime[0]
+                                                          data.departmentId.jobTime[0],
+                                                          id
                                                           )));
                                           break;
                                         case 'remove':

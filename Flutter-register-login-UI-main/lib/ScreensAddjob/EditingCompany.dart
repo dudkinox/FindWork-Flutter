@@ -664,17 +664,6 @@ class MapScreenState extends State<EditingCompany>
                             builder: (_) => AlertMessage(
                                 "แจ้งเตือน", "แก้ไขข้อมูลสำเร็จ", null));
                         setState(() {});
-                        // Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        //     builder: (context) => EditingCompany(
-                        //         token,
-                        //         typeUser,
-                        //         tokenJob,
-                        //         companay,
-                        //         detail,
-                        //         province,
-                        //         district,
-                        //         subDistrict,
-                        //         Job_JobID)));
                       } else {
                         showDialog(
                             context: context,
