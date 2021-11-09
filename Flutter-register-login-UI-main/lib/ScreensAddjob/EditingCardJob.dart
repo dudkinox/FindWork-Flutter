@@ -43,6 +43,8 @@ class MapScreenState extends State<EditingCardJob>
   var Title_jobTime = new TextEditingController();
   File file;
 
+  int _value = 0;
+
   bool _status = true;
   final FocusNode myFocusNode = FocusNode();
 
@@ -404,6 +406,42 @@ class MapScreenState extends State<EditingCardJob>
                                           )),
                                         ],
                                       ),
+                                    ),
+                                    SizedBox(
+                                      height: 5,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Row(children: [
+                                          Radio(
+                                              value: 1,
+                                              groupValue: _value,
+                                              onChanged: (value) {
+                                                setState(() {
+                                                  _value = value;
+                                                });
+                                              }),
+                                          Text("1"),
+                                        ]),
+                                        Row(children: [
+                                          Radio(
+                                              value: 2,
+                                              groupValue: _value,
+                                              onChanged: (value) {
+                                                setState(() {
+                                                  _value = value;
+                                                });
+                                              }),
+                                          Text("2"),
+                                        ]),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 5,
                                     ),
                                     Padding(
                                         padding: EdgeInsets.only(

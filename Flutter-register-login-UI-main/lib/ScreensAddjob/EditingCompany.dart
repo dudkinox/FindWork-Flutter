@@ -502,10 +502,34 @@ class MapScreenState extends State<EditingCompany>
                                                   );
                                                 } else {
                                                   return Container(
-                                                    child: Image.network(
-                                                      snapshot.data?.link,
-                                                      fit: BoxFit.fill,
-                                                    ),
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            1,
+                                                    height:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .height *
+                                                            0.5,
+                                                    decoration: BoxDecoration(
+                                                        image: DecorationImage(
+                                                          image: NetworkImage(
+                                                            snapshot.data?.link,
+                                                          ),
+                                                          fit: BoxFit.fill,
+                                                        ),
+                                                        color: Colors
+                                                            .lightBlueAccent,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(
+                                                                    15.0)),
+
+                                                    // child: Image.network(
+                                                    //   snapshot.data?.link,
+                                                    //   fit: BoxFit.fill,
+                                                    // ),
                                                   );
                                                 }
                                               } else {
@@ -639,9 +663,7 @@ class MapScreenState extends State<EditingCompany>
                             context: context,
                             builder: (_) => AlertMessage(
                                 "แจ้งเตือน", "แก้ไขข้อมูลสำเร็จ", null));
-                                setState(() {
-                                  
-                                });
+                        setState(() {});
                         // Navigator.of(context).pushReplacement(MaterialPageRoute(
                         //     builder: (context) => EditingCompany(
                         //         token,
@@ -679,8 +701,8 @@ class MapScreenState extends State<EditingCompany>
 
                     final JobDataModel OldData =
                         await TopicWorkFindJob_ID(Job_JobID);
-                    final String status =
-                        await UpdateJob(tokenJob, request, OldData, title_detail.text);
+                    final String status = await UpdateJob(
+                        tokenJob, request, OldData, title_detail.text);
                     // print(status);
                     if (status == "แก้ไขข้อมูลแล้ว") {
                       showDialog(
@@ -721,8 +743,7 @@ class MapScreenState extends State<EditingCompany>
                 textColor: Colors.white,
                 color: Colors.red[600],
                 onPressed: () {
-                  setState(() {
-                      });
+                  setState(() {});
                   _status = true;
                 },
                 shape: new RoundedRectangleBorder(
