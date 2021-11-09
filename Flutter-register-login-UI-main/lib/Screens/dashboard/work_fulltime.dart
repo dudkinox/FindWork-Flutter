@@ -12,10 +12,11 @@ import 'package:login_ui/model/jobModel.dart';
 import 'dashboard_All.dart';
 
 class work_fulltime extends StatelessWidget {
-  work_fulltime(this.token, this.typeUser);
+  work_fulltime(this.token, this.typeUser, this.matching);
   var token;
   var typeUser;
   var img;
+  var matching;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -81,6 +82,9 @@ class work_fulltime extends StatelessWidget {
                   } else {
                     for (JobDataModel data in snapshot?.data) {
                       if (data.departmentId.type.single == "salary") {
+                        // if(){
+
+                        // }
                         if(data?.image == ""){
                           img = DefaultImage;
                         } else {

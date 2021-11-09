@@ -223,67 +223,67 @@ List<Map<String, dynamic>> cars = [
 
 List<Map<String, dynamic>> smartphones = [
   {
-    'id': 'sk3',
+    'id': '1',
     'name': 'พนักงานขาย',
     'brand': 'Samsung',
     'category': 'Budget Phone'
   },
   {
-    'id': 'n106',
+    'id': '2',
     'name': 'งานช่างเทคนิค',
     'brand': 'Nokia',
     'category': 'Budget Phone'
   },
   {
-    'id': 'n150',
+    'id': '3',
     'name': 'งานผลิต',
     'brand': 'Nokia',
     'category': 'Budget Phone'
   },
   {
-    'id': 'r7a',
+    'id': '4',
     'name': 'งานบริการลูกค้า',
     'brand': 'Xiaomi',
     'category': 'Mid End Phone'
   },
   {
-    'id': 'ga10s',
+    'id': '5',
     'name': 'งานบัญชี / การเงิน',
     'brand': 'Samsung',
     'category': 'Mid End Phone'
   },
   {
-    'id': 'rn7',
+    'id': '6',
     'name': ' งานบริการลูกค้า',
     'brand': 'Xiaomi',
     'category': 'Mid End Phone'
   },
   {
-    'id': 'ga20s',
+    'id': '7',
     'name': 'หัวหน้าเซฟ',
     'brand': 'Samsung',
     'category': 'Mid End Phone'
   },
   {
-    'id': 'mc9',
+    'id': '8',
     'name': 'ผู้จัดการ',
     'brand': 'Meizu',
     'category': 'Mid End Phone'
   },
   {
-    'id': 'm6',
+    'id': '9',
     'name': 'กราฟฟิกดีไซเนอร์',
     'brand': 'Meizu',
     'category': 'Mid End Phone'
   },
   {
-    'id': 'ga2c',
+    'id': '10',
     'name': 'ช่างยนต์',
     'brand': 'Samsung',
     'category': 'Mid End Phone'
   },
   {
-    'id': 'r6a',
+    'id': '11',
     'name': 'ช่างไฟฟ้า',
     'brand': 'Xiaomi',
     'category': 'Mid End Phone'

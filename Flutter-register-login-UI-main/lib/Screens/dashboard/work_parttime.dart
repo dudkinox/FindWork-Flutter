@@ -12,10 +12,11 @@ import 'package:login_ui/model/jobModel.dart';
 import 'dashboard_All.dart';
 
 class work_parttime extends StatelessWidget {
-  work_parttime(this.token, this.typeUser);
+  work_parttime(this.token, this.typeUser, this.matching);
   var token;
   var typeUser;
   var img;
+  var matching;
   @override
   Widget build(BuildContext context) {
     return Container(

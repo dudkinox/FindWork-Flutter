@@ -2,14 +2,15 @@
 
 import 'package:flutter/material.dart';
 import 'package:login_ui/Screens/login/login.dart';
+import 'package:login_ui/SelectCheckbox/smart_select.dart';
 import 'package:login_ui/Service/LoginService.dart';
 
 import 'package:login_ui/Themes/Themes.dart';
 import 'package:login_ui/components/alert.dart';
 import 'package:login_ui/components/background.dart';
-import 'package:login_ui/components/selcetChackbox.dart';
-import 'package:login_ui/main.dart';
+
 import 'package:login_ui/model/loginModel.dart';
+import '../../SelectCheckbox/choices.dart' as choices;
 
 class RegisterScreen extends StatefulWidget {
   @override
@@ -22,6 +23,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final confirmpassword = GlobalKey<FormState>();
   final email = GlobalKey<FormState>();
   final tel = GlobalKey<FormState>();
+
+  List<String> _smartphone = [];
+
   RegisterInputModel register = RegisterInputModel();
   @override
   Widget build(BuildContext context) {
@@ -47,7 +51,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                 ),
                 SizedBox(height: size.height * 0.01),
-              
+
                 Container(
                   alignment: Alignment.center,
                   margin: EdgeInsets.symmetric(horizontal: 40),
@@ -135,7 +139,37 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 Container(
                   alignment: Alignment.center,
                   margin: EdgeInsets.symmetric(horizontal: 40),
-                  child: FeaturesMultiChips(),
+                  child: Column(
+                    children: <Widget>[
+                      const Divider(indent: 20),
+                      SmartSelect<String>.multiple(
+                        title: 'งานที่สนใจ',
+                        selectedValue: _smartphone,
+                        onChange: (selected) {
+                          setState(() => _smartphone = selected.title);
+                        },
+                        choiceType: S2ChoiceType.chips,
+                        choiceItems: S2Choice.listFrom<String, Map>(
+                          source: choices.smartphones,
+                          value: (index, item) => item['id'],
+                          title: (index, item) => item['name'],
+                        ),
+                        choiceStyle: S2ChoiceStyle(outlined: true),
+                        choiceActiveStyle: S2ChoiceStyle(outlined: true),
+                        modalConfig: S2ModalConfig(
+                          type: S2ModalType.bottomSheet,
+                          useFilter: true,
+                          maxHeightFactor: .7,
+                        ),
+                        tileBuilder: (context, state) {
+                          return S2Tile.fromState(
+                            state,
+                            isTwoLine: true,
+                          );
+                        },
+                      ),
+                    ],
+                  ),
                 ),
                 SizedBox(height: size.height * 0.01),
                 RaisedButton(
@@ -166,8 +200,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           if (register.tel == "") {
                             showDialog(
                                 context: context,
-                                builder: (_) => AlertMessage(
-                                    "แจ้งเตือน", "กรุณากรอกเบอร์โทรศัพท์", null));
+                                builder: (_) => AlertMessage("แจ้งเตือน",
+                                    "กรุณากรอกเบอร์โทรศัพท์", null));
                           } else {
                             if (register.password != register.confirmpassword) {
                               showDialog(
@@ -186,6 +220,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 register.tel,
                                 register.username,
                                 register.password,
+                                _smartphone,
                               );
                               if (status == "เพิ่มบัญชีสำเร็จ") {
                                 showDialog(
@@ -236,9 +271,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   alignment: Alignment.centerRight,
                   margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
                   child: GestureDetector(
-                    onTap: () => {
-                      Navigator.pop(context)
-                    },
+                    onTap: () => {Navigator.pop(context)},
                     child: Text(
                       "มีบัญชีอยู่แล้ว / เข้าสู่ระบบ",
                       style: TextStyle(

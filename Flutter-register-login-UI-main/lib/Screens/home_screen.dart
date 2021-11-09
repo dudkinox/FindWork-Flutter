@@ -14,9 +14,10 @@ DateTime backbuttonpressedTime;
 
 class HomePage extends StatelessWidget {
   TextEditingController fullname = TextEditingController();
-  HomePage(this.newindex, this.id_token, this.typeUser);
+  HomePage(this.newindex, this.id_token, this.typeUser, this.matching);
   var id_token;
   var typeUser;
+  var matching;
   int newindex;
   bool loading = false;
   DateTime currentTime = DateTime.now();
@@ -47,7 +48,7 @@ class HomePage extends StatelessWidget {
                     SizedBox(
                       height: 15.0,
                     ),
-                    Work(id_token, typeUser),
+                    Work(id_token, typeUser, matching),
                   ],
                 ),
               ),

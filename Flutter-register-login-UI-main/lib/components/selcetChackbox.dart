@@ -35,6 +35,7 @@ class _FeaturesMultiChipsState extends State<FeaturesMultiChips> {
             maxHeightFactor: .7,
           ),
           tileBuilder: (context, state) {
+           
             return S2Tile.fromState(
               state,
               isTwoLine: true,

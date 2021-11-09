@@ -21,7 +21,7 @@ class AccountModel {
 
   String id;
   String email;
-  String matching;
+  var matching;
   String tel;
   String password;
   String jobId;

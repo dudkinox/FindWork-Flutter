@@ -7,8 +7,10 @@ import 'package:login_ui/Screens/alertPage/alertPage.dart';
 import 'package:login_ui/Screens/home_screen.dart';
 import 'package:login_ui/Screens/loading.dart';
 import 'package:login_ui/Screens/profile/Profile.dart';
+import 'package:login_ui/Service/LoginService.dart';
 import 'package:login_ui/Themes/Themes.dart';
 import 'package:login_ui/components/WillPop.dart';
+import 'package:login_ui/model/loginModel.dart';
 import 'favorite/favorite.dart';
 
 class HomeHome extends StatefulWidget {
@@ -38,52 +40,62 @@ class _HomeHomeState extends State<HomeHome> {
         ? LoadingCube()
         : RefreshIndicator(
             onRefresh: onPullToRefresh,
-            child: WillPopScope(
-              onWillPop: onWillPop,
-              child: Scaffold(
-                bottomNavigationBar: CurvedNavigationBar(
-                  color: PrimaryColor,
-                  index: 0,
-                  backgroundColor: Colors.white,
-                  items: <Widget>[
-                    Icon(
-                      Icons.home_outlined,
-                      size: 30,
-                      color: Colors.white,
-                    ),
-                    Icon(
-                      Icons.person_outline,
-                      size: 30,
-                      color: Colors.white,
-                    ),
-                    Icon(
-                      Icons.favorite_border,
-                      color: Colors.white,
-                      size: 30.0,
-                    ),
-                    Icon(
-                      Icons.add_alert_outlined,
-                      color: Colors.white,
-                      size: 30.0,
-                    ),
-                  ],
-                  onTap: (index) {
-                    setState(() {
-                      newindex = index;
-                    });
-                  },
-                ),
-                body: newindex == 0
-                    ? HomePage(newindex, token, typeUser)
-                    : newindex == 1
-                        ? ProfilePage(typeUser, token)
-                        : newindex == 2
-                            ? Favorite(token, typeUser)
-                            : newindex == 3
-                                ? AlertPage()
-                                : null,
-              ),
-            ),
+            child: FutureBuilder<AccountModel>(
+                future: FindID(token),
+                builder: (context, AsyncSnapshot snapshot) {
+                  AccountModel datalist = snapshot?.data;
+                  if (snapshot?.connectionState != ConnectionState.done) {
+                    return LoadingCube();
+                  } else {
+                    print(datalist.matching);
+                    return WillPopScope(
+                      onWillPop: onWillPop,
+                      child: Scaffold(
+                        bottomNavigationBar: CurvedNavigationBar(
+                          color: PrimaryColor,
+                          index: 0,
+                          backgroundColor: Colors.white,
+                          items: <Widget>[
+                            Icon(
+                              Icons.home_outlined,
+                              size: 30,
+                              color: Colors.white,
+                            ),
+                            Icon(
+                              Icons.person_outline,
+                              size: 30,
+                              color: Colors.white,
+                            ),
+                            Icon(
+                              Icons.favorite_border,
+                              color: Colors.white,
+                              size: 30.0,
+                            ),
+                            Icon(
+                              Icons.add_alert_outlined,
+                              color: Colors.white,
+                              size: 30.0,
+                            ),
+                          ],
+                          onTap: (index) {
+                            setState(() {
+                              newindex = index;
+                            });
+                          },
+                        ),
+                        body: newindex == 0
+                            ? HomePage(newindex, token, typeUser, datalist.matching)
+                            : newindex == 1
+                                ? ProfilePage(typeUser, token)
+                                : newindex == 2
+                                    ? Favorite(token, typeUser)
+                                    : newindex == 3
+                                        ? AlertPage()
+                                        : null,
+                      ),
+                    );
+                  }
+                }),
           );
   }
 }

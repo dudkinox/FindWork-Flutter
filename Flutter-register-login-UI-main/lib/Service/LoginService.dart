@@ -36,6 +36,7 @@ Future<String> RegisterEmployee(
   String tel,
   String username,
   String password,
+  var matching
 ) async {
   try {
     final String Url = Host + "/api/login";
@@ -44,11 +45,11 @@ Future<String> RegisterEmployee(
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
-      body: jsonEncode(<String, String>{
+      body: jsonEncode(<String, dynamic>{
         "email": email,
         "fullname": fullname,
         "job_id": "",
-        "matching": "",
+        "matching": matching,
         "tel": tel,
         "type": "employee",
         "username": username,
@@ -75,6 +76,7 @@ Future<String> RegisterEmployer(
   String tel,
   String username,
   String password,
+  var matching
 ) async {
   try {
     final String Url = Host + "/api/login";
@@ -83,11 +85,11 @@ Future<String> RegisterEmployer(
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
-      body: jsonEncode(<String, String>{
+      body: jsonEncode(<String, dynamic>{
         "email": email,
         "fullname": fullname,
         "job_id": job_id,
-        "matching": "",
+        "matching": matching,
         "tel": tel,
         "type": "employer",
         "username": username,

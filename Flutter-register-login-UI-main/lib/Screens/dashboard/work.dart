@@ -9,9 +9,10 @@ import 'package:login_ui/Themes/Themes.dart';
 import 'work_progress.dart';
 
 class Work extends StatelessWidget {
-  Work(this.token, this.typeUser);
+  Work(this.token, this.typeUser, this.matching);
   var token;
   var typeUser;
+  var matching;
   @override
   Widget build(BuildContext context) {
     return FadeAnimation(
@@ -43,8 +44,8 @@ class Work extends StatelessWidget {
                   ),
                 ]),
             body: TabBarView(children: [
-              work_fulltime(token, typeUser),
-              work_parttime(token, typeUser),
+              work_fulltime(token, typeUser, matching),
+              work_parttime(token, typeUser, matching),
               work_progress(token, typeUser),
             ]),
           ),
