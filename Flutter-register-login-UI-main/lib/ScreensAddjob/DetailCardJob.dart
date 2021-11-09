@@ -23,7 +23,7 @@ class DetailCardJob extends StatefulWidget {
   var money;
   var jobTime;
   var id_job;
-  
+
   final TextEditingController detailCompany = new TextEditingController();
 
   @override
@@ -55,7 +55,6 @@ class _DetailCardJobState extends State<DetailCardJob> {
   var id_job;
 
   var detailCompany = new TextEditingController();
-
 
   bool _status = true;
 
@@ -159,7 +158,11 @@ class _DetailCardJobState extends State<DetailCardJob> {
                         ),
                         child: Center(
                           child: Text(
-                            (type == "salary" ? "งานประจำ" : "พาร์ทไทม์"),
+                            (type == "salary"
+                                ? "งานประจำ"
+                                : type == ""
+                                    ? "ยังไม่ระบุ"
+                                    : "พาร์ทไทม์"),
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 16,
@@ -302,7 +305,6 @@ class _DetailCardJobState extends State<DetailCardJob> {
                           )
                         : TextFormField(
                             maxLines: 8,
-                            maxLength: 1000,
                             keyboardType: TextInputType.multiline,
                             controller: detailCompany,
                             decoration: new InputDecoration(
@@ -323,7 +325,7 @@ class _DetailCardJobState extends State<DetailCardJob> {
                               contentPadding: EdgeInsets.only(
                                   left: 15, bottom: 11, top: 11, right: 15),
                             ),
-                            enabled: _status,
+                            enabled: false,
                           )),
                 SizedBox(
                   height: 20,
@@ -390,17 +392,7 @@ class _DetailCardJobState extends State<DetailCardJob> {
                           }
                         })
                     : Container(
-                        alignment: Alignment.center,
-                        child: RaisedButton(
-                          child: new Text("ยืนยันการแก้ไขงาน"),
-                          textColor: Colors.white,
-                          color: PrimaryColor,
-                          onPressed: () async {
-                            await updaetJobNotification();
-                          },
-                          shape: new RoundedRectangleBorder(
-                              borderRadius: new BorderRadius.circular(20.0)),
-                        ),
+                        child: null,
                       ),
               ],
             ),

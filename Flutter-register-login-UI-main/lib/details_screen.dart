@@ -22,11 +22,11 @@ class DetailsPage extends StatelessWidget {
   Future<bool> status(String token, String jobId) async {
     FavoriteModel status = await GetFavorite(token);
     if (status != null) {
-      for (var i = 0; i < status.jobId.length; i++) {
-        if (status.jobId[i] == null) {
+      for (var i = 0; i < status?.jobId.length; i++) {
+        if (status?.jobId[i] == null) {
           return false;
         }
-        if (status.jobId[i] == jobId) {
+        if (status?.jobId[i] == jobId) {
           return true;
         }
       }

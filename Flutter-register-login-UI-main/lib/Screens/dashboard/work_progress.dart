@@ -90,7 +90,7 @@ class work_progress extends StatelessWidget {
                                       }
                                       result.add(Recommendation(
                                           img,
-                                          data?.company,
+                                          data?.name,
                                           data.province +
                                               " " +
                                               data?.district +

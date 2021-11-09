@@ -124,7 +124,13 @@ class FeaturedCardJob extends StatelessWidget {
                                               MaterialPageRoute(
                                                   builder: (context) =>
                                                       EditingCardJob(
-                                                          token, typeUser)));
+                                                          token, 
+                                                          typeUser,
+                                                          data.departmentId.name[0],
+                                                          data.departmentId.type[0],
+                                                          money,
+                                                          data.departmentId.jobTime[0]
+                                                          )));
                                           break;
                                         case 'remove':
                                           final String status =

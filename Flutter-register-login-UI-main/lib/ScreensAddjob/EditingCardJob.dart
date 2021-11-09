@@ -2,44 +2,45 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_session/flutter_session.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:login_ui/Animation/Fade_Animation.dart';
 
 import 'package:login_ui/Screens/loading.dart';
-import 'package:login_ui/Screens/profile/ProfileController.dart';
-import 'package:login_ui/Service/LoginService.dart';
 import 'package:login_ui/Themes/Themes.dart';
 import 'package:login_ui/components/WillPop.dart';
-import 'package:login_ui/components/alert.dart';
-import 'package:login_ui/model/loginModel.dart';
 import 'dart:io';
 
-import 'HomeAddjob.dart';
-
 class EditingCardJob extends StatefulWidget {
-  EditingCardJob(this.token, this.typeUser);
+  EditingCardJob(this.token, this.typeUser, this.name, this.type, this.money,
+      this.jobTime);
   var token;
   var typeUser;
-  final TextEditingController fullname = new TextEditingController();
-  final TextEditingController email = new TextEditingController();
-  final TextEditingController tel = new TextEditingController();
-  final TextEditingController password = new TextEditingController();
-  final TextEditingController confirmpassword = new TextEditingController();
+  var name;
+  var type;
+  var money;
+  var jobTime;
+  final TextEditingController Title_company = new TextEditingController();
+  final TextEditingController Title_type = new TextEditingController();
+  final TextEditingController Title_money = new TextEditingController();
+  final TextEditingController Title_jobTime = new TextEditingController();
   @override
-  MapScreenState createState() => MapScreenState(token, typeUser);
+  MapScreenState createState() =>
+      MapScreenState(token, typeUser, name, type, money, jobTime);
 }
 
 class MapScreenState extends State<EditingCardJob>
     with SingleTickerProviderStateMixin {
-  MapScreenState(this.token, this.typeUser);
+  MapScreenState(this.token, this.typeUser, this.name, this.type, this.money,
+      this.jobTime);
   var token;
   var typeUser;
-  var fullname = new TextEditingController();
-  var email = new TextEditingController();
-  var tel = new TextEditingController();
-  var password = new TextEditingController();
-  var confirmpassword = new TextEditingController();
+  var name;
+  var type;
+  var money;
+  var jobTime;
+  var Title_company = new TextEditingController();
+  var Title_type = new TextEditingController();
+  var Title_money = new TextEditingController();
+  var Title_jobTime = new TextEditingController();
   File file;
 
   bool _status = true;
@@ -54,6 +55,10 @@ class MapScreenState extends State<EditingCardJob>
 
   @override
   Widget build(BuildContext context) {
+    Title_company.text = name;
+    Title_type.text = type;
+    Title_money.text = money;
+    Title_jobTime.text = jobTime;
     return loading
         ? LoadingCube()
         : WillPopScope(
@@ -81,606 +86,353 @@ class MapScreenState extends State<EditingCardJob>
                   color: Colors.white,
                   child: new ListView(
                     children: <Widget>[
-                      FutureBuilder(
-                          future: FlutterSession().get('token'),
-                          builder: (context, snapshot) {
-                            token = snapshot.data;
-                            return FadeAnimation(
-                              1.0,
-                              Column(
-                                children: <Widget>[
-                                  new Container(
-                                    height: 20.0,
-                                    color: Colors.white,
-                                  ),
-                                  new Container(
-                                    color: Color(0xffFFFFFF),
-                                    child: Padding(
-                                      padding: EdgeInsets.only(bottom: 0.0),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                      FadeAnimation(
+                        1.0,
+                        Column(
+                          children: <Widget>[
+                            new Container(
+                              height: 20.0,
+                              color: Colors.white,
+                            ),
+                            new Container(
+                              color: Color(0xffFFFFFF),
+                              child: Padding(
+                                padding: EdgeInsets.only(bottom: 0.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: <Widget>[
+                                    Padding(
+                                        padding: EdgeInsets.only(
+                                            left: 25.0, right: 25.0, top: 10.0),
+                                        child: new Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: <Widget>[
+                                            new Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: <Widget>[
+                                                new Text(
+                                                  'แก้ไขข้อมูล',
+                                                  style: TextStyle(
+                                                      fontSize: 18.0,
+                                                      color: PrimaryColor,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                              ],
+                                            ),
+                                            new Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.end,
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: <Widget>[
+                                                _status
+                                                    ? _getEditIcon()
+                                                    : new Container(),
+                                              ],
+                                            )
+                                          ],
+                                        )),
+                                    Padding(
+                                        padding: EdgeInsets.only(
+                                            left: 25.0, right: 25.0, top: 25.0),
+                                        child: new Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: <Widget>[
+                                            new Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: <Widget>[
+                                                new Text(
+                                                  'ชื่อตำแหน่งงาน',
+                                                  style: TextStyle(
+                                                      fontSize: 16.0,
+                                                      color: PrimaryColor,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        )),
+                                    Padding(
+                                        padding: EdgeInsets.only(
+                                            left: 25.0, right: 25.0, top: 2.0),
+                                        child: new Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: <Widget>[
+                                            new Flexible(
+                                                child: new TextField(
+                                              controller: Title_company,
+                                              decoration: const InputDecoration(
+                                                hintText:
+                                                    "ใส่ชื่อตำแหน่งงานของคุณ",
+                                              ),
+                                              enabled: !_status,
+                                              autofocus: !_status,
+                                            )),
+                                          ],
+                                        )),
+
+                                    // Padding(
+                                    SizedBox(
+                                      height: 25,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          right: 25, left: 25),
+                                      child: Row(
                                         mainAxisAlignment:
-                                            MainAxisAlignment.start,
+                                            MainAxisAlignment.spaceBetween,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
                                         children: <Widget>[
-                                          Padding(
-                                              padding: EdgeInsets.only(
-                                                  left: 25.0,
-                                                  right: 25.0,
-                                                  top: 10.0),
-                                              child: new Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: <Widget>[
-                                                  new Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.start,
-                                                    mainAxisSize:
-                                                        MainAxisSize.min,
-                                                    children: <Widget>[
-                                                      new Text(
-                                                        'แก้ไขข้อมูล',
-                                                        style: TextStyle(
-                                                            fontSize: 18.0,
-                                                            color: PrimaryColor,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .bold),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  new Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.end,
-                                                    mainAxisSize:
-                                                        MainAxisSize.min,
-                                                    children: <Widget>[
-                                                      _status
-                                                          ? _getEditIcon()
-                                                          : new Container(),
-                                                    ],
-                                                  )
-                                                ],
-                                              )),
-                                          Padding(
-                                              padding: EdgeInsets.only(
-                                                  left: 25.0,
-                                                  right: 25.0,
-                                                  top: 25.0),
-                                              child: new Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: <Widget>[
-                                                  new Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.start,
-                                                    mainAxisSize:
-                                                        MainAxisSize.min,
-                                                    children: <Widget>[
-                                                      new Text(
-                                                        'ชื่อตำแหน่งงาน',
-                                                        style: TextStyle(
-                                                            fontSize: 16.0,
-                                                            color: PrimaryColor,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .bold),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ],
-                                              )),
-                                          Padding(
-                                              padding: EdgeInsets.only(
-                                                  left: 25.0,
-                                                  right: 25.0,
-                                                  top: 2.0),
-                                              child: new Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: <Widget>[
-                                                  new Flexible(
-                                                    child: FutureBuilder<
-                                                        TextEditingController>(
-                                                      future: datafullname(
-                                                          snapshot?.data
-                                                              .toString()),
-                                                      builder:
-                                                          (context, snapshot) {
-                                                        fullname =
-                                                            snapshot?.data;
-                                                        // Future.delayed(Duration(seconds: 5), () {
-
-                                                        // });
-                                                        return new TextField(
-                                                          controller: fullname,
-                                                          decoration:
-                                                              const InputDecoration(
-                                                            hintText:
-                                                                "ใส่ชื่อตำแหน่งงานของคุณ",
-                                                          ),
-                                                          enabled: !_status,
-                                                          autofocus: !_status,
-                                                        );
-                                                      },
-                                                    ),
-                                                  ),
-                                                ],
-                                              )),
-
-                                          // Padding(
-                                          SizedBox(
-                                            height: 25,
+                                          new Text(
+                                            'Text 1',
+                                            style: TextStyle(
+                                                fontSize: 16.0,
+                                                color: PrimaryColor,
+                                                fontWeight: FontWeight.bold),
                                           ),
                                           Padding(
                                             padding: const EdgeInsets.only(
-                                                right: 25, left: 25),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
-                                              children: <Widget>[
-                                                new Text(
-                                                  'Text 1',
-                                                  style: TextStyle(
-                                                      fontSize: 16.0,
-                                                      color: PrimaryColor,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          right: 120),
-                                                  child: new Text(
-                                                    'Text 2',
-                                                    style: TextStyle(
-                                                        fontSize: 16.0,
-                                                        color: PrimaryColor,
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  ),
-                                                ),
-                                              ],
+                                                right: 120),
+                                            child: new Text(
+                                              'Text 2',
+                                              style: TextStyle(
+                                                  fontSize: 16.0,
+                                                  color: PrimaryColor,
+                                                  fontWeight: FontWeight.bold),
                                             ),
                                           ),
-                                          SizedBox(
-                                            height: 5,
-                                          ),
-
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                              left: 25,
-                                              right: 25.0,
-                                            ),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceAround,
-                                              children: [
-                                                new Flexible(
-                                                  child: FutureBuilder<
-                                                      TextEditingController>(
-                                                    future: datafullname(
-                                                        snapshot.data
-                                                            .toString()),
-                                                    builder:
-                                                        (context, snapshot) {
-                                                      fullname = snapshot.data;
-                                                      // Future.delayed(
-                                                      //     Duration(seconds: 5),
-                                                      //     () {});
-                                                      return Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .only(right: 5),
-                                                        child: new TextField(
-                                                          controller: fullname,
-                                                          decoration:
-                                                              const InputDecoration(
-                                                            hintText: "Text 1",
-                                                          ),
-                                                          enabled: !_status,
-                                                          autofocus: !_status,
-                                                        ),
-                                                      );
-                                                    },
-                                                  ),
-                                                ),
-                                                new Flexible(
-                                                  child: FutureBuilder<
-                                                      TextEditingController>(
-                                                    future: datafullname(
-                                                        snapshot.data
-                                                            .toString()),
-                                                    builder:
-                                                        (context, snapshot) {
-                                                      fullname = snapshot.data;
-                                                      // Future.delayed(
-                                                      //     Duration(seconds: 5),
-                                                      //     () {});
-                                                      return Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                    .only(
-                                                                left: 15,
-                                                                right: 5),
-                                                        child: new TextField(
-                                                          controller: fullname,
-                                                          decoration:
-                                                              const InputDecoration(
-                                                            hintText: "Text 2",
-                                                          ),
-                                                          enabled: !_status,
-                                                          autofocus: !_status,
-                                                        ),
-                                                      );
-                                                    },
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            height: 25,
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                right: 25, left: 25),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
-                                              children: <Widget>[
-                                                new Text(
-                                                  'Text 3',
-                                                  style: TextStyle(
-                                                      fontSize: 16.0,
-                                                      color: PrimaryColor,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          right: 120),
-                                                  child: new Text(
-                                                    'Text 4',
-                                                    style: TextStyle(
-                                                        fontSize: 16.0,
-                                                        color: PrimaryColor,
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            height: 5,
-                                          ),
-
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                              left: 25,
-                                              right: 25.0,
-                                            ),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceAround,
-                                              children: [
-                                                new Flexible(
-                                                  child: FutureBuilder<
-                                                      TextEditingController>(
-                                                    future: datafullname(
-                                                        snapshot.data
-                                                            .toString()),
-                                                    builder:
-                                                        (context, snapshot) {
-                                                      fullname = snapshot.data;
-                                                      // Future.delayed(
-                                                      //     Duration(seconds: 5),
-                                                      //     () {});
-                                                      return Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .only(right: 5),
-                                                        child: new TextField(
-                                                          controller: fullname,
-                                                          decoration:
-                                                              const InputDecoration(
-                                                            hintText: "Text 3",
-                                                          ),
-                                                          enabled: !_status,
-                                                          autofocus: !_status,
-                                                        ),
-                                                      );
-                                                    },
-                                                  ),
-                                                ),
-                                                new Flexible(
-                                                  child: FutureBuilder<
-                                                      TextEditingController>(
-                                                    future: datafullname(
-                                                        snapshot.data
-                                                            .toString()),
-                                                    builder:
-                                                        (context, snapshot) {
-                                                      fullname = snapshot.data;
-                                                      // Future.delayed(
-                                                      //     Duration(seconds: 5),
-                                                      //     () {});
-                                                      return Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                    .only(
-                                                                left: 15,
-                                                                right: 5),
-                                                        child: new TextField(
-                                                          controller: fullname,
-                                                          decoration:
-                                                              const InputDecoration(
-                                                            hintText: "Text 4",
-                                                          ),
-                                                          enabled: !_status,
-                                                          autofocus: !_status,
-                                                        ),
-                                                      );
-                                                    },
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            height: 25,
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                right: 25, left: 25),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
-                                              children: <Widget>[
-                                                new Text(
-                                                  'เงินเดือน',
-                                                  style: TextStyle(
-                                                      fontSize: 16.0,
-                                                      color: PrimaryColor,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          right: 90),
-                                                  child: new Text(
-                                                    'วันที่ลงงาน',
-                                                    style: TextStyle(
-                                                        fontSize: 16.0,
-                                                        color: PrimaryColor,
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            height: 5,
-                                          ),
-
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                              left: 25,
-                                              right: 25.0,
-                                            ),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceAround,
-                                              children: [
-                                                new Flexible(
-                                                  child: FutureBuilder<
-                                                      TextEditingController>(
-                                                    future: datafullname(
-                                                        snapshot.data
-                                                            .toString()),
-                                                    builder:
-                                                        (context, snapshot) {
-                                                      fullname = snapshot.data;
-                                                      // Future.delayed(
-                                                      //     Duration(seconds: 5),
-                                                      //     () {});
-                                                      return Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .only(right: 5),
-                                                        child: new TextField(
-                                                          controller: fullname,
-                                                          decoration:
-                                                              const InputDecoration(
-                                                            hintText:
-                                                                "เงินเดือน",
-                                                          ),
-                                                          enabled: !_status,
-                                                          autofocus: !_status,
-                                                        ),
-                                                      );
-                                                    },
-                                                  ),
-                                                ),
-                                                new Flexible(
-                                                  child: FutureBuilder<
-                                                      TextEditingController>(
-                                                    future: datafullname(
-                                                        snapshot.data
-                                                            .toString()),
-                                                    builder:
-                                                        (context, snapshot) {
-                                                      fullname = snapshot.data;
-                                                      // Future.delayed(
-                                                      //     Duration(seconds: 5),
-                                                      //     () {});
-                                                      return Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                    .only(
-                                                                left: 15,
-                                                                right: 5),
-                                                        child: new TextField(
-                                                          controller: fullname,
-                                                          decoration:
-                                                              const InputDecoration(
-                                                            hintText:
-                                                                "วันที่ลงงาน",
-                                                          ),
-                                                          enabled: !_status,
-                                                          autofocus: !_status,
-                                                        ),
-                                                      );
-                                                    },
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-
-                                          Container(
-                                            padding: EdgeInsets.only(
-                                                left: 25.0,
-                                                right: 25.0,
-                                                top: 25.0),
-                                            alignment: Alignment.centerRight,
-                                            margin: EdgeInsets.symmetric(
-                                                horizontal: 5, vertical: 5),
-                                            child: Column(
-                                              children: [
-                                                FutureBuilder<ResumeModel>(
-                                                  future: PreviewResume(token),
-                                                  builder: (context, snapshot) {
-                                                    if (snapshot
-                                                            .connectionState ==
-                                                        ConnectionState.done) {
-                                                      if (snapshot.data?.link ==
-                                                          "") {
-                                                        return Text(
-                                                          "ยังไม่ได้เลือกรูปภาพ",
-                                                          textAlign:
-                                                              TextAlign.center,
-                                                        );
-                                                      } else {
-                                                        return Container(
-                                                          child: Image.network(
-                                                            snapshot.data?.link,
-                                                            fit: BoxFit.fill,
-                                                          ),
-                                                        );
-                                                      }
-                                                    } else {
-                                                      return LoadingRipple();
-                                                    }
-                                                  },
-                                                ),
-                                                SizedBox(
-                                                  height: 15,
-                                                ),
-                                                Container(
-                                                  alignment: Alignment.center,
-                                                  child: RaisedButton(
-                                                    child: new Text(
-                                                        "เพิ่ม รูปภาพ (image)"),
-                                                    textColor: Colors.white,
-                                                    color: PrimaryColor,
-                                                    onPressed: () async {
-                                                      var image = await ImagePicker()
-                                                          .getImage(
-                                                              source:
-                                                                  ImageSource
-                                                                      .gallery);
-                                                      if (image?.path != null) {
-                                                        String status =
-                                                            await UploadResume(
-                                                                token,
-                                                                File(image
-                                                                    .path));
-
-                                                        if (status ==
-                                                            "อัพโหลดรูปภาพเรียบร้อย") {
-                                                          showDialog(
-                                                            context: context,
-                                                            builder: (_) => AlertMessage(
-                                                                "แจ้งเตือน",
-                                                                "อัพเดตรูปภาพแล้ว",
-                                                                EditingCardJob(
-                                                                    token,
-                                                                    typeUser)),
-                                                          );
-                                                          setState(() {
-                                                            file = File(
-                                                                image.path);
-                                                          });
-                                                        } else {
-                                                          showDialog(
-                                                            context: context,
-                                                            builder: (_) =>
-                                                                AlertMessage(
-                                                                    "แจ้งเตือน",
-                                                                    "การอัพโหลดมีปัญหา โปรดลองใหม่ภายหลัง",
-                                                                    null),
-                                                          );
-                                                        }
-                                                      }
-                                                    },
-                                                    shape:
-                                                        new RoundedRectangleBorder(
-                                                            borderRadius:
-                                                                new BorderRadius
-                                                                        .circular(
-                                                                    20.0)),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          Padding(
-                                              padding: EdgeInsets.only(
-                                                  left: 25.0,
-                                                  right: 25.0,
-                                                  top: 15.0),
-                                              child: new Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                children: <Widget>[],
-                                              )),
-                                          Padding(
-                                              padding: EdgeInsets.only(
-                                                  left: 25.0,
-                                                  right: 25.0,
-                                                  top: 2.0),
-                                              child: new Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                children: <Widget>[],
-                                              )),
-                                          !_status
-                                              ? _getActionButtons()
-                                              : new Container(),
                                         ],
                                       ),
                                     ),
-                                  )
-                                ],
+                                    SizedBox(
+                                      height: 5,
+                                    ),
+
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                        left: 25,
+                                        right: 25.0,
+                                      ),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        children: [
+                                          new Flexible(
+                                              child: Padding(
+                                            padding:
+                                                const EdgeInsets.only(right: 5),
+                                            child: new TextField(
+                                              controller: Title_type,
+                                              decoration: const InputDecoration(
+                                                hintText: "Text 1",
+                                              ),
+                                              enabled: !_status,
+                                              autofocus: !_status,
+                                            ),
+                                          )),
+                                          new Flexible(
+                                              child: Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 15, right: 5),
+                                            child: new TextField(
+                                              controller: Title_type,
+                                              decoration: const InputDecoration(
+                                                hintText: "Text 2",
+                                              ),
+                                              enabled: !_status,
+                                              autofocus: !_status,
+                                            ),
+                                          )),
+                                        ],
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 25,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          right: 25, left: 25),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: <Widget>[
+                                          new Text(
+                                            'Text 3',
+                                            style: TextStyle(
+                                                fontSize: 16.0,
+                                                color: PrimaryColor,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                right: 120),
+                                            child: new Text(
+                                              'Text 4',
+                                              style: TextStyle(
+                                                  fontSize: 16.0,
+                                                  color: PrimaryColor,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 5,
+                                    ),
+
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                        left: 25,
+                                        right: 25.0,
+                                      ),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        children: [
+                                          new Flexible(
+                                              child: Padding(
+                                            padding:
+                                                const EdgeInsets.only(right: 5),
+                                            child: new TextField(
+                                              controller: Title_type,
+                                              decoration: const InputDecoration(
+                                                hintText: "Text 3",
+                                              ),
+                                              enabled: !_status,
+                                              autofocus: !_status,
+                                            ),
+                                          )),
+                                          new Flexible(
+                                              child: Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 15, right: 5),
+                                            child: new TextField(
+                                              controller: Title_type,
+                                              decoration: const InputDecoration(
+                                                hintText: "Text 4",
+                                              ),
+                                              enabled: !_status,
+                                              autofocus: !_status,
+                                            ),
+                                          )),
+                                        ],
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 25,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          right: 25, left: 25),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: <Widget>[
+                                          new Text(
+                                            'เงินเดือน',
+                                            style: TextStyle(
+                                                fontSize: 16.0,
+                                                color: PrimaryColor,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                right: 90),
+                                            child: new Text(
+                                              'วันที่ลงงาน',
+                                              style: TextStyle(
+                                                  fontSize: 16.0,
+                                                  color: PrimaryColor,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 5,
+                                    ),
+
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                        left: 25,
+                                        right: 25.0,
+                                      ),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        children: [
+                                          new Flexible(
+                                              child: Padding(
+                                            padding:
+                                                const EdgeInsets.only(right: 5),
+                                            child: new TextField(
+                                              controller: Title_money,
+                                              decoration: const InputDecoration(
+                                                hintText: "เงินเดือน",
+                                              ),
+                                              enabled: !_status,
+                                              autofocus: !_status,
+                                            ),
+                                          )),
+                                          new Flexible(
+                                              child: Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 15, right: 5),
+                                            child: new TextField(
+                                              controller: Title_jobTime,
+                                              decoration: const InputDecoration(
+                                                hintText: "วันที่ลงงาน",
+                                              ),
+                                              enabled: !_status,
+                                              autofocus: !_status,
+                                            ),
+                                          )),
+                                        ],
+                                      ),
+                                    ),
+                                    Padding(
+                                        padding: EdgeInsets.only(
+                                            left: 25.0, right: 25.0, top: 15.0),
+                                        child: new Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: <Widget>[],
+                                        )),
+                                    Padding(
+                                        padding: EdgeInsets.only(
+                                            left: 25.0, right: 25.0, top: 2.0),
+                                        child: new Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: <Widget>[],
+                                        )),
+                                    !_status
+                                        ? _getActionButtons()
+                                        : new Container(),
+                                  ],
+                                ),
                               ),
-                            );
-                          }),
+                            )
+                          ],
+                        ),
+                      )
                     ],
                   ),
                 )),
@@ -702,66 +454,62 @@ class MapScreenState extends State<EditingCardJob>
                 child: new Text("Save"),
                 textColor: Colors.white,
                 color: Color(0xFF25888E),
-                onPressed: () async {
-                  if (password.text != "") {
-                    if (password.text == confirmpassword.text) {
-                      final String status = await UpdateProfilePassword(
-                          email.text,
-                          fullname.text,
-                          tel.text,
-                          password.text,
-                          token);
-                      if (status == "แก้ไขข้อมูลแล้ว") {
-                        showDialog(
-                            context: context,
-                            builder: (_) => AlertMessage(
-                                "แจ้งเตือน", "แก้ไขข้อมูลสำเร็จ", null));
-                        Navigator.of(context).pushReplacement(MaterialPageRoute(
-                            builder: (context) =>
-                                EditingCardJob(token, typeUser)));
-                      } else {
-                        showDialog(
-                            context: context,
-                            builder: (_) => AlertMessage(
-                                "แจ้งเตือน",
-                                "Server มีปัญหา ปิดปรับปรุงชั่วคราว กรุณาลองใหม่ภายหลัง",
-                                null));
-                      }
-                      setState(() {
-                        _status = true;
-                        FocusScope.of(context).requestFocus(new FocusNode());
-                      });
-                    } else {
-                      showDialog(
-                          context: context,
-                          builder: (_) => AlertMessage(
-                              "แจ้งเตือน", "กรอกกรหัสให้ตรงกัน", null));
-                    }
-                  } else {
-                    final String status = await UpdateProfile(
-                        email.text, fullname.text, tel.text, token);
-                    if (status == "แก้ไขข้อมูลแล้ว") {
-                      showDialog(
-                          context: context,
-                          builder: (_) => AlertMessage(
-                              "แจ้งเตือน", "แก้ไขข้อมูลสำเร็จ", null));
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (context) =>
-                              EditingCardJob(token, typeUser)));
-                    } else {
-                      showDialog(
-                          context: context,
-                          builder: (_) => AlertMessage(
-                              "แจ้งเตือน",
-                              "Server มีปัญหา ปิดปรับปรุงชั่วคราว กรุณาลองใหม่ภายหลัง",
-                              null));
-                    }
-                    setState(() {
-                      _status = true;
-                      FocusScope.of(context).requestFocus(new FocusNode());
-                    });
-                  }
-                },
+                // onPressed: () async {
+                //   if (password.text != "") {
+                //     if (password.text == confirmpassword.text) {
+                //       final String status = await UpdateProfilePassword(
+                //           email.text,
+                //           fullname.text,
+                //           tel.text,
+                //           password.text,
+                //           token);
+                //       if (status == "แก้ไขข้อมูลแล้ว") {
+                //         showDialog(
+                //             context: context,
+                //             builder: (_) => AlertMessage(
+                //                 "แจ้งเตือน", "แก้ไขข้อมูลสำเร็จ", null));
+                //         setState(() {});
+                //       } else {
+                //         showDialog(
+                //             context: context,
+                //             builder: (_) => AlertMessage(
+                //                 "แจ้งเตือน",
+                //                 "Server มีปัญหา ปิดปรับปรุงชั่วคราว กรุณาลองใหม่ภายหลัง",
+                //                 null));
+                //       }
+                //       setState(() {
+                //         _status = true;
+                //         FocusScope.of(context).requestFocus(new FocusNode());
+                //       });
+                //     } else {
+                //       showDialog(
+                //           context: context,
+                //           builder: (_) => AlertMessage(
+                //               "แจ้งเตือน", "กรอกกรหัสให้ตรงกัน", null));
+                //     }
+                //   } else {
+                //     final String status = await UpdateProfile(
+                //         email.text, fullname.text, tel.text, token);
+                //     if (status == "แก้ไขข้อมูลแล้ว") {
+                //       showDialog(
+                //           context: context,
+                //           builder: (_) => AlertMessage(
+                //               "แจ้งเตือน", "แก้ไขข้อมูลสำเร็จ", null));
+                //       setState(() {});
+                //     } else {
+                //       showDialog(
+                //           context: context,
+                //           builder: (_) => AlertMessage(
+                //               "แจ้งเตือน",
+                //               "Server มีปัญหา ปิดปรับปรุงชั่วคราว กรุณาลองใหม่ภายหลัง",
+                //               null));
+                //     }
+                //     setState(() {
+                //       _status = true;
+                //       FocusScope.of(context).requestFocus(new FocusNode());
+                //     });
+                //   }
+                // },
                 shape: new RoundedRectangleBorder(
                     borderRadius: new BorderRadius.circular(20.0)),
               )),
@@ -779,7 +527,6 @@ class MapScreenState extends State<EditingCardJob>
                 onPressed: () {
                   setState(() {
                     _status = true;
-                    FocusScope.of(context).requestFocus(new FocusNode());
                   });
                 },
                 shape: new RoundedRectangleBorder(
