@@ -172,7 +172,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   builder: (context) => RegisterScreen()))
                         },
                         child: Text(
-                          "สมัครสมาชิก/สมัครงาน",
+                          "สมัครสมาชิก/ผู้หางาน",
                           style: TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.bold,
@@ -192,7 +192,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   builder: (context) => RegisterAddjobScreen()))
                         },
                         child: Text(
-                          "สมัครสมาชิก/รับสมัครงาน",
+                          "สมัครสมาชิก/ผู้ว่าจ้าง",
                           style: TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.bold,
