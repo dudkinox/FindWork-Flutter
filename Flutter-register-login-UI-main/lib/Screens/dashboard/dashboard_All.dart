@@ -13,18 +13,20 @@ import '../loading.dart';
 import 'dashboard_itemCard.dart';
 
 class dashboard_All extends StatefulWidget {
-  dashboard_All(this.token, this.typeUser);
+  dashboard_All(this.token, this.typeUser, this.matching);
   var token;
   var typeUser;
+  var matching;
   @override
-  _dashboard_AllState createState() => _dashboard_AllState(token, typeUser);
+  _dashboard_AllState createState() => _dashboard_AllState(token, typeUser, matching);
 }
 
 class _dashboard_AllState extends State<dashboard_All> {
-  _dashboard_AllState(this.token, this.typeUser);
+  _dashboard_AllState(this.token, this.typeUser,this.matching);
   var token;
   var typeUser;
   var img;
+  var matching;
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -46,7 +48,7 @@ class _dashboard_AllState extends State<dashboard_All> {
             icon: Icon(Icons.arrow_back_ios, color: Colors.black),
             onPressed: () => {
               Navigator.of(context).pushReplacement(MaterialPageRoute(
-                  builder: (context) => HomeHome(0, token, typeUser))),
+                  builder: (context) => HomeHome(0, token, typeUser,matching))),
             },
           ),
         ),

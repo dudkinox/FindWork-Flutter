@@ -17,23 +17,25 @@ import 'dart:io';
 import 'ProfileController.dart';
 
 class ProfilePage extends StatefulWidget {
-  ProfilePage(this.typeUser, this.token);
+  ProfilePage(this.typeUser, this.token, this.matching);
   var typeUser;
   var token;
+  var matching;
   final TextEditingController fullname = new TextEditingController();
   final TextEditingController email = new TextEditingController();
   final TextEditingController tel = new TextEditingController();
   final TextEditingController password = new TextEditingController();
   final TextEditingController confirmpassword = new TextEditingController();
   @override
-  MapScreenState createState() => MapScreenState(typeUser, token);
+  MapScreenState createState() => MapScreenState(typeUser, token, matching);
 }
 
 class MapScreenState extends State<ProfilePage>
     with SingleTickerProviderStateMixin {
-  MapScreenState(this.typeUser, this.token);
+  MapScreenState(this.typeUser, this.token, this.matching);
   var typeUser;
   var token;
+  var matching;
   var fullname = new TextEditingController();
   var email = new TextEditingController();
   var tel = new TextEditingController();
@@ -73,7 +75,7 @@ class MapScreenState extends State<ProfilePage>
                     icon: Icon(Icons.arrow_back_ios, color: Colors.black),
                     onPressed: () => {
                       Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (context) => HomeHome(0, token, typeUser))),
+                          builder: (context) => HomeHome(0, token, typeUser,matching))),
                     },
                   ),
                 ),
@@ -419,7 +421,8 @@ class MapScreenState extends State<ProfilePage>
                                                               "อัพเดตรูปภาพแล้ว",
                                                               ProfilePage(
                                                                   typeUser,
-                                                                  token)),
+                                                                  token,
+                                                                  matching)),
                                                     );
                                                     setState(() {
                                                       file = File(image?.path);
@@ -509,7 +512,7 @@ class MapScreenState extends State<ProfilePage>
                                 "แจ้งเตือน", "แก้ไขข้อมูลสำเร็จ", null));
                         Navigator.of(context).pushReplacement(MaterialPageRoute(
                             builder: (context) =>
-                                ProfilePage(typeUser, token)));
+                                ProfilePage(typeUser, token,matching)));
                       } else {
                         showDialog(
                             context: context,
@@ -537,7 +540,7 @@ class MapScreenState extends State<ProfilePage>
                           builder: (_) => AlertMessage(
                               "แจ้งเตือน", "แก้ไขข้อมูลสำเร็จ", null));
                       Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (context) => ProfilePage(typeUser, token)));
+                          builder: (context) => ProfilePage(typeUser, token,matching)));
                     } else {
                       showDialog(
                           context: context,

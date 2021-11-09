@@ -9,11 +9,12 @@ import '../homehome.dart';
 
 void login(BuildContext context, String username, String password) async {
   LoginModel login = await Login(username, password);
+  AccountModel result = await FindID(login.id);
   await FlutterSession().set('token', login.id);
   switch (login.type) {
     case "employee":
       Navigator.of(context).pushReplacement(MaterialPageRoute(
-          builder: (context) => HomeHome(0, login.id, login.type)));
+          builder: (context) => HomeHome(0, login.id, login.type, result.matching)));
       break;
     case "employer":
       Navigator.of(context).pushReplacement(

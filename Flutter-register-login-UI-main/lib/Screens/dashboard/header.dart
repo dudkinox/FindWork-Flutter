@@ -10,9 +10,10 @@ import 'package:login_ui/Themes/Themes.dart';
 import 'package:login_ui/Themes/images.dart';
 
 class Header extends StatelessWidget {
-  Header(this.token, this.typeUser);
+  Header(this.token, this.typeUser, this.matching);
   var token;
   var typeUser;
+  var matching;
   @override
   Widget build(BuildContext context) {
     return FadeAnimation(
@@ -64,7 +65,7 @@ class Header extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                                 builder: (BuildContext context) =>
-                                    ProfilePage(typeUser,token)));
+                                    ProfilePage(typeUser,token, matching)));
                       },
                       child: null,
                     ),

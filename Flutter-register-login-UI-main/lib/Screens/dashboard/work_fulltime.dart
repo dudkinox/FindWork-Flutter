@@ -57,7 +57,7 @@ class work_fulltime extends StatelessWidget {
                                 context,
                                 MaterialPageRoute(
                                     builder: (BuildContext context) =>
-                                        dashboard_All(token, typeUser)))
+                                        dashboard_All(token, typeUser, matching)))
                           },
                           child: Text(
                             "ดูทั้งหมด",
