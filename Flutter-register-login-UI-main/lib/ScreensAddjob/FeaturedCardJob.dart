@@ -94,21 +94,30 @@ class FeaturedCardJob extends StatelessWidget {
                                 color: Colors.lightBlueAccent,
                                 borderRadius: BorderRadius.circular(15.0)),
                           ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                data.departmentId.name[0],
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18),
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 15),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    data.departmentId.name[0],
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 5),
+                                    child: Text(
+                                      data.company,
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                ],
                               ),
-                              Text(
-                                data.company,
-                                style: TextStyle(fontWeight: FontWeight.bold),
-                              ),
-                            ],
+                            ),
                           ),
                           typeUser == "employee"
                               ? Text("")
