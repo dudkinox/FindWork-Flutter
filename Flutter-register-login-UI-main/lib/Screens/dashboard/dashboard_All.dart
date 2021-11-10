@@ -68,7 +68,7 @@ class _dashboard_AllState extends State<dashboard_All> {
                     }
                     result.add(Recommendation(
                         img,
-                        data?.name,
+                        data?.company,
                         data.province +
                             " " +
                             data?.district +

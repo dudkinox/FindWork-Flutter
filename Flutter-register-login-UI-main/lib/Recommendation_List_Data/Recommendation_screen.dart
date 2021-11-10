@@ -60,7 +60,7 @@ class _RecommendationState extends State<Recommendation> {
             return LoadingFadingCube();
           } else {
             for (var item in snapshot?.data) {
-              data?.company = item.name;
+              data?.company = item.company;
               data?.departmentId = item.departmentId;
               data?.district = item.district;
               data?.id = item.id;
