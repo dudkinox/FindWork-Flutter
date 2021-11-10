@@ -688,11 +688,11 @@ class MapScreenState extends State<EditingCompany>
                       subDistrict: title_subDistrict.text,
                     );
 
-                    final JobDataModel OldData =
-                        await TopicWorkFindJob_ID(Job_JobID);
+                    var resultDetail = new DepartmentId(detail: [title_detail.text]);
+                    
+                    
                     final String status = await UpdateJob(
-                        tokenJob, request, OldData, title_detail.text);
-                    // print(status);
+                        tokenJob, request, Job_JobID, resultDetail);
                     if (status == "แก้ไขข้อมูลแล้ว") {
                       showDialog(
                           context: context,
@@ -700,7 +700,7 @@ class MapScreenState extends State<EditingCompany>
                               "แจ้งเตือน", "แก้ไขข้อมูลสำเร็จ", null));
                       setState(() {
                         company = request.company;
-                        detail = title_detail.text;
+                        detail = resultDetail.detail[0];
                         district = request.district;
                         province = request.province;
                         subDistrict = request.subDistrict;

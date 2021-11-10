@@ -91,8 +91,9 @@ Future<String> JobCrate(
 }
 
 Future<String> UpdateJob(String token, JobDataModel request,
-    JobDataModel OldData, String detail) async {
+    String Job_JobID, DepartmentId detail) async {
   try {
+    final JobDataModel OldData = await TopicWorkFindJob_ID(Job_JobID);
     final String Url = Host + "/api/employer/" + token;
     final response = await http.put(
       Uri.parse(Url),
@@ -103,7 +104,7 @@ Future<String> UpdateJob(String token, JobDataModel request,
         "company": request.company,
         "department_id": {
           "salary": [OldData.departmentId.salary[0]],
-          "detail": [detail],
+          "detail": [detail.detail[0]],
           "name": [OldData.departmentId.name[0]],
           "part_time": [OldData.departmentId.partTime[0]],
           "job_time": [OldData.departmentId.jobTime[0]],
