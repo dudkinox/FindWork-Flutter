@@ -295,7 +295,10 @@ class MapScreenState extends State<EditingCardJob>
                                         Text("ตำแหน่งงาน"),
                                         Column(children: [
                                           _status
-                                              ? Radio(value: null)
+                                              ? Radio(
+                                                  value: "salary",
+                                                  groupValue: _value,
+                                                )
                                               : Radio(
                                                   value: "salary",
                                                   groupValue: _value,
@@ -317,7 +320,10 @@ class MapScreenState extends State<EditingCardJob>
                                         ]),
                                         Column(children: [
                                           _status
-                                              ? Radio(value: null)
+                                              ? Radio(
+                                                  value: "parttime",
+                                                  groupValue: _value,
+                                                )
                                               : Radio(
                                                   value: "parttime",
                                                   groupValue: _value,
