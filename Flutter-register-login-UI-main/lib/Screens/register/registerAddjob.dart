@@ -291,7 +291,7 @@ class _RegisterAddjobScreenState extends State<RegisterAddjobScreen> {
                                       register.password,
                                       _smartphone);
                                   if (status == "เพิ่มบัญชีสำเร็จ") {
-                                    final String result = await JobCrate(register.job_id);
+                                    final String result = await JobCrate(register.job_id,register.fullname);
                                     if(result == "เพิ่มงานสำเร็จ"){
                                       showDialog(
                                         context: context,

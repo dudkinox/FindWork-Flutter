@@ -51,6 +51,7 @@ Future<JobDataModel> TopicWorkFindID(String token) async {
 
 Future<String> JobCrate(
   String job_id,
+  String company
 ) async {
   try {
     final String Url = Host + "/api/employer/";
@@ -60,7 +61,7 @@ Future<String> JobCrate(
         'Content-Type': 'application/json; charset=UTF-8',
       },
       body: jsonEncode(<String, dynamic>{
-        "company": "",
+        "company": company,
         "department_id": {
           "salary": [""],
           "name": [""],
