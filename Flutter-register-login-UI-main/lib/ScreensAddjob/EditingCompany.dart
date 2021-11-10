@@ -511,13 +511,13 @@ class MapScreenState extends State<EditingCompany>
                                                         MediaQuery.of(context)
                                                                 .size
                                                                 .height *
-                                                            0.5,
+                                                            0.25,
                                                     decoration: BoxDecoration(
                                                         image: DecorationImage(
                                                           image: NetworkImage(
                                                             snapshot.data?.link,
                                                           ),
-                                                          fit: BoxFit.fill,
+                                                          fit: BoxFit.cover,
                                                         ),
                                                         color: Colors
                                                             .lightBlueAccent,
