@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:login_ui/Animation/Fade_Animation.dart';
 
 import 'package:login_ui/Screens/loading.dart';
+import 'package:login_ui/ScreensAddjob/HomeAddjob.dart';
 import 'package:login_ui/Service/JobService.dart';
 import 'package:login_ui/Themes/Themes.dart';
 import 'package:login_ui/components/WillPop.dart';
@@ -55,6 +56,7 @@ class MapScreenState extends State<EditingCardJob>
   var tempJobTime;
 
   var _value;
+  var value;
 
   bool _status = true;
   final FocusNode myFocusNode = FocusNode();
@@ -74,10 +76,12 @@ class MapScreenState extends State<EditingCardJob>
       Title_money.text = money;
       Title_jobTime.text = jobTime;
       if (type == "parttime") {
-        _value = "parttime";
+        value = "parttime";
+        _value = value;
         Title_type.text = _value;
       } else if (type == "fulltime") {
-        _value = "fulltime";
+        value = "fulltime";
+        _value = value;
         Title_type.text = _value;
       }
     } else {
@@ -105,7 +109,13 @@ class MapScreenState extends State<EditingCardJob>
                   leading: IconButton(
                     icon: Icon(Icons.arrow_back_ios, color: Colors.black),
                     onPressed: () {
-                      Navigator.pop(context);
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => HomeAddjob(
+                                    token,
+                                    typeUser,
+                                  )));
                     },
                   ),
                 ),

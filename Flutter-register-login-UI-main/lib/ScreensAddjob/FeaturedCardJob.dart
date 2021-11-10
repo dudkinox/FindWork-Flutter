@@ -119,19 +119,21 @@ class FeaturedCardJob extends StatelessWidget {
                                     onSelected: (choice) async {
                                       switch (choice) {
                                         case 'edit':
-                                          Navigator.push(
+                                          Navigator.pushReplacement(
                                               context,
                                               MaterialPageRoute(
                                                   builder: (context) =>
                                                       EditingCardJob(
-                                                          token, 
+                                                          token,
                                                           typeUser,
-                                                          data.departmentId.name[0],
-                                                          data.departmentId.type[0],
+                                                          data.departmentId
+                                                              .name[0],
+                                                          data.departmentId
+                                                              .type[0],
                                                           money,
-                                                          data.departmentId.jobTime[0],
-                                                          id
-                                                          )));
+                                                          data.departmentId
+                                                              .jobTime[0],
+                                                          id)));
                                           break;
                                         case 'remove':
                                           final String status =

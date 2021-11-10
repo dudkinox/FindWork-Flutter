@@ -118,7 +118,7 @@ Future<AccountModel> FindID(String token) async {
         'Content-Type': 'application/json; charset=UTF-8',
       },
     );
-    return AccountModel.fromJson(jsonDecode(response.body));
+    return AccountModel.fromJson(jsonDecode(response?.body));
   } catch (e) {
     print(e);
   }

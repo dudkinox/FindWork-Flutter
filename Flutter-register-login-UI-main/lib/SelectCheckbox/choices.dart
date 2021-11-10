@@ -254,36 +254,30 @@ List<Map<String, dynamic>> smartphones = [
   },
   {
     'id': '6',
-    'name': ' งานบริการลูกค้า',
-    'brand': 'Xiaomi',
-    'category': 'Mid End Phone'
-  },
-  {
-    'id': '7',
     'name': 'หัวหน้าเซฟ',
     'brand': 'Samsung',
     'category': 'Mid End Phone'
   },
   {
-    'id': '8',
+    'id': '7',
     'name': 'ผู้จัดการ',
     'brand': 'Meizu',
     'category': 'Mid End Phone'
   },
   {
-    'id': '9',
+    'id': '8',
     'name': 'กราฟฟิกดีไซเนอร์',
     'brand': 'Meizu',
     'category': 'Mid End Phone'
   },
   {
-    'id': '10',
+    'id': '9',
     'name': 'ช่างยนต์',
     'brand': 'Samsung',
     'category': 'Mid End Phone'
   },
   {
-    'id': '11',
+    'id': '10',
     'name': 'ช่างไฟฟ้า',
     'brand': 'Xiaomi',
     'category': 'Mid End Phone'
