@@ -285,7 +285,6 @@ class MapScreenState extends State<CloseTheAccount>
                                                                     "ลบบัญชีเสร็จสิ้น",
                                                                     MyApp()),
                                                           );
-                                                          print("TEST");
                                                         } else {
                                                           showDialog(
                                                             context: context,

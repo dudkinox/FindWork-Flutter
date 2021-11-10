@@ -373,7 +373,7 @@ Future<FavoriteModel> GetFavorite(String token) async {
         'Content-Type': 'application/json; charset=UTF-8',
       },
     );
-    return FavoriteModel.fromJson(jsonDecode(response.body));
+    return FavoriteModel.fromJson(jsonDecode(response?.body));
   } catch (e) {
     print(e);
   }

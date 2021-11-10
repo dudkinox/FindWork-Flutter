@@ -561,14 +561,14 @@ class MapScreenState extends State<EditingCompany>
                                                   String status =
                                                       await UploadResume(token,
                                                           File(image.path));
-
+                                                 
                                                   if (status ==
                                                       "อัพโหลดรูปภาพเรียบร้อย") {
                                                         await Future.delayed(Duration(seconds: 5));
-                                                    final AccountModel
+                                                    final ResumeModel
                                                         findImage =
-                                                        await FindID(token);
-                                                    final String upload = await UpdateImage(tokenJob,Job_JobID,findImage?.image);
+                                                        await PreviewResume(token);
+                                                    final String upload = await UpdateImage(tokenJob,Job_JobID,findImage?.link);
                                                     if (upload == 'แก้ไขข้อมูลแล้ว') {
                                                       showDialog(
                                                         context: context,
