@@ -130,6 +130,46 @@ Future<String> UpdateJob(String token, JobDataModel request,
   }
 }
 
+Future<String> UpdateImage(String token,String Job_JobID , String image) async {
+  try {
+    final JobDataModel OldData = await TopicWorkFindJob_ID(Job_JobID);
+    final String Url = Host + "/api/employer/" + token;
+    final response = await http.put(
+      Uri.parse(Url),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, dynamic>{
+        "company": OldData.company,
+        "department_id": {
+          "salary": [OldData.departmentId.salary[0]],
+          "detail": [OldData.departmentId.detail[0]],
+          "name": [OldData.departmentId.name[0]],
+          "part_time": [OldData.departmentId.partTime[0]],
+          "job_time": [OldData.departmentId.jobTime[0]],
+          "status": [OldData.departmentId.status[0]],
+          "type": [OldData.departmentId.type[0]],
+        },
+        "district": OldData.district,
+        "province": OldData.province,
+        "sub_district": OldData.subDistrict,
+        "image": image,
+        "job_id": OldData.jobId,
+      }),
+    );
+
+    print(response.body);
+    if (response.statusCode == 400) {
+      var err = json.decode(json.encode(response.body));
+      return err;
+    }
+    var data = json.decode(json.encode(response.body));
+    return data;
+  } catch (e) {
+    print(e);
+  }
+}
+
 Future<String> UpdateDetailJob(String token, JobDataModel OldData, String salary, String name, String parttime, String jobtime, String type) async {
   try {
     final String Url = Host + "/api/employer/" + token;

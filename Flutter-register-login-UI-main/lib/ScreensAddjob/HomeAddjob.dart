@@ -161,7 +161,8 @@ class _HomeAddjobState extends State<HomeAddjob> {
                                                                       data?.province,
                                                                       data?.district,
                                                                       data?.subDistrict,
-                                                                      data?.jobId)));
+                                                                      data?.jobId,
+                                                                      datalist?.image)));
                                                               break;
                                                             case 'remove':
                                                               Navigator.of(

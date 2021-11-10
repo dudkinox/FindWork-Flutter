@@ -27,7 +27,8 @@ class EditingCompany extends StatefulWidget {
       this.province,
       this.district,
       this.subDistrict,
-      this.Job_JobID);
+      this.Job_JobID,
+      this.image_job);
   var tokenJob;
   var token;
   var typeUser;
@@ -37,6 +38,7 @@ class EditingCompany extends StatefulWidget {
   var district;
   var subDistrict;
   var Job_JobID;
+  var image_job;
 
   final TextEditingController title_company = new TextEditingController();
   final TextEditingController title_detail = new TextEditingController();
@@ -51,7 +53,7 @@ class EditingCompany extends StatefulWidget {
   final TextEditingController confirmpassword = new TextEditingController();
   @override
   MapScreenState createState() => MapScreenState(token, typeUser, tokenJob,
-      company, detail, province, district, subDistrict, Job_JobID);
+      company, detail, province, district, subDistrict, Job_JobID, image_job);
 }
 
 class MapScreenState extends State<EditingCompany>
@@ -65,7 +67,8 @@ class MapScreenState extends State<EditingCompany>
       this.province,
       this.district,
       this.subDistrict,
-      this.Job_JobID);
+      this.Job_JobID,
+      this.image_job);
   var token;
   var tokenJob;
   var jobID = new AccountModel();
@@ -76,6 +79,7 @@ class MapScreenState extends State<EditingCompany>
   var district;
   var subDistrict;
   var Job_JobID;
+  var image_job;
 
   var fullname = new TextEditingController();
   var email = new TextEditingController();
@@ -548,6 +552,7 @@ class MapScreenState extends State<EditingCompany>
                                               textColor: Colors.white,
                                               color: PrimaryColor,
                                               onPressed: () async {
+                                                setState(() => loading = true);
                                                 var image = await ImagePicker()
                                                     .getImage(
                                                         source: ImageSource
@@ -559,26 +564,42 @@ class MapScreenState extends State<EditingCompany>
 
                                                   if (status ==
                                                       "อัพโหลดรูปภาพเรียบร้อย") {
-                                                    showDialog(
-                                                      context: context,
-                                                      builder: (_) =>
-                                                          AlertMessage(
-                                                              "แจ้งเตือน",
-                                                              "อัพเดตรูปภาพแล้ว",
-                                                              EditingCompany(
-                                                                  token,
-                                                                  typeUser,
-                                                                  tokenJob,
-                                                                  company,
-                                                                  detail,
-                                                                  province,
-                                                                  district,
-                                                                  subDistrict,
-                                                                  Job_JobID)),
-                                                    );
-                                                    setState(() {
-                                                      file = File(image.path);
-                                                    });
+                                                        await Future.delayed(Duration(seconds: 5));
+                                                    final AccountModel
+                                                        findImage =
+                                                        await FindID(token);
+                                                    final String upload = await UpdateImage(tokenJob,Job_JobID,findImage?.image);
+                                                    if (upload == 'แก้ไขข้อมูลแล้ว') {
+                                                      showDialog(
+                                                        context: context,
+                                                        builder: (_) =>
+                                                            AlertMessage(
+                                                                "แจ้งเตือน",
+                                                                "อัพเดตรูปภาพแล้ว",
+                                                                EditingCompany(
+                                                                    token,
+                                                                    typeUser,
+                                                                    tokenJob,
+                                                                    company,
+                                                                    detail,
+                                                                    province,
+                                                                    district,
+                                                                    subDistrict,
+                                                                    Job_JobID,
+                                                                    image_job)),
+                                                      );
+                                                      setState(() {
+                                                        file = File(image.path);
+                                                      });
+                                                    } else {
+                                                      showDialog(
+                                                          context: context,
+                                                          builder: (_) =>
+                                                              AlertMessage(
+                                                                  "แจ้งเตือน",
+                                                                  "การอัพโหลดมีปัญหา โปรดลองใหม่ภายหลัง",
+                                                                  null));
+                                                    }
                                                   } else {
                                                     showDialog(
                                                       context: context,
@@ -588,6 +609,7 @@ class MapScreenState extends State<EditingCompany>
                                                           null),
                                                     );
                                                   }
+                                                  setState(() => loading = false);
                                                 }
                                               },
                                               shape: new RoundedRectangleBorder(
@@ -687,10 +709,8 @@ class MapScreenState extends State<EditingCompany>
                       province: title_province.text,
                       subDistrict: title_subDistrict.text,
                     );
-
-                    var resultDetail = new DepartmentId(detail: [title_detail.text]);
-                    
-                    
+                    var resultDetail =
+                        new DepartmentId(detail: [title_detail.text]);
                     final String status = await UpdateJob(
                         tokenJob, request, Job_JobID, resultDetail);
                     if (status == "แก้ไขข้อมูลแล้ว") {
