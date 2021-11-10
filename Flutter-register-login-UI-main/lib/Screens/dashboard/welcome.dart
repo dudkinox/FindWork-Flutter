@@ -26,9 +26,9 @@ class Welcome extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 FutureBuilder<TextEditingController>(
-                    future: datafullname(snapshot.data.toString()),
+                    future: datafullname(snapshot?.data.toString()),
                     builder: (context, AsyncSnapshot snapshot) {
-                      if(snapshot.connectionState == ConnectionState.done){
+                      if(snapshot?.connectionState == ConnectionState.done){
                         fullname = snapshot?.data;
                         return Text(
                           "สวัสดี, " + fullname?.text ?? "กำลังโหลด...",

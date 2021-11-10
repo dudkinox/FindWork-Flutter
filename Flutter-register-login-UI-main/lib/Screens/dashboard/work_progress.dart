@@ -62,7 +62,7 @@ class work_progress extends StatelessWidget {
               child: FutureBuilder<dynamic>(
                   future: GetProgressID(token),
                   builder: (context, AsyncSnapshot snapshot) {
-                    ProgressModel progressID = snapshot?.data;
+                    var progressID = snapshot?.data;
                     if (snapshot?.connectionState != ConnectionState.done) {
                       return LoadingCube();
                     } else {
@@ -90,7 +90,7 @@ class work_progress extends StatelessWidget {
                                       }
                                       result.add(Recommendation(
                                           img,
-                                          data?.name,
+                                          data?.company,
                                           data.province +
                                               " " +
                                               data?.district +
