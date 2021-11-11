@@ -51,7 +51,7 @@ class Itemcard extends StatelessWidget {
         Spacer(),
         button(
           buttonName: "ปฏิเศษการร้องขอ",
-          color: ButtonColor,
+          color: Danger,
           onpress: {},
         ),
       ],
