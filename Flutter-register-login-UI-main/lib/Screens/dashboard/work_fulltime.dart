@@ -83,9 +83,6 @@ class work_fulltime extends StatelessWidget {
                   } else {
                     for (JobDataModel data in snapshot?.data) {
                       if (data.departmentId.type.single == "salary") {
-                        // if(){
-
-                        // }
                         if(data?.image == ""){
                           img = DefaultImage;
                         } else {
