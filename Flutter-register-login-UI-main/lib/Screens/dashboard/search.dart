@@ -15,62 +15,76 @@ class Search extends StatelessWidget {
   var img;
   @override
   Widget build(BuildContext context) {
-    return FadeAnimation(
-      1.2,
-      Container(
-        padding: EdgeInsets.all(16),
-        child: TypeAheadField<User>(
-          hideSuggestionsOnKeyboardHide: false,
-          textFieldConfiguration: TextFieldConfiguration(
-            decoration: InputDecoration(
-              prefixIcon: Icon(Icons.search),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(20.0),
-                borderSide: BorderSide(color: PrimaryColor),
-              ),
-              hintText: 'ค้นหาที่นี่',
-            ),
-          ),
-          suggestionsCallback: UserApi.getUserSuggestions,
-          itemBuilder: (context, User suggestion) {
-            var temp;
-            if (suggestion?.company != "") {
-              temp = ListTile(
-              title: Text(suggestion?.company),
-            );
-            } else {
-              temp = Container(child: null);
-            }
-            return temp;
-          },
-          noItemsFoundBuilder: (context) => Container(
-            height: 60,
-            child: Center(
-              child: Text(
-                'ค้าหาไม่เจอ',
-                style: TextStyle(fontSize: 16),
-              ),
-            ),
-          ),
-          onSuggestionSelected: (User suggestion) {
-            final user = suggestion;
-            if (user?.image == "") {
-              img = DefaultImage;
-            } else {
-              img = user?.image;
-            }
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) =>
-                        DetailsPage(img, user.id, token, typeUser)));
+    return Material(
+      child: FadeAnimation(
+        1.2,
+        Padding(
+          padding: const EdgeInsets.only(left: 5, right: 5),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Container(
+                width: MediaQuery.of(context).size.width - 90,
+                child: TypeAheadField<User>(
+                  hideSuggestionsOnKeyboardHide: false,
+                  textFieldConfiguration: TextFieldConfiguration(
+                    decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.search),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20.0),
+                        borderSide: BorderSide(color: PrimaryColor),
+                      ),
+                      hintText: 'ค้นหาที่นี่',
+                    ),
+                  ),
+                  suggestionsCallback: UserApi.getUserSuggestions,
+                  itemBuilder: (context, User suggestion) {
+                    var temp;
+                    if (suggestion?.company != "") {
+                      temp = ListTile(
+                        title: Text(suggestion?.company),
+                      );
+                    } else {
+                      temp = Container(child: null);
+                    }
+                    return temp;
+                  },
+                  noItemsFoundBuilder: (context) => Container(
+                    height: 60,
+                    child: Center(
+                      child: Text(
+                        'ค้าหาไม่เจอ',
+                        style: TextStyle(fontSize: 16),
+                      ),
+                    ),
+                  ),
+                  onSuggestionSelected: (User suggestion) {
+                    final user = suggestion;
+                    if (user?.image == "") {
+                      img = DefaultImage;
+                    } else {
+                      img = user?.image;
+                    }
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                DetailsPage(img, user.id, token, typeUser)));
 
-            ScaffoldMessenger.of(context)
-              ..removeCurrentSnackBar()
-              ..showSnackBar(SnackBar(
-                content: Text('เลือกบริษัท: ${user.company}'),
-              ));
-          },
+                    ScaffoldMessenger.of(context)
+                      ..removeCurrentSnackBar()
+                      ..showSnackBar(SnackBar(
+                        content: Text('เลือกบริษัท: ${user.company}'),
+                      ));
+                  },
+                ),
+              ),
+              IconButton(
+                onPressed: () {},
+                icon: Icon(Icons.location_on_outlined, color: PrimaryColor),
+              )
+            ],
+          ),
         ),
       ),
     );
