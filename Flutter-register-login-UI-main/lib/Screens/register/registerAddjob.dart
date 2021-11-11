@@ -185,138 +185,154 @@ class _RegisterAddjobScreenState extends State<RegisterAddjobScreen> {
               ),
               // matching
               Container(
-                  alignment: Alignment.center,
-                  margin: EdgeInsets.symmetric(horizontal: 40),
-                  child: Column(
-                    children: <Widget>[
-                      const Divider(indent: 20),
-                      SmartSelect<String>.multiple(
-                        title: 'งานที่สนใจ',
-                        selectedValue: _smartphone,
-                        onChange: (selected) {
-                          setState(() => _smartphone = selected.title);
-                        },
-                        choiceType: S2ChoiceType.chips,
-                        choiceItems: S2Choice.listFrom<String, Map>(
-                          source: choices.smartphones,
-                          value: (index, item) => item['id'],
-                          title: (index, item) => item['name'],
-                        ),
-                        choiceStyle: S2ChoiceStyle(outlined: true),
-                        choiceActiveStyle: S2ChoiceStyle(outlined: true),
-                        modalConfig: S2ModalConfig(
-                          type: S2ModalType.bottomSheet,
-                          useFilter: true,
-                          maxHeightFactor: .7,
-                        ),
-                        tileBuilder: (context, state) {
-                          return S2Tile.fromState(
-                            state,
-                            isTwoLine: true,
-                          );
-                        },
+                alignment: Alignment.center,
+                margin: EdgeInsets.symmetric(horizontal: 40),
+                child: Column(
+                  children: <Widget>[
+                    const Divider(indent: 20),
+                    SmartSelect<String>.multiple(
+                      title: 'ประเภทงานที่รับสมัคร',
+                      selectedValue: _smartphone,
+                      onChange: (selected) {
+                        setState(() => _smartphone = selected.title);
+                      },
+                      choiceType: S2ChoiceType.chips,
+                      choiceItems: S2Choice.listFrom<String, Map>(
+                        source: choices.smartphones,
+                        value: (index, item) => item['id'],
+                        title: (index, item) => item['name'],
                       ),
-                    ],
-                  ),
+                      choiceStyle: S2ChoiceStyle(outlined: true),
+                      choiceActiveStyle: S2ChoiceStyle(outlined: true),
+                      modalConfig: S2ModalConfig(
+                        type: S2ModalType.bottomSheet,
+                        useFilter: true,
+                        maxHeightFactor: .7,
+                      ),
+                      tileBuilder: (context, state) {
+                        return S2Tile.fromState(
+                          state,
+                          isTwoLine: true,
+                        );
+                      },
+                    ),
+                  ],
                 ),
+              ),
               SizedBox(height: size.height * 0.01),
               Container(
                 alignment: Alignment.centerRight,
                 margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
                 child: RaisedButton(
                   onPressed: () async {
-                    username.currentState.save();
-                    password.currentState.save();
-                    confirmpassword.currentState.save();
-                    email.currentState.save();
-                    tel.currentState.save();
-                    job_id.currentState.save();
-                    fullname.currentState.save();
-                    if (register.username == "") {
-                      showDialog(
-                          context: context,
-                          builder: (BuildContext context) => AlertMessage(
-                              "แจ้งเตือน", "กรุณากรอกบัญชีผู้ใช้", null));
-                    } else {
-                      if (register.password == "") {
+                    try {
+                      username.currentState.save();
+                      password.currentState.save();
+                      confirmpassword.currentState.save();
+                      email.currentState.save();
+                      tel.currentState.save();
+                      job_id.currentState.save();
+                      fullname.currentState.save();
+                      if (register.username == "") {
                         showDialog(
                             context: context,
-                            builder: (_) => AlertMessage(
-                                "แจ้งเตือน", "กรุณากรอกรหัสผ่าน", null));
+                            builder: (BuildContext context) => AlertMessage(
+                                "แจ้งเตือน", "กรุณากรอกบัญชีผู้ใช้", null));
                       } else {
-                        if (register.fullname == "") {
+                        if (register.password == "") {
                           showDialog(
                               context: context,
                               builder: (_) => AlertMessage(
-                                  "แจ้งเตือน", "กรุณากรอกชื่อบริษัท", null));
+                                  "แจ้งเตือน", "กรุณากรอกรหัสผ่าน", null));
                         } else {
-                          if (register.job_id == "") {
+                          if (register.fullname == "") {
                             showDialog(
                                 context: context,
-                                builder: (_) => AlertMessage("แจ้งเตือน",
-                                    "กรุณากรอกเลขประจำตัวผู้เสียภาษี", null));
+                                builder: (_) => AlertMessage(
+                                    "แจ้งเตือน", "กรุณากรอกชื่อบริษัท", null));
                           } else {
-                            if (register.email == "") {
+                            if (register.job_id == "") {
                               showDialog(
                                   context: context,
-                                  builder: (_) => AlertMessage(
-                                      "แจ้งเตือน", "กรุณากรอกอีเมล", null));
+                                  builder: (_) => AlertMessage("แจ้งเตือน",
+                                      "กรุณากรอกเลขประจำตัวผู้เสียภาษี", null));
                             } else {
-                              if (register.tel == "") {
+                              if (register.email == "") {
                                 showDialog(
                                     context: context,
-                                    builder: (_) => AlertMessage("แจ้งเตือน",
-                                        "กรุณากรอกเบอร์โทรศัพท์", null));
+                                    builder: (_) => AlertMessage(
+                                        "แจ้งเตือน", "กรุณากรอกอีเมล", null));
                               } else {
-                                if (register.password !=
-                                    register.confirmpassword) {
+                                if (register.tel == "") {
                                   showDialog(
                                       context: context,
                                       builder: (_) => AlertMessage("แจ้งเตือน",
-                                          "กรอกรหัสผ่านไม่ตรงกัน", null));
+                                          "กรุณากรอกเบอร์โทรศัพท์", null));
                                 } else {
-                                  username.currentState.reset();
-                                  password.currentState.reset();
-                                  confirmpassword.currentState.reset();
-                                  fullname.currentState.reset();
-                                  job_id.currentState.reset();
-                                  email.currentState.reset();
-                                  tel.currentState.reset();
-                                  final String status = await RegisterEmployer(
-                                      register.email,
-                                      register.fullname,
-                                      register.job_id,
-                                      register.tel,
-                                      register.username,
-                                      register.password,
-                                      _smartphone);
-                                  if (status == "เพิ่มบัญชีสำเร็จ") {
-                                    final String result = await JobCrate(register.job_id,register.fullname);
-                                    if(result == "เพิ่มงานสำเร็จ"){
+                                  if (register.password !=
+                                      register.confirmpassword) {
+                                    showDialog(
+                                        context: context,
+                                        builder: (_) => AlertMessage(
+                                            "แจ้งเตือน",
+                                            "กรอกรหัสผ่านไม่ตรงกัน",
+                                            null));
+                                  } else {
+                                    if (_smartphone.length <= 0) {
                                       showDialog(
                                         context: context,
                                         builder: (_) => AlertMessage(
                                             "แจ้งเตือน",
-                                            "สมัครสามาชิกรเรียบร้อยแล้ว",
-                                            MyApp()),
+                                            "กรุณาเลือกประเภทงานที่รับสมัคร",
+                                            null),
                                       );
                                     } else {
-                                      showDialog(
-                                      context: context,
-                                      builder: (_) => AlertMessage(
-                                          "แจ้งเตือน",
-                                          "การสมัครสมาชิกปิดปรับปรุงเนื่องจาก server มีปัญหา โปรดลองใหม่ภายหลัง",
-                                          null),
-                                    );
+                                      username.currentState.reset();
+                                      password.currentState.reset();
+                                      confirmpassword.currentState.reset();
+                                      fullname.currentState.reset();
+                                      job_id.currentState.reset();
+                                      email.currentState.reset();
+                                      tel.currentState.reset();
+                                      final String status =
+                                          await RegisterEmployer(
+                                              register.email,
+                                              register.fullname,
+                                              register.job_id,
+                                              register.tel,
+                                              register.username,
+                                              register.password,
+                                              _smartphone);
+                                      if (status == "เพิ่มบัญชีสำเร็จ") {
+                                        final String result = await JobCrate(
+                                            register.job_id, register.fullname);
+                                        if (result == "เพิ่มงานสำเร็จ") {
+                                          showDialog(
+                                            context: context,
+                                            builder: (_) => AlertMessage(
+                                                "แจ้งเตือน",
+                                                "สมัครสามาชิกรเรียบร้อยแล้ว",
+                                                MyApp()),
+                                          );
+                                        } else {
+                                          showDialog(
+                                            context: context,
+                                            builder: (_) => AlertMessage(
+                                                "แจ้งเตือน",
+                                                "การสมัครสมาชิกปิดปรับปรุงเนื่องจาก server มีปัญหา โปรดลองใหม่ภายหลัง",
+                                                null),
+                                          );
+                                        }
+                                      } else {
+                                        showDialog(
+                                          context: context,
+                                          builder: (_) => AlertMessage(
+                                              "แจ้งเตือน",
+                                              "การสมัครสมาชิกปิดปรับปรุงเนื่องจาก server มีปัญหา โปรดลองใหม่ภายหลัง",
+                                              null),
+                                        );
+                                      }
                                     }
-                                  } else {
-                                    showDialog(
-                                      context: context,
-                                      builder: (_) => AlertMessage(
-                                          "แจ้งเตือน",
-                                          "การสมัครสมาชิกปิดปรับปรุงเนื่องจาก server มีปัญหา โปรดลองใหม่ภายหลัง",
-                                          null),
-                                    );
                                   }
                                 }
                               }
@@ -324,6 +340,12 @@ class _RegisterAddjobScreenState extends State<RegisterAddjobScreen> {
                           }
                         }
                       }
+                    } catch (e) {
+                      showDialog(
+                        context: context,
+                        builder: (_) => AlertMessage("แจ้งเตือน",
+                            "กรุณาเลือกประเภทงานที่รับสมัคร", null),
+                      );
                     }
                   },
                   shape: RoundedRectangleBorder(
@@ -353,9 +375,7 @@ class _RegisterAddjobScreenState extends State<RegisterAddjobScreen> {
                 alignment: Alignment.centerRight,
                 margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
                 child: GestureDetector(
-                  onTap: () => {
-                    Navigator.pop(context)
-                  },
+                  onTap: () => {Navigator.pop(context)},
                   child: Text(
                     "มีบัญชีอยู่แล้ว / เข้าสู่ระบบ",
                     style: TextStyle(

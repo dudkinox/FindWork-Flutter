@@ -174,75 +174,92 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 SizedBox(height: size.height * 0.01),
                 RaisedButton(
                   onPressed: () async {
-                    username.currentState.save();
-                    password.currentState.save();
-                    confirmpassword.currentState.save();
-                    email.currentState.save();
-                    tel.currentState.save();
-                    if (register.username == "") {
-                      showDialog(
-                          context: context,
-                          builder: (BuildContext context) => AlertMessage(
-                              "แจ้งเตือน", "กรุณากรอกบัญชีผู้ใช้", null));
-                    } else {
-                      if (register.password == "") {
+                    try {
+                      username.currentState.save();
+                      password.currentState.save();
+                      confirmpassword.currentState.save();
+                      email.currentState.save();
+                      tel.currentState.save();
+                      if (register.username == "") {
                         showDialog(
                             context: context,
-                            builder: (_) => AlertMessage(
-                                "แจ้งเตือน", "กรุณากรอกรหัสผ่าน", null));
+                            builder: (BuildContext context) => AlertMessage(
+                                "แจ้งเตือน", "กรุณากรอกบัญชีผู้ใช้", null));
                       } else {
-                        if (register.email == "") {
+                        if (register.password == "") {
                           showDialog(
                               context: context,
                               builder: (_) => AlertMessage(
-                                  "แจ้งเตือน", "กรุณากรอกอีเมล์", null));
+                                  "แจ้งเตือน", "กรุณากรอกรหัสผ่าน", null));
                         } else {
-                          if (register.tel == "") {
+                          if (register.email == "") {
                             showDialog(
                                 context: context,
-                                builder: (_) => AlertMessage("แจ้งเตือน",
-                                    "กรุณากรอกเบอร์โทรศัพท์", null));
+                                builder: (_) => AlertMessage(
+                                    "แจ้งเตือน", "กรุณากรอกอีเมล์", null));
                           } else {
-                            if (register.password != register.confirmpassword) {
+                            if (register.tel == "") {
                               showDialog(
                                   context: context,
                                   builder: (_) => AlertMessage("แจ้งเตือน",
-                                      "กรอกรหัสผ่านไม่ตรงกัน", null));
+                                      "กรุณากรอกเบอร์โทรศัพท์", null));
                             } else {
-                              username.currentState.reset();
-                              password.currentState.reset();
-                              confirmpassword.currentState.reset();
-                              email.currentState.reset();
-                              tel.currentState.reset();
-                              final String status = await RegisterEmployee(
-                                register.email,
-                                register.username,
-                                register.tel,
-                                register.username,
-                                register.password,
-                                _smartphone,
-                              );
-                              if (status == "เพิ่มบัญชีสำเร็จ") {
+                              if (register.password !=
+                                  register.confirmpassword) {
                                 showDialog(
-                                  context: context,
-                                  builder: (_) => AlertMessage(
-                                      "แจ้งเตือน",
-                                      "สมัครสามาชิกรเรียบร้อยแล้ว",
-                                      LoginScreen()),
-                                );
+                                    context: context,
+                                    builder: (_) => AlertMessage("แจ้งเตือน",
+                                        "กรอกรหัสผ่านไม่ตรงกัน", null));
                               } else {
-                                showDialog(
-                                  context: context,
-                                  builder: (_) => AlertMessage(
-                                      "แจ้งเตือน",
-                                      "การสมัครสมาชิกปิดปรับปรุงเนื่องจาก server มีปัญหา โปรดลองใหม่ภายหลัง",
-                                      null),
-                                );
+                                if (_smartphone.length <= 0) {
+                                  showDialog(
+                                    context: context,
+                                    builder: (_) => AlertMessage("แจ้งเตือน",
+                                        "กรุณาเลือกงานที่สนใจ", null),
+                                  );
+                                } else {
+                                  username.currentState.reset();
+                                  password.currentState.reset();
+                                  confirmpassword.currentState.reset();
+                                  email.currentState.reset();
+                                  tel.currentState.reset();
+                                  final String status = await RegisterEmployee(
+                                    register.email,
+                                    register.username,
+                                    register.tel,
+                                    register.username,
+                                    register.password,
+                                    _smartphone,
+                                  );
+                                  if (status == "เพิ่มบัญชีสำเร็จ") {
+                                    showDialog(
+                                      context: context,
+                                      builder: (_) => AlertMessage(
+                                          "แจ้งเตือน",
+                                          "สมัครสามาชิกรเรียบร้อยแล้ว",
+                                          LoginScreen()),
+                                    );
+                                  } else {
+                                    showDialog(
+                                      context: context,
+                                      builder: (_) => AlertMessage(
+                                          "แจ้งเตือน",
+                                          "การสมัครสมาชิกปิดปรับปรุงเนื่องจาก server มีปัญหา โปรดลองใหม่ภายหลัง",
+                                          null),
+                                    );
+                                  }
+                                }
                               }
                             }
                           }
                         }
                       }
+                    } catch (e) {
+                      showDialog(
+                        context: context,
+                        builder: (_) => AlertMessage(
+                            "แจ้งเตือน", "กรุณาเลือกงานที่สนใจ", null),
+                      );
                     }
                   },
                   shape: RoundedRectangleBorder(
