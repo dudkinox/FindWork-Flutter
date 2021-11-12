@@ -21,7 +21,7 @@ Future<List<JobDataModel>> Progress(String token) async {
 }
 
 Future<List<AccountModel>> RegisProgress(String token) async {
-  final String url = Host + "/api/progress/register/" + token;
+  final String url = Host + "/api/progress/recheck/" + token;
   final response = await http.get(
     Uri.parse(url),
     headers: <String, String>{

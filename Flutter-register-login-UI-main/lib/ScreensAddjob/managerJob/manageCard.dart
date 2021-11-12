@@ -14,7 +14,6 @@ class Itemcard extends StatefulWidget {
   var name;
   var id;
   var token;
-  var status;
 
   @override
   _ItemcardState createState() =>
@@ -30,7 +29,7 @@ class _ItemcardState extends State<Itemcard> {
   var name;
   var id;
   var token;
-  var status;
+
   bool loading = false;
 
   @override
@@ -40,6 +39,7 @@ class _ItemcardState extends State<Itemcard> {
 
   @override
   Widget build(BuildContext context) {
+    print(id);
     return loading
         ? LoadingCube()
         : GestureDetector(

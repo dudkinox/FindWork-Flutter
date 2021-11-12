@@ -34,12 +34,6 @@ class _ManagerState extends State<Manager> {
           if (snapshot?.connectionState != ConnectionState.done) {
             return LoadingCube();
           } else {
-            //  FutureBuilder(
-            //    future: GetProgressID(id),
-            //    builder: (context, AsyncSnapshot snapshot) {
-                 
-            //    },);
-            
             for (AccountModel data in snapshot?.data) {
               result.add(Itemcard(data?.email, data?.fullname, data?.tel,name,data?.id,id));
             }
