@@ -362,7 +362,8 @@ class _DetailCardJobState extends State<DetailCardJob> {
                                     text_color = Danger;
                                     statusRegister = false;
                                     break;
-                                  } else {
+                                  } else if(result.jobId[i].status ==
+                                      "รอ") {
                                     text_accept = "รอการติดต่อกลับ";
                                     text_alert =
                                         "กรุณารอทางบริษัทพิจารณาและติดต่อกลับ";
