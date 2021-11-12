@@ -23,6 +23,7 @@ dependencies:
   flutter_local_notifications: ^4.0.1+2
   favorite_button: ^0.0.4
   flutter_typeahead: ^1.7.0
+  late_init: ^1.1.0
 
 dev_dependencies:
   flutter_test:
