@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:login_ui/Screens/loading.dart';
+import 'package:login_ui/ScreensAddjob/managerJob/manageControl.dart';
+import 'package:login_ui/ScreensAddjob/managerJob/manageJob.dart';
 import 'package:login_ui/ScreensAddjob/managerJob/showResume.dart';
 import 'package:login_ui/Service/ProgressService.dart';
 import 'package:login_ui/Themes/Themes.dart';
@@ -7,28 +9,30 @@ import 'package:login_ui/components/alert.dart';
 import 'package:login_ui/model/ProgressModel.dart';
 
 class Itemcard extends StatefulWidget {
-  Itemcard(this.email, this.fullname, this.tel, this.name, this.id, this.token);
+  Itemcard(this.email, this.fullname, this.tel, this.name, this.id, this.token,this.tokenJob);
   var email;
   var fullname;
   var tel;
   var name;
   var id;
   var token;
+  var tokenJob;
 
   @override
   _ItemcardState createState() =>
-      _ItemcardState(email, fullname, tel, name, id, token);
+      _ItemcardState(email, fullname, tel, name, id, token, tokenJob);
 }
 
 class _ItemcardState extends State<Itemcard> {
   _ItemcardState(
-      this.email, this.fullname, this.tel, this.name, this.id, this.token);
+      this.email, this.fullname, this.tel, this.name, this.id, this.token,this.tokenJob);
   var email;
   var fullname;
   var tel;
   var name;
   var id;
   var token;
+  var tokenJob;
 
   bool loading = false;
 
@@ -39,7 +43,6 @@ class _ItemcardState extends State<Itemcard> {
 
   @override
   Widget build(BuildContext context) {
-    print(id);
     return loading
         ? LoadingCube()
         : GestureDetector(
@@ -90,7 +93,7 @@ class _ItemcardState extends State<Itemcard> {
                   showDialog(
                     context: context,
                     builder: (_) => AlertMessage(
-                        "แจ้งเตือน", "รับสมัครผ่านเรียบร้อยแล้ว", null),
+                        "แจ้งเตือน", "รับสมัครผ่านเรียบร้อยแล้ว", HomeAdmin(tokenJob,"employer",token,name)),
                   );
                 } else {
                   showDialog(
@@ -124,7 +127,7 @@ class _ItemcardState extends State<Itemcard> {
                   showDialog(
                     context: context,
                     builder: (_) => AlertMessage(
-                        "แจ้งเตือน", "ปฏิเศษสมัครผ่านเรียบร้อยแล้ว", null),
+                        "แจ้งเตือน", "ปฏิเศษสมัครผ่านเรียบร้อยแล้ว", HomeAdmin(tokenJob,"employer",token,name)),
                   );
                 } else {
                   showDialog(

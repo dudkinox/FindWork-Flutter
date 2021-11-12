@@ -35,11 +35,11 @@ class _ManagerState extends State<Manager> {
             return LoadingCube();
           } else {
             for (AccountModel data in snapshot?.data) {
-              result.add(Itemcard(data?.email, data?.fullname, data?.tel,name,data?.id,id));
+              result.add(Itemcard(data?.email, data?.fullname, data?.tel,name,data?.id,id,token));
             }
             if (result.length == 0) {
               return RefreshIndicator(
-                onRefresh: onWillPop,
+                onRefresh: onPullToRefresh,
                 child: CustomScrollView(
                   slivers: <Widget>[
                     SliverFillRemaining(
