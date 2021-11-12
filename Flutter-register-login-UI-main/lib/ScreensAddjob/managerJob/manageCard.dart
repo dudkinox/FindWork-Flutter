@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:login_ui/ScreensAddjob/managerJob/showResume.dart';
 import 'package:login_ui/Service/ProgressService.dart';
 import 'package:login_ui/Themes/Themes.dart';
 import 'package:login_ui/model/ProgressModel.dart';
@@ -16,27 +17,33 @@ class Itemcard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        color: SecondaryColor,
-        borderRadius: BorderRadius.circular(6),
-      ),
-      child: Column(
-        children: <Widget>[
-          header(context),
-          Container(
-            width: MediaQuery.of(context).size.width * 0.67,
-            child: Column(
-              children: [
-                body(context),
-                SizedBox(height: 6),
-                footer(),
-              ],
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => showResume()));
+      },
+      child: Container(
+        padding: EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          color: SecondaryColor,
+          borderRadius: BorderRadius.circular(6),
+        ),
+        child: Column(
+          children: <Widget>[
+            header(context),
+            Container(
+              width: MediaQuery.of(context).size.width * 0.67,
+              child: Column(
+                children: [
+                  body(context),
+                  SizedBox(height: 6),
+                  footer(),
+                ],
+              ),
             ),
-          ),
-          SizedBox(height: 6),
-        ],
+            SizedBox(height: 6),
+          ],
+        ),
       ),
     );
   }
