@@ -281,6 +281,7 @@ class _DetailCardJobState extends State<DetailCardJob> {
                 SingleChildScrollView(
                     child: typeUser == "employee"
                         ? TextFormField(
+                          maxLines: 8,
                             readOnly: true,
                             keyboardType: TextInputType.multiline,
                             controller: detailCompany,
