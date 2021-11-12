@@ -365,7 +365,9 @@ class _HomeAddjobState extends State<HomeAddjob> {
                                                                   builder: (context) =>
                                                                       HomeAdmin(
                                                                           token,
-                                                                          typeUser)));
+                                                                          typeUser,
+                                                                          data?.id,
+                                                                          data?.departmentId.name[0])));
                                                         },
                                                         child: Text(
                                                           "รายชื่อผู้สมัคร",

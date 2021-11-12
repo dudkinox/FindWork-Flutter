@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:login_ui/Service/ProgressService.dart';
 import 'package:login_ui/Themes/Themes.dart';
+import 'package:login_ui/model/ProgressModel.dart';
 import 'managelistdata.dart';
 
 class Itemcard extends StatelessWidget {
-  final user person;
-  final Function press;
-  const Itemcard({
-    Key key,
-    this.person,
-    this.press,
-  }) : super(key: key);
+  Itemcard(this.email, this.fullname, this.tel, this.name, this.id, this.token);
+  var email;
+  var fullname;
+  var tel;
+  var name;
+  var id;
+  var token;
+  var status;
 
   @override
   Widget build(BuildContext context) {
@@ -43,16 +46,36 @@ class Itemcard extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        button(
-          buttonName: "ยืนยันการร้องขอ",
-          color: ButtonColor,
-          onpress: {},
+        TextButton(
+          onPressed: () async {
+            ProgressModel data = await GetProgressID(id);
+            for (var i = 0; i < data.jobId.length; i++) {
+              if (data.jobId[i].id == token) {
+                data.jobId[i].id = token;
+                data.jobId[i].status = "อนุมัติแล้ว";
+              }
+            }
+            String resultData = await AcceptProgress(id, data.jobId);
+            print(resultData);
+          },
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all(ButtonColor),
+          ),
+          child: Text(
+            "ยืนยันการร้องขอ",
+            style: TextStyle(color: Colors.white),
+          ),
         ),
         Spacer(),
-        button(
-          buttonName: "ปฏิเศษการร้องขอ",
-          color: Danger,
-          onpress: {},
+        TextButton(
+          onPressed: () {},
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all(Danger),
+          ),
+          child: Text(
+            "ปฏิเศษการร้องขอ",
+            style: TextStyle(color: Colors.white),
+          ),
         ),
       ],
     );
@@ -76,15 +99,19 @@ class Itemcard extends StatelessWidget {
       child: Column(
         children: [
           labelText(
-            label: "หมายเลขห้อง",
-            value: person.numberroom.toString(),
+            label: "ตำแหน่ง: ",
+            value: name,
           ),
           SizedBox(
-            width: 80,
+            width: 20,
           ),
           labelText(
-            label: "วันที่ยื่นคำร้อง",
-            value: person.date,
+            label: "อีเมลย์: ",
+            value: email,
+          ),
+          labelText(
+            label: "เบอร์ติดต่อ: ",
+            value: tel,
           ),
         ],
       ),
@@ -94,11 +121,21 @@ class Itemcard extends StatelessWidget {
   Widget labelText({String label, String value}) {
     return Row(
       children: [
-        Text(label),
-        SizedBox(
-          width: 80,
+        Text(
+          label,
+          overflow: TextOverflow.ellipsis,
         ),
-        Text(value),
+        SizedBox(
+          width: 10,
+        ),
+        Expanded(
+          child: Text(
+            value,
+            overflow: TextOverflow.fade,
+            maxLines: 1,
+            softWrap: false,
+          ),
+        )
       ],
     );
   }
@@ -113,33 +150,16 @@ class Itemcard extends StatelessWidget {
         ),
         SizedBox(width: 8),
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              person.name,
+              "ชื่อคุณ: " + fullname,
               style: TextStyle(fontSize: 18),
-            ),
-            Text(
-              person.date,
-              style: TextStyle(fontSize: 14),
             ),
           ],
         ),
         SizedBox(height: 8),
       ],
-    );
-  }
-
-  Widget button({String buttonName, Color color, void onpress}) {
-    return TextButton(
-      onPressed: () => onpress,
-      style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all(color),
-      ),
-      child: Text(
-        buttonName,
-        style: TextStyle(color: Colors.white),
-      ),
     );
   }
 }

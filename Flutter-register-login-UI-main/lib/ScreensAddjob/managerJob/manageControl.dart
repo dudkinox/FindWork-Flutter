@@ -5,18 +5,21 @@ import 'package:login_ui/Themes/Themes.dart';
 import 'manageJob.dart';
 
 class HomeAdmin extends StatefulWidget {
-  HomeAdmin(this.token,this.typeUser);
+  HomeAdmin(this.token,this.typeUser,this.id_job,this.name_job);
   var token;
   var typeUser;
-
+  var id_job;
+  var name_job;
   @override
-  _HomeAdminState createState() => _HomeAdminState(token,typeUser);
+  _HomeAdminState createState() => _HomeAdminState(token,typeUser,id_job,name_job);
 }
 
 class _HomeAdminState extends State<HomeAdmin> {
-  _HomeAdminState(this.token,this.typeUser);
+  _HomeAdminState(this.token,this.typeUser,this.id_job,this.name_job);
   var token;
   var typeUser;
+  var id_job;
+  var name_job;
   final InfiniteScrollController _infiniteController = InfiniteScrollController(
     initialScrollOffset: 0.0,
   );
@@ -43,7 +46,7 @@ class _HomeAdminState extends State<HomeAdmin> {
         ),
         body: TabBarView(
           children: <Widget>[
-            Manager(),
+            Manager(id_job,name_job,token),
           ],
         ),
       ),

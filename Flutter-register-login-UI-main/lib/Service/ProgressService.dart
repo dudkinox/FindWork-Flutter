@@ -6,6 +6,7 @@ import 'package:login_ui/Database/Host.dart';
 import 'package:login_ui/model/ProgressModel.dart';
 import 'package:login_ui/model/jobModel.dart';
 import 'package:http/http.dart' as http;
+import 'package:login_ui/model/loginModel.dart';
 
 Future<List<JobDataModel>> Progress(String token) async {
   final String url = Host + "/api/progress/" + token;
@@ -17,6 +18,18 @@ Future<List<JobDataModel>> Progress(String token) async {
   );
   List jsonResponse = json.decode(response?.body);
   return jsonResponse.map((data) => new JobDataModel.fromJson(data)).toList();
+}
+
+Future<List<AccountModel>> RegisProgress(String token) async {
+  final String url = Host + "/api/progress/register/" + token;
+  final response = await http.get(
+    Uri.parse(url),
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+  );
+  List jsonResponse = json.decode(response?.body);
+  return jsonResponse.map((data) => new AccountModel.fromJson(data)).toList();
 }
 
 Future<dynamic> GetProgressID(String token) async {
@@ -35,6 +48,59 @@ Future<dynamic> GetProgressID(String token) async {
 }
 
 Future<String> AddProgress(String token, String job_id) async {
+  try {
+    final String url = Host + "/api/progress";
+    final response = await http.put(
+      Uri.parse(url),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, dynamic>{
+        "id_user": token,
+        "job_id": [
+            {
+                "id": job_id,
+                "status": "รอ"
+            }
+        ]
+}),
+    );
+    if (response.statusCode == 400) {
+      var err = json.decode(json.encode(response.body));
+      return err;
+    }
+    var data = json.decode(json.encode(response.body));
+    return data;
+  } catch (e) {
+    print(e);
+  }
+}
+
+Future<String> AcceptProgress(String token, var job_id) async {
+  try {
+    final String url = Host + "/api/progress/"+ token;
+    final response = await http.put(
+      Uri.parse(url),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, dynamic>{
+        "id_user": token,
+        "job_id": job_id
+}),
+    );
+    if (response.statusCode == 400) {
+      var err = json.decode(json.encode(response.body));
+      return err;
+    }
+    var data = json.decode(json.encode(response.body));
+    return data;
+  } catch (e) {
+    print(e);
+  }
+}
+
+Future<String> RejectProgress(String token, String job_id) async {
   try {
     final String url = Host + "/api/progress";
     final response = await http.put(
