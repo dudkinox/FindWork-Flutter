@@ -335,15 +335,41 @@ class _DetailCardJobState extends State<DetailCardJob> {
                         future: GetProgressID(token),
                         builder: (context, snapshot) {
                           bool statusRegister = true;
+                          var text_accept = "";
+                          var text_alert = "";
+                          var text_color;
                           if (snapshot?.connectionState !=
                               ConnectionState.done) {
-                            return Text("");
+                            return LoadingRipple();
                           } else {
                             var result = snapshot?.data;
                             if (result != "ไม่พบ") {
                               for (var i = 0; i < result.jobId.length; i++) {
                                 if (result.jobId[i].id == id_job) {
-                                  statusRegister = false;
+                                  if (result.jobId[i].status == "อนุมัติ") {
+                                    text_accept =
+                                        "บริษัทได้รับอนุมัติการสมัครของคุณแล้ว";
+                                    text_alert = "บริษัทได้รับคุณเข้าทำงานแล้ว";
+                                    text_color = Color(0xFF278E95);
+                                    statusRegister = false;
+                                    break;
+                                  } else if (result.jobId[i].status ==
+                                      "ปฏิเสธ") {
+                                    text_accept =
+                                        "บริษัทปฏิเสธการสมัครของคุณแล้ว";
+                                    text_alert =
+                                        "บริษัทได้ปฏิเศษการสมัครของคุณ กรุณาติดต่อบริษัทเพื่อสอบถาม";
+                                    text_color = Danger;
+                                    statusRegister = false;
+                                    break;
+                                  } else {
+                                    text_accept = "รอการติดต่อกลับ";
+                                    text_alert =
+                                        "กรุณารอทางบริษัทพิจารณาและติดต่อกลับ";
+                                        text_color = Colors.white38;
+                                    statusRegister = false;
+                                    break;
+                                  }
                                   break;
                                 }
                               }
@@ -378,12 +404,16 @@ class _DetailCardJobState extends State<DetailCardJob> {
                                                     20.0)),
                                       )
                                     : RaisedButton(
-                                        child: new Text(
-                                          "รอการติดต่อกลับ",
-                                          style: TextStyle(color: NoneColor),
-                                        ),
+                                        child: new Text(text_accept),
                                         textColor: Colors.white,
-                                        color: Danger,
+                                        color: text_color,
+                                        onPressed: () {
+                                          showDialog(
+                                            context: context,
+                                            builder: (_) => AlertMessage(
+                                                "แจ้งเตือน", text_alert, null),
+                                          );
+                                        },
                                         shape: new RoundedRectangleBorder(
                                             borderRadius:
                                                 new BorderRadius.circular(
