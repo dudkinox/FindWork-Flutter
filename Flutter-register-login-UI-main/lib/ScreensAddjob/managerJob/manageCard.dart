@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:login_ui/Screens/loading.dart';
 import 'package:login_ui/ScreensAddjob/managerJob/showResume.dart';
 import 'package:login_ui/Service/ProgressService.dart';
 import 'package:login_ui/Themes/Themes.dart';
+import 'package:login_ui/components/alert.dart';
 import 'package:login_ui/model/ProgressModel.dart';
-import 'managelistdata.dart';
 
-class Itemcard extends StatelessWidget {
+class Itemcard extends StatefulWidget {
   Itemcard(this.email, this.fullname, this.tel, this.name, this.id, this.token);
   var email;
   var fullname;
@@ -16,54 +17,91 @@ class Itemcard extends StatelessWidget {
   var status;
 
   @override
+  _ItemcardState createState() =>
+      _ItemcardState(email, fullname, tel, name, id, token);
+}
+
+class _ItemcardState extends State<Itemcard> {
+  _ItemcardState(
+      this.email, this.fullname, this.tel, this.name, this.id, this.token);
+  var email;
+  var fullname;
+  var tel;
+  var name;
+  var id;
+  var token;
+  var status;
+  bool loading = false;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => showResume()));
-      },
-      child: Container(
-        padding: EdgeInsets.all(10),
-        decoration: BoxDecoration(
-          color: SecondaryColor,
-          borderRadius: BorderRadius.circular(6),
-        ),
-        child: Column(
-          children: <Widget>[
-            header(context),
-            Container(
-              width: MediaQuery.of(context).size.width * 0.67,
+    return loading
+        ? LoadingCube()
+        : GestureDetector(
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => showResume(id)));
+            },
+            child: Container(
+              padding: EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: SecondaryColor,
+                borderRadius: BorderRadius.circular(6),
+              ),
               child: Column(
-                children: [
-                  body(context),
+                children: <Widget>[
+                  header(context),
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.67,
+                    child: Column(
+                      children: [
+                        body(context),
+                        SizedBox(height: 6),
+                        footer(context),
+                      ],
+                    ),
+                  ),
                   SizedBox(height: 6),
-                  footer(),
                 ],
               ),
             ),
-            SizedBox(height: 6),
-          ],
-        ),
-      ),
-    );
+          );
   }
 
-  Widget footer() {
+  Widget footer(context) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         TextButton(
           onPressed: () async {
+            setState(() => loading = true);
             ProgressModel data = await GetProgressID(id);
             for (var i = 0; i < data.jobId.length; i++) {
               if (data.jobId[i].id == token) {
-                data.jobId[i].id = token;
-                data.jobId[i].status = "อนุมัติแล้ว";
+                String resultData =
+                    await StatusProgress(id, 1.toString(), i.toString());
+                if (resultData == "แก้ไขข้อมูลแล้ว") {
+                  showDialog(
+                    context: context,
+                    builder: (_) => AlertMessage(
+                        "แจ้งเตือน", "รับสมัครผ่านเรียบร้อยแล้ว", null),
+                  );
+                } else {
+                  showDialog(
+                    context: context,
+                    builder: (_) => AlertMessage("แจ้งเตือน",
+                        "เซิฟเวอร์เกิดข้อผิดพลาด โปรดลองใหม่ภายหลัง", null),
+                  );
+                }
+                setState(() => loading = false);
               }
             }
-            String resultData = await AcceptProgress(id, data.jobId);
-            print(resultData);
           },
           style: ButtonStyle(
             backgroundColor: MaterialStateProperty.all(ButtonColor),
@@ -75,7 +113,30 @@ class Itemcard extends StatelessWidget {
         ),
         Spacer(),
         TextButton(
-          onPressed: () {},
+          onPressed: () async {
+            setState(() => loading = true);
+            ProgressModel data = await GetProgressID(id);
+            for (var i = 0; i < data.jobId.length; i++) {
+              if (data.jobId[i].id == token) {
+                String resultData =
+                    await StatusProgress(id, 0.toString(), i.toString());
+                if (resultData == "แก้ไขข้อมูลแล้ว") {
+                  showDialog(
+                    context: context,
+                    builder: (_) => AlertMessage(
+                        "แจ้งเตือน", "ปฏิเศษสมัครผ่านเรียบร้อยแล้ว", null),
+                  );
+                } else {
+                  showDialog(
+                    context: context,
+                    builder: (_) => AlertMessage("แจ้งเตือน",
+                        "เซิฟเวอร์เกิดข้อผิดพลาด โปรดลองใหม่ภายหลัง", null),
+                  );
+                }
+                setState(() => loading = false);
+              }
+            }
+          },
           style: ButtonStyle(
             backgroundColor: MaterialStateProperty.all(Danger),
           ),

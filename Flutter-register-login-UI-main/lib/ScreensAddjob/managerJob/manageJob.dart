@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:login_ui/Screens/loading.dart';
 import 'package:login_ui/Service/ProgressService.dart';
 import 'package:login_ui/components/WillPop.dart';
+import 'package:login_ui/model/ProgressModel.dart';
 import 'package:login_ui/model/loginModel.dart';
 import 'manageCard.dart';
 
@@ -33,6 +34,12 @@ class _ManagerState extends State<Manager> {
           if (snapshot?.connectionState != ConnectionState.done) {
             return LoadingCube();
           } else {
+            //  FutureBuilder(
+            //    future: GetProgressID(id),
+            //    builder: (context, AsyncSnapshot snapshot) {
+                 
+            //    },);
+            
             for (AccountModel data in snapshot?.data) {
               result.add(Itemcard(data?.email, data?.fullname, data?.tel,name,data?.id,id));
             }
