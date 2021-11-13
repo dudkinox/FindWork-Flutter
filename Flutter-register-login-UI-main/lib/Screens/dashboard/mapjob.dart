@@ -14,28 +14,16 @@ class _MapJobState extends State<MapJob> {
   Set<Marker> _markers = {};
   BitmapDescriptor mapMarker;
 
-  @override
-  void initState() {
-    super.initState();
-    setCustomMarker();
-  }
-
-  void setCustomMarker() async{
-    // mapMarker = await BitmapDescriptor.fromAssetImage(ImageConfiguration(),'');
-  }
-
   void _onMapCreated(GoogleMapController controller) {
     setState(() {
       _markers.add(
         Marker(
-          markerId: MarkerId('1'),
-          position: LatLng(13.784749, 100.630561),
-          // icon: mapMarker,
-          infoWindow: InfoWindow(
-            title: 'Test',
-            snippet: 'A',
-          ),
-        ),
+            markerId: MarkerId('1'),
+            position: LatLng(13.784749, 100.630561),
+            // icon: mapMarker,
+            onTap: () {
+              setState(() {});
+            }),
       );
     });
     mapController = controller;
@@ -57,11 +45,9 @@ class _MapJobState extends State<MapJob> {
       appBar: AppBar(
         title: Text("ค้นหางานใกล้ตัวคุณ"),
         leading: IconButton(
-            icon: Icon(Icons.arrow_back_ios, color: Colors.black),
-            onPressed: () => {
-              
-            },
-          ),
+          icon: Icon(Icons.arrow_back_ios, color: Colors.black),
+          onPressed: () => {},
+        ),
         actions: [
           TextButton.icon(
             style: TextButton.styleFrom(
@@ -93,14 +79,24 @@ class _MapJobState extends State<MapJob> {
         future: _getLocation(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.hasData) {
-            return GoogleMap(
-              mapType: MapType.normal,
-              onMapCreated: _onMapCreated,
-              markers: _markers,
-              myLocationEnabled: true,
-              initialCameraPosition: CameraPosition(
-                  target: LatLng(userLocation.latitude, userLocation.longitude),
-                  zoom: 15),
+            return Scaffold(
+              body: Stack(
+                children: <Widget>[
+                  GoogleMap(
+                    mapType: MapType.normal,
+                    onMapCreated: _onMapCreated,
+                    markers: _markers,
+                    myLocationEnabled: true,
+                    initialCameraPosition: CameraPosition(
+                        target: LatLng(
+                            userLocation.latitude, userLocation.longitude),
+                        zoom: 15),
+                  ),
+                  AnimatedPositioned(
+                      child: Text("data"),
+                      duration: Duration(milliseconds: 200))
+                ],
+              ),
             );
           } else {
             return Center(
