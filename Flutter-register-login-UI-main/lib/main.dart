@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:login_ui/Screens/dashboard/mapjob.dart';
 import 'package:login_ui/components/WillPop.dart';
 import 'Screens/login/login.dart';
 import 'Themes/Themes.dart';
@@ -18,7 +19,6 @@ Future<void> main() async {
   runApp(MyApp());
 }
 
-
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -33,6 +33,7 @@ class MyApp extends StatelessWidget {
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         home: LoginScreen(),
+        // home: MapJob()
       ),
     );
   }

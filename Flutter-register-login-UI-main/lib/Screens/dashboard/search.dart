@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:login_ui/Animation/Fade_Animation.dart';
+import 'package:login_ui/Screens/dashboard/mapjob.dart';
 import 'package:login_ui/Themes/Themes.dart';
 import 'package:login_ui/components/image.dart';
 import 'package:login_ui/model/SearchModel.dart';
@@ -80,7 +81,9 @@ class Search extends StatelessWidget {
                 ),
               ),
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(context,MaterialPageRoute(builder: (context) => MapJob()));
+                },
                 icon: Icon(Icons.location_on_outlined, color: PrimaryColor),
               )
             ],
