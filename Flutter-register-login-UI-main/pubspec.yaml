@@ -6,7 +6,7 @@ publish_to: "none"
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -24,9 +24,10 @@ dependencies:
   favorite_button: ^0.0.4
   flutter_typeahead: ^1.7.0
   late_init: ^1.1.0
-  geolocator: ^6.2.1
-  google_maps_flutter: ^2.0.2
-  flutter_polyline_points: ^0.2.6
+  geolocator: ^5.1.5
+  permission_handler: ^3.0.1
+  google_maps_flutter: ^0.5.19
+  
 
 
 
