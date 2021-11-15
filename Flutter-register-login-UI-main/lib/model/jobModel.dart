@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'dart:ffi';
 
 JobDataModel jobDataModelFromJson(String str) =>
     JobDataModel.fromJson(json.decode(str));

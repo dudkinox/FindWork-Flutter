@@ -33,8 +33,8 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: NoneColor,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        // home: LoginScreen(),
-        home: MapJob()
+        home: LoginScreen(),
+        // home: MapJob()
       ),
     );
   }

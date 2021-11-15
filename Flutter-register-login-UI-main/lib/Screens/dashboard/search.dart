@@ -82,7 +82,7 @@ class Search extends StatelessWidget {
               ),
               IconButton(
                 onPressed: () {
-                  Navigator.push(context,MaterialPageRoute(builder: (context) => MapJob()));
+                  Navigator.push(context,MaterialPageRoute(builder: (context) => MapJob(token , typeUser)));
                 },
                 icon: Icon(Icons.location_on_outlined, color: PrimaryColor),
               )
