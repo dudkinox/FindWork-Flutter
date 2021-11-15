@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:login_ui/Animation/Fade_Animation.dart';
 
@@ -46,6 +47,8 @@ class EditingCompany extends StatefulWidget {
   final TextEditingController title_province = new TextEditingController();
   final TextEditingController title_district = new TextEditingController();
   final TextEditingController title_subDistrict = new TextEditingController();
+  final TextEditingController lat = new TextEditingController();
+  final TextEditingController lng = new TextEditingController();
 
   final TextEditingController fullname = new TextEditingController();
   final TextEditingController email = new TextEditingController();
@@ -93,6 +96,8 @@ class MapScreenState extends State<EditingCompany>
   var title_province = new TextEditingController();
   var title_district = new TextEditingController();
   var title_subDistrict = new TextEditingController();
+  var lat = new TextEditingController();
+  var lng = new TextEditingController();
 
   File file;
 
@@ -105,6 +110,19 @@ class MapScreenState extends State<EditingCompany>
   }
 
   bool loading = false;
+
+  Position userLocation;
+  Future<Position> _getLocation() async {
+    try {
+      userLocation = await Geolocator()
+          .getCurrentPosition(desiredAccuracy: LocationAccuracy.best);
+          lat.text = userLocation.latitude.toString();
+          lng.text = userLocation.longitude.toString();
+    } catch (e) {
+      userLocation = null;
+    }
+    return userLocation;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -425,8 +443,22 @@ class MapScreenState extends State<EditingCompany>
                                                       fontWeight:
                                                           FontWeight.bold),
                                                 ),
+                                                
                                               ],
                                             ),
+                                            Column(
+                                              children: [
+                                                
+                                                TextButton(
+                                                  onPressed: _status ? null : () {
+                                                    _getLocation();
+                                                  },
+                                                  child: Text("เลือกตำแหน่งปัจจุบัน"),
+                                                  
+                                                  )
+                                              ],
+                                              
+                                            )
                                           ],
                                         )),
                                     Padding(
@@ -460,7 +492,7 @@ class MapScreenState extends State<EditingCompany>
                                         children: <Widget>[
                                           new Flexible(
                                             child: TextField(
-                                              // controller: ,
+                                              controller: lat,
                                               inputFormatters: <
                                                   TextInputFormatter>[
                                                 FilteringTextInputFormatter
@@ -509,7 +541,7 @@ class MapScreenState extends State<EditingCompany>
                                         children: <Widget>[
                                           new Flexible(
                                             child: TextField(
-                                              // controller: ,
+                                              controller: lng,
                                               inputFormatters: <
                                                   TextInputFormatter>[
                                                 FilteringTextInputFormatter
@@ -915,4 +947,6 @@ class MapScreenState extends State<EditingCompany>
       },
     );
   }
+
+  
 }
