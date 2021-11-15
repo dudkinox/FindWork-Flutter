@@ -5,6 +5,7 @@ import 'package:login_ui/Screens/loading.dart';
 import 'package:login_ui/Service/JobService.dart';
 import 'package:login_ui/Service/locaitonService.dart';
 import 'package:login_ui/components/alert.dart';
+import 'package:login_ui/components/image.dart';
 import 'package:login_ui/details_screen.dart';
 import 'package:login_ui/model/jobModel.dart';
 import 'package:login_ui/model/locationJobModel.dart';
@@ -61,27 +62,32 @@ class _MapJobState extends State<MapJob> {
           builder: (_) =>
               AlertMessage("แจ้งเตือน", "ปฏิเสธการเข้าถึงตำแหน่ง", null),
         );
+        Navigator.pop(context);
         break;
       case GeolocationStatus.disabled:
         showDialog(
           context: context,
           builder: (_) => AlertMessage("แจ้งเตือน", "ตำแหน่งถูกปิดอยู่", null),
         );
+        Navigator.pop(context);
         break;
       case GeolocationStatus.restricted:
         showDialog(
           context: context,
           builder: (_) => AlertMessage("แจ้งเตือน", "การอนุญาติถูกจำกัด", null),
         );
+        Navigator.pop(context);
         break;
       case GeolocationStatus.unknown:
         showDialog(
           context: context,
           builder: (_) => AlertMessage("แจ้งเตือน", "ไม่พบตำแหน่ง", null),
         );
+        Navigator.pop(context);
         break;
       case GeolocationStatus.granted:
         _getLocation();
+        break;
     }
   }
 
@@ -98,6 +104,9 @@ class _MapJobState extends State<MapJob> {
         location.latitude.toString(), location.longitude.toString());
     setState(() {
       for (LocationJobModel item in data) {
+        if (item?.image == "") {
+          item?.image = DefaultImage;
+        }
         _markers.add(
           Marker(
               markerId: MarkerId(item.company),
@@ -230,11 +239,7 @@ class _MapJobState extends State<MapJob> {
                   );
                 } else {
                   return Center(
-                    child: Column(
-                      children: [
-                        CircularProgressIndicator(),
-                      ],
-                    ),
+                    child: LoadingCube(),
                   );
                 }
               },
@@ -245,6 +250,9 @@ class _MapJobState extends State<MapJob> {
   void GotoDetail() async {
     setState(() => loading = true);
     JobDataModel find = await TopicWorkFindJob_ID(_datadetail.jobId);
+    if (find?.image == "") {
+      find.image = DefaultImage;
+    }
     Navigator.push(
       context,
       MaterialPageRoute(
