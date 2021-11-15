@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:login_ui/Animation/Fade_Animation.dart';
 
@@ -405,6 +406,129 @@ class MapScreenState extends State<EditingCompany>
                                     ),
                                     Padding(
                                         padding: EdgeInsets.only(
+                                            left: 25.0, right: 25.0, top: 10.0),
+                                        child: new Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: <Widget>[
+                                            new Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: <Widget>[
+                                                new Text(
+                                                  'พิกัดที่ตั้งบริษัท',
+                                                  style: TextStyle(
+                                                      fontSize: 18.0,
+                                                      color: PrimaryColor,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        )),
+                                    Padding(
+                                        padding: EdgeInsets.only(
+                                            left: 25.0, right: 25.0, top: 25.0),
+                                        child: new Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: <Widget>[
+                                            new Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: <Widget>[
+                                                new Text(
+                                                  'ละติจูด Ex.(10.00000)',
+                                                  style: TextStyle(
+                                                      fontSize: 16.0,
+                                                      color: PrimaryColor,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        )),
+                                    Padding(
+                                      padding: EdgeInsets.only(
+                                          left: 25.0, right: 25.0, top: 2.0),
+                                      child: new Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: <Widget>[
+                                          new Flexible(
+                                            child: TextField(
+                                              // controller: ,
+                                              inputFormatters: <
+                                                  TextInputFormatter>[
+                                                FilteringTextInputFormatter
+                                                    .allow(RegExp(r'[0-9.]')),
+                                              ],
+                                              keyboardType:
+                                                  TextInputType.number,
+                                              decoration: const InputDecoration(
+                                                hintText: "ใส่พิกัด",
+                                              ),
+                                              enabled: !_status,
+                                              autofocus: !_status,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Padding(
+                                        padding: EdgeInsets.only(
+                                            left: 25.0, right: 25.0, top: 25.0),
+                                        child: new Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: <Widget>[
+                                            new Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: <Widget>[
+                                                new Text(
+                                                  'ลองติจูด Ex.(100.00000)',
+                                                  style: TextStyle(
+                                                      fontSize: 16.0,
+                                                      color: PrimaryColor,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        )),
+                                    Padding(
+                                      padding: EdgeInsets.only(
+                                          left: 25.0, right: 25.0, top: 2.0),
+                                      child: new Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: <Widget>[
+                                          new Flexible(
+                                            child: TextField(
+                                              // controller: ,
+                                              inputFormatters: <
+                                                  TextInputFormatter>[
+                                                FilteringTextInputFormatter
+                                                    .allow(RegExp(r'[0-9.]')),
+                                              ],
+                                              keyboardType:
+                                                  TextInputType.number,
+                                              decoration: const InputDecoration(
+                                                hintText: "ใส่พิกัด",
+                                              ),
+                                              enabled: !_status,
+                                              autofocus: !_status,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Padding(
+                                        padding: EdgeInsets.only(
                                             left: 25.0, right: 25.0, top: 25.0),
                                         child: new Row(
                                           mainAxisSize: MainAxisSize.max,
@@ -561,15 +685,22 @@ class MapScreenState extends State<EditingCompany>
                                                   String status =
                                                       await UploadResume(token,
                                                           File(image.path));
-                                                 
+
                                                   if (status ==
                                                       "อัพโหลดรูปภาพเรียบร้อย") {
-                                                        await Future.delayed(Duration(seconds: 5));
+                                                    await Future.delayed(
+                                                        Duration(seconds: 5));
                                                     final ResumeModel
                                                         findImage =
-                                                        await PreviewResume(token);
-                                                    final String upload = await UpdateImage(tokenJob,Job_JobID,findImage?.link);
-                                                    if (upload == 'แก้ไขข้อมูลแล้ว') {
+                                                        await PreviewResume(
+                                                            token);
+                                                    final String upload =
+                                                        await UpdateImage(
+                                                            tokenJob,
+                                                            Job_JobID,
+                                                            findImage?.link);
+                                                    if (upload ==
+                                                        'แก้ไขข้อมูลแล้ว') {
                                                       showDialog(
                                                         context: context,
                                                         builder: (_) =>
@@ -609,7 +740,8 @@ class MapScreenState extends State<EditingCompany>
                                                           null),
                                                     );
                                                   }
-                                                  setState(() => loading = false);
+                                                  setState(
+                                                      () => loading = false);
                                                 }
                                               },
                                               shape: new RoundedRectangleBorder(
