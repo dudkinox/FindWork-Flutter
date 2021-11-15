@@ -3,7 +3,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:login_ui/Screens/loading.dart';
 import 'package:login_ui/Service/JobService.dart';
-import 'package:login_ui/Service/locaitonService.dart';
+import 'package:login_ui/Service/LocaitonService.dart';
 import 'package:login_ui/components/alert.dart';
 import 'package:login_ui/components/image.dart';
 import 'package:login_ui/details_screen.dart';

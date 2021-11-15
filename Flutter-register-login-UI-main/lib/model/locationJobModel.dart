@@ -1,33 +1,39 @@
 import 'dart:convert';
 
-List<LocationJobModel> locationJobModelFromJson(String str) => List<LocationJobModel>.from(json.decode(str).map((x) => LocationJobModel.fromJson(x)));
+import 'SearchModel.dart';
 
-String locationJobModelToJson(List<LocationJobModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+List<LocationJobModel> locationJobModelFromJson(String str) =>
+    List<LocationJobModel>.from(
+        json.decode(str).map((x) => LocationJobModel.fromJson(x)));
+
+String locationJobModelToJson(List<LocationJobModel> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class LocationJobModel {
-    LocationJobModel({
-        this.image,
-        this.province,
-        this.subDistrict,
-        this.jobId,
-        this.departmentId,
-        this.company,
-        this.district,
-        this.latitude,
-        this.longitude,
-    });
+  LocationJobModel({
+    this.image,
+    this.province,
+    this.subDistrict,
+    this.jobId,
+    this.departmentId,
+    this.company,
+    this.district,
+    this.latitude,
+    this.longitude,
+  });
 
-    String image;
-    String province;
-    String subDistrict;
-    String jobId;
-    DepartmentId departmentId;
-    String company;
-    String district;
-    double latitude;
-    double longitude;
+  String image;
+  String province;
+  String subDistrict;
+  String jobId;
+  DepartmentId departmentId;
+  String company;
+  String district;
+  double latitude;
+  double longitude;
 
-    factory LocationJobModel.fromJson(Map<String, dynamic> json) => LocationJobModel(
+  factory LocationJobModel.fromJson(Map<String, dynamic> json) =>
+      LocationJobModel(
         image: json["image"],
         province: json["province"],
         subDistrict: json["sub_district"],
@@ -37,9 +43,9 @@ class LocationJobModel {
         district: json["district"],
         latitude: json["latitude"].toDouble(),
         longitude: json["longitude"].toDouble(),
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "image": image,
         "province": province,
         "sub_district": subDistrict,
@@ -49,45 +55,34 @@ class LocationJobModel {
         "district": district,
         "latitude": latitude.toDouble(),
         "longitude": longitude.toDouble(),
-    };
+      };
 }
 
-class DepartmentId {
-    DepartmentId({
-        this.name,
-        this.detail,
-        this.status,
-        this.salary,
-        this.jobTime,
-        this.type,
-        this.partTime,
-    });
+PositionModel positionModelFromJson(String str) =>
+    PositionModel.fromJson(json.decode(str));
+String positionModelToJson(PositionModel data) => json.encode(data.toJson());
 
-    List<String> name;
-    List<String> detail;
-    List<bool> status;
-    List<String> salary;
-    List<String> jobTime;
-    List<String> type;
-    List<String> partTime;
+class PositionModel {
+  PositionModel({
+    this.jobId,
+    this.latitude,
+    this.longitude,
+  });
 
-    factory DepartmentId.fromJson(Map<String, dynamic> json) => DepartmentId(
-        name: List<String>.from(json["name"].map((x) => x)),
-        detail: List<String>.from(json["detail"].map((x) => x)),
-        status: List<bool>.from(json["status"].map((x) => x)),
-        salary: List<String>.from(json["salary"].map((x) => x)),
-        jobTime: List<String>.from(json["job_time"].map((x) => x)),
-        type: List<String>.from(json["type"].map((x) => x)),
-        partTime: List<String>.from(json["part_time"].map((x) => x)),
-    );
+  String jobId;
+  double latitude;
+  double longitude;
 
-    Map<String, dynamic> toJson() => {
-        "name": List<dynamic>.from(name.map((x) => x)),
-        "detail": List<dynamic>.from(detail.map((x) => x)),
-        "status": List<dynamic>.from(status.map((x) => x)),
-        "salary": List<dynamic>.from(salary.map((x) => x)),
-        "job_time": List<dynamic>.from(jobTime.map((x) => x)),
-        "type": List<dynamic>.from(type.map((x) => x)),
-        "part_time": List<dynamic>.from(partTime.map((x) => x)),
-    };
+  factory PositionModel.fromJson(Map<String, dynamic> json) => PositionModel(
+        jobId: json["job_id"] == null ? null : json["job_id"],
+        latitude: json["latitude"] == null ? null : json["latitude"].toDouble(),
+        longitude:
+            json["longitude"] == null ? null : json["longitude"].toDouble(),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "job_id": jobId == null ? null : jobId,
+        "latitude": latitude == null ? null : latitude,
+        "longitude": longitude == null ? null : longitude,
+      };
 }

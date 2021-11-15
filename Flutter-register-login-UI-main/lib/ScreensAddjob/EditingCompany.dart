@@ -10,6 +10,7 @@ import 'package:login_ui/Animation/Fade_Animation.dart';
 import 'package:login_ui/Screens/loading.dart';
 import 'package:login_ui/Service/JobService.dart';
 import 'package:login_ui/Service/LoginService.dart';
+import 'package:login_ui/Service/locaitonService.dart';
 import 'package:login_ui/Themes/Themes.dart';
 import 'package:login_ui/components/WillPop.dart';
 import 'package:login_ui/components/alert.dart';
@@ -116,8 +117,8 @@ class MapScreenState extends State<EditingCompany>
     try {
       userLocation = await Geolocator()
           .getCurrentPosition(desiredAccuracy: LocationAccuracy.best);
-          lat.text = userLocation.latitude.toString();
-          lng.text = userLocation.longitude.toString();
+      lat.text = userLocation.latitude.toString();
+      lng.text = userLocation.longitude.toString();
     } catch (e) {
       userLocation = null;
     }
@@ -443,21 +444,20 @@ class MapScreenState extends State<EditingCompany>
                                                       fontWeight:
                                                           FontWeight.bold),
                                                 ),
-                                                
                                               ],
                                             ),
                                             Column(
                                               children: [
-                                                
                                                 TextButton(
-                                                  onPressed: _status ? null : () {
-                                                    _getLocation();
-                                                  },
-                                                  child: Text("เลือกตำแหน่งปัจจุบัน"),
-                                                  
-                                                  )
+                                                  onPressed: _status
+                                                      ? null
+                                                      : () {
+                                                          _getLocation();
+                                                        },
+                                                  child: Text(
+                                                      "เลือกตำแหน่งปัจจุบัน"),
+                                                )
                                               ],
-                                              
                                             )
                                           ],
                                         )),
@@ -878,17 +878,61 @@ class MapScreenState extends State<EditingCompany>
                     final String status = await UpdateJob(
                         tokenJob, request, Job_JobID, resultDetail);
                     if (status == "แก้ไขข้อมูลแล้ว") {
-                      showDialog(
-                          context: context,
-                          builder: (_) => AlertMessage(
-                              "แจ้งเตือน", "แก้ไขข้อมูลสำเร็จ", null));
-                      setState(() {
-                        company = request.company;
-                        detail = resultDetail.detail[0];
-                        district = request.district;
-                        province = request.province;
-                        subDistrict = request.subDistrict;
-                      });
+                      if (lat.text != "" && lng.text != "") {
+                        dynamic positionData = await FindIDLocation(tokenJob);
+                        if (positionData == null) {
+                          final String statusPosition = await InsertLocation(
+                              tokenJob,
+                              double.parse(lat.text),
+                              double.parse(lng.text));
+                          if (statusPosition == "เพิ่มตำแหน่งสำเร็จ") {
+                            showDialog(
+                                context: context,
+                                builder: (_) => AlertMessage(
+                                    "แจ้งเตือน", "แก้ไขข้อมูลสำเร็จ", null));
+                            setState(() {
+                              company = request.company;
+                              detail = resultDetail.detail[0];
+                              district = request.district;
+                              province = request.province;
+                              subDistrict = request.subDistrict;
+                            });
+                          } else {
+                            showDialog(
+                                context: context,
+                                builder: (_) => AlertMessage(
+                                    "แจ้งเตือน",
+                                    "Server มีปัญหา ปิดปรับปรุงชั่วคราว กรุณาลองใหม่ภายหลัง",
+                                    null));
+                          }
+                        } else {
+                          // update position
+                          final String statusUpdate = await UpdateLocation(
+                              tokenJob,
+                              double.parse(lat.text),
+                              double.parse(lng.text));
+                          if (statusUpdate == "แก้ไขข้อมูลแล้ว") {
+                            showDialog(
+                                context: context,
+                                builder: (_) => AlertMessage("แจ้งเตือน",
+                                    "อัพเดตข้อมูลเรียบร้อย", null));
+                          } else {
+                            showDialog(
+                                context: context,
+                                builder: (_) => AlertMessage(
+                                    "แจ้งเตือน",
+                                    "Server มีปัญหา ปิดปรับปรุงชั่วคราว กรุณาลองใหม่ภายหลัง",
+                                    null));
+                          }
+                        }
+                      } else {
+                        showDialog(
+                            context: context,
+                            builder: (_) => AlertMessage(
+                                "แจ้งเตือน",
+                                "กรุณากรอกตำแหน่งที่อยู่ ละจิจูด และลองติจูด",
+                                null));
+                      }
                     } else {
                       showDialog(
                           context: context,
@@ -947,6 +991,4 @@ class MapScreenState extends State<EditingCompany>
       },
     );
   }
-
-  
 }
