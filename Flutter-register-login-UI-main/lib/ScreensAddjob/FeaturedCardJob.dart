@@ -35,7 +35,7 @@ class FeaturedCardJob extends StatelessWidget {
         builder: (context, AsyncSnapshot snapshot) {
           JobDataModel data = snapshot?.data;
           if (snapshot?.connectionState != ConnectionState.done) {
-            return Text("");
+            return LoadingRipple();
           } else {
             String money = "";
             if (data.departmentId.type[0] == "salary") {

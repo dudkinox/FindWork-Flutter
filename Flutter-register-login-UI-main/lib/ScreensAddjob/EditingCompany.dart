@@ -31,7 +31,9 @@ class EditingCompany extends StatefulWidget {
       this.district,
       this.subDistrict,
       this.Job_JobID,
-      this.image_job);
+      this.image_job,
+      this.resultLat,
+      this.resultLng);
   var tokenJob;
   var token;
   var typeUser;
@@ -42,6 +44,8 @@ class EditingCompany extends StatefulWidget {
   var subDistrict;
   var Job_JobID;
   var image_job;
+  var resultLat;
+  var resultLng;
 
   final TextEditingController title_company = new TextEditingController();
   final TextEditingController title_detail = new TextEditingController();
@@ -57,8 +61,19 @@ class EditingCompany extends StatefulWidget {
   final TextEditingController password = new TextEditingController();
   final TextEditingController confirmpassword = new TextEditingController();
   @override
-  MapScreenState createState() => MapScreenState(token, typeUser, tokenJob,
-      company, detail, province, district, subDistrict, Job_JobID, image_job);
+  MapScreenState createState() => MapScreenState(
+      token,
+      typeUser,
+      tokenJob,
+      company,
+      detail,
+      province,
+      district,
+      subDistrict,
+      Job_JobID,
+      image_job,
+      resultLat,
+      resultLng);
 }
 
 class MapScreenState extends State<EditingCompany>
@@ -73,7 +88,9 @@ class MapScreenState extends State<EditingCompany>
       this.district,
       this.subDistrict,
       this.Job_JobID,
-      this.image_job);
+      this.image_job,
+      this.resultLat,
+      this.resultLng);
   var token;
   var tokenJob;
   var jobID = new AccountModel();
@@ -85,6 +102,8 @@ class MapScreenState extends State<EditingCompany>
   var subDistrict;
   var Job_JobID;
   var image_job;
+  var resultLat;
+  var resultLng;
 
   var fullname = new TextEditingController();
   var email = new TextEditingController();
@@ -99,6 +118,14 @@ class MapScreenState extends State<EditingCompany>
   var title_subDistrict = new TextEditingController();
   var lat = new TextEditingController();
   var lng = new TextEditingController();
+
+  var tempcompany;
+  var tempdetail;
+  var tempprovince;
+  var tempdistrict;
+  var tempsubDistrict;
+  var tempresultLat;
+  var tempresultLng;
 
   File file;
 
@@ -127,11 +154,23 @@ class MapScreenState extends State<EditingCompany>
 
   @override
   Widget build(BuildContext context) {
-    title_company.text = company;
-    title_detail.text = detail;
-    title_province.text = province;
-    title_district.text = district;
-    title_subDistrict.text = subDistrict;
+    if (_status == true) {
+      lat.text = resultLat;
+      lng.text = resultLng;
+      title_company.text = company;
+      title_detail.text = detail;
+      title_province.text = province;
+      title_district.text = district;
+      title_subDistrict.text = subDistrict;
+    } else {
+      lat.text = tempresultLat;
+      lng.text = tempresultLng;
+      title_company.text = tempcompany;
+      title_detail.text = tempdetail;
+      title_province.text = tempprovince;
+      title_district.text = tempdistrict;
+      title_subDistrict.text = tempsubDistrict;
+    }
     return loading
         ? LoadingCube()
         : WillPopScope(
@@ -749,7 +788,9 @@ class MapScreenState extends State<EditingCompany>
                                                                     district,
                                                                     subDistrict,
                                                                     Job_JobID,
-                                                                    image_job)),
+                                                                    image_job,
+                                                                    lat.text,
+                                                                    lng.text)),
                                                       );
                                                       setState(() {
                                                         file = File(image.path);
@@ -880,7 +921,7 @@ class MapScreenState extends State<EditingCompany>
                     if (status == "แก้ไขข้อมูลแล้ว") {
                       if (lat.text != "" && lng.text != "") {
                         dynamic positionData = await FindIDLocation(tokenJob);
-                        if (positionData == null) {
+                        if (positionData == "หาไม่เจอ") {
                           final String statusPosition = await InsertLocation(
                               tokenJob,
                               double.parse(lat.text),
@@ -896,6 +937,8 @@ class MapScreenState extends State<EditingCompany>
                               district = request.district;
                               province = request.province;
                               subDistrict = request.subDistrict;
+                              resultLat = lat.text;
+                              resultLng = lng.text;
                             });
                           } else {
                             showDialog(
@@ -916,6 +959,15 @@ class MapScreenState extends State<EditingCompany>
                                 context: context,
                                 builder: (_) => AlertMessage("แจ้งเตือน",
                                     "อัพเดตข้อมูลเรียบร้อย", null));
+                            setState(() {
+                              resultLat = tempresultLat;
+                              resultLng = tempresultLng;
+                              company = tempcompany;
+                              detail = tempdetail;
+                              province = tempprovince;
+                              district = tempdetail;
+                              subDistrict = tempsubDistrict;
+                            });
                           } else {
                             showDialog(
                                 context: context,
@@ -961,6 +1013,13 @@ class MapScreenState extends State<EditingCompany>
                 color: Colors.red[600],
                 onPressed: () {
                   setState(() {});
+                  resultLat;
+                  resultLng;
+                  company;
+                  detail;
+                  province;
+                  district;
+                  subDistrict;
                   _status = true;
                 },
                 shape: new RoundedRectangleBorder(

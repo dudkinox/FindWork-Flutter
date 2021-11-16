@@ -11,6 +11,7 @@ import 'package:login_ui/Screens/login/login.dart';
 import 'package:login_ui/Screens/profile/ProfileController.dart';
 import 'package:login_ui/Service/JobService.dart';
 import 'package:login_ui/Service/LoginService.dart';
+import 'package:login_ui/Service/locaitonService.dart';
 import 'package:login_ui/Themes/Themes.dart';
 import 'package:login_ui/components/WillPop.dart';
 import 'package:login_ui/components/alert.dart';
@@ -78,8 +79,7 @@ class MapScreenState extends State<CloseTheAccount>
                   leading: IconButton(
                     icon: Icon(Icons.arrow_back_ios, color: Colors.black),
                     onPressed: () {
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (context) => HomeAddjob(token, typeUser)));
+                      Navigator.pop(context);
                     },
                   ),
                 ),
@@ -277,14 +277,37 @@ class MapScreenState extends State<CloseTheAccount>
                                                                 token);
                                                         if (resultuser ==
                                                             "ลบสำเร็จ") {
-                                                          showDialog(
-                                                            context: context,
-                                                            builder: (_) =>
-                                                                AlertMessage(
-                                                                    "แจ้งเตือน",
-                                                                    "ลบบัญชีเสร็จสิ้น",
-                                                                    MyApp()),
-                                                          );
+                                                          final String
+                                                              resultlocation =
+                                                              await DeleteLocation(
+                                                                  id);
+                                                          if (resultlocation ==
+                                                              "ลบสำเร็จ") {
+                                                            showDialog(
+                                                              context: context,
+                                                              builder: (_) =>
+                                                                  AlertMessage(
+                                                                      "แจ้งเตือน",
+                                                                      "ลบบัญชีเสร็จสิ้น",
+                                                                      null),
+                                                            );
+                                                            Navigator.of(
+                                                                    context)
+                                                                .pushReplacement(
+                                                                    MaterialPageRoute(
+                                                                        builder:
+                                                                            (context) =>
+                                                                                MyApp()));
+                                                          } else {
+                                                            showDialog(
+                                                              context: context,
+                                                              builder: (_) =>
+                                                                  AlertMessage(
+                                                                      "แจ้งเตือน",
+                                                                      "ลบบัญชีปิดปรับปรุงเนื่องจาก server มีปัญหา โปรดลองใหม่ภายหลัง",
+                                                                      null),
+                                                            );
+                                                          }
                                                         } else {
                                                           showDialog(
                                                             context: context,

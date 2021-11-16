@@ -94,7 +94,7 @@ Future<String> DeleteLocation(
   }
 }
 
-Future<PositionModel> FindIDLocation(String token) async {
+Future<dynamic> FindIDLocation(String token) async {
   try {
     final String Url = Host + "/api/location/" + token;
     final response = await http.get(
@@ -103,6 +103,9 @@ Future<PositionModel> FindIDLocation(String token) async {
         'Content-Type': 'application/json; charset=UTF-8',
       },
     );
+    if(response.body == "หาไม่เจอ"){
+      return response.body;
+    }
     return PositionModel.fromJson(jsonDecode(response?.body));
   } catch (e) {
     print(e);
