@@ -21,33 +21,29 @@ class _AlertPageState extends State<AlertPage> {
   _AlertPageState(this.token);
   var token;
 
-  Future<void> onPullToRefresh() async {
-    await Future.delayed(Duration(milliseconds: 500));
-    setState(() {});
-  }
+
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: onWillPop,
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('แจ้งเตือน'),
-          backgroundColor: PrimaryColor,
-        ),
-        body: FutureBuilder<List<MessageModel>>(
-        future: GetMessage(token),
-        builder: (context, AsyncSnapshot snapshot) {
-          List result = [];
-          if (snapshot?.connectionState != ConnectionState.done) {
-            return LoadingCube();
-          } else {
-            for (MessageModel data in snapshot?.data) {
-              result.add(notifyPage(data?.image, data?.message, data?.company));
-            }
-            if (result.length == 0) {
-              return RefreshIndicator(
-                onRefresh: onPullToRefresh,
-                child: CustomScrollView(
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('แจ้งเตือน'),
+        backgroundColor: PrimaryColor,
+      ),
+      body: FutureBuilder<dynamic>(
+          future: GetMessage(token),
+          builder: (context, AsyncSnapshot snapshot) {
+            List result = [];
+            if (snapshot?.connectionState != ConnectionState.done) {
+              return LoadingCube();
+            } else {
+              if (snapshot.data != "หาไม่เจอ") {
+                for (MessageModel data in snapshot?.data) {
+                  result.add(
+                      notifyPage(data?.image, data?.message, data?.company));
+                }
+              }
+              if (result.length == 0) {
+                return CustomScrollView(
                   slivers: <Widget>[
                     SliverFillRemaining(
                       child: Container(
@@ -61,12 +57,9 @@ class _AlertPageState extends State<AlertPage> {
                       ),
                     )
                   ],
-                ),
-              );
-            } else {
-              return RefreshIndicator(
-                onRefresh: onPullToRefresh,
-                child: Padding(
+                );
+              } else {
+                return Padding(
                   padding: EdgeInsets.only(top: 10),
                   child: ListView.builder(
                     itemCount: result?.length,
@@ -77,12 +70,10 @@ class _AlertPageState extends State<AlertPage> {
                       );
                     },
                   ),
-                ),
-              );
+                );
+              }
             }
-          }
-        }),
-      ),
+          }),
     );
   }
 }
