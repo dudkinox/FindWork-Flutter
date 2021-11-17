@@ -20,7 +20,7 @@ class _AlertPageState extends State<AlertPage> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 2,
+      length: 1,
       child: WillPopScope(
         onWillPop: onWillPop,
         child: Scaffold(
@@ -29,10 +29,7 @@ class _AlertPageState extends State<AlertPage> {
             title: const Text('แจ้งเตือน'),
             backgroundColor: PrimaryColor,
             bottom: const TabBar(
-              tabs: <Widget>[
-                Tab(text: 'การตอบกลับ'),
-                Tab(text: 'ข้อความ'),
-              ],
+              tabs: <Widget>[Tab(text: 'การตอบกลับ')],
             ),
           ),
           body: FadeAnimation(
@@ -40,7 +37,6 @@ class _AlertPageState extends State<AlertPage> {
             TabBarView(
               children: <Widget>[
                 _buildTab(0),
-                _buildTab(1),
               ],
             ),
           ),
