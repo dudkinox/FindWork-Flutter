@@ -3,13 +3,15 @@ import 'package:login_ui/Screens/loading.dart';
 import 'package:login_ui/ScreensAddjob/managerJob/manageControl.dart';
 import 'package:login_ui/ScreensAddjob/managerJob/manageJob.dart';
 import 'package:login_ui/ScreensAddjob/managerJob/showResume.dart';
+import 'package:login_ui/Service/MessageService.dart';
 import 'package:login_ui/Service/ProgressService.dart';
 import 'package:login_ui/Themes/Themes.dart';
 import 'package:login_ui/components/alert.dart';
 import 'package:login_ui/model/ProgressModel.dart';
 
 class Itemcard extends StatefulWidget {
-  Itemcard(this.email, this.fullname, this.tel, this.name, this.id, this.token,this.tokenJob);
+  Itemcard(this.email, this.fullname, this.tel, this.name, this.id, this.token,
+      this.tokenJob);
   var email;
   var fullname;
   var tel;
@@ -24,8 +26,8 @@ class Itemcard extends StatefulWidget {
 }
 
 class _ItemcardState extends State<Itemcard> {
-  _ItemcardState(
-      this.email, this.fullname, this.tel, this.name, this.id, this.token,this.tokenJob);
+  _ItemcardState(this.email, this.fullname, this.tel, this.name, this.id,
+      this.token, this.tokenJob);
   var email;
   var fullname;
   var tel;
@@ -39,6 +41,11 @@ class _ItemcardState extends State<Itemcard> {
   @override
   void initState() {
     super.initState();
+  }
+
+  Future<void> onPullToRefresh() async {
+    await Future.delayed(Duration(milliseconds: 500));
+    setState(() {});
   }
 
   @override
@@ -90,11 +97,23 @@ class _ItemcardState extends State<Itemcard> {
                 String resultData =
                     await StatusProgress(id, 1.toString(), i.toString());
                 if (resultData == "แก้ไขข้อมูลแล้ว") {
-                  showDialog(
-                    context: context,
-                    builder: (_) => AlertMessage(
-                        "แจ้งเตือน", "รับสมัครผ่านเรียบร้อยแล้ว", HomeAdmin(tokenJob,"employer",token,name)),
-                  );
+                  final String SendMessage =
+                      await SendApproveMessage(token, id, "อนุมัติ");
+                  if (SendMessage == "เพิ่มข้อความสำเร็จ") {
+                    showDialog(
+                      context: context,
+                      builder: (_) => AlertMessage(
+                          "แจ้งเตือน",
+                          "รับสมัครผ่านเรียบร้อยแล้ว",
+                          HomeAdmin(tokenJob, "employer", token, name)),
+                    );
+                  } else {
+                    showDialog(
+                      context: context,
+                      builder: (_) => AlertMessage("แจ้งเตือน",
+                          "เซิฟเวอร์เกิดข้อผิดพลาด โปรดลองใหม่ภายหลัง", null),
+                    );
+                  }
                 } else {
                   showDialog(
                     context: context,
@@ -124,11 +143,23 @@ class _ItemcardState extends State<Itemcard> {
                 String resultData =
                     await StatusProgress(id, 0.toString(), i.toString());
                 if (resultData == "แก้ไขข้อมูลแล้ว") {
-                  showDialog(
-                    context: context,
-                    builder: (_) => AlertMessage(
-                        "แจ้งเตือน", "ปฏิเศษสมัครผ่านเรียบร้อยแล้ว", HomeAdmin(tokenJob,"employer",token,name)),
-                  );
+                  final String SendMessage =
+                      await SendApproveMessage(token, id, "ปฏิเสธ");
+                  if (SendMessage == "เพิ่มข้อความสำเร็จ") {
+                    showDialog(
+                      context: context,
+                      builder: (_) => AlertMessage(
+                          "แจ้งเตือน",
+                          "ปฏิเศษสมัครผ่านเรียบร้อยแล้ว",
+                          HomeAdmin(tokenJob, "employer", token, name)),
+                    );
+                  } else {
+                    showDialog(
+                      context: context,
+                      builder: (_) => AlertMessage("แจ้งเตือน",
+                          "เซิฟเวอร์เกิดข้อผิดพลาด โปรดลองใหม่ภายหลัง", null),
+                    );
+                  }
                 } else {
                   showDialog(
                     context: context,
