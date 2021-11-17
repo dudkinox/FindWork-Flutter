@@ -6,6 +6,7 @@ import 'package:login_ui/Screens/dashboard/work.dart';
 import 'package:login_ui/Screens/loading.dart';
 import 'package:login_ui/Themes/Themes.dart';
 import 'package:login_ui/components/WillPop.dart';
+import 'package:login_ui/components/notification.dart';
 
 import 'dashboard/header.dart';
 import 'dashboard/search.dart';
@@ -23,6 +24,7 @@ class HomePage extends StatelessWidget {
   DateTime currentTime = DateTime.now();
   @override
   Widget build(BuildContext context) {
+    MessageNotification();
     return loading
         ? Loader()
         : WillPopScope(
