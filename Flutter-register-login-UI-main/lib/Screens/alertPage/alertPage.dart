@@ -1,69 +1,88 @@
 import 'package:flutter/material.dart';
 import 'package:login_ui/Animation/Fade_Animation.dart';
+import 'package:login_ui/Screens/alertPage/notifyPage.dart';
+import 'package:login_ui/Screens/loading.dart';
+import 'package:login_ui/ScreensAddjob/managerJob/manageCard.dart';
+import 'package:login_ui/ScreensAddjob/managerJob/manageJob.dart';
+import 'package:login_ui/Service/MessageService.dart';
 import 'package:login_ui/Themes/Themes.dart';
 import 'package:login_ui/components/WillPop.dart';
-
-import 'infinite.dart';
+import 'package:login_ui/model/loginModel.dart';
+import 'package:login_ui/model/messageModel.dart';
 
 class AlertPage extends StatefulWidget {
-  const AlertPage({Key key}) : super(key: key);
-
+  AlertPage(this.token);
+  var token;
   @override
-  _AlertPageState createState() => _AlertPageState();
+  _AlertPageState createState() => _AlertPageState(token);
 }
 
 class _AlertPageState extends State<AlertPage> {
-  final InfiniteScrollController _infiniteController = InfiniteScrollController(
-    initialScrollOffset: 0.0,
-  );
+  _AlertPageState(this.token);
+  var token;
 
+  Future<void> onPullToRefresh() async {
+    await Future.delayed(Duration(milliseconds: 500));
+    setState(() {});
+  }
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 1,
-      child: WillPopScope(
-        onWillPop: onWillPop,
-        child: Scaffold(
-          appBar: AppBar(
-            automaticallyImplyLeading: false,
-            title: const Text('แจ้งเตือน'),
-            backgroundColor: PrimaryColor,
-            bottom: const TabBar(
-              tabs: <Widget>[Tab(text: 'การตอบกลับ')],
-            ),
-          ),
-          body: FadeAnimation(
-            1.0,
-            TabBarView(
-              children: <Widget>[
-                _buildTab(0),
-              ],
-            ),
-          ),
+    return WillPopScope(
+      onWillPop: onWillPop,
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('แจ้งเตือน'),
+          backgroundColor: PrimaryColor,
         ),
+        body: FutureBuilder<List<MessageModel>>(
+        future: GetMessage(token),
+        builder: (context, AsyncSnapshot snapshot) {
+          List result = [];
+          if (snapshot?.connectionState != ConnectionState.done) {
+            return LoadingCube();
+          } else {
+            for (MessageModel data in snapshot?.data) {
+              result.add(notifyPage(data?.image, data?.message, data?.company));
+            }
+            if (result.length == 0) {
+              return RefreshIndicator(
+                onRefresh: onPullToRefresh,
+                child: CustomScrollView(
+                  slivers: <Widget>[
+                    SliverFillRemaining(
+                      child: Container(
+                        child: Center(
+                          child: Text("ไม่พบข้อมูล",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                  fontSize: 23)),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              );
+            } else {
+              return RefreshIndicator(
+                onRefresh: onPullToRefresh,
+                child: Padding(
+                  padding: EdgeInsets.only(top: 10),
+                  child: ListView.builder(
+                    itemCount: result?.length,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: EdgeInsets.all(8),
+                        child: result[index],
+                      );
+                    },
+                  ),
+                ),
+              );
+            }
+          }
+        }),
       ),
-    );
-  }
-
-  Widget _buildTab(int tab) {
-    return InfiniteListView.separated(
-      key: PageStorageKey(tab),
-      controller: _infiniteController,
-      itemBuilder: (BuildContext context, int index) {
-        return Material(
-          child: InkWell(
-            onTap: () {},
-            child: ListTile(
-              title: Text('แจ้งเตือน ข้อความที่ $index'),
-              subtitle: Text('การตอบกลับที่ $index'),
-              trailing: const Icon(Icons.chevron_right),
-            ),
-          ),
-        );
-      },
-      separatorBuilder: (BuildContext context, int index) =>
-          const Divider(height: 2.0),
-      anchor: 0.5,
     );
   }
 }

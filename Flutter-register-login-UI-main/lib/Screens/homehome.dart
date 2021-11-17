@@ -85,7 +85,7 @@ class _HomeHomeState extends State<HomeHome> {
                         : newindex == 2
                             ? Favorite(token, typeUser)
                             : newindex == 3
-                                ? AlertPage()
+                                ? AlertPage(token)
                                 : null,
               ),
             ));
