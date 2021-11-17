@@ -98,15 +98,15 @@ class _MapJobState extends State<MapJob> {
   }
 
   void _onMapCreated(GoogleMapController controller) async {
-    var location = userLocation = await Geolocator()
+    userLocation = await Geolocator()
         .getCurrentPosition(desiredAccuracy: LocationAccuracy.best);
     List<LocationJobModel> data = await GetLocationJob(
-        location.latitude.toString(), location.longitude.toString());
-    setState(() {
-      for (LocationJobModel item in data) {
-        if (item?.image == "") {
-          item?.image = DefaultImage;
-        }
+        userLocation.latitude.toString(), userLocation.longitude.toString());
+    for (LocationJobModel item in data) {
+      if (item?.image == "") {
+        item?.image = DefaultImage;
+      }
+      setState(() {
         _markers.add(
           Marker(
               markerId: MarkerId(item.company),
@@ -118,8 +118,8 @@ class _MapJobState extends State<MapJob> {
                 });
               }),
         );
-      }
-    });
+      });
+    }
     mapController = controller;
   }
 
