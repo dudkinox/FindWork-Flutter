@@ -57,12 +57,7 @@ class _MapJobState extends State<MapJob> {
         await geolocator.checkGeolocationPermissionStatus();
     switch (geolocationStatus) {
       case GeolocationStatus.denied:
-        showDialog(
-          context: context,
-          builder: (_) =>
-              AlertMessage("แจ้งเตือน", "ปฏิเสธการเข้าถึงตำแหน่ง", null),
-        );
-        Navigator.pop(context);
+        _getLocation();
         break;
       case GeolocationStatus.disabled:
         showDialog(
