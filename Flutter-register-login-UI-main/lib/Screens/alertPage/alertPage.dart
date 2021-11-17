@@ -28,26 +28,6 @@ class _AlertPageState extends State<AlertPage> {
             automaticallyImplyLeading: false,
             title: const Text('แจ้งเตือน'),
             backgroundColor: PrimaryColor,
-            actions: <Widget>[
-              IconButton(
-                icon: const Icon(Icons.arrow_downward),
-                onPressed: () {
-                  _infiniteController.animateTo(
-                      _infiniteController.offset + 2000.0,
-                      duration: const Duration(milliseconds: 250),
-                      curve: Curves.easeIn);
-                },
-              ),
-              IconButton(
-                icon: const Icon(Icons.arrow_upward),
-                onPressed: () {
-                  _infiniteController.animateTo(
-                      _infiniteController.offset - 2000.0,
-                      duration: const Duration(milliseconds: 250),
-                      curve: Curves.easeIn);
-                },
-              ),
-            ],
             bottom: const TabBar(
               tabs: <Widget>[
                 Tab(text: 'การตอบกลับ'),
