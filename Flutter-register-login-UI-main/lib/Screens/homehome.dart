@@ -50,9 +50,11 @@ class _HomeHomeState extends State<HomeHome> {
         : FutureBuilder(
             future: FlutterSession().get('notification'),
             builder: (context, snapshot) {
+              print(snapshot.data);
               if (snapshot.data == 1) {
                 MessageNotification();
                 clearNotification();
+                newindex = 3;
               }
               return RefreshIndicator(
                   onRefresh: onPullToRefresh,

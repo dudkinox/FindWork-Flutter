@@ -36,7 +36,11 @@ class _HomeAdminState extends State<HomeAdmin> {
             leading: IconButton(
               icon: Icon(Icons.arrow_back_ios, color: Colors.black),
               onPressed: () {
-                Navigator.pop(context);
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) =>
+                            HomeAddjob(token, typeUser)));
               },
             ),
             title: const Text('หน้าจัดการผู้สมัคร'),
