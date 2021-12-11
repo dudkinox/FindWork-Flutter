@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:login_ui/Animation/Fade_Animation.dart';
 import 'package:login_ui/Screens/alertPage/notifyPage.dart';
 import 'package:login_ui/Screens/loading.dart';
-import 'package:login_ui/ScreensAddjob/managerJob/manageCard.dart';
-import 'package:login_ui/ScreensAddjob/managerJob/manageJob.dart';
 import 'package:login_ui/Service/MessageService.dart';
 import 'package:login_ui/Themes/Themes.dart';
-import 'package:login_ui/components/WillPop.dart';
-import 'package:login_ui/model/loginModel.dart';
 import 'package:login_ui/model/messageModel.dart';
 
 class AlertPage extends StatefulWidget {
@@ -20,7 +15,6 @@ class AlertPage extends StatefulWidget {
 class _AlertPageState extends State<AlertPage> {
   _AlertPageState(this.token);
   var token;
-
 
   @override
   Widget build(BuildContext context) {
@@ -38,8 +32,8 @@ class _AlertPageState extends State<AlertPage> {
             } else {
               if (snapshot.data != "หาไม่เจอ") {
                 for (MessageModel data in snapshot?.data) {
-                  result.add(
-                      notifyPage(data?.image, data?.message, data?.company));
+                  result.add(notifyPage(
+                      data?.image, data?.message, data?.company, data?.lineID));
                 }
               }
               if (result.length == 0) {

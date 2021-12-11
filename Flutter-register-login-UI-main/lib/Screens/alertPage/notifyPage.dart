@@ -2,19 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:login_ui/Themes/Themes.dart';
 
 class notifyPage extends StatefulWidget {
-  notifyPage(this.img,this.msg,this.company);
+  notifyPage(this.img, this.msg, this.company, this.lineID);
   var img;
   var msg;
   var company;
+  var lineID;
   @override
-  _notifyPageState createState() => _notifyPageState(img, msg, company);
+  _notifyPageState createState() => _notifyPageState(img, msg, company, lineID);
 }
 
 class _notifyPageState extends State<notifyPage> {
-  _notifyPageState(this.img,this.msg,this.company);
+  _notifyPageState(this.img, this.msg, this.company, this.lineID);
   var img;
   var msg;
   var company;
+  var lineID;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -64,8 +66,10 @@ class _notifyPageState extends State<notifyPage> {
                       fontWeight: FontWeight.bold,
                       color: PrimaryColor),
                 ),
+                Text("      ** กรุณาติดต่อ **"),
+                Text("Line ID : " + lineID),
                 Text(
-                  "สถานะ : "+ msg,
+                  "สถานะ : " + msg,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 1,
                   style: TextStyle(

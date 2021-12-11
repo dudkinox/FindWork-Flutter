@@ -136,16 +136,19 @@ class FeaturedCardJob extends StatelessWidget {
                                               MaterialPageRoute(
                                                   builder: (context) =>
                                                       EditingCardJob(
-                                                          token,
-                                                          typeUser,
-                                                          data.departmentId
-                                                              .name[0],
-                                                          data.departmentId
-                                                              .type[0],
-                                                          money,
-                                                          data.departmentId
-                                                              .jobTime[0],
-                                                          id)));
+                                                        token,
+                                                        typeUser,
+                                                        data.departmentId
+                                                            .name[0],
+                                                        data.departmentId
+                                                            .type[0],
+                                                        money,
+                                                        data.departmentId
+                                                            .jobTime[0],
+                                                        id,
+                                                        data.departmentId
+                                                            .lineID[0],
+                                                      )));
                                           break;
                                         case 'remove':
                                           final String status =

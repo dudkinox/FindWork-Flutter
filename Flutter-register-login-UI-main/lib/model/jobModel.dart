@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-
 JobDataModel jobDataModelFromJson(String str) =>
     JobDataModel.fromJson(json.decode(str));
 
@@ -59,6 +58,7 @@ class DepartmentId {
     this.type,
     this.partTime,
     this.jobTime,
+    this.lineID,
   });
 
   var salary = [];
@@ -68,6 +68,7 @@ class DepartmentId {
   var type = [];
   var partTime = [];
   var jobTime = [];
+  var lineID = [];
 
   factory DepartmentId.fromJson(Map<String, dynamic> json) => DepartmentId(
         salary: List<String>.from(json["salary"].map((x) => x)),
@@ -75,6 +76,7 @@ class DepartmentId {
         detail: List<String>.from(json["detail"].map((x) => x)),
         name: List<String>.from(json["name"].map((x) => x)),
         type: List<String>.from(json["type"].map((x) => x)),
+        lineID: List<String>.from(json["lineID"].map((x) => x)),
         partTime: List<String>.from(json["part_time"].map((x) => x)),
         jobTime: List<String>.from(json["job_time"].map((x) => x)),
       );
@@ -85,6 +87,7 @@ class DepartmentId {
         "detail": List<dynamic>.from(detail.map((x) => x)),
         "name": List<dynamic>.from(name.map((x) => x)),
         "type": List<dynamic>.from(type.map((x) => x)),
+        "lineID": List<dynamic>.from(lineID.map((x) => x)),
         "part_time": List<dynamic>.from(partTime.map((x) => x)),
         "job_time": List<dynamic>.from(jobTime.map((x) => x)),
       };

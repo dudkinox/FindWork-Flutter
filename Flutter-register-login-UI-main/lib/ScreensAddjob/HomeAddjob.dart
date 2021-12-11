@@ -71,7 +71,7 @@ class _HomeAddjobState extends State<HomeAddjob> {
                         if (snapshot?.connectionState != ConnectionState.done) {
                           return LoadingFadingCube();
                         } else {
-                          detailCompany.text = data.departmentId.detail[0];
+                          detailCompany.text = data.departmentId?.detail[0];
                           return FutureBuilder<ResumeModel>(
                               future: PreviewImageCopany(token),
                               builder: (context, snapshot) {
@@ -86,18 +86,21 @@ class _HomeAddjobState extends State<HomeAddjob> {
                                   }
                                   return FutureBuilder<dynamic>(
                                       future: FindIDLocation(data?.id),
-                                      builder: (context, AsyncSnapshot snapshot) {
-                                          var resultposition = snapshot?.data;
+                                      builder:
+                                          (context, AsyncSnapshot snapshot) {
+                                        var resultposition = snapshot?.data;
                                         if (snapshot?.connectionState !=
                                             ConnectionState.done) {
                                           return LoadingFadingCube();
                                         } else {
-                                          if(resultposition == "หาไม่เจอ"){
+                                          if (resultposition == "หาไม่เจอ") {
                                             LatLocation = "";
                                             LngLocation = "";
                                           } else {
-                                            LatLocation = resultposition?.latitude;
-                                            LngLocation = resultposition?.longitude;
+                                            LatLocation =
+                                                resultposition?.latitude;
+                                            LngLocation =
+                                                resultposition?.longitude;
                                           }
                                           return Container(
                                             height: MediaQuery.of(context)
@@ -192,7 +195,7 @@ class _HomeAddjobState extends State<HomeAddjob> {
                                                                               typeUser,
                                                                               data?.id,
                                                                               data?.company,
-                                                                              data.departmentId.detail[0],
+                                                                              data.departmentId?.detail[0],
                                                                               data?.province,
                                                                               data?.district,
                                                                               data?.subDistrict,
@@ -384,9 +387,11 @@ class _HomeAddjobState extends State<HomeAddjob> {
                                                                           BouncingScrollPhysics(),
                                                                       child:
                                                                           Column(
-                                                                        children: buildRequirements(data
-                                                                            .departmentId
-                                                                            .detail[0]),
+                                                                        children:
+                                                                            buildRequirements(
+                                                                          data.departmentId
+                                                                              .detail[0],
+                                                                        ),
                                                                       ),
                                                                     ),
                                                                   ),
@@ -422,10 +427,11 @@ class _HomeAddjobState extends State<HomeAddjob> {
                                                                       context,
                                                                       MaterialPageRoute(
                                                                           builder: (context) => HomeAdmin(
-                                                                              token,
-                                                                              typeUser,
-                                                                              data?.id,
-                                                                              data?.departmentId.name[0])));
+                                                                                token,
+                                                                                typeUser,
+                                                                                data?.id,
+                                                                                data.departmentId?.name[0],
+                                                                              )));
                                                                 },
                                                                 child: Text(
                                                                   "รายชื่อผู้สมัคร",

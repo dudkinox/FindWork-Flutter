@@ -41,7 +41,7 @@ Future<JobDataModel> TopicWorkFindID(String token) async {
       'Content-Type': 'application/json; charset=UTF-8',
     },
   );
-  JobDataModel temp ;
+  JobDataModel temp;
   if (response.body != "หาไม่เจอ") {
     return JobDataModel.fromJson(jsonDecode(response.body));
   } else {
@@ -49,10 +49,7 @@ Future<JobDataModel> TopicWorkFindID(String token) async {
   }
 }
 
-Future<String> JobCrate(
-  String job_id,
-  String company
-) async {
+Future<String> JobCrate(String job_id, String company) async {
   try {
     final String Url = Host + "/api/employer/";
     final response = await http.post(
@@ -69,7 +66,8 @@ Future<String> JobCrate(
           "part_time": [""],
           "job_time": [""],
           "status": [true],
-          "type": [""]
+          "type": [""],
+          "lineID": [""],
         },
         "district": "",
         "image": "",
@@ -90,8 +88,8 @@ Future<String> JobCrate(
   }
 }
 
-Future<String> UpdateJob(String token, JobDataModel request,
-    String Job_JobID, DepartmentId detail) async {
+Future<String> UpdateJob(String token, JobDataModel request, String Job_JobID,
+    DepartmentId detail) async {
   try {
     final JobDataModel OldData = await TopicWorkFindJob_ID(Job_JobID);
     final String Url = Host + "/api/employer/" + token;
@@ -110,6 +108,7 @@ Future<String> UpdateJob(String token, JobDataModel request,
           "job_time": [OldData.departmentId.jobTime[0]],
           "status": [OldData.departmentId.status[0]],
           "type": [OldData.departmentId.type[0]],
+          "lineID": [OldData.departmentId.lineID[0]],
         },
         "district": request.district,
         "province": request.province,
@@ -130,7 +129,7 @@ Future<String> UpdateJob(String token, JobDataModel request,
   }
 }
 
-Future<String> UpdateImage(String token,String Job_JobID , String image) async {
+Future<String> UpdateImage(String token, String Job_JobID, String image) async {
   try {
     final JobDataModel OldData = await TopicWorkFindJob_ID(Job_JobID);
     final String Url = Host + "/api/employer/" + token;
@@ -149,6 +148,7 @@ Future<String> UpdateImage(String token,String Job_JobID , String image) async {
           "job_time": [OldData.departmentId.jobTime[0]],
           "status": [OldData.departmentId.status[0]],
           "type": [OldData.departmentId.type[0]],
+          "lineID": [OldData.departmentId.lineID[0]],
         },
         "district": OldData.district,
         "province": OldData.province,
@@ -170,7 +170,16 @@ Future<String> UpdateImage(String token,String Job_JobID , String image) async {
   }
 }
 
-Future<String> UpdateDetailJob(String token, JobDataModel OldData, String salary, String name, String parttime, String jobtime, String type) async {
+Future<String> UpdateDetailJob(
+  String token,
+  JobDataModel OldData,
+  String salary,
+  String name,
+  String parttime,
+  String jobtime,
+  String type,
+  String lineID,
+) async {
   try {
     final String Url = Host + "/api/employer/" + token;
     final response = await http.put(
@@ -188,6 +197,7 @@ Future<String> UpdateDetailJob(String token, JobDataModel OldData, String salary
           "job_time": [jobtime],
           "status": [OldData.departmentId.status[0]],
           "type": [type],
+          "lineID": [lineID],
         },
         "district": OldData.district,
         "province": OldData.province,

@@ -16,44 +16,49 @@ import 'package:login_ui/model/jobModel.dart';
 
 class EditingCardJob extends StatefulWidget {
   EditingCardJob(this.token, this.typeUser, this.name, this.type, this.money,
-      this.jobTime, this.id);
+      this.jobTime, this.id, this.lineID);
   var token;
   var typeUser;
   var name;
   var type;
   var money;
   var jobTime;
+  var lineID;
   var id;
   final TextEditingController Title_company = new TextEditingController();
   final TextEditingController Title_type = new TextEditingController();
   final TextEditingController Title_money = new TextEditingController();
   final TextEditingController Title_jobTime = new TextEditingController();
+  final TextEditingController Title_lineID = new TextEditingController();
   @override
   MapScreenState createState() =>
-      MapScreenState(token, typeUser, name, type, money, jobTime, id);
+      MapScreenState(token, typeUser, name, type, money, jobTime, id, lineID);
 }
 
 class MapScreenState extends State<EditingCardJob>
     with SingleTickerProviderStateMixin {
   MapScreenState(this.token, this.typeUser, this.name, this.type, this.money,
-      this.jobTime, this.id);
+      this.jobTime, this.id, this.lineID);
   var token;
   var typeUser;
   var name;
   var type;
   var money;
   var jobTime;
+  var lineID;
   var id;
   var Title_company = new TextEditingController();
   var Title_type = new TextEditingController();
   var Title_money = new TextEditingController();
   var Title_jobTime = new TextEditingController();
+  var Title_lineID = new TextEditingController();
   File file;
 
   var tempName;
   var tempType;
   var tempMoney;
   var tempJobTime;
+  var tempLineID;
 
   var _value;
   var value;
@@ -75,6 +80,7 @@ class MapScreenState extends State<EditingCardJob>
       Title_type.text = _value;
       Title_money.text = money;
       Title_jobTime.text = jobTime;
+      Title_lineID.text = lineID;
       if (type == "parttime") {
         value = "parttime";
         _value = value;
@@ -89,7 +95,9 @@ class MapScreenState extends State<EditingCardJob>
       Title_type.text = tempType;
       Title_money.text = tempMoney;
       Title_jobTime.text = tempJobTime;
+      Title_lineID.text = tempLineID;
     }
+    print(lineID);
     return loading
         ? LoadingCube()
         : WillPopScope(
@@ -296,6 +304,34 @@ class MapScreenState extends State<EditingCardJob>
                                     SizedBox(
                                       height: 5,
                                     ),
+
+                                    Padding(
+                                        padding: EdgeInsets.only(
+                                            left: 25.0, right: 25.0, top: 2.0),
+                                        child: new Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: <Widget>[
+                                            new Text(
+                                              'Line ID : ',
+                                              style: TextStyle(
+                                                  fontSize: 16.0,
+                                                  color: PrimaryColor,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            SizedBox(
+                                              width: 5,
+                                            ),
+                                            new Flexible(
+                                                child: new TextField(
+                                              controller: Title_lineID,
+                                              decoration: const InputDecoration(
+                                                hintText: "กรอก ID line",
+                                              ),
+                                              enabled: !_status,
+                                              autofocus: !_status,
+                                            )),
+                                          ],
+                                        )),
                                     Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceAround,
@@ -324,6 +360,8 @@ class MapScreenState extends State<EditingCardJob>
                                                           Title_jobTime.text;
                                                       tempType =
                                                           Title_type.text;
+                                                      tempLineID =
+                                                          Title_lineID.text;
                                                     });
                                                   }),
                                           Text("FullTime"),
@@ -349,6 +387,8 @@ class MapScreenState extends State<EditingCardJob>
                                                           Title_jobTime.text;
                                                       tempType =
                                                           Title_type.text;
+                                                      tempLineID =
+                                                          Title_lineID.text;
                                                     });
                                                   }),
                                           Text("Partime"),
@@ -411,13 +451,15 @@ class MapScreenState extends State<EditingCardJob>
                   final JobDataModel OldData = await TopicWorkFindID(id);
                   if (Title_type.text == "parttime") {
                     final String status = await UpdateDetailJob(
-                        id,
-                        OldData,
-                        "",
-                        Title_company.text,
-                        Title_money.text,
-                        Title_jobTime.text,
-                        Title_type.text);
+                      id,
+                      OldData,
+                      "",
+                      Title_company.text,
+                      Title_money.text,
+                      Title_jobTime.text,
+                      Title_type.text,
+                      Title_lineID.text,
+                    );
                     if (status == "แก้ไขข้อมูลแล้ว") {
                       showDialog(
                           context: context,
@@ -439,13 +481,15 @@ class MapScreenState extends State<EditingCardJob>
                     }
                   } else if (Title_type.text == "salary") {
                     final String status = await UpdateDetailJob(
-                        id,
-                        OldData,
-                        Title_money.text,
-                        Title_company.text,
-                        "",
-                        Title_jobTime.text,
-                        Title_type.text);
+                      id,
+                      OldData,
+                      Title_money.text,
+                      Title_company.text,
+                      "",
+                      Title_jobTime.text,
+                      Title_type.text,
+                      Title_lineID.text,
+                    );
                     if (status == "แก้ไขข้อมูลแล้ว") {
                       showDialog(
                           context: context,
