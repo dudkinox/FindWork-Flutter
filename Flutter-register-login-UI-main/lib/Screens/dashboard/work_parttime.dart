@@ -60,7 +60,8 @@ class work_parttime extends StatelessWidget {
                                 context,
                                 MaterialPageRoute(
                                     builder: (BuildContext context) =>
-                                        dashboard_All(token, typeUser,matching)))
+                                        dashboard_All(
+                                            token, typeUser, matching)))
                           },
                           child: Text(
                             "ดูทั้งหมด",
@@ -79,37 +80,38 @@ class work_parttime extends StatelessWidget {
               child: FutureBuilder<List<JobDataModel>>(
                 future: FindMatching(token),
                 builder: (context, AsyncSnapshot snapshot) {
-                  List result = [];
                   if (snapshot?.connectionState != ConnectionState.done) {
-                    return LoadingCube();
+                    return Container();
                   } else {
-                    for (JobDataModel data in snapshot?.data) {
-                      if (data.departmentId.type.single == "parttime") {
-                        if(data?.image == ""){
-                          img = DefaultImage;
-                        } else {
-                          img = data?.image;
+                    var data = [];
+                    for (JobDataModel items in snapshot?.data) {
+                      if (items?.departmentId?.name[0] != "") {
+                        var count = items?.departmentId?.type.length;
+                        for (var i = 0; i < count; i++) {
+                          if (items?.departmentId?.type[i] == "parttime") {
+                            data.add(items);
+                          }
                         }
-                        result.add(Recommendation(
-                            img,
-                            data?.company,
-                            data.province +
-                                " " +
-                                data?.district +
-                                " " +
-                                data?.subDistrict,
-                            data?.id,
-                            token,
-                            typeUser));
                       }
                     }
-                    return result.length <= 0 ? notFound() : ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: result?.length,
-                      itemBuilder: (context, index) {
-                        return result[index];
-                      },
-                    );
+                    return data.length <= 0
+                        ? notFound()
+                        : ListView?.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: data.length,
+                            itemBuilder: (context, index) {
+                              return Recommendation(
+                                  data[index].image,
+                                  data[index].company,
+                                  data[index].province +
+                                      " " +
+                                      data[index].district +
+                                      " " +
+                                      data[index].subDistrict,
+                                  data[index].id,
+                                  token,
+                                  typeUser);
+                            });
                   }
                 },
               ),

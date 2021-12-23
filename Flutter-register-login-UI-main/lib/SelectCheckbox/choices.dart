@@ -234,12 +234,7 @@ List<Map<String, dynamic>> smartphones = [
     'brand': 'Nokia',
     'category': 'Budget Phone'
   },
-  {
-    'id': '3',
-    'name': 'งานผลิต',
-    'brand': 'Nokia',
-    'category': 'Budget Phone'
-  },
+  {'id': '3', 'name': 'งานผลิต', 'brand': 'Nokia', 'category': 'Budget Phone'},
   {
     'id': '4',
     'name': 'งานบริการลูกค้า',
@@ -285,6 +280,17 @@ List<Map<String, dynamic>> smartphones = [
 ];
 
 List<JobsDetail> demoFeatured = [
+  JobsDetail(
+    image: 'assets/images/youtube.png',
+    title: 'Backend Developer',
+    subTitle: 'Youtube',
+    renumeration: '\฿2000 / บาท',
+    datePosted: '3 Weeks ago',
+    text1: 'Part Time',
+    text2: 'Remote',
+    text3: 'Junior',
+    text4: '4 yrs',
+  ),
   JobsDetail(
     image: 'assets/images/youtube.png',
     title: 'Backend Developer',

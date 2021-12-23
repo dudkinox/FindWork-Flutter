@@ -1,9 +1,8 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: must_be_immutable, sdk_version_set_literal
 
 import 'package:flutter/material.dart';
 import 'package:login_ui/Recommendation_List_Data/Recommendation_screen.dart';
 import 'package:login_ui/Screens/loading.dart';
-import 'package:login_ui/Service/JobService.dart';
 import 'package:login_ui/Service/matchingService.dart';
 import 'package:login_ui/Themes/Themes.dart';
 import 'package:login_ui/components/image.dart';
@@ -12,11 +11,12 @@ import 'package:login_ui/model/jobModel.dart';
 
 import 'dashboard_All.dart';
 
+// ignore: camel_case_types
 class work_fulltime extends StatelessWidget {
   work_fulltime(this.token, this.typeUser, this.matching);
   var token;
   var typeUser;
-  var img;
+  var img = [];
   var matching;
   @override
   Widget build(BuildContext context) {
@@ -58,7 +58,8 @@ class work_fulltime extends StatelessWidget {
                                 context,
                                 MaterialPageRoute(
                                     builder: (BuildContext context) =>
-                                        dashboard_All(token, typeUser, matching)))
+                                        dashboard_All(
+                                            token, typeUser, matching)))
                           },
                           child: Text(
                             "ดูทั้งหมด",
@@ -77,37 +78,38 @@ class work_fulltime extends StatelessWidget {
               child: FutureBuilder<List<JobDataModel>>(
                 future: FindMatching(token),
                 builder: (context, AsyncSnapshot snapshot) {
-                  List result = [];
                   if (snapshot?.connectionState != ConnectionState.done) {
-                    return LoadingCube();
+                    return Container();
                   } else {
-                    for (JobDataModel data in snapshot?.data) {
-                      if (data.departmentId.type.single == "salary") {
-                        if(data?.image == ""){
-                          img = DefaultImage;
-                        } else {
-                          img = data?.image;
+                    var data = [];
+                    for (JobDataModel items in snapshot?.data) {
+                      if (items?.departmentId?.name[0] != "") {
+                        var count = items?.departmentId?.type.length;
+                        for (var i = 0; i < count; i++) {
+                          if (items?.departmentId?.type[i] == "salary") {
+                            data.add(items);
+                          }
                         }
-                        result.add(Recommendation(
-                            img,
-                            data?.company,
-                            data.province +
-                                " " +
-                                data?.district +
-                                " " +
-                                data?.subDistrict,
-                            data?.id,
-                            token,
-                            typeUser));
                       }
                     }
-                    return result.length <= 0 ? notFound() : ListView?.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: result?.length,
-                      itemBuilder: (context, index) {
-                        return result[index];
-                      },
-                    );
+                    return data.length <= 0
+                        ? notFound()
+                        : ListView?.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: data.length,
+                            itemBuilder: (context, index) {
+                              return Recommendation(
+                                  data[index].image,
+                                  data[index].company,
+                                  data[index].province +
+                                      " " +
+                                      data[index].district +
+                                      " " +
+                                      data[index].subDistrict,
+                                  data[index].id,
+                                  token,
+                                  typeUser);
+                            });
                   }
                 },
               ),

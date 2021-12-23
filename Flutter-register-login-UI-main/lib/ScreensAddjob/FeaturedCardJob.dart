@@ -11,6 +11,7 @@ import 'EditingCardJob.dart';
 import 'HomeAddjob.dart';
 
 class FeaturedCardJob extends StatelessWidget {
+  final index;
   final featuredJobs;
   final token;
   final typeUser;
@@ -19,7 +20,8 @@ class FeaturedCardJob extends StatelessWidget {
   final VoidCallback onClicked;
 
   const FeaturedCardJob(
-      {this.featuredJobs,
+      {this.index,
+      this.featuredJobs,
       this.typeUser,
       this.token,
       this.id,
@@ -27,9 +29,9 @@ class FeaturedCardJob extends StatelessWidget {
       this.onClicked,
       Key key})
       : super(key: key);
-
   @override
   Widget build(BuildContext context) {
+    print(index);
     return FutureBuilder<JobDataModel>(
         future: TopicWorkFindID(id),
         builder: (context, AsyncSnapshot snapshot) {

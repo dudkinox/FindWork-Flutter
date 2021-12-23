@@ -1,4 +1,4 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: must_be_immutable, sdk_version_set_literal
 
 import 'dart:math';
 
@@ -13,6 +13,7 @@ import 'package:login_ui/Service/LoginService.dart';
 import 'package:login_ui/Service/locaitonService.dart';
 import 'package:login_ui/Themes/Themes.dart';
 import 'package:login_ui/components/WillPop.dart';
+import 'package:login_ui/components/alert.dart';
 import 'package:login_ui/components/image.dart';
 import 'package:login_ui/details_screen.dart';
 import 'package:login_ui/main.dart';
@@ -48,6 +49,17 @@ class _HomeAddjobState extends State<HomeAddjob> {
   Future<void> onPullToRefresh() async {
     await Future.delayed(Duration(milliseconds: 500));
     setState(() {});
+  }
+
+  Future<void> addDepartment() async {
+    String statusAddDepartment = await AddDepartment(token);
+    if (statusAddDepartment == "") {
+      showDialog(
+        context: context,
+        builder: (_) =>
+            AlertMessage("แจ้งเตือน", "ตำแหน่งงานถูกเพิ่มแล้ว", null),
+      );
+    }
   }
 
   @override
@@ -421,6 +433,14 @@ class _HomeAddjobState extends State<HomeAddjob> {
                                                                     fontSize:
                                                                         15.0),
                                                               ),
+                                                              IconButton(
+                                                                icon: Icon(
+                                                                    Icons.add),
+                                                                onPressed: () =>
+                                                                    {
+                                                                  addDepartment(),
+                                                                },
+                                                              ),
                                                               GestureDetector(
                                                                 onTap: () {
                                                                   Navigator.push(
@@ -453,9 +473,13 @@ class _HomeAddjobState extends State<HomeAddjob> {
                                                             child: Row(
                                                               children:
                                                                   List.generate(
-                                                                demoFeatured
-                                                                    .length,
-                                                                (HomeAddjob) => FeaturedCardJob(
+                                                                data
+                                                                    .departmentId
+                                                                    ?.name
+                                                                    ?.length,
+                                                                (indexDepartment) => FeaturedCardJob(
+                                                                    index:
+                                                                        indexDepartment,
                                                                     featuredJobs:
                                                                         demoFeatured[
                                                                             0],

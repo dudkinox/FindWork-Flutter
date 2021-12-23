@@ -388,3 +388,11 @@ Future<FavoriteModel> GetFavorite(String token) async {
     print(e);
   }
 }
+
+Future<String> AddDepartment(String token) async {
+  try {
+    return '';
+  } catch (e) {
+    print(e);
+  }
+}
