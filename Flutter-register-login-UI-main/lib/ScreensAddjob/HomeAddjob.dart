@@ -51,8 +51,8 @@ class _HomeAddjobState extends State<HomeAddjob> {
   }
 
   Future<void> addDepartment() async {
-    JobDataModel get = await TopicWorkFindID(token);
-    String statusAddDepartment = await AddDepartment(get.jobId);
+    AccountModel get = await FindID(token);
+    String statusAddDepartment = await AddDepartment(get?.jobId);
     if (statusAddDepartment == "เพิ่มตำแหน่งสำเร็จ") {
       showDialog(
         context: context,
