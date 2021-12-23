@@ -60,6 +60,7 @@ class _HomeAddjobState extends State<HomeAddjob> {
         builder: (_) =>
             AlertMessage("แจ้งเตือน", "ตำแหน่งงานถูกเพิ่มแล้ว", null),
       );
+      setState(() {});
     } else {
       showDialog(
         context: context,

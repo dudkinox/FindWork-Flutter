@@ -31,7 +31,6 @@ class FeaturedCardJob extends StatelessWidget {
       : super(key: key);
   @override
   Widget build(BuildContext context) {
-    print(index);
     return FutureBuilder<JobDataModel>(
         future: TopicWorkFindID(id),
         builder: (context, AsyncSnapshot snapshot) {
@@ -40,10 +39,10 @@ class FeaturedCardJob extends StatelessWidget {
             return LoadingRipple();
           } else {
             String money = "";
-            if (data.departmentId.type[0] == "salary") {
-              money = data.departmentId.salary[0];
+            if (data.departmentId.type[index] == "salary") {
+              money = data.departmentId.salary[index];
             } else {
-              money = data.departmentId.partTime[0];
+              money = data.departmentId.partTime[index];
             }
             return GestureDetector(
               onTap: () {
@@ -54,12 +53,12 @@ class FeaturedCardJob extends StatelessWidget {
                         typeUser,
                         token,
                         img,
-                        data.departmentId.name[0],
+                        data.departmentId.name[index],
                         data.company,
-                        data.departmentId.type[0],
-                        data.departmentId.detail[0],
+                        data.departmentId.type[index],
+                        data.departmentId.detail[index],
                         money,
-                        data.departmentId.jobTime[0],
+                        data.departmentId.jobTime[index],
                         id),
                   ),
                 );
@@ -104,7 +103,7 @@ class FeaturedCardJob extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    data.departmentId.name[0],
+                                    data.departmentId.name[index],
                                     overflow: TextOverflow.ellipsis,
                                     maxLines: 1,
                                     style: TextStyle(
@@ -141,15 +140,15 @@ class FeaturedCardJob extends StatelessWidget {
                                                         token,
                                                         typeUser,
                                                         data.departmentId
-                                                            .name[0],
+                                                            .name[index],
                                                         data.departmentId
-                                                            .type[0],
+                                                            .type[index],
                                                         money,
                                                         data.departmentId
-                                                            .jobTime[0],
+                                                            .jobTime[index],
                                                         id,
                                                         data.departmentId
-                                                            .lineID[0],
+                                                            .lineID[index],
                                                       )));
                                           break;
                                         case 'remove':
@@ -228,9 +227,9 @@ class FeaturedCardJob extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        buildChip(data.departmentId.type[0] == "salary"
+                        buildChip(data.departmentId.type[index] == "salary"
                             ? "งานประจำ"
-                            : data.departmentId.type[0] == ""
+                            : data.departmentId.type[index] == ""
                                 ? "ยังไม่ระบุ"
                                 : "พาร์ทไทม์"),
                         buildChip(featuredJobs.text2),
@@ -247,7 +246,7 @@ class FeaturedCardJob extends StatelessWidget {
                           style: TextStyle(
                               fontSize: 20, fontWeight: FontWeight.bold),
                         ),
-                        Text(data.departmentId.jobTime[0])
+                        Text(data.departmentId.jobTime[index])
                       ],
                     ),
                   ],
