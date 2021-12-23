@@ -18,7 +18,6 @@ import 'package:login_ui/components/image.dart';
 import 'package:login_ui/details_screen.dart';
 import 'package:login_ui/main.dart';
 import 'package:login_ui/model/jobModel.dart';
-import 'package:login_ui/model/locationJobModel.dart';
 import 'package:login_ui/model/loginModel.dart';
 
 import 'EditingCompany.dart';
@@ -52,12 +51,19 @@ class _HomeAddjobState extends State<HomeAddjob> {
   }
 
   Future<void> addDepartment() async {
-    String statusAddDepartment = await AddDepartment(token);
-    if (statusAddDepartment == "") {
+    JobDataModel get = await TopicWorkFindID(token);
+    String statusAddDepartment = await AddDepartment(get.jobId);
+    if (statusAddDepartment == "เพิ่มตำแหน่งสำเร็จ") {
       showDialog(
         context: context,
         builder: (_) =>
             AlertMessage("แจ้งเตือน", "ตำแหน่งงานถูกเพิ่มแล้ว", null),
+      );
+    } else {
+      showDialog(
+        context: context,
+        builder: (_) => AlertMessage(
+            "แจ้งเตือน", "เกิดข้อผิดพลาดทาง Server โปรดลองใหม่ภายหลัง", null),
       );
     }
   }
