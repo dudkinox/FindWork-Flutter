@@ -392,8 +392,7 @@ Future<FavoriteModel> GetFavorite(String token) async {
 Future<String> AddDepartment(String token) async {
   try {
     final String Url = Host + "/api/employer/add/department/" + token;
-    final response =
-        await http.delete(Uri.parse(Url), headers: <String, String>{
+    final response = await http.put(Uri.parse(Url), headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     });
 
