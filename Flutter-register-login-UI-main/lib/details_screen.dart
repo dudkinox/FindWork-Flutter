@@ -41,10 +41,10 @@ class DetailsPage extends StatelessWidget {
       child: FutureBuilder<JobDataModel>(
         future: TopicWorkFindID(id),
         builder: (context, AsyncSnapshot snapshot) {
-          JobDataModel data = snapshot?.data;
           if (snapshot?.connectionState != ConnectionState.done) {
             return LoadingCube();
           } else {
+            JobDataModel data = snapshot?.data;
             return Container(
               child: SingleChildScrollView(
                 child: Column(
@@ -230,6 +230,7 @@ class DetailsPage extends StatelessWidget {
                                       typeUser: typeUser,
                                       token: token,
                                       id: id,
+                                      index: HomeAddjob,
                                       img: imgUrl),
                                 ),
                               ),
