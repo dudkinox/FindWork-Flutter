@@ -350,10 +350,12 @@ Future<String> DelJob(
 }
 
 Future<String> DelJobDetail(
-  String token,
+  String job_id,
+  String index,
 ) async {
   try {
-    final String Url = Host + "/api/employer/" + token;
+    final String Url =
+        Host + "/api/employer/delete/department/" + index + "/" + job_id;
     final response =
         await http.delete(Uri.parse(Url), headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',

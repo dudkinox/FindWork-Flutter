@@ -154,8 +154,9 @@ class FeaturedCardJob extends StatelessWidget {
                                           break;
                                         case 'remove':
                                           final String status =
-                                              await DelJobDetail(data?.jobId);
-                                          if (status == "ลบสำเร็จ") {
+                                              await DelJobDetail(data?.jobId,
+                                                  index.toString());
+                                          if (status == "ลบตำแหน่งงานสำเร็จ") {
                                             showDialog(
                                               context: context,
                                               builder: (_) => AlertMessage(
