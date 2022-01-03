@@ -1,8 +1,7 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: must_be_immutable, sdk_version_set_literal
 
 import 'package:flutter/material.dart';
 import 'package:login_ui/Recommendation_List_Data/Recommendation_screen.dart';
-import 'package:login_ui/SelectCheckbox/choices.dart';
 import 'package:login_ui/Service/JobService.dart';
 import 'package:login_ui/Themes/Themes.dart';
 import 'package:login_ui/components/WillPop.dart';
@@ -10,7 +9,6 @@ import 'package:login_ui/components/image.dart';
 import 'package:login_ui/model/jobModel.dart';
 import '../homehome.dart';
 import '../loading.dart';
-import 'dashboard_itemCard.dart';
 
 class dashboard_All extends StatefulWidget {
   dashboard_All(this.token, this.typeUser, this.matching);
@@ -18,11 +16,12 @@ class dashboard_All extends StatefulWidget {
   var typeUser;
   var matching;
   @override
-  _dashboard_AllState createState() => _dashboard_AllState(token, typeUser, matching);
+  _dashboard_AllState createState() =>
+      _dashboard_AllState(token, typeUser, matching);
 }
 
 class _dashboard_AllState extends State<dashboard_All> {
-  _dashboard_AllState(this.token, this.typeUser,this.matching);
+  _dashboard_AllState(this.token, this.typeUser, this.matching);
   var token;
   var typeUser;
   var img;
@@ -48,7 +47,8 @@ class _dashboard_AllState extends State<dashboard_All> {
             icon: Icon(Icons.arrow_back_ios, color: Colors.black),
             onPressed: () => {
               Navigator.of(context).pushReplacement(MaterialPageRoute(
-                  builder: (context) => HomeHome(0, token, typeUser,matching))),
+                  builder: (context) =>
+                      HomeHome(0, token, typeUser, matching))),
             },
           ),
         ),
@@ -76,7 +76,8 @@ class _dashboard_AllState extends State<dashboard_All> {
                             data?.subDistrict,
                         data?.id,
                         token,
-                        typeUser));
+                        typeUser,
+                        999));
                   }
                   return ListView.builder(
                     scrollDirection: Axis.vertical,

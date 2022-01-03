@@ -4,7 +4,6 @@ import 'package:login_ui/Screens/loading.dart';
 import 'package:login_ui/Service/JobService.dart';
 import 'package:login_ui/Themes/Themes.dart';
 import 'package:login_ui/details_screen.dart';
-import 'package:login_ui/model/ProgressModel.dart';
 import 'package:login_ui/model/favoriteModel.dart';
 import 'package:login_ui/model/jobModel.dart';
 
@@ -15,29 +14,31 @@ class Recommendation extends StatefulWidget {
   final String id;
   final String token;
   final String typeUser;
+  final int index;
 
   const Recommendation(this.imgUlr, this.company, this.location, this.id,
-      this.token, this.typeUser);
+      this.token, this.typeUser, this.index);
   @override
-  _RecommendationState createState() =>
-      _RecommendationState(imgUlr, company, location, id, token, typeUser);
+  _RecommendationState createState() => _RecommendationState(
+      imgUlr, company, location, id, token, typeUser, index);
 }
 
 class _RecommendationState extends State<Recommendation> {
   _RecommendationState(this.imgUrl, this.company, this.location, this.id,
-      this.token, this.typeUser);
+      this.token, this.typeUser, this.index);
   var imgUrl;
   var company;
   var location;
   var id;
   var token;
   var typeUser;
-
+  var index;
+  var name = "";
 
   Future<bool> status(String token, String jobId) async {
     FavoriteModel status = await GetFavorite(token);
     if (status != null) {
-      for (var i = 0; i < status?.jobId.length; i++) {
+      for (var i = 0; i < status?.jobId?.length; i++) {
         if (status?.jobId[i] == null) {
           return false;
         }
@@ -68,6 +69,11 @@ class _RecommendationState extends State<Recommendation> {
               data?.jobId = item.jobId;
               data?.province = item.province;
               data?.subDistrict = item.subDistrict;
+            }
+            if (index == 999) {
+              name = company;
+            } else {
+              name = data?.departmentId?.name[index];
             }
             return Padding(
               padding: EdgeInsets.only(top: 20.0, left: 15, right: 15),
@@ -146,7 +152,7 @@ class _RecommendationState extends State<Recommendation> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  company,
+                                  name,
                                   style: TextStyle(
                                       color: PrimaryColor,
                                       fontWeight: FontWeight.bold,

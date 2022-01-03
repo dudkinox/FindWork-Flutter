@@ -98,7 +98,8 @@ class work_progress extends StatelessWidget {
                                               data?.subDistrict,
                                           data?.id,
                                           token,
-                                          typeUser));
+                                          typeUser,
+                                          i));
                                     }
                                   } else {
                                     return notFound();

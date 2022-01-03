@@ -84,7 +84,7 @@ class work_fulltime extends StatelessWidget {
                     var data = [];
                     for (JobDataModel items in snapshot?.data) {
                       if (items?.departmentId?.name[0] != "") {
-                        var count = items?.departmentId?.type.length;
+                        var count = items?.departmentId?.type?.length;
                         for (var i = 0; i < count; i++) {
                           if (items?.departmentId?.type[i] == "salary") {
                             data.add(items);
@@ -108,7 +108,8 @@ class work_fulltime extends StatelessWidget {
                                       data[index].subDistrict,
                                   data[index].id,
                                   token,
-                                  typeUser);
+                                  typeUser,
+                                  index);
                             });
                   }
                 },

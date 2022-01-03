@@ -1,4 +1,4 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: must_be_immutable, sdk_version_set_literal
 
 import 'package:flutter/material.dart';
 import 'package:login_ui/Recommendation_List_Data/Recommendation_screen.dart';
@@ -110,7 +110,8 @@ class work_parttime extends StatelessWidget {
                                       data[index].subDistrict,
                                   data[index].id,
                                   token,
-                                  typeUser);
+                                  typeUser,
+                                  index);
                             });
                   }
                 },

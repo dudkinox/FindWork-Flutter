@@ -112,7 +112,8 @@ class _FavoriteState extends State<Favorite> {
                                       data?.subDistrict,
                                   data?.id,
                                   token,
-                                  typeUser));
+                                  typeUser,
+                                  999));
                             }
                             loading = false;
                             if (result.length == 0) {
