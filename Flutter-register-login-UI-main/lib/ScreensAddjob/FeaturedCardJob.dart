@@ -149,6 +149,7 @@ class FeaturedCardJob extends StatelessWidget {
                                                         id,
                                                         data.departmentId
                                                             .lineID[index],
+                                                        index,
                                                       )));
                                           break;
                                         case 'remove':

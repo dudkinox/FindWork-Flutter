@@ -1,4 +1,4 @@
-// ignore_for_file: deprecated_member_use
+// ignore_for_file: deprecated_member_use, must_be_immutable
 
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
@@ -16,7 +16,7 @@ import 'package:login_ui/model/jobModel.dart';
 
 class EditingCardJob extends StatefulWidget {
   EditingCardJob(this.token, this.typeUser, this.name, this.type, this.money,
-      this.jobTime, this.id, this.lineID);
+      this.jobTime, this.id, this.lineID, this.index);
   var token;
   var typeUser;
   var name;
@@ -25,20 +25,21 @@ class EditingCardJob extends StatefulWidget {
   var jobTime;
   var lineID;
   var id;
+  var index;
   final TextEditingController Title_company = new TextEditingController();
   final TextEditingController Title_type = new TextEditingController();
   final TextEditingController Title_money = new TextEditingController();
   final TextEditingController Title_jobTime = new TextEditingController();
   final TextEditingController Title_lineID = new TextEditingController();
   @override
-  MapScreenState createState() =>
-      MapScreenState(token, typeUser, name, type, money, jobTime, id, lineID);
+  MapScreenState createState() => MapScreenState(
+      token, typeUser, name, type, money, jobTime, id, lineID, index);
 }
 
 class MapScreenState extends State<EditingCardJob>
     with SingleTickerProviderStateMixin {
   MapScreenState(this.token, this.typeUser, this.name, this.type, this.money,
-      this.jobTime, this.id, this.lineID);
+      this.jobTime, this.id, this.lineID, this.index);
   var token;
   var typeUser;
   var name;
@@ -47,6 +48,7 @@ class MapScreenState extends State<EditingCardJob>
   var jobTime;
   var lineID;
   var id;
+  var index;
   var Title_company = new TextEditingController();
   var Title_type = new TextEditingController();
   var Title_money = new TextEditingController();
@@ -97,7 +99,7 @@ class MapScreenState extends State<EditingCardJob>
       Title_jobTime.text = tempJobTime;
       Title_lineID.text = tempLineID;
     }
-    print(lineID);
+
     return loading
         ? LoadingCube()
         : WillPopScope(
@@ -451,16 +453,16 @@ class MapScreenState extends State<EditingCardJob>
                   final JobDataModel OldData = await TopicWorkFindID(id);
                   if (Title_type.text == "parttime") {
                     final String status = await UpdateDetailJob(
-                      id,
-                      OldData,
-                      "",
-                      Title_company.text,
-                      Title_money.text,
-                      Title_jobTime.text,
-                      Title_type.text,
-                      Title_lineID.text,
-                    );
-                    if (status == "แก้ไขข้อมูลแล้ว") {
+                        OldData.jobId,
+                        OldData,
+                        "",
+                        Title_company.text,
+                        Title_money.text,
+                        Title_jobTime.text,
+                        Title_type.text,
+                        Title_lineID.text,
+                        index.toString());
+                    if (status == "อัพเดตตำแหน่งงานสำเร็จ") {
                       showDialog(
                           context: context,
                           builder: (_) => AlertMessage(
@@ -481,7 +483,7 @@ class MapScreenState extends State<EditingCardJob>
                     }
                   } else if (Title_type.text == "salary") {
                     final String status = await UpdateDetailJob(
-                      id,
+                      OldData.jobId,
                       OldData,
                       Title_money.text,
                       Title_company.text,
@@ -489,8 +491,9 @@ class MapScreenState extends State<EditingCardJob>
                       Title_jobTime.text,
                       Title_type.text,
                       Title_lineID.text,
+                      index.toString(),
                     );
-                    if (status == "แก้ไขข้อมูลแล้ว") {
+                    if (status == "อัพเดตตำแหน่งงานสำเร็จ") {
                       showDialog(
                           context: context,
                           builder: (_) => AlertMessage(

@@ -171,7 +171,7 @@ Future<String> UpdateImage(String token, String Job_JobID, String image) async {
 }
 
 Future<String> UpdateDetailJob(
-  String token,
+  String job_id,
   JobDataModel OldData,
   String salary,
   String name,
@@ -179,31 +179,27 @@ Future<String> UpdateDetailJob(
   String jobtime,
   String type,
   String lineID,
+  String index,
 ) async {
   try {
-    final String Url = Host + "/api/employer/" + token;
+    final String Url =
+        Host + "/api/employer/department/" + index + "/" + job_id;
     final response = await http.put(
       Uri.parse(Url),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
       body: jsonEncode(<String, dynamic>{
-        "company": OldData.company,
         "department_id": {
+          "status": [true],
           "salary": [salary],
           "detail": [OldData.departmentId.detail[0]],
-          "name": [name],
           "part_time": [parttime],
-          "job_time": [jobtime],
-          "status": [OldData.departmentId.status[0]],
           "type": [type],
+          "name": [name],
           "lineID": [lineID],
-        },
-        "district": OldData.district,
-        "province": OldData.province,
-        "sub_district": OldData.subDistrict,
-        "image": OldData.image,
-        "job_id": OldData.jobId,
+          "job_time": [jobtime]
+        }
       }),
     );
 
