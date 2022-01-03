@@ -1,7 +1,8 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:login_ui/Screens/loading.dart';
 import 'package:login_ui/ScreensAddjob/managerJob/manageControl.dart';
-import 'package:login_ui/ScreensAddjob/managerJob/manageJob.dart';
 import 'package:login_ui/ScreensAddjob/managerJob/showResume.dart';
 import 'package:login_ui/Service/MessageService.dart';
 import 'package:login_ui/Service/ProgressService.dart';

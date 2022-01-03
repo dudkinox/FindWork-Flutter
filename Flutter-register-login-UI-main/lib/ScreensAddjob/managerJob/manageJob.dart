@@ -1,22 +1,22 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:login_ui/Screens/loading.dart';
 import 'package:login_ui/Service/ProgressService.dart';
-import 'package:login_ui/components/WillPop.dart';
-import 'package:login_ui/model/ProgressModel.dart';
 import 'package:login_ui/model/loginModel.dart';
 import 'manageCard.dart';
 
 class Manager extends StatefulWidget {
-  Manager(this.id,this.name,this.token);
+  Manager(this.id, this.name, this.token);
   var id;
   var name;
   var token;
   @override
-  _ManagerState createState() => _ManagerState(id,name,token);
+  _ManagerState createState() => _ManagerState(id, name, token);
 }
 
 class _ManagerState extends State<Manager> {
-  _ManagerState(this.id,this.name,this.token);
+  _ManagerState(this.id, this.name, this.token);
   var id;
   var name;
   var token;
@@ -35,7 +35,8 @@ class _ManagerState extends State<Manager> {
             return LoadingCube();
           } else {
             for (AccountModel data in snapshot?.data) {
-              result.add(Itemcard(data?.email, data?.fullname, data?.tel,name,data?.id,id,token));
+              result.add(Itemcard(data?.email, data?.fullname, data?.tel, name,
+                  data?.id, id, token));
             }
             if (result.length == 0) {
               return RefreshIndicator(
