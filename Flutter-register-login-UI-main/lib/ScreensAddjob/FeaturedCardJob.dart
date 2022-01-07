@@ -1,11 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:login_ui/Screens/loading.dart';
 import 'package:login_ui/Service/JobService.dart';
-
 import 'package:login_ui/Themes/Themes.dart';
 import 'package:login_ui/components/alert.dart';
 import 'package:login_ui/model/jobModel.dart';
-
 import 'DetailCardJob.dart';
 import 'EditingCardJob.dart';
 import 'HomeAddjob.dart';
@@ -153,7 +154,35 @@ class FeaturedCardJob extends StatelessWidget {
                                                       )));
                                           break;
                                         case 'photo':
-                                          // TODO
+                                          var image = await ImagePicker()
+                                              .getImage(
+                                                  source: ImageSource.gallery);
+                                          if (image?.path != null) {
+                                            String status =
+                                                await UploadImageDepartment(
+                                                    index.toString(),
+                                                    id,
+                                                    File(image.path));
+
+                                            if (status ==
+                                                "อัพโหลดรูปภาพเรียบร้อย") {
+                                              showDialog(
+                                                context: context,
+                                                builder: (_) => AlertMessage(
+                                                    "แจ้งเตือน",
+                                                    "อัพโหลดสำเร็จ",
+                                                    null),
+                                              );
+                                            } else {
+                                              showDialog(
+                                                context: context,
+                                                builder: (_) => AlertMessage(
+                                                    "แจ้งเตือน",
+                                                    "การอัพโหลดมีปัญหา โปรดลองใหม่ภายหลัง",
+                                                    null),
+                                              );
+                                            }
+                                          }
                                           break;
                                         case 'remove':
                                           final String status =

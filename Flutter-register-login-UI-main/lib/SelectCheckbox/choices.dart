@@ -287,9 +287,9 @@ List<JobsDetail> demoFeatured = [
     renumeration: '\฿2000 / บาท',
     datePosted: '3 Weeks ago',
     text1: 'Part Time',
-    text2: 'Remote',
-    text3: 'Junior',
-    text4: '4 yrs',
+    text2: 'ประกันสังคม',
+    text3: 'รับจบใหม่',
+    text4: 'ฟรีที่พัก',
   ),
   JobsDetail(
     image: 'assets/images/youtube.png',
@@ -298,9 +298,9 @@ List<JobsDetail> demoFeatured = [
     renumeration: '\฿2000 / บาท',
     datePosted: '3 Weeks ago',
     text1: 'Part Time',
-    text2: 'Remote',
-    text3: 'Junior',
-    text4: '4 yrs',
+    text2: 'ประกันสังคม',
+    text3: 'รับจบใหม่',
+    text4: 'ฟรีที่พัก',
   ),
 ];
 

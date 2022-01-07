@@ -30,14 +30,8 @@ Future<LoginModel> Login(String username, String password) async {
   return LoginModel.fromJson(jsonDecode(response.body));
 }
 
-Future<String> RegisterEmployee(
-  String email,
-  String fullname,
-  String tel,
-  String username,
-  String password,
-  var matching
-) async {
+Future<String> RegisterEmployee(String email, String fullname, String tel,
+    String username, String password, var matching) async {
   try {
     final String Url = Host + "/api/login";
     final response = await http.post(
@@ -69,15 +63,8 @@ Future<String> RegisterEmployee(
   }
 }
 
-Future<String> RegisterEmployer(
-  String email,
-  String fullname,
-  String job_id,
-  String tel,
-  String username,
-  String password,
-  var matching
-) async {
+Future<String> RegisterEmployer(String email, String fullname, String job_id,
+    String tel, String username, String password, var matching) async {
   try {
     final String Url = Host + "/api/login";
     final response = await http.post(
