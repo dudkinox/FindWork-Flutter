@@ -82,16 +82,20 @@ class work_fulltime extends StatelessWidget {
                     return Container();
                   } else {
                     var data = [];
+                    var department = [];
+
                     for (JobDataModel items in snapshot?.data) {
-                      if (items?.departmentId?.name[0] != "") {
-                        var count = items?.departmentId?.type?.length;
-                        for (var i = 0; i < count; i++) {
+                      var count = items?.departmentId?.type?.length;
+                      for (var i = 0; i < count; i++) {
+                        if (items?.departmentId?.name[i] != "") {
                           if (items?.departmentId?.type[i] == "salary") {
                             data.add(items);
+                            department.add(items?.departmentId);
                           }
                         }
                       }
                     }
+
                     return data.length <= 0
                         ? notFound()
                         : ListView?.builder(
@@ -109,7 +113,8 @@ class work_fulltime extends StatelessWidget {
                                   data[index].id,
                                   token,
                                   typeUser,
-                                  index);
+                                  index,
+                                  department);
                             });
                   }
                 },

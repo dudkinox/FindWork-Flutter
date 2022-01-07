@@ -1,12 +1,9 @@
-// ignore_for_file: must_be_immutable, sdk_version_set_literal
+// ignore_for_file: must_be_immutable, sdk_version_set_literal, camel_case_types
 
 import 'package:flutter/material.dart';
 import 'package:login_ui/Recommendation_List_Data/Recommendation_screen.dart';
-import 'package:login_ui/Screens/loading.dart';
-import 'package:login_ui/Service/JobService.dart';
 import 'package:login_ui/Service/matchingService.dart';
 import 'package:login_ui/Themes/Themes.dart';
-import 'package:login_ui/components/image.dart';
 import 'package:login_ui/components/notfound.dart';
 import 'package:login_ui/model/jobModel.dart';
 
@@ -84,12 +81,15 @@ class work_parttime extends StatelessWidget {
                     return Container();
                   } else {
                     var data = [];
+                    var department = [];
+
                     for (JobDataModel items in snapshot?.data) {
-                      if (items?.departmentId?.name[0] != "") {
-                        var count = items?.departmentId?.type.length;
-                        for (var i = 0; i < count; i++) {
+                      var count = items?.departmentId?.type?.length;
+                      for (var i = 0; i < count; i++) {
+                        if (items?.departmentId?.name[i] != "") {
                           if (items?.departmentId?.type[i] == "parttime") {
                             data.add(items);
+                            department.add(items?.departmentId);
                           }
                         }
                       }
@@ -101,17 +101,18 @@ class work_parttime extends StatelessWidget {
                             itemCount: data.length,
                             itemBuilder: (context, index) {
                               return Recommendation(
-                                  data[index].image,
-                                  data[index].company,
-                                  data[index].province +
+                                  data[0].image,
+                                  data[0].company,
+                                  data[0].province +
                                       " " +
-                                      data[index].district +
+                                      data[0].district +
                                       " " +
-                                      data[index].subDistrict,
-                                  data[index].id,
+                                      data[0].subDistrict,
+                                  data[0].id,
                                   token,
                                   typeUser,
-                                  index);
+                                  index,
+                                  department);
                             });
                   }
                 },

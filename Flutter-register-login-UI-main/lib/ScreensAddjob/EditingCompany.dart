@@ -724,11 +724,6 @@ class MapScreenState extends State<EditingCompany>
                                                             BorderRadius
                                                                 .circular(
                                                                     15.0)),
-
-                                                    // child: Image.network(
-                                                    //   snapshot.data?.link,
-                                                    //   fit: BoxFit.fill,
-                                                    // ),
                                                   );
                                                 }
                                               } else {

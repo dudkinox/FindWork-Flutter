@@ -113,7 +113,8 @@ class _FavoriteState extends State<Favorite> {
                                   data?.id,
                                   token,
                                   typeUser,
-                                  999));
+                                  999,
+                                  null));
                             }
                             loading = false;
                             if (result.length == 0) {

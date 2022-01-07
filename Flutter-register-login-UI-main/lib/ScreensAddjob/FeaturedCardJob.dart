@@ -152,6 +152,9 @@ class FeaturedCardJob extends StatelessWidget {
                                                         index,
                                                       )));
                                           break;
+                                        case 'photo':
+                                          // TODO
+                                          break;
                                         case 'remove':
                                           final String status =
                                               await DelJobDetail(data?.jobId,
@@ -194,6 +197,24 @@ class FeaturedCardJob extends StatelessWidget {
                                           ],
                                         ),
                                         value: 'edit',
+                                      ),
+                                      PopupMenuItem(
+                                        child: Row(
+                                          children: [
+                                            Icon(Icons.camera_alt),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 10),
+                                              child: Text(
+                                                "เพิ่มรูปภาพ",
+                                                style: TextStyle(
+                                                  fontSize: 14,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        value: 'photo',
                                       ),
                                       PopupMenuItem(
                                         child: Row(

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
 import 'package:login_ui/Screens/loading.dart';
@@ -15,17 +17,18 @@ class Recommendation extends StatefulWidget {
   final String token;
   final String typeUser;
   final int index;
+  final List<dynamic> department;
 
   const Recommendation(this.imgUlr, this.company, this.location, this.id,
-      this.token, this.typeUser, this.index);
+      this.token, this.typeUser, this.index, this.department);
   @override
   _RecommendationState createState() => _RecommendationState(
-      imgUlr, company, location, id, token, typeUser, index);
+      imgUlr, company, location, id, token, typeUser, index, department);
 }
 
 class _RecommendationState extends State<Recommendation> {
   _RecommendationState(this.imgUrl, this.company, this.location, this.id,
-      this.token, this.typeUser, this.index);
+      this.token, this.typeUser, this.index, this.department);
   var imgUrl;
   var company;
   var location;
@@ -34,6 +37,7 @@ class _RecommendationState extends State<Recommendation> {
   var typeUser;
   var index;
   var name = "";
+  var department;
 
   Future<bool> status(String token, String jobId) async {
     FavoriteModel status = await GetFavorite(token);
@@ -52,6 +56,9 @@ class _RecommendationState extends State<Recommendation> {
 
   @override
   Widget build(BuildContext context) {
+    JsonEncoder encoder = new JsonEncoder.withIndent('  ');
+    print(encoder.convert(department));
+
     return Material(
       child: FutureBuilder<List<JobDataModel>>(
         future: TopicWork(),

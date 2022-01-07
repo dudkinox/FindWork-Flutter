@@ -1,4 +1,4 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: must_be_immutable, camel_case_types
 
 import 'package:flutter/material.dart';
 import 'package:login_ui/Recommendation_List_Data/Recommendation_screen.dart';
@@ -8,10 +8,7 @@ import 'package:login_ui/Service/ProgressService.dart';
 import 'package:login_ui/Themes/Themes.dart';
 import 'package:login_ui/components/image.dart';
 import 'package:login_ui/components/notfound.dart';
-import 'package:login_ui/model/ProgressModel.dart';
 import 'package:login_ui/model/jobModel.dart';
-
-import 'dashboard_All.dart';
 
 class work_progress extends StatelessWidget {
   work_progress(this.token, this.typeUser);
@@ -99,7 +96,8 @@ class work_progress extends StatelessWidget {
                                           data?.id,
                                           token,
                                           typeUser,
-                                          999));
+                                          999,
+                                          null));
                                     }
                                   } else {
                                     return notFound();
