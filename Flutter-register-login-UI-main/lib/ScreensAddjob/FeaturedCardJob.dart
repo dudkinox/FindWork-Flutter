@@ -55,7 +55,7 @@ class FeaturedCardJob extends StatelessWidget {
                     builder: (context) => DetailCardJob(
                         typeUser,
                         token,
-                        img,
+                        imgDepartment,
                         data.departmentId.name[index],
                         data.company,
                         data.departmentId.type[index],
@@ -172,7 +172,7 @@ class FeaturedCardJob extends StatelessWidget {
                                                 context: context,
                                                 builder: (_) => AlertMessage(
                                                     "แจ้งเตือน",
-                                                    "อัพโหลดสำเร็จ",
+                                                    "อัพโหลดสำเร็จ กรุณา Refresh!",
                                                     null),
                                               );
                                             } else {
