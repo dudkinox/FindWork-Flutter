@@ -209,7 +209,7 @@ class DetailsPage extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  "ตำแหน่งงานที่รับสมัครหหห",
+                                  "ตำแหน่งงานที่รับสมัคร",
                                   style: TextStyle(
                                       color: PrimaryColor,
                                       fontWeight: FontWeight.bold,
@@ -231,6 +231,7 @@ class DetailsPage extends StatelessWidget {
                                       token: token,
                                       id: id,
                                       index: HomeAddjob,
+                                      imgDepartment: imgUrl,
                                       img: imgUrl),
                                 ),
                               ),
