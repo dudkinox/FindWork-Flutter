@@ -209,7 +209,7 @@ class DetailsPage extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  "ตำแหน่งงานที่รับสมัคร",
+                                  "ตำแหน่งงานที่รับสมัครหหห",
                                   style: TextStyle(
                                       color: PrimaryColor,
                                       fontWeight: FontWeight.bold,

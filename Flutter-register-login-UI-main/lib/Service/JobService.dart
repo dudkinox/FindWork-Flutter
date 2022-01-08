@@ -160,7 +160,6 @@ Future<String> UpdateImage(String token, String Job_JobID, String image) async {
       }),
     );
 
-    print(response.body);
     if (response.statusCode == 400) {
       var err = json.decode(json.encode(response.body));
       return err;

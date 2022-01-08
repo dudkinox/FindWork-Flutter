@@ -56,9 +56,6 @@ class _RecommendationState extends State<Recommendation> {
 
   @override
   Widget build(BuildContext context) {
-    JsonEncoder encoder = new JsonEncoder.withIndent('  ');
-    print(encoder.convert(department));
-
     return Material(
       child: FutureBuilder<List<JobDataModel>>(
         future: TopicWork(),

@@ -3,11 +3,13 @@
 import 'package:flutter/material.dart';
 import 'package:login_ui/Recommendation_List_Data/Recommendation_screen.dart';
 import 'package:login_ui/Screens/loading.dart';
+import 'package:login_ui/Service/JobService.dart';
 import 'package:login_ui/Service/matchingService.dart';
 import 'package:login_ui/Themes/Themes.dart';
 import 'package:login_ui/components/image.dart';
 import 'package:login_ui/components/notfound.dart';
 import 'package:login_ui/model/jobModel.dart';
+import 'package:login_ui/model/loginModel.dart';
 
 import 'dashboard_All.dart';
 
@@ -102,19 +104,41 @@ class work_fulltime extends StatelessWidget {
                             scrollDirection: Axis.horizontal,
                             itemCount: data.length,
                             itemBuilder: (context, index) {
-                              return Recommendation(
-                                  data[index].image,
-                                  data[index].company,
-                                  data[index].province +
-                                      " " +
-                                      data[index].district +
-                                      " " +
-                                      data[index].subDistrict,
-                                  data[index].id,
-                                  token,
-                                  typeUser,
-                                  index,
-                                  department);
+                              return FutureBuilder(
+                                  future: GetImageIdDepartment(
+                                      data[index].id, index.toString()),
+                                  builder: (context, snapshot) {
+                                    var idImage = snapshot?.data;
+                                    if (snapshot.connectionState ==
+                                        ConnectionState.done) {
+                                      return FutureBuilder(
+                                          future:
+                                              PreviewImageDepartment(idImage),
+                                          builder: (context, snapshot) {
+                                            if (snapshot.connectionState ==
+                                                ConnectionState.done) {
+                                              ResumeModel link = snapshot.data;
+                                              return Recommendation(
+                                                  link.link,
+                                                  data[index].company,
+                                                  data[index].province +
+                                                      " " +
+                                                      data[index].district +
+                                                      " " +
+                                                      data[index].subDistrict,
+                                                  data[index].id,
+                                                  token,
+                                                  typeUser,
+                                                  index,
+                                                  department);
+                                            } else {
+                                              return Container();
+                                            }
+                                          });
+                                    } else {
+                                      return Container();
+                                    }
+                                  });
                             });
                   }
                 },

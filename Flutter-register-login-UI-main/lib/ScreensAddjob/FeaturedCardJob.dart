@@ -6,6 +6,7 @@ import 'package:login_ui/Screens/loading.dart';
 import 'package:login_ui/Service/JobService.dart';
 import 'package:login_ui/Themes/Themes.dart';
 import 'package:login_ui/components/alert.dart';
+import 'package:login_ui/components/image.dart';
 import 'package:login_ui/model/jobModel.dart';
 import 'DetailCardJob.dart';
 import 'EditingCardJob.dart';
@@ -17,11 +18,11 @@ class FeaturedCardJob extends StatelessWidget {
   final token;
   final typeUser;
   final id;
-  final img;
-  final imgDepartment;
+  var img;
+  var imgDepartment;
   final VoidCallback onClicked;
 
-  const FeaturedCardJob(
+  FeaturedCardJob(
       {this.index,
       this.featuredJobs,
       this.typeUser,
@@ -34,6 +35,9 @@ class FeaturedCardJob extends StatelessWidget {
       : super(key: key);
   @override
   Widget build(BuildContext context) {
+    if (img == null) {
+      img = DefaultImage;
+    }
     return FutureBuilder<JobDataModel>(
         future: TopicWorkFindID(id),
         builder: (context, AsyncSnapshot snapshot) {
@@ -92,7 +96,7 @@ class FeaturedCardJob extends StatelessWidget {
                             height: (50),
                             decoration: BoxDecoration(
                                 image: DecorationImage(
-                                  image: NetworkImage(imgDepartment),
+                                  image: NetworkImage(img),
                                   fit: BoxFit.fill,
                                 ),
                                 color: Colors.lightBlueAccent,
