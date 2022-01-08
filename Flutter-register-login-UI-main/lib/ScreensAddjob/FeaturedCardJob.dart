@@ -18,6 +18,7 @@ class FeaturedCardJob extends StatelessWidget {
   final typeUser;
   final id;
   final img;
+  final imgDepartment;
   final VoidCallback onClicked;
 
   const FeaturedCardJob(
@@ -27,6 +28,7 @@ class FeaturedCardJob extends StatelessWidget {
       this.token,
       this.id,
       this.img,
+      this.imgDepartment,
       this.onClicked,
       Key key})
       : super(key: key);
@@ -90,7 +92,7 @@ class FeaturedCardJob extends StatelessWidget {
                             height: (50),
                             decoration: BoxDecoration(
                                 image: DecorationImage(
-                                  image: NetworkImage(img),
+                                  image: NetworkImage(imgDepartment),
                                   fit: BoxFit.fill,
                                 ),
                                 color: Colors.lightBlueAccent,

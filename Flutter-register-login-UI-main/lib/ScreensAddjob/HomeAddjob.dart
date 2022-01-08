@@ -53,7 +53,6 @@ class _HomeAddjobState extends State<HomeAddjob> {
   Future<void> addDepartment() async {
     AccountModel get = await FindID(token);
     String statusAddDepartment = await AddDepartment(get?.jobId);
-    print(statusAddDepartment);
     if (statusAddDepartment == "เพิ่มตำแหน่งสำเร็จ") {
       showDialog(
         context: context,
@@ -485,18 +484,42 @@ class _HomeAddjobState extends State<HomeAddjob> {
                                                                     .departmentId
                                                                     ?.name
                                                                     ?.length,
-                                                                (indexDepartment) => FeaturedCardJob(
-                                                                    index:
-                                                                        indexDepartment,
-                                                                    featuredJobs:
-                                                                        demoFeatured[
-                                                                            0],
-                                                                    token:
-                                                                        token,
-                                                                    typeUser:
-                                                                        typeUser,
-                                                                    id: data.id,
-                                                                    img: img),
+                                                                (indexDepartment) =>
+                                                                    FutureBuilder(
+                                                                        future: GetImageIdDepartment(
+                                                                            data
+                                                                                ?.id,
+                                                                            indexDepartment
+                                                                                .toString()),
+                                                                        builder:
+                                                                            (context,
+                                                                                snapshot) {
+                                                                          if (snapshot.connectionState !=
+                                                                              ConnectionState.done) {
+                                                                            return Container();
+                                                                          } else {
+                                                                            var idImage =
+                                                                                snapshot?.data;
+                                                                            return FutureBuilder(
+                                                                                future: PreviewImageDepartment(idImage),
+                                                                                builder: (context, snapshot) {
+                                                                                  if (snapshot.connectionState == ConnectionState.done) {
+                                                                                    ResumeModel link = snapshot.data;
+                                                                                    return FeaturedCardJob(
+                                                                                      index: indexDepartment,
+                                                                                      featuredJobs: demoFeatured[0],
+                                                                                      token: token,
+                                                                                      typeUser: typeUser,
+                                                                                      id: data.id,
+                                                                                      imgDepartment: link.link,
+                                                                                      img: img,
+                                                                                    );
+                                                                                  } else {
+                                                                                    return Container();
+                                                                                  }
+                                                                                });
+                                                                          }
+                                                                        }),
                                                               ),
                                                             ),
                                                           ),
