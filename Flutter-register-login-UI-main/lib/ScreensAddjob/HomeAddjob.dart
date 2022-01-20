@@ -17,9 +17,11 @@ import 'package:login_ui/components/alert.dart';
 import 'package:login_ui/components/image.dart';
 import 'package:login_ui/details_screen.dart';
 import 'package:login_ui/main.dart';
+import 'package:login_ui/model/departmentMeodel.dart';
 import 'package:login_ui/model/jobModel.dart';
 import 'package:login_ui/model/loginModel.dart';
 
+import 'EditingCardJob.dart';
 import 'EditingCompany.dart';
 import 'managerJob/manageControl.dart';
 import 'modelsAddjob/CloseTheAccount.dart';
@@ -50,15 +52,29 @@ class _HomeAddjobState extends State<HomeAddjob> {
     setState(() {});
   }
 
-  Future<void> addDepartment() async {
+  Future<void> addDepartment(String id) async {
     AccountModel get = await FindID(token);
-    String statusAddDepartment = await AddDepartment(get?.jobId);
-    if (statusAddDepartment == "เพิ่มตำแหน่งสำเร็จ") {
+    DepaertmentModel statusAddDepartment = await AddDepartment(get?.jobId);
+    var index = statusAddDepartment.length;
+    if (statusAddDepartment.message == "เพิ่มตำแหน่งสำเร็จ") {
       showDialog(
         context: context,
-        builder: (_) =>
-            AlertMessage("แจ้งเตือน", "ตำแหน่งงานถูกเพิ่มแล้ว", null),
+        builder: (_) => AlertMessage(
+            "แจ้งเตือน",
+            "ตำแหน่งงานถูกเพิ่มแล้ว",
+            EditingCardJob(
+              token,
+              typeUser,
+              "",
+              "",
+              "",
+              "",
+              id,
+              "",
+              index,
+            )),
       );
+
       setState(() {});
     } else {
       showDialog(
@@ -445,7 +461,7 @@ class _HomeAddjobState extends State<HomeAddjob> {
                                                                     Icons.add),
                                                                 onPressed: () =>
                                                                     {
-                                                                  addDepartment(),
+                                                                  addDepartment(data.id),
                                                                 },
                                                               ),
                                                               GestureDetector(

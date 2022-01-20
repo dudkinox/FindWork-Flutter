@@ -6,6 +6,7 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:login_ui/Database/Host.dart';
 import 'package:login_ui/components/image.dart';
+import 'package:login_ui/model/departmentMeodel.dart';
 import 'package:login_ui/model/favoriteModel.dart';
 import 'package:login_ui/model/jobModel.dart';
 import 'package:login_ui/model/loginModel.dart';
@@ -388,7 +389,7 @@ Future<FavoriteModel> GetFavorite(String token) async {
   }
 }
 
-Future<String> AddDepartment(String token) async {
+Future<DepaertmentModel> AddDepartment(String token) async {
   try {
     final String Url = Host + "/api/employer/add/department/" + token;
     final response = await http.put(Uri.parse(Url), headers: <String, String>{
@@ -399,8 +400,7 @@ Future<String> AddDepartment(String token) async {
       var err = json.decode(json.encode(response.body));
       return err;
     }
-    var data = json.decode(json.encode(response.body));
-    return data;
+    return DepaertmentModel.fromJson(jsonDecode(response?.body));
   } catch (e) {
     print(e);
   }

@@ -75,8 +75,10 @@ class MapScreenState extends State<EditingCardJob>
 
   bool loading = false;
 
+
   @override
   Widget build(BuildContext context) {
+  print(id);
     if (_status == true) {
       Title_company.text = name;
       Title_type.text = _value;
