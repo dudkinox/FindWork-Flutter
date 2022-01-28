@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_session/flutter_session.dart';
 import 'package:login_ui/ScreensAddjob/HomeAddjob.dart';
+import 'package:login_ui/ScreensAddjob/modelsAddjob/HomeEmployer.dart';
 import 'package:login_ui/Service/LoginService.dart';
 import 'package:login_ui/Service/MessageService.dart';
 import 'package:login_ui/components/alert.dart';
@@ -30,7 +31,7 @@ void login(BuildContext context, String username, String password) async {
       break;
     case "employer":
       Navigator.of(context).pushReplacement(MaterialPageRoute(
-          builder: (context) => HomeAddjob(login.id, login.type)));
+          builder: (context) => HomeEmployer(login.id, login.type)));
       break;
     default:
       showDialog(

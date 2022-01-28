@@ -9,6 +9,7 @@ import 'package:login_ui/Animation/Fade_Animation.dart';
 import 'package:login_ui/Screens/loading.dart';
 import 'package:login_ui/Screens/login/login.dart';
 import 'package:login_ui/Screens/profile/ProfileController.dart';
+import 'package:login_ui/ScreensAddjob/modelsAddjob/HomeEmployer.dart';
 import 'package:login_ui/Service/JobService.dart';
 import 'package:login_ui/Service/LoginService.dart';
 import 'package:login_ui/Service/locaitonService.dart';
@@ -79,7 +80,10 @@ class MapScreenState extends State<CloseTheAccount>
                   leading: IconButton(
                     icon: Icon(Icons.arrow_back_ios, color: Colors.black),
                     onPressed: () {
-                      Navigator.pop(context);
+                      Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(builder: (context) {
+                        return HomeEmployer(token, typeUser);
+                      }));
                     },
                   ),
                 ),
