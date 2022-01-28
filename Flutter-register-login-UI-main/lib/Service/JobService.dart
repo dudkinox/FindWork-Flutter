@@ -1,4 +1,4 @@
-// ignore_for_file: non_constant_identifier_names, missing_return
+// ignore_for_file: non_constant_identifier_names, missing_return, deprecated_member_use
 
 import 'dart:convert';
 import 'dart:io';
@@ -25,7 +25,7 @@ Future<JobDataModel> Jobdata() async {
   return JobDataModel.fromJson(jsonDecode(response.body));
 }
 
-Future<ImageDepartmentModel> DepartmentdataImage(String token) async {
+Future<List<String>> DepartmentdataImage(String token) async {
   final String url = Host + "/api/employer/department/" + token;
   final response = await http.get(
     Uri.parse(url),
@@ -33,8 +33,7 @@ Future<ImageDepartmentModel> DepartmentdataImage(String token) async {
       'Content-Type': 'application/json; charset=UTF-8',
     },
   );
-  print(response.body);
-  return ImageDepartmentModel.fromJson(jsonDecode(response.body));
+  return List<String>.from(jsonDecode(response.body));
 }
 
 Future<List<JobDataModel>> TopicWork() async {

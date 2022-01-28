@@ -80,6 +80,8 @@ class _HomeEmployerState extends State<HomeEmployer> {
   var LatLocation;
   var LngLocation;
 
+  List<String> listImage = [];
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -234,273 +236,277 @@ class _HomeEmployerState extends State<HomeEmployer> {
                                 ),
                                 body: RefreshIndicator(
                                   onRefresh: onPullToRefresh,
-                                  child: FadeAnimation(
-                                    1.5,
-                                    SingleChildScrollView(
-                                      child: Column(
-                                        children: [
-                                          Container(
-                                            height: 350.0,
-                                            width: double.infinity,
-                                            child: FutureBuilder<
-                                                    ImageDepartmentModel>(
-                                                future:
-                                                    DepartmentdataImage(token),
-                                                builder: (context, snapshot) {
-                                                  if (snapshot
-                                                          .connectionState !=
-                                                      ConnectionState.done) {
-                                                    return Container();
-                                                  }
-                                                  List<String> tesst = [
-                                                    "https://www.cntpeo.go.th/wp-content/uploads/2020/11/bg.jpg",
-                                                    "https://www.cntpeo.go.th/wp-content/uploads/2020/11/bg.jpg"
-                                                  ];
-                                                  return CarouselSlider(
-                                                    options: CarouselOptions(
-                                                      enlargeCenterPage: true,
-                                                      enableInfiniteScroll:
-                                                          false,
-                                                      autoPlay: true,
+                                  child: SingleChildScrollView(
+                                    child: Column(
+                                      children: [
+                                        FutureBuilder<List<String>>(
+                                            future:
+                                                DepartmentdataImage(jobData.id),
+                                            builder: (context, snapshot) {
+                                              if (snapshot.connectionState !=
+                                                  ConnectionState.done) {
+                                                return Loader();
+                                              }
+                                              listImage = snapshot.data;
+                                              return Container(
+                                                height: 350.0,
+                                                width: double.infinity,
+                                                child: CarouselSlider(
+                                                  options: CarouselOptions(
+                                                    enlargeCenterPage: true,
+                                                    enableInfiniteScroll: false,
+                                                    autoPlay: true,
+                                                  ),
+                                                  items: listImage
+                                                          ?.map(
+                                                              (e) => ClipRRect(
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(8),
+                                                                    child:
+                                                                        Stack(
+                                                                      fit: StackFit
+                                                                          .expand,
+                                                                      children: <
+                                                                          Widget>[
+                                                                        Image
+                                                                            .network(
+                                                                          e,
+                                                                          width:
+                                                                              1050,
+                                                                          height:
+                                                                              350,
+                                                                          fit: BoxFit
+                                                                              .cover,
+                                                                        )
+                                                                      ],
+                                                                    ),
+                                                                  ))
+                                                          ?.toList() ??
+                                                      [],
+                                                ),
+                                              );
+                                            }),
+                                        SizedBox(
+                                          height: 20.0,
+                                        ),
+                                        FadeAnimation(
+                                          1.1,
+                                          Padding(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 10.0),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  jobData.company,
+                                                  style: TextStyle(
+                                                      fontSize: 20.0,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      color: PrimaryColor),
+                                                ),
+                                                SizedBox(
+                                                  height: 10.0,
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    Icon(
+                                                      Icons
+                                                          .location_on_outlined,
+                                                      color: PrimaryColor,
                                                     ),
-                                                    items: tesst
-                                                        .map((e) => ClipRRect(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          8),
-                                                              child: Stack(
-                                                                fit: StackFit
-                                                                    .expand,
-                                                                children: <
-                                                                    Widget>[
-                                                                  Image.network(
-                                                                    e,
-                                                                    width: 1050,
-                                                                    height: 350,
-                                                                    fit: BoxFit
-                                                                        .cover,
-                                                                  )
-                                                                ],
-                                                              ),
-                                                            ))
-                                                        ?.toList(),
-                                                  );
-                                                }),
-                                          ),
-                                          SizedBox(
-                                            height: 20.0,
-                                          ),
-                                          FadeAnimation(
-                                            1.1,
-                                            Padding(
-                                              padding: EdgeInsets.symmetric(
-                                                  horizontal: 10.0),
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    jobData.company,
-                                                    style: TextStyle(
-                                                        fontSize: 20.0,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        color: PrimaryColor),
-                                                  ),
-                                                  SizedBox(
-                                                    height: 10.0,
-                                                  ),
-                                                  Row(
-                                                    children: [
-                                                      Icon(
-                                                        Icons
-                                                            .location_on_outlined,
-                                                        color: PrimaryColor,
+                                                    SizedBox(
+                                                      width: 10.0,
+                                                    ),
+                                                    Text(
+                                                      jobData.province +
+                                                          " " +
+                                                          jobData.district +
+                                                          " " +
+                                                          jobData.subDistrict,
+                                                      style: TextStyle(
+                                                        color: Colors.grey,
                                                       ),
-                                                      SizedBox(
-                                                        width: 10.0,
-                                                      ),
-                                                      Text(
-                                                        jobData.province +
-                                                            " " +
-                                                            jobData.district +
-                                                            " " +
-                                                            jobData.subDistrict,
-                                                        style: TextStyle(
-                                                          color: Colors.grey,
+                                                    ),
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  height: 10.0,
+                                                ),
+                                                Container(
+                                                  height: 300.0,
+                                                  width: double.infinity,
+                                                  decoration: BoxDecoration(
+                                                    color: Colors.grey[300],
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            40.0),
+                                                  ),
+                                                  child: Padding(
+                                                    padding: EdgeInsets.only(
+                                                      left: 20.0,
+                                                      right: 20.0,
+                                                    ),
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        SizedBox(
+                                                          height: 25,
                                                         ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  SizedBox(
-                                                    height: 10.0,
-                                                  ),
-                                                  Container(
-                                                    height: 300.0,
-                                                    width: double.infinity,
-                                                    decoration: BoxDecoration(
-                                                      color: Colors.grey[300],
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              40.0),
-                                                    ),
-                                                    child: Padding(
-                                                      padding: EdgeInsets.only(
-                                                        left: 20.0,
-                                                        right: 20.0,
-                                                      ),
-                                                      child: Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          SizedBox(
-                                                            height: 25,
-                                                          ),
-                                                          Text(
-                                                            "ข้อมูลบริษัท",
-                                                            style: TextStyle(
-                                                              fontSize: 18,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold,
-                                                            ),
-                                                          ),
-                                                          SizedBox(
-                                                            height: 16,
-                                                          ),
-                                                          Expanded(
-                                                            child:
-                                                                SingleChildScrollView(
-                                                              physics:
-                                                                  BouncingScrollPhysics(),
-                                                              child: Column(
-                                                                children:
-                                                                    buildRequirements(
-                                                                  jobData
-                                                                      .departmentId
-                                                                      .detail[0],
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          SizedBox(
-                                                            height: 16,
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    height: 16,
-                                                  ),
-                                                  Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    children: [
-                                                      Text(
-                                                        "ตำแหน่งงานที่รับสมัคร",
-                                                        style: TextStyle(
-                                                            color: PrimaryColor,
+                                                        Text(
+                                                          "ข้อมูลบริษัท",
+                                                          style: TextStyle(
+                                                            fontSize: 18,
                                                             fontWeight:
                                                                 FontWeight.bold,
-                                                            fontSize: 15.0),
-                                                      ),
-                                                      IconButton(
-                                                        icon: Icon(Icons.add),
-                                                        onPressed: () => {
-                                                          addDepartment(
-                                                              jobData.id),
-                                                        },
-                                                      ),
-                                                      GestureDetector(
-                                                        onTap: () {
-                                                          Navigator.push(
-                                                              context,
-                                                              MaterialPageRoute(
-                                                                  builder:
-                                                                      (context) =>
-                                                                          HomeAdmin(
-                                                                            token,
-                                                                            typeUser,
-                                                                            jobData?.id,
-                                                                            jobData.departmentId?.name[0],
-                                                                          )));
-                                                        },
-                                                        child: Text(
-                                                          "รายชื่อผู้สมัคร",
-                                                          style: TextStyle(
-                                                            color: PrimaryColor,
                                                           ),
                                                         ),
-                                                      )
-                                                    ],
-                                                  ),
-                                                  SizedBox(
-                                                    height: 16,
-                                                  ),
-                                                  SingleChildScrollView(
-                                                    scrollDirection:
-                                                        Axis.horizontal,
-                                                    child: Row(
-                                                      children: List.generate(
-                                                        jobData.departmentId
-                                                            ?.name?.length,
-                                                        (indexDepartment) =>
-                                                            FutureBuilder(
-                                                                future: GetImageIdDepartment(
-                                                                    jobData?.id,
-                                                                    indexDepartment
-                                                                        .toString()),
-                                                                builder: (context,
-                                                                    snapshot) {
-                                                                  if (snapshot
-                                                                          .connectionState !=
-                                                                      ConnectionState
-                                                                          .done) {
-                                                                    return Container();
-                                                                  } else {
-                                                                    var idImage =
-                                                                        snapshot
-                                                                            ?.data;
-                                                                    return FutureBuilder(
-                                                                        future: PreviewImageDepartment(
-                                                                            idImage),
-                                                                        builder:
-                                                                            (context,
-                                                                                snapshot) {
-                                                                          if (snapshot.connectionState ==
-                                                                              ConnectionState.done) {
-                                                                            ResumeModel
-                                                                                link =
-                                                                                snapshot.data;
-                                                                            return FeaturedCardJob(
-                                                                              index: indexDepartment,
-                                                                              featuredJobs: demoFeatured[0],
-                                                                              token: token,
-                                                                              typeUser: typeUser,
-                                                                              id: jobData.id,
-                                                                              imgDepartment: link.link,
-                                                                              img: img,
-                                                                            );
-                                                                          } else {
-                                                                            return Container();
-                                                                          }
-                                                                        });
-                                                                  }
-                                                                }),
-                                                      ),
+                                                        SizedBox(
+                                                          height: 16,
+                                                        ),
+                                                        Expanded(
+                                                          child:
+                                                              SingleChildScrollView(
+                                                            physics:
+                                                                BouncingScrollPhysics(),
+                                                            child: Column(
+                                                              children:
+                                                                  buildRequirements(
+                                                                jobData
+                                                                    .departmentId
+                                                                    .detail[0],
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        SizedBox(
+                                                          height: 16,
+                                                        ),
+                                                      ],
                                                     ),
                                                   ),
-                                                  SizedBox(height: 25),
-                                                ],
-                                              ),
+                                                ),
+                                                SizedBox(
+                                                  height: 16,
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Text(
+                                                      "ตำแหน่งงานที่รับสมัคร",
+                                                      style: TextStyle(
+                                                          color: PrimaryColor,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 15.0),
+                                                    ),
+                                                    IconButton(
+                                                      icon: Icon(Icons.add),
+                                                      onPressed: () => {
+                                                        addDepartment(
+                                                            jobData.id),
+                                                      },
+                                                    ),
+                                                    GestureDetector(
+                                                      onTap: () {
+                                                        Navigator.push(
+                                                            context,
+                                                            MaterialPageRoute(
+                                                                builder:
+                                                                    (context) =>
+                                                                        HomeAdmin(
+                                                                          token,
+                                                                          typeUser,
+                                                                          jobData
+                                                                              ?.id,
+                                                                          jobData
+                                                                              .departmentId
+                                                                              ?.name[0],
+                                                                        )));
+                                                      },
+                                                      child: Text(
+                                                        "รายชื่อผู้สมัคร",
+                                                        style: TextStyle(
+                                                          color: PrimaryColor,
+                                                        ),
+                                                      ),
+                                                    )
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  height: 16,
+                                                ),
+                                                SingleChildScrollView(
+                                                  scrollDirection:
+                                                      Axis.horizontal,
+                                                  child: Row(
+                                                    children: List.generate(
+                                                      jobData.departmentId?.name
+                                                          ?.length,
+                                                      (indexDepartment) =>
+                                                          FutureBuilder(
+                                                              future: GetImageIdDepartment(
+                                                                  jobData?.id,
+                                                                  indexDepartment
+                                                                      .toString()),
+                                                              builder: (context,
+                                                                  snapshot) {
+                                                                if (snapshot
+                                                                        .connectionState !=
+                                                                    ConnectionState
+                                                                        .done) {
+                                                                  return Container();
+                                                                } else {
+                                                                  var idImage =
+                                                                      snapshot
+                                                                          ?.data;
+                                                                  return FutureBuilder(
+                                                                      future: PreviewImageDepartment(
+                                                                          idImage),
+                                                                      builder:
+                                                                          (context,
+                                                                              snapshot) {
+                                                                        if (snapshot.connectionState ==
+                                                                            ConnectionState.done) {
+                                                                          ResumeModel
+                                                                              link =
+                                                                              snapshot.data;
+                                                                          return FeaturedCardJob(
+                                                                            index:
+                                                                                indexDepartment,
+                                                                            featuredJobs:
+                                                                                demoFeatured[0],
+                                                                            token:
+                                                                                token,
+                                                                            typeUser:
+                                                                                typeUser,
+                                                                            id: jobData.id,
+                                                                            imgDepartment:
+                                                                                link.link,
+                                                                            img:
+                                                                                img,
+                                                                          );
+                                                                        } else {
+                                                                          return Container();
+                                                                        }
+                                                                      });
+                                                                }
+                                                              }),
+                                                    ),
+                                                  ),
+                                                ),
+                                                SizedBox(height: 25),
+                                              ],
                                             ),
                                           ),
-                                        ],
-                                      ),
+                                        ),
+                                      ],
                                     ),
                                   ),
                                 ),

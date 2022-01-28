@@ -4,28 +4,8 @@
 
 import 'dart:convert';
 
-List<ImageDepartmentModel> imageDepartmentModelFromJson(String str) =>
-    List<ImageDepartmentModel>.from(
-        json.decode(str).map((x) => ImageDepartmentModel.fromJson(x)));
+List<String> imageDepartmentModelFromJson(String str) =>
+    List<String>.from(json.decode(str).map((x) => x));
 
-String imageDepartmentModelToJson(List<ImageDepartmentModel> data) =>
-    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
-
-class ImageDepartmentModel {
-  ImageDepartmentModel({
-    this.image,
-  });
-
-  List<String> image;
-
-  factory ImageDepartmentModel.fromJson(Map<String, dynamic> json) =>
-      ImageDepartmentModel(
-        image: json["image"] == null
-            ? null
-            : List<String>.from(json["image"].map((x) => x)),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "image": image == null ? null : List<dynamic>.from(image.map((x) => x)),
-      };
-}
+String imageDepartmentModelToJson(List<String> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x)));
