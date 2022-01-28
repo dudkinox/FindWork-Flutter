@@ -2,13 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_session/flutter_session.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:login_ui/Animation/Fade_Animation.dart';
 
 import 'package:login_ui/Screens/loading.dart';
-import 'package:login_ui/Screens/login/login.dart';
-import 'package:login_ui/Screens/profile/ProfileController.dart';
 import 'package:login_ui/ScreensAddjob/modelsAddjob/HomeEmployer.dart';
 import 'package:login_ui/Service/JobService.dart';
 import 'package:login_ui/Service/LoginService.dart';
@@ -19,8 +15,6 @@ import 'package:login_ui/components/alert.dart';
 import 'package:login_ui/main.dart';
 import 'package:login_ui/model/loginModel.dart';
 import 'dart:io';
-
-import '../HomeAddjob.dart';
 
 class CloseTheAccount extends StatefulWidget {
   CloseTheAccount(this.token, this.typeUser, this.id);

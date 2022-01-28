@@ -12,7 +12,7 @@ import 'package:login_ui/components/image.dart';
 import 'package:login_ui/model/jobModel.dart';
 import 'DetailCardJob.dart';
 import 'EditingCardJob.dart';
-import 'HomeAddjob.dart';
+import 'modelsAddjob/HomeEmployer.dart';
 
 class FeaturedCardJob extends StatelessWidget {
   final index;
@@ -202,7 +202,8 @@ class FeaturedCardJob extends StatelessWidget {
                                               builder: (_) => AlertMessage(
                                                   "แจ้งเตือน",
                                                   "ลบตำแหน่งงานที่สมัครเรียบร้อยแล้ว",
-                                                  HomeAddjob(token, typeUser)),
+                                                  HomeEmployer(
+                                                      token, typeUser)),
                                             );
                                           } else {
                                             showDialog(

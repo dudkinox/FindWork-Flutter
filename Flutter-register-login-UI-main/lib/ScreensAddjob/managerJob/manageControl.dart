@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:login_ui/Screens/alertPage/infinite.dart';
-import 'package:login_ui/ScreensAddjob/HomeAddjob.dart';
+import 'package:login_ui/ScreensAddjob/modelsAddjob/HomeEmployer.dart';
 import 'package:login_ui/Themes/Themes.dart';
 import 'package:login_ui/components/WillPop.dart';
 import 'manageJob.dart';
@@ -42,7 +42,7 @@ class _HomeAdminState extends State<HomeAdmin> {
                     context,
                     MaterialPageRoute(
                         builder: (BuildContext context) =>
-                            HomeAddjob(token, typeUser)));
+                            HomeEmployer(token, typeUser)));
               },
             ),
             title: const Text('หน้าจัดการผู้สมัคร'),

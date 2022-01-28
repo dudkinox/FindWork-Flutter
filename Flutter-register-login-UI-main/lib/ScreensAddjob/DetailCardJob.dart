@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:login_ui/Screens/loading.dart';
-import 'package:login_ui/ScreensAddjob/HomeAddjob.dart';
 import 'package:login_ui/SelectCheckbox/choices.dart';
 import 'package:login_ui/Service/ProgressService.dart';
 import 'package:login_ui/Themes/Themes.dart';
@@ -281,7 +280,7 @@ class _DetailCardJobState extends State<DetailCardJob> {
                 SingleChildScrollView(
                     child: typeUser == "employee"
                         ? TextFormField(
-                          maxLines: 8,
+                            maxLines: 8,
                             readOnly: true,
                             keyboardType: TextInputType.multiline,
                             controller: detailCompany,
@@ -363,12 +362,11 @@ class _DetailCardJobState extends State<DetailCardJob> {
                                     text_color = Danger;
                                     statusRegister = false;
                                     break;
-                                  } else if(result.jobId[i].status ==
-                                      "รอ") {
+                                  } else if (result.jobId[i].status == "รอ") {
                                     text_accept = "รอการติดต่อกลับ";
                                     text_alert =
                                         "กรุณารอทางบริษัทพิจารณาและติดต่อกลับ";
-                                        text_color = Colors.white38;
+                                    text_color = Colors.white38;
                                     statusRegister = false;
                                     break;
                                   }

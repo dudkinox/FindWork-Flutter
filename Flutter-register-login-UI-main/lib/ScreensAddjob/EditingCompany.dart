@@ -18,7 +18,7 @@ import 'package:login_ui/model/jobModel.dart';
 import 'package:login_ui/model/loginModel.dart';
 import 'dart:io';
 
-import 'HomeAddjob.dart';
+import 'modelsAddjob/HomeEmployer.dart';
 
 class EditingCompany extends StatefulWidget {
   EditingCompany(
@@ -191,7 +191,7 @@ class MapScreenState extends State<EditingCompany>
                   icon: Icon(Icons.arrow_back_ios, color: Colors.black),
                   onPressed: () {
                     Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        builder: (context) => HomeAddjob(token, typeUser)));
+                        builder: (context) => HomeEmployer(token, typeUser)));
                   },
                 ),
               ),

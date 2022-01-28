@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_session/flutter_session.dart';
-import 'package:login_ui/ScreensAddjob/HomeAddjob.dart';
 import 'package:login_ui/ScreensAddjob/modelsAddjob/HomeEmployer.dart';
 import 'package:login_ui/Service/LoginService.dart';
 import 'package:login_ui/Service/MessageService.dart';

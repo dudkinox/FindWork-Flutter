@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:login_ui/Animation/Fade_Animation.dart';
 
 import 'package:login_ui/Screens/loading.dart';
-import 'package:login_ui/ScreensAddjob/HomeAddjob.dart';
+import 'package:login_ui/ScreensAddjob/modelsAddjob/HomeEmployer.dart';
 import 'package:login_ui/Service/JobService.dart';
 import 'package:login_ui/Themes/Themes.dart';
 import 'package:login_ui/components/WillPop.dart';
@@ -75,10 +75,9 @@ class MapScreenState extends State<EditingCardJob>
 
   bool loading = false;
 
-
   @override
   Widget build(BuildContext context) {
-  print(id);
+    print(id);
     if (_status == true) {
       Title_company.text = name;
       Title_type.text = _value;
@@ -124,7 +123,7 @@ class MapScreenState extends State<EditingCardJob>
                       Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => HomeAddjob(
+                              builder: (context) => HomeEmployer(
                                     token,
                                     typeUser,
                                   )));
