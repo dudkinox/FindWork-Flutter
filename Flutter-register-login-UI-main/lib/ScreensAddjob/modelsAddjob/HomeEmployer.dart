@@ -488,9 +488,9 @@ class _HomeEmployerState extends State<HomeEmployer> {
                                                                                 typeUser,
                                                                             id: jobData.id,
                                                                             imgDepartment:
-                                                                                link.link,
+                                                                                listImage[indexDepartment],
                                                                             img:
-                                                                                img,
+                                                                                listImage[indexDepartment],
                                                                           );
                                                                         } else {
                                                                           return Container();
