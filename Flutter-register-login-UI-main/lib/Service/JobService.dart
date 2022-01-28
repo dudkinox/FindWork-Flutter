@@ -8,6 +8,7 @@ import 'package:login_ui/Database/Host.dart';
 import 'package:login_ui/components/image.dart';
 import 'package:login_ui/model/departmentMeodel.dart';
 import 'package:login_ui/model/favoriteModel.dart';
+import 'package:login_ui/model/imageModel.dart';
 import 'package:login_ui/model/jobModel.dart';
 import 'package:login_ui/model/loginModel.dart';
 
@@ -22,6 +23,18 @@ Future<JobDataModel> Jobdata() async {
     },
   );
   return JobDataModel.fromJson(jsonDecode(response.body));
+}
+
+Future<ImageDepartmentModel> DepartmentdataImage(String token) async {
+  final String url = Host + "/api/employer/department/" + token;
+  final response = await http.get(
+    Uri.parse(url),
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+  );
+  print(response.body);
+  return ImageDepartmentModel.fromJson(jsonDecode(response.body));
 }
 
 Future<List<JobDataModel>> TopicWork() async {

@@ -1,4 +1,4 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: must_be_immutable, sdk_version_set_literal
 
 import 'dart:math';
 
@@ -16,7 +16,7 @@ import 'package:login_ui/components/WillPop.dart';
 import 'package:login_ui/components/alert.dart';
 import 'package:login_ui/components/image.dart';
 import 'package:login_ui/model/departmentMeodel.dart';
-import 'package:login_ui/model/imageSliderModel.dart';
+import 'package:login_ui/model/imageModel.dart';
 import 'package:login_ui/model/jobModel.dart';
 import 'package:login_ui/model/loginModel.dart';
 
@@ -242,31 +242,51 @@ class _HomeEmployerState extends State<HomeEmployer> {
                                           Container(
                                             height: 350.0,
                                             width: double.infinity,
-                                            child: CarouselSlider(
-                                              options: CarouselOptions(
-                                                enlargeCenterPage: true,
-                                                enableInfiniteScroll: false,
-                                                autoPlay: true,
-                                              ),
-                                              items: imageList
-                                                  .map((e) => ClipRRect(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(8),
-                                                        child: Stack(
-                                                          fit: StackFit.expand,
-                                                          children: <Widget>[
-                                                            Image.network(
-                                                              e,
-                                                              width: 1050,
-                                                              height: 350,
-                                                              fit: BoxFit.cover,
-                                                            )
-                                                          ],
-                                                        ),
-                                                      ))
-                                                  .toList(),
-                                            ),
+                                            child: FutureBuilder<
+                                                    ImageDepartmentModel>(
+                                                future:
+                                                    DepartmentdataImage(token),
+                                                builder: (context, snapshot) {
+                                                  if (snapshot
+                                                          .connectionState !=
+                                                      ConnectionState.done) {
+                                                    return Container();
+                                                  }
+                                                  List<String> tesst = [
+                                                    "https://www.cntpeo.go.th/wp-content/uploads/2020/11/bg.jpg",
+                                                    "https://www.cntpeo.go.th/wp-content/uploads/2020/11/bg.jpg"
+                                                  ];
+                                                  return CarouselSlider(
+                                                    options: CarouselOptions(
+                                                      enlargeCenterPage: true,
+                                                      enableInfiniteScroll:
+                                                          false,
+                                                      autoPlay: true,
+                                                    ),
+                                                    items: tesst
+                                                        .map((e) => ClipRRect(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          8),
+                                                              child: Stack(
+                                                                fit: StackFit
+                                                                    .expand,
+                                                                children: <
+                                                                    Widget>[
+                                                                  Image.network(
+                                                                    e,
+                                                                    width: 1050,
+                                                                    height: 350,
+                                                                    fit: BoxFit
+                                                                        .cover,
+                                                                  )
+                                                                ],
+                                                              ),
+                                                            ))
+                                                        ?.toList(),
+                                                  );
+                                                }),
                                           ),
                                           SizedBox(
                                             height: 20.0,
