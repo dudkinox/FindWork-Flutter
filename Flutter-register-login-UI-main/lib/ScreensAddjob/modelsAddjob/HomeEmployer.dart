@@ -16,7 +16,6 @@ import 'package:login_ui/components/WillPop.dart';
 import 'package:login_ui/components/alert.dart';
 import 'package:login_ui/components/image.dart';
 import 'package:login_ui/model/departmentMeodel.dart';
-import 'package:login_ui/model/imageModel.dart';
 import 'package:login_ui/model/jobModel.dart';
 import 'package:login_ui/model/loginModel.dart';
 
