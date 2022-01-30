@@ -348,7 +348,7 @@ class MapScreenState extends State<EditingCompany>
                                               mainAxisSize: MainAxisSize.min,
                                               children: <Widget>[
                                                 new Text(
-                                                  'ชื่อจังหวัด',
+                                                  'ที่อยู่บริษัท',
                                                   style: TextStyle(
                                                       fontSize: 16.0,
                                                       color: PrimaryColor,
@@ -369,7 +369,7 @@ class MapScreenState extends State<EditingCompany>
                                             child: TextField(
                                               controller: title_province,
                                               decoration: const InputDecoration(
-                                                hintText: "ใส่จังหวัด",
+                                                hintText: "ที่อยู่บริษัท",
                                               ),
                                               enabled: !_status,
                                               autofocus: !_status,
@@ -390,7 +390,7 @@ class MapScreenState extends State<EditingCompany>
                                               mainAxisSize: MainAxisSize.min,
                                               children: <Widget>[
                                                 new Text(
-                                                  'อำเภอ',
+                                                  'รหัสไปรษณีย์',
                                                   style: TextStyle(
                                                       fontSize: 16.0,
                                                       color: PrimaryColor,
@@ -411,7 +411,7 @@ class MapScreenState extends State<EditingCompany>
                                             child: TextField(
                                               controller: title_district,
                                               decoration: const InputDecoration(
-                                                hintText: "ใส่อำเภอ",
+                                                hintText: "กรอกเลขรหัสไปรษณีย์",
                                               ),
                                               enabled: !_status,
                                               autofocus: !_status,
@@ -432,7 +432,7 @@ class MapScreenState extends State<EditingCompany>
                                               mainAxisSize: MainAxisSize.min,
                                               children: <Widget>[
                                                 new Text(
-                                                  'ตำบล',
+                                                  'ที่อยู่เว็บไซต์',
                                                   style: TextStyle(
                                                       fontSize: 16.0,
                                                       color: PrimaryColor,
@@ -453,7 +453,7 @@ class MapScreenState extends State<EditingCompany>
                                             child: TextField(
                                               controller: title_subDistrict,
                                               decoration: const InputDecoration(
-                                                hintText: "ใส่ตำบล",
+                                                hintText: "กรอกเว็บไซต์",
                                               ),
                                               enabled: !_status,
                                               autofocus: !_status,
